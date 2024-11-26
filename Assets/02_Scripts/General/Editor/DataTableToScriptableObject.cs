@@ -3,8 +3,6 @@ using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using Unity.Plastic.Newtonsoft.Json;
@@ -35,7 +33,9 @@ public class DataTableToScriptableObject : OdinEditorWindow
         GetWindow<DataTableToScriptableObject>().Show();
     }
 
-    // 안내 인포박스
+    /// <summary>
+    /// 안내 인포박스
+    /// </summary>
     [InfoBox("데이터를 최신화하려면 아래 버튼을 순서대로 눌러주세요", InfoMessageType.Info)]
 
     /// <summary>
@@ -57,6 +57,7 @@ public class DataTableToScriptableObject : OdinEditorWindow
     [Button("2. 데이터 매니저 링크 최신화 하기!", ButtonSizes.Large)]
     public void ManagerLinkFetch()
     {
+        // 데이터 매니저 찾기
         DataManager dataManager = FindObjectOfType<DataManager>();
         if (dataManager == null)
         {
@@ -64,13 +65,14 @@ public class DataTableToScriptableObject : OdinEditorWindow
             return;
         }
 
-
+        // 데이터 매니저에 링크
         dataManager.SetWeaponData(Resources.Load<WeaponDatasSO>($"Data/{_sheetName_weaponData}"));
         dataManager.SetArmorData(Resources.Load<ArmorDatasSO>($"Data/{_sheetName_armorData}"));
         dataManager.SetEnemyData(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_enemyData}"));
         dataManager.SetStageData(Resources.Load<StageDatasSO>($"Data/{_sheetName_stageData}"));
         dataManager.SetSkillData(Resources.Load<SkillDatasSO>($"Data/{_sheetName_skillData}"));
 
+        // 저장
         EditorUtility.SetDirty(dataManager);
         AssetDatabase.SaveAssets();
 
@@ -121,19 +123,19 @@ public class DataTableToScriptableObject : OdinEditorWindow
     }
 
     /// <summary>
-    /// // JSON 데이터를 ScriptableObject로 변환하는 메서드.
+    /// JSON 데이터를 ScriptableObject로 변환하는 메서드.
     /// </summary>
     private void CreateScriptableObject<Data, DatasSO>(string json, string sheetName) where Data : BaseData, new() where DatasSO : BaseDatasSO<Data>
     {
         // Json 데이터를 JsonFormat 객체로 디시리얼라이즈함 (문자열에서 객체로 변환)
         var jsonData = JsonConvert.DeserializeObject<JsonFormat>(json);
 
+        // 헤더들
+        var headers = jsonData.values[1];
+
         // 새로운 ScriptableObject를 생성. 여기에 파싱된 데이터를 저장할 것임
         DatasSO datasSO = CreateInstance<DatasSO>();
         datasSO.DataList = new List<Data>();
-
-        // 헤더들
-        var headers = jsonData.values[1];
 
         // 파싱된 Json 데이터의 값들을 하나씩 ScriptableObject에 채움 (2번째 인덱스부터 데이터 시작)
         for (int i = 2; i < jsonData.values.Length; i++) 
@@ -148,23 +150,20 @@ public class DataTableToScriptableObject : OdinEditorWindow
             // 헤더와 데이터를 하나씩 매핑
             for (int h = 0; h < headers.Length; h++)
             {
-                // row 배열 범위를 초과하는 경우를 방지 (행의 마지막 부분이 비어있으면 ""가 아니라 아예 배열길이가 줄어들기 때문에 예외처리 필요)
+                // row길이를 초과하거나 셀이 비어있으면 건너뛰기
                 if (h >= row.Length || string.IsNullOrEmpty(row[h]))
-                {
-                    continue; // 해당 셀 건너뛰기
-                }
+                    continue;
 
-                // 현재 headers[h](예: "ID")와 이름이 같은 필드를 EquipmentDataSO에서 검색 + 퍼블릭 필드와 인스턴스 필드만 검색하도록 제한
+                // 헤더셀값과 이름이 같은 필드를 찾아옴 + 퍼블릭 필드와 인스턴스 필드만 검색하도록 제한
                 FieldInfo fieldInfo = type.GetField(headers[h], BindingFlags.Public | BindingFlags.Instance);
-
                 if (fieldInfo != null)
                 {
-                    // Reflection을 사용하여 필드에 값을 설정 + row[h] 값을 필드타입으로 데이터 타입 변환
+                    // Reflection을 사용하여 필드에 값을 설정 + 셀값을 필드타입으로 데이터 타입 변환
                     fieldInfo.SetValue(data, Convert.ChangeType(row[h], fieldInfo.FieldType));
                 }
             }
 
-            // 데이터테이블에 있던 값들이 변수에 다 들어간 data를 -> datasSO DataList에 추가
+            // 필드값을 다 추가한 데이터를 데이터리스트에 추가
             datasSO.DataList.Add(data);
 
             // 변경 사항을 유니티에 알림
