@@ -1,0 +1,415 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acf877c59e36244989e03b3f596ad6a, type: 3}
+  m_Name: Skill
+  m_EditorClassIdentifier: 
+  DataList:
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 1
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3000%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3000
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 2
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3100%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3100
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 3
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3200%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3200
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 4
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3300%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3300
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 5
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3400%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3400
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 6
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3500%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3500
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 7
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3600%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3600
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 8
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3700%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3700
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 9
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3800%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3800
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Meteor
+    Name: "\uBA54\uD14C\uC624"
+    Grade: "\uC77C\uBC18"
+    Level: 10
+    Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+      \uACF5\uACA9\uB825\uC758 3900%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 3900
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 5
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 1
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 1 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 1
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 2
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 2 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 2
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 3
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 3 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 3
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 4
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 4 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 4
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 5
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 5 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 5
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 6
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 6 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 6
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 7
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 7 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 7
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 8
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 8 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 8
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 9
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 9 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 9
+    Range: 0
+    Delay: 0
+  - ID: Skill_Anger
+    Name: "\uBD84\uB178"
+    Grade: "\uC77C\uBC18"
+    Level: 10
+    Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 10 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    Atk: 0
+    AtkSpeedBuff: 10
+    Range: 0
+    Delay: 0
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 1
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1200% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1200
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 2
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1300% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1300
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 3
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1400% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1400
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 4
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1500% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1500
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 5
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1600% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1600
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 6
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1700% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1700
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 7
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1800% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1800
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 8
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 1900% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 1900
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 9
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 2000% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 2000
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Egg
+    Name: "\uB2EC\uAC40\uD22C\uCC99"
+    Grade: "\uB808\uC5B4"
+    Level: 10
+    Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
+      \uACF5\uACA9\uB825\uC758 2100% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    Atk: 2100
+    AtkSpeedBuff: 0
+    Range: 0
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 1
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2000%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2000
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 2
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2100%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2100
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 3
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2200%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2200
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 4
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2300%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2300
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 5
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2400%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2400
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 6
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2500%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2500
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 7
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2600%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2600
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 8
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2700%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2700
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 9
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2800%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2800
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4
+  - ID: Skill_Thunder
+    Name: "\uC36C\uB354\uBCFC\uD2B8"
+    Grade: "\uC804\uC124"
+    Level: 10
+    Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+      \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2900%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+      \uC90D\uB2C8\uB2E4."
+    Atk: 2900
+    AtkSpeedBuff: 0
+    Range: 3
+    Delay: 4

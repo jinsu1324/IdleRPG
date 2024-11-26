@@ -1,0 +1,335 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de15296255e2fc64d8474400a2fe0ce9, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  DataList:
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 1
+    Atk: 150
+    AtkSpeed: 110
+    Critical: 5
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 2
+    Atk: 160
+    AtkSpeed: 111
+    Critical: 6
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 3
+    Atk: 170
+    AtkSpeed: 112
+    Critical: 7
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 4
+    Atk: 180
+    AtkSpeed: 113
+    Critical: 8
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 5
+    Atk: 190
+    AtkSpeed: 114
+    Critical: 9
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 6
+    Atk: 200
+    AtkSpeed: 115
+    Critical: 10
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 7
+    Atk: 210
+    AtkSpeed: 116
+    Critical: 11
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 8
+    Atk: 220
+    AtkSpeed: 117
+    Critical: 12
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 9
+    Atk: 230
+    AtkSpeed: 118
+    Critical: 13
+  - ID: Weapon_Sword
+    EquipmentType: Weapon
+    Name: "\uAC80"
+    Grade: "\uC77C\uBC18"
+    Level: 10
+    Atk: 240
+    AtkSpeed: 119
+    Critical: 14
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 1
+    Atk: 170
+    AtkSpeed: 105
+    Critical: 2
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 2
+    Atk: 180
+    AtkSpeed: 111
+    Critical: 3
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 3
+    Atk: 190
+    AtkSpeed: 112
+    Critical: 4
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 4
+    Atk: 200
+    AtkSpeed: 113
+    Critical: 5
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 5
+    Atk: 210
+    AtkSpeed: 114
+    Critical: 6
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 6
+    Atk: 220
+    AtkSpeed: 115
+    Critical: 7
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 7
+    Atk: 230
+    AtkSpeed: 116
+    Critical: 8
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 8
+    Atk: 240
+    AtkSpeed: 117
+    Critical: 9
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 9
+    Atk: 250
+    AtkSpeed: 118
+    Critical: 10
+  - ID: Weapon_Axe
+    EquipmentType: Weapon
+    Name: "\uB3C4\uB07C"
+    Grade: "\uC77C\uBC18"
+    Level: 10
+    Atk: 260
+    AtkSpeed: 119
+    Critical: 11
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 1
+    Atk: 250
+    AtkSpeed: 120
+    Critical: 10
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 2
+    Atk: 260
+    AtkSpeed: 121
+    Critical: 11
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 3
+    Atk: 270
+    AtkSpeed: 122
+    Critical: 12
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 4
+    Atk: 280
+    AtkSpeed: 123
+    Critical: 13
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 5
+    Atk: 290
+    AtkSpeed: 124
+    Critical: 14
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 6
+    Atk: 300
+    AtkSpeed: 125
+    Critical: 15
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 7
+    Atk: 310
+    AtkSpeed: 126
+    Critical: 16
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 8
+    Atk: 320
+    AtkSpeed: 127
+    Critical: 17
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 9
+    Atk: 330
+    AtkSpeed: 128
+    Critical: 18
+  - ID: Weapon_ForestSword
+    EquipmentType: Weapon
+    Name: "\uC232\uC758 \uCE7C\uB0A0"
+    Grade: "\uB808\uC5B4"
+    Level: 10
+    Atk: 340
+    AtkSpeed: 129
+    Critical: 19
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 1
+    Atk: 400
+    AtkSpeed: 130
+    Critical: 15
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 2
+    Atk: 410
+    AtkSpeed: 131
+    Critical: 16
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 3
+    Atk: 420
+    AtkSpeed: 132
+    Critical: 17
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 4
+    Atk: 430
+    AtkSpeed: 133
+    Critical: 18
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 5
+    Atk: 440
+    AtkSpeed: 134
+    Critical: 19
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 6
+    Atk: 450
+    AtkSpeed: 135
+    Critical: 20
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 7
+    Atk: 460
+    AtkSpeed: 136
+    Critical: 21
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 8
+    Atk: 470
+    AtkSpeed: 137
+    Critical: 22
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 9
+    Atk: 480
+    AtkSpeed: 138
+    Critical: 23
+  - ID: Weapon_MagicStaff
+    EquipmentType: Weapon
+    Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
+    Grade: "\uC804\uC124"
+    Level: 10
+    Atk: 490
+    AtkSpeed: 139
+    Critical: 24

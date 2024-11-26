@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ab47566110b4296e6f1f618c9c8a, type: 3}
+  m_Name: Stage
+  m_EditorClassIdentifier: 
+  DataList:
+  - ID: 1
+    Chapter: 1
+    Stage: 1
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 10
+    SpeedPercentage: 1
+    AtkPercentage: 10
+    AtkSpeedPercentage: 1
+  - ID: 1
+    Chapter: 1
+    Stage: 2
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 10
+    SpeedPercentage: 1
+    AtkPercentage: 10
+    AtkSpeedPercentage: 1
+  - ID: 1
+    Chapter: 1
+    Stage: 3
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 10
+    SpeedPercentage: 1
+    AtkPercentage: 10
+    AtkSpeedPercentage: 1
+  - ID: 1
+    Chapter: 1
+    Stage: 4
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 10
+    SpeedPercentage: 1
+    AtkPercentage: 10
+    AtkSpeedPercentage: 1
+  - ID: 1
+    Chapter: 1
+    Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    HpPercentage: 10
+    SpeedPercentage: 1
+    AtkPercentage: 10
+    AtkSpeedPercentage: 1
+  - ID: 2
+    Chapter: 2
+    Stage: 1
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 20
+    SpeedPercentage: 1
+    AtkPercentage: 20
+    AtkSpeedPercentage: 1
+  - ID: 2
+    Chapter: 2
+    Stage: 2
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 20
+    SpeedPercentage: 1
+    AtkPercentage: 20
+    AtkSpeedPercentage: 1
+  - ID: 2
+    Chapter: 2
+    Stage: 3
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 20
+    SpeedPercentage: 1
+    AtkPercentage: 20
+    AtkSpeedPercentage: 1
+  - ID: 2
+    Chapter: 2
+    Stage: 4
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 20
+    SpeedPercentage: 1
+    AtkPercentage: 20
+    AtkSpeedPercentage: 1
+  - ID: 2
+    Chapter: 2
+    Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    HpPercentage: 20
+    SpeedPercentage: 1
+    AtkPercentage: 20
+    AtkSpeedPercentage: 1
+  - ID: 3
+    Chapter: 3
+    Stage: 1
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    HpPercentage: 30
+    SpeedPercentage: 1
+    AtkPercentage: 30
+    AtkSpeedPercentage: 1
+  - ID: 3
+    Chapter: 3
+    Stage: 2
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    HpPercentage: 30
+    SpeedPercentage: 1
+    AtkPercentage: 30
+    AtkSpeedPercentage: 1
+  - ID: 3
+    Chapter: 3
+    Stage: 3
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    HpPercentage: 30
+    SpeedPercentage: 1
+    AtkPercentage: 30
+    AtkSpeedPercentage: 1
+  - ID: 3
+    Chapter: 3
+    Stage: 4
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    HpPercentage: 30
+    SpeedPercentage: 1
+    AtkPercentage: 30
+    AtkSpeedPercentage: 1
+  - ID: 3
+    Chapter: 3
+    Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    HpPercentage: 30
+    SpeedPercentage: 1
+    AtkPercentage: 30
+    AtkSpeedPercentage: 1
+  - ID: 4
+    Chapter: 4
+    Stage: 1
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 40
+    SpeedPercentage: 1
+    AtkPercentage: 40
+    AtkSpeedPercentage: 1
+  - ID: 4
+    Chapter: 4
+    Stage: 2
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 40
+    SpeedPercentage: 1
+    AtkPercentage: 40
+    AtkSpeedPercentage: 1
+  - ID: 4
+    Chapter: 4
+    Stage: 3
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 40
+    SpeedPercentage: 1
+    AtkPercentage: 40
+    AtkSpeedPercentage: 1
+  - ID: 4
+    Chapter: 4
+    Stage: 4
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    HpPercentage: 40
+    SpeedPercentage: 1
+    AtkPercentage: 40
+    AtkSpeedPercentage: 1
+  - ID: 4
+    Chapter: 4
+    Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    HpPercentage: 40
+    SpeedPercentage: 1
+    AtkPercentage: 40
+    AtkSpeedPercentage: 1
+  - ID: 5
+    Chapter: 5
+    Stage: 1
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 50
+    SpeedPercentage: 1
+    AtkPercentage: 50
+    AtkSpeedPercentage: 1
+  - ID: 5
+    Chapter: 5
+    Stage: 2
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 50
+    SpeedPercentage: 1
+    AtkPercentage: 50
+    AtkSpeedPercentage: 1
+  - ID: 5
+    Chapter: 5
+    Stage: 3
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 50
+    SpeedPercentage: 1
+    AtkPercentage: 50
+    AtkSpeedPercentage: 1
+  - ID: 5
+    Chapter: 5
+    Stage: 4
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    HpPercentage: 50
+    SpeedPercentage: 1
+    AtkPercentage: 50
+    AtkSpeedPercentage: 1
+  - ID: 5
+    Chapter: 5
+    Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    HpPercentage: 50
+    SpeedPercentage: 1
+    AtkPercentage: 50
+    AtkSpeedPercentage: 1
