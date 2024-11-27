@@ -14,28 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DataList:
   - ID: Monster_SlimeBlue
-    EnemyType: Monster
     Name: "\uBE14\uB8E8 \uC2AC\uB77C\uC784"
     Hp: 100
     Speed: 1
     Atk: 10
     AtkSpeed: 1
   - ID: Monster_SlimeGreen
-    EnemyType: Monster
     Name: "\uADF8\uB9B0 \uC2AC\uB77C\uC784"
     Hp: 120
     Speed: 1
     Atk: 8
     AtkSpeed: 1
   - ID: Monster_SlimePink
-    EnemyType: Monster
     Name: "\uD551\uD06C \uC2AC\uB77C\uC784"
     Hp: 80
     Speed: 1
     Atk: 12
     AtkSpeed: 1
   - ID: Boss_KingSlime
-    EnemyType: Boss
     Name: "\uD0B9\uC2AC\uB77C\uC784"
     Hp: 1000
     Speed: 2

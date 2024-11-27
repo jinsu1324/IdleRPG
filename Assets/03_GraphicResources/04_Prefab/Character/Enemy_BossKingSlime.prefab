@@ -131,8 +131,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5271637078737633285}
   - component: {fileID: 1491199350717084979}
+  - component: {fileID: 7927337952629196051}
   m_Layer: 0
-  m_Name: Enemy_BossSlime
+  m_Name: Enemy_BossKingSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,6 +178,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7927337952629196051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2306491536672818110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56561a963c1ab6e4e8cd11e4e4fa4d37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _enemyType: 3
 --- !u!1 &2991035812678846820
 GameObject:
   m_ObjectHideFlags: 0

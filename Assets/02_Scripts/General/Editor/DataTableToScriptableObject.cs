@@ -21,8 +21,8 @@ public class DataTableToScriptableObject : OdinEditorWindow
     private readonly string _sheetName_weaponData = "Weapon";
     private readonly string _sheetName_armorData = "Armor";
     private readonly string _sheetName_enemyData = "Enemy";
-    private readonly string _sheetName_stageData = "Stage";
     private readonly string _sheetName_skillData = "Skill";
+    private readonly string _sheetName_stageData = "Stage";
 
     /// <summary>
     /// 메뉴 생성
@@ -47,8 +47,8 @@ public class DataTableToScriptableObject : OdinEditorWindow
         FetchAndConvertData<WeaponData, WeaponDatasSO>(_sheetName_weaponData);
         FetchAndConvertData<ArmorData, ArmorDatasSO>(_sheetName_armorData);
         FetchAndConvertData<EnemyData, EnemyDatasSO>(_sheetName_enemyData);
-        FetchAndConvertData<StageData, StageDatasSO>(_sheetName_stageData);
         FetchAndConvertData<SkillData, SkillDatasSO>(_sheetName_skillData);
+        FetchAndConvertData<StageData, StageDatasSO>(_sheetName_stageData);
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ public class DataTableToScriptableObject : OdinEditorWindow
         dataManager.SetWeaponData(Resources.Load<WeaponDatasSO>($"Data/{_sheetName_weaponData}"));
         dataManager.SetArmorData(Resources.Load<ArmorDatasSO>($"Data/{_sheetName_armorData}"));
         dataManager.SetEnemyData(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_enemyData}"));
-        dataManager.SetStageData(Resources.Load<StageDatasSO>($"Data/{_sheetName_stageData}"));
         dataManager.SetSkillData(Resources.Load<SkillDatasSO>($"Data/{_sheetName_skillData}"));
+        dataManager.SetStageData(Resources.Load<StageDatasSO>($"Data/{_sheetName_stageData}"));
 
         // 저장
         EditorUtility.SetDirty(dataManager);
