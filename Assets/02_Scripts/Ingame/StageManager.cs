@@ -6,7 +6,7 @@ using UnityEngine;
 public class StageManager : MonoBehaviour
 {
     private EnemySpawner _enemySpawner;         // 적 스포너
-    private StageDatasSO _stageData;            // 스테이지 데이터
+    private StageDatasSO _stageDatasSO;            // 스테이지 데이터
     private StageDataManager _stageDataManager; // 스테이지 데이터 매니저
 
 
@@ -16,10 +16,7 @@ public class StageManager : MonoBehaviour
     private int _stage;
     private string _appearEnemy;
     private int _count;
-    private int _hpPercentage;
-    private int _speedPercentage;
-    private int _atkPercentage;
-    private int _atkSpeedPercentage;
+    private int _statPercentage;
 
 
 
@@ -28,10 +25,10 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(EnemySpawner enemySpawner, StageDatasSO stageData, StageDataManager stageDataManager)
+    public void Initialize(EnemySpawner enemySpawner, StageDatasSO stageDatasSO, StageDataManager stageDataManager)
     {
         _enemySpawner = enemySpawner;
-        _stageData = stageData;
+        _stageDatasSO = stageDatasSO;
         _stageDataManager = stageDataManager;
     }
 
@@ -45,9 +42,10 @@ public class StageManager : MonoBehaviour
 
         _appearEnemy = currentStageData.AppearEnemy;
         _count = currentStageData.Count;
+        _statPercentage = currentStageData.StatPercentage;
 
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), _appearEnemy);
 
-        _enemySpawner.SpawnEnemies(appearEnemyID, _count);
+        _enemySpawner.SpawnEnemies(appearEnemyID, _count, _statPercentage);
     }
 }

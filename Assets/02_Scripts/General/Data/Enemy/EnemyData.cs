@@ -14,8 +14,8 @@ public enum EnemyID
 public class EnemyData : BaseData
 {
     public string Name;
-    public int Hp;
-    public int Speed;
+    public int MaxHp;
+    public int MoveSpeed;
     public int Atk;
-    public int AtkSpeed;
+    public int AtkDelay;
 }

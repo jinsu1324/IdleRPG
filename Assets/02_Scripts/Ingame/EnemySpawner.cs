@@ -14,13 +14,15 @@ public class EnemySpawner : SerializedMonoBehaviour
     
     private Dictionary<EnemyID, ObjectPool<Enemy>> _enemyPoolDict;  // 에너미 오브젝트 풀 딕셔너리        
     private EnemyManager _enemyManager;                             // 에너미 매니저
+    private EnemyDatasSO _enemyDatasSO;                                // 적들 데이터 스크립터블 오브젝트
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(EnemyManager enemyManager)
+    public void Initialize(EnemyManager enemyManager, EnemyDatasSO enemyDatasSO)
     {
         _enemyManager = enemyManager;
+        _enemyDatasSO = enemyDatasSO;
 
         _enemyPoolDict = new Dictionary<EnemyID, ObjectPool<Enemy>>();
         foreach (var kvp in _enemyPrefabDict)
@@ -31,20 +33,21 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// <summary>
     /// 에너미 타입에 맞는 에너미 스폰
     /// </summary>
-    public void SpawnEnemies(EnemyID enemyType, int count)
+    public void SpawnEnemies(EnemyID enemyID, int count, int statPercentage)
     {
-        ObjectPool<Enemy> pool = _enemyPoolDict[enemyType];
+        ObjectPool<Enemy> pool = _enemyPoolDict[enemyID];
+        EnemyData enemyData = _enemyDatasSO.GetDataByID(enemyID.ToString());
 
         for (int i = 0; i < count; i++)
         {
             Enemy enemy = pool.GetObject();
             enemy.transform.position = _spawnPosList[i].position;
 
-            // EnemyManager에 구독
+            // Enemy 스폰, 죽음 이벤트 구독
             _enemyManager.SubscribeToEnemy(enemy);
 
             // Enemy 초기화
-            enemy.Initialize(pool);
+            enemy.Initialize(pool, enemyData, statPercentage);
         }
     }
 }

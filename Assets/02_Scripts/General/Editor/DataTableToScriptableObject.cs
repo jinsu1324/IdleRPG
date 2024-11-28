@@ -23,6 +23,7 @@ public class DataTableToScriptableObject : OdinEditorWindow
     private readonly string _sheetName_enemyData = "Enemy";
     private readonly string _sheetName_skillData = "Skill";
     private readonly string _sheetName_stageData = "Stage";
+    private readonly string _sheetName_statData = "Stat";
 
     /// <summary>
     /// 메뉴 생성
@@ -49,6 +50,7 @@ public class DataTableToScriptableObject : OdinEditorWindow
         FetchAndConvertData<EnemyData, EnemyDatasSO>(_sheetName_enemyData);
         FetchAndConvertData<SkillData, SkillDatasSO>(_sheetName_skillData);
         FetchAndConvertData<StageData, StageDatasSO>(_sheetName_stageData);
+        FetchAndConvertData<StatData, StatDatasSO>(_sheetName_statData);
     }
 
     /// <summary>
@@ -66,11 +68,12 @@ public class DataTableToScriptableObject : OdinEditorWindow
         }
 
         // 데이터 매니저에 링크
-        dataManager.SetWeaponData(Resources.Load<WeaponDatasSO>($"Data/{_sheetName_weaponData}"));
-        dataManager.SetArmorData(Resources.Load<ArmorDatasSO>($"Data/{_sheetName_armorData}"));
-        dataManager.SetEnemyData(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_enemyData}"));
-        dataManager.SetSkillData(Resources.Load<SkillDatasSO>($"Data/{_sheetName_skillData}"));
-        dataManager.SetStageData(Resources.Load<StageDatasSO>($"Data/{_sheetName_stageData}"));
+        dataManager.SetWeaponDatasSO(Resources.Load<WeaponDatasSO>($"Data/{_sheetName_weaponData}"));
+        dataManager.SetArmorDatasSO(Resources.Load<ArmorDatasSO>($"Data/{_sheetName_armorData}"));
+        dataManager.SetEnemyDatasSO(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_enemyData}"));
+        dataManager.SetSkillDatasSO(Resources.Load<SkillDatasSO>($"Data/{_sheetName_skillData}"));
+        dataManager.SetStageDatasSO(Resources.Load<StageDatasSO>($"Data/{_sheetName_stageData}"));
+        dataManager.SetStatDatasSO(Resources.Load<StatDatasSO>($"Data/{_sheetName_statData}"));
 
         // 저장
         EditorUtility.SetDirty(dataManager);

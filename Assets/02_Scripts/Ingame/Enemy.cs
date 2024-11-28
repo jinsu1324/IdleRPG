@@ -6,24 +6,37 @@ using UnityEngine;
 
 public class Enemy : SerializedMonoBehaviour
 {
-    private ObjectPool<Enemy> _pool; // 자신을 반환할 풀 참조
+    public event Action<Enemy> OnEnemySpawned;      // 스폰시 이벤트
+    public event Action<Enemy> OnEnemyDied;         // 죽었을때 이벤트
 
-    public event Action<Enemy> OnEnemySpawned;
-    public event Action<Enemy> OnEnemyDied;
+    private ObjectPool<Enemy> _pool;                // 자신을 반환할 풀 참조
+    private EnemyData _enemyData;                   // 데이터
 
-    private int _atk;         // 공격력
-    private int _atkSpeed;    // 공격속도
-    private int _hp;          // 체력
-    private int _maxHp;       // 최대체력
-    private int _speed;       // 이동속도
+    private int _hp;                                // 체력
+    private int _maxHp;                             // 최대체력
+    private int _atk;                               // 공격력
+    private int _atkSpeed;                          // 공격속도
+    private int _moveSpeed;                             // 이동속도
 
-
-    public void Initialize(ObjectPool<Enemy> pool)
+    /// <summary>
+    /// 초기화
+    /// </summary>
+    public void Initialize(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
     {
         _pool = pool;
+        _enemyData = enemyData;
+
+        // 스탯 셋팅
+        _hp = (_enemyData.MaxHp * statPercentage) / 100;
+        _maxHp = (_enemyData.MaxHp * statPercentage) / 100;
+        _atk = (_enemyData.Atk * statPercentage) / 100;
+        _atkSpeed = _enemyData.AtkDelay;
+        _moveSpeed = _enemyData.MoveSpeed;
 
         // 스폰 이벤트 호출
         OnEnemySpawned?.Invoke(this);
+
+        //Debug.Log(_atk);
     }
 
     private void Move()

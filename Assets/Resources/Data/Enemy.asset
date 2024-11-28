@@ -15,25 +15,25 @@ MonoBehaviour:
   DataList:
   - ID: Monster_SlimeBlue
     Name: "\uBE14\uB8E8 \uC2AC\uB77C\uC784"
-    Hp: 100
-    Speed: 1
+    MaxHp: 100
+    MoveSpeed: 1
     Atk: 10
-    AtkSpeed: 1
+    AtkDelay: 1
   - ID: Monster_SlimeGreen
     Name: "\uADF8\uB9B0 \uC2AC\uB77C\uC784"
-    Hp: 120
-    Speed: 1
+    MaxHp: 120
+    MoveSpeed: 1
     Atk: 8
-    AtkSpeed: 1
+    AtkDelay: 1
   - ID: Monster_SlimePink
     Name: "\uD551\uD06C \uC2AC\uB77C\uC784"
-    Hp: 80
-    Speed: 1
+    MaxHp: 80
+    MoveSpeed: 1
     Atk: 12
-    AtkSpeed: 1
+    AtkDelay: 1
   - ID: Boss_KingSlime
     Name: "\uD0B9\uC2AC\uB77C\uC784"
-    Hp: 1000
-    Speed: 2
+    MaxHp: 1000
+    MoveSpeed: 2
     Atk: 50
-    AtkSpeed: 2
+    AtkDelay: 2

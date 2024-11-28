@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Player : SerializedMonoBehaviour
 {
+    private PlayerData _playerStats;
+
+
     private int _atk;         // 공격력
     private int _atkSpeed;    // 공격속도
     private int _hp;          // 체력
@@ -34,4 +37,6 @@ public class Player : SerializedMonoBehaviour
     {
 
     }
+
+
 }
