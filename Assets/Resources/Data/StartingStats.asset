@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26767d5729b026048ae329a1c98b0919, type: 3}
+  m_Name: StartingStats
+  m_EditorClassIdentifier: 
+  DataList:
+  - ID: Attack
+    Name: "\uACF5\uACA9\uB825"
+    Level: 1
+    Value: 50
+    ValueIncrease: 10
+    Cost: 10
+    CostIncrease: 1
+  - ID: AttackDelay
+    Name: "\uACF5\uACA9\uC18D\uB3C4"
+    Level: 1
+    Value: 5
+    ValueIncrease: 1
+    Cost: 10
+    CostIncrease: 1
+  - ID: MaxHp
+    Name: "\uCCB4\uB825"
+    Level: 1
+    Value: 500
+    ValueIncrease: 25
+    Cost: 15
+    CostIncrease: 2
+  - ID: Critical
+    Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
+    Level: 1
+    Value: 10
+    ValueIncrease: 1
+    Cost: 15
+    CostIncrease: 5

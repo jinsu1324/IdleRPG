@@ -7,17 +7,15 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int CurrentHp;   // 현재 HP
-    public int CurrentGold = 100; // 현재 Gold
-    public List<StatData> StatList = new List<StatData>(); // 스탯들 리스트
-
-    // 스탯들 리스트 -> 딕셔너리
-    private Dictionary<string, StatData> _statDict = new Dictionary<string, StatData>();
+    public int CurrentGold = 100;                   // 현재 Gold
+    public int CurrentHp;                           // 현재 HP
+    public List<Stat> StatList = new List<Stat>();  // 스탯들 리스트
+    private Dictionary<string, Stat> _statDict = new Dictionary<string, Stat>(); // 스탯들 리스트 -> 딕셔너리용
 
     /// <summary>
-    /// 딕셔너리 초기화
+    /// 딕셔너리 설정
     /// </summary>
-    public void InitializeDict()
+    public void SetDictFromStatList()
     {
         _statDict = StatList.ToDictionary(statData => statData.ID);
     }
@@ -25,7 +23,7 @@ public class PlayerData
     /// <summary>
     /// 특정 스탯 가져오기
     /// </summary>
-    public StatData GetStat(string id)
+    public Stat GetStat(string id)
     {
         if (_statDict.TryGetValue(id, out var stat))
         {
@@ -39,7 +37,7 @@ public class PlayerData
     }
 
     /// <summary>
-    /// 레벨업
+    /// 스탯 레벨업
     /// </summary>
     public void LevelUpStat(string id)
     {
@@ -54,14 +52,14 @@ public class PlayerData
     }
 
     /// <summary>
-    /// 초기화
+    /// 스탯들 스타팅값으로 설정
     /// </summary>
-    public void InitializeStats(DataManager dataManager)
+    public void SetToStartingStats(DataManager dataManager)
     {
-        StatDatasSO statDataSO = dataManager.StatDatasSO;
+        StartingStatsSO startingStatsSO = dataManager.StartingStatsSO;
 
-        // 데이터 초기화
-        StatList = statDataSO.DataList.Select(stat => new StatData
+        // 스탯들 스타팅값으로 설정
+        StatList = startingStatsSO.DataList.Select(stat => new Stat
         {
             ID = stat.ID,
             Name = stat.Name,
@@ -72,8 +70,8 @@ public class PlayerData
             CostIncrease = stat.CostIncrease
         }).ToList();
 
-        // MaxHp로 CurrentHp 설정
-        StatData maxHpStat = StatList.Find(statData => statData.ID == StatID.MaxHp.ToString());
+        // 스타팅 MaxHp로 CurrentHp도 설정
+        Stat maxHpStat = StatList.Find(statData => statData.ID == StatID.MaxHp.ToString());
         CurrentHp = maxHpStat.Value;
     }
 }

@@ -1,19 +1,20 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Title("Managers", Bold = false)]
     [SerializeField] private DataManager _dataManager;               // 데이터 매니저
     [SerializeField] private PlayerManager _playerManager;           // 플레이어 매니저
     [SerializeField] private EnemySpawner _enemySpawner;             // 에너미 스포너
     [SerializeField] private EnemyManager _enemyManager;             // 에너미 매니저
     [SerializeField] private StageManager _stageManager;             // 스테이지 매니저
-
-    [SerializeField] private StatUpgradePanel _statUpgradePanel;    // 스탯 업그레이드 패널
-
     private StageDataManager _stageDataManager;                      // 스테이지 데이터 매니저
 
+    [Title("UIs", Bold = false)]
+    [SerializeField] private StatUpgradePanel _statUpgradePanel;     // 스탯 업그레이드 패널
 
     /// <summary>
     /// Awake 초기화 할 순서대로 작성할 것

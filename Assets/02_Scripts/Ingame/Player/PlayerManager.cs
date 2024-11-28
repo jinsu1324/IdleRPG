@@ -5,17 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : SerializedMonoBehaviour
-{
-    public void OnPlusGold()
-    {
-        _playerData.CurrentGold += 1000;
-    }
-
-
-
-    [SerializeField] private PlayerData _playerData;            // 플레이어 데이터 
-    private DataManager _dataManager;          // 데이터 매니저
-
+{   
+    [SerializeField] private PlayerData _playerData;        // 플레이어 데이터 (SerializeField는 확인용)
+    private DataManager _dataManager;                       // 데이터 매니저
 
     /// <summary>
     /// 초기화
@@ -32,30 +24,37 @@ public class PlayerManager : SerializedMonoBehaviour
         {
             Debug.Log("PlayerData가 null입니다. 새 데이터를 생성합니다.");
             
-            // 새로 생성
+            // 플레이어 데이터 새로 생성
             _playerData = new PlayerData();
-            _playerData.InitializeStats(_dataManager);
+            _playerData.SetToStartingStats(_dataManager);
 
-            // 스탯 딕셔너리 초기화
-            _playerData.InitializeDict();
+            // 딕셔너리도 셋팅
+            _playerData.SetDictFromStatList();
         }
         else
         {
-            // 바로 스탯 딕셔너리 초기화
-            _playerData.InitializeDict();
+            // 딕셔너리도 셋팅
+            _playerData.SetDictFromStatList();
         }
     }
 
     /// <summary>
     /// 특정 스탯 레벨업 시도
     /// </summary>
-    public bool LevelUpStat(string id)
+    public bool TryLevelUpStatByID(string id)
     {
-        var stat = _playerData.GetStat(id);
-        if (stat != null && CanAffordStat(stat.Cost))
+        // id 에 맞는 스탯 가져오기
+        Stat stat = _playerData.GetStat(id);
+
+        // 스탯이 있고 + 자금이 된다면
+        if (stat != null && HasEnoughGold(stat.Cost))
         {
-            DeductResources(stat.Cost);
+            // 돈 감소
+            ReduceGold(stat.Cost);
+
+            // 그 스탯 레벨업
             _playerData.LevelUpStat(id);
+
             return true;
         }
         return false;
@@ -64,7 +63,7 @@ public class PlayerManager : SerializedMonoBehaviour
     /// <summary>
     /// 특정 스탯 가져오기
     /// </summary>
-    public StatData GetStat(string id)
+    public Stat GetStatByID(string id)
     {
         return _playerData.GetStat(id); 
     }
@@ -72,23 +71,23 @@ public class PlayerManager : SerializedMonoBehaviour
     /// <summary>
     /// 모든 스탯들 리스트를 반환
     /// </summary>
-    public List<StatData> GetAllStat()
+    public List<Stat> GetAllStats()
     {
         return _playerData.StatList;
     }
 
     /// <summary>
-    /// 비용 확인
+    /// 업그레이드 할만한 돈을 충분히 가지고 있는지
     /// </summary>
-    public bool CanAffordStat(int cost)
+    public bool HasEnoughGold(int cost)
     {
         return _playerData.CurrentGold >= cost;
     }
 
     /// <summary>
-    /// 비용 차감
+    /// 골드 감소
     /// </summary>
-    private void DeductResources(int cost)
+    private void ReduceGold(int cost)
     {
         _playerData.CurrentGold -= cost;
         Debug.Log($"남은 골드 : {_playerData.CurrentGold}");
@@ -101,4 +100,14 @@ public class PlayerManager : SerializedMonoBehaviour
     {
         SaveLoadManager.SavePlayerData(_playerData);
     }
+
+
+
+
+    // 임시 치트
+    public void OnPlusGold()
+    {
+        _playerData.CurrentGold += 1000;
+    }
+
 }

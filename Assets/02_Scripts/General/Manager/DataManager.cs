@@ -12,7 +12,7 @@ public class DataManager : SerializedMonoBehaviour
     [SerializeField] public EnemyDatasSO EnemyDatasSO { get; private set; }             // 적 데이터
     [SerializeField] public SkillDatasSO SkillDatasSO { get; private set; }             // 스킬 데이터
     [SerializeField] public StageDatasSO StageDatasSO { get; private set; }             // 스테이지 데이터
-    [SerializeField] public StatDatasSO StatDatasSO { get; private set; }               // 스탯 데이터
+    [SerializeField] public StartingStatsSO StartingStatsSO { get; private set; }       // 스타팅 스탯 데이터
 
     // 데이터들 set 함수들
     public void SetWeaponDatasSO(WeaponDatasSO data) => WeaponDatasSO = data;
@@ -20,5 +20,5 @@ public class DataManager : SerializedMonoBehaviour
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
     public void SetSkillDatasSO(SkillDatasSO data) => SkillDatasSO = data;
     public void SetStageDatasSO(StageDatasSO data) => StageDatasSO = data;
-    public void SetStatDatasSO(StatDatasSO data) => StatDatasSO = data;
+    public void SetStartingStatsSO(StartingStatsSO data) => StartingStatsSO = data;
 }
