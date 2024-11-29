@@ -697,7 +697,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7612278914373717722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 971e29c14bd3fcd49a5f4e614656f75a, type: 2}
   m_CullingMode: 0
@@ -731,6 +731,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _projectilePrefab: {fileID: 2995312722554096482, guid: 619fdf21e28ef284dba9dddebd9349eb, type: 3}
 --- !u!61 &8349220822790349758
 BoxCollider2D:
   m_ObjectHideFlags: 0

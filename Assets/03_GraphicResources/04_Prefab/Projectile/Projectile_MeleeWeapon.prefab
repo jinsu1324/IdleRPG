@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5659314902627826983}
   - component: {fileID: 6649042339753509413}
+  - component: {fileID: 2995312722554096482}
   m_Layer: 0
   m_Name: Projectile_MeleeWeapon
   m_TagString: Untagged
@@ -84,3 +85,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2995312722554096482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5480715095517743154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e04855019d4ee4cba5640c5ee4f0df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

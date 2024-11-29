@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -29,10 +30,10 @@ public class EnemyManager : MonoBehaviour
     public void SubscribeToEnemy(Enemy enemy)
     {
         // 적이 스폰될 때 리스트에 추가
-        enemy.OnEnemySpawned += AddFieldEnemyList;
+        enemy.OnEnemySpawn += AddFieldEnemyList;
 
         // 적이 죽을 때 리스트에서 제거 + 구독 해제
-        enemy.OnEnemyDied += OnEnemyDiedHandler;
+        enemy.OnEnemyDie += OnEnemyDiedHandler;
     }
 
     /// <summary>
@@ -44,10 +45,9 @@ public class EnemyManager : MonoBehaviour
         RemoveFieldEnemyList(enemy);
 
         // 모든 구독 해제
-        enemy.OnEnemySpawned -= AddFieldEnemyList;
-        enemy.OnEnemyDied -= OnEnemyDiedHandler;
+        enemy.OnEnemySpawn -= AddFieldEnemyList;
+        enemy.OnEnemyDie -= OnEnemyDiedHandler;
     }
-
 
     /// <summary>
     /// 필드 에너미 리스트에 에너미 추가
@@ -63,5 +63,15 @@ public class EnemyManager : MonoBehaviour
     public void RemoveFieldEnemyList(Enemy enemy)
     {
         _fieldEnemyList.Remove(enemy);
+    }
+
+    /// <summary>
+    /// 특정위치에서 가장 가까운 적 반환
+    /// </summary>
+    public Enemy Get_ClosestEnemy(Vector3 pos)
+    {
+        Enemy closestEnemy = 
+            _fieldEnemyList.OrderBy(enemy => Vector3.Distance(pos, enemy.transform.position)).FirstOrDefault();
+        return closestEnemy;
     }
 }

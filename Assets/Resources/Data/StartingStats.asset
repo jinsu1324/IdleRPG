@@ -23,7 +23,7 @@ MonoBehaviour:
   - ID: AttackDelay
     Name: "\uACF5\uACA9\uC18D\uB3C4"
     Level: 1
-    Value: 5
+    Value: 1
     ValueIncrease: 1
     Cost: 10
     CostIncrease: 1

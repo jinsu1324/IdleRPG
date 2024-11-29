@@ -12,8 +12,8 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
-    public event Action<Enemy> OnEnemySpawned;          // 스폰시 이벤트
-    public event Action<Enemy> OnEnemyDied;             // 죽었을때 이벤트
+    public event Action<Enemy> OnEnemySpawn;            // 스폰시 이벤트
+    public event Action<Enemy> OnEnemyDie;              // 죽었을때 이벤트
 
     private ObjectPool<Enemy> _pool;                    // 자신을 반환할 풀 참조
     private EnemyData _enemyData;                       // 데이터
@@ -45,7 +45,7 @@ public class Enemy : SerializedMonoBehaviour
         _moveSpeed = _enemyData.MoveSpeed;
 
         // 스폰 이벤트 호출
-        OnEnemySpawned?.Invoke(this);
+        OnEnemySpawn?.Invoke(this);
 
 
     }
@@ -124,7 +124,7 @@ public class Enemy : SerializedMonoBehaviour
         if (_targetPlayer != null)
         {
             Debug.Log("플레이어 공격!");
-            _targetPlayer.Damaged(_attackPower);
+            _targetPlayer.TakeDamage(_attackPower);
         }
     }
 
@@ -143,20 +143,22 @@ public class Enemy : SerializedMonoBehaviour
     /// <summary>
     /// 공격 받음
     /// </summary>
-    private void Damaged(int atk)
+    public void TakeDamage(int atk)
     {
         _currentHp -= atk;
 
+        Debug.Log($"{atk}의 데미지를 받음! 남은 체력 : {_currentHp}");
+
         if (_currentHp <= 0)
-            Died();
+            Die();
     }
 
     /// <summary>
     /// 죽음
     /// </summary>
-    private void Died()
+    private void Die()
     {
-        OnEnemyDied?.Invoke(this);  // 사망 이벤트 호출
+        OnEnemyDie?.Invoke(this);  // 사망 이벤트 호출
         _pool.ReturnObject(this); // 풀로 반환
     }
 
