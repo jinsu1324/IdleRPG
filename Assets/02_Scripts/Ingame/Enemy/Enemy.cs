@@ -16,7 +16,7 @@ public class Enemy : SerializedMonoBehaviour
     private int _maxHp;                             // 최대체력
     private int _atk;                               // 공격력
     private int _atkSpeed;                          // 공격속도
-    private int _moveSpeed;                             // 이동속도
+    private int _moveSpeed;                         // 이동속도
 
     /// <summary>
     /// 초기화
@@ -35,8 +35,6 @@ public class Enemy : SerializedMonoBehaviour
 
         // 스폰 이벤트 호출
         OnEnemySpawned?.Invoke(this);
-
-        //Debug.Log(_atk);
     }
 
     private void Move()

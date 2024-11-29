@@ -25,7 +25,9 @@ public class PlayerManager : SerializedMonoBehaviour
     }
     #endregion
 
-    [SerializeField] private PlayerData _playerData;        // 플레이어 데이터 (SerializeField는 확인용)
+    private PlayerData _playerData;                         // 플레이어 데이터
+    [SerializeField] private Player _playerPrefab;          // 플레이어 프리팹
+    [SerializeField] private Transform _playerSpawnPos;     // 플레이어 스폰 위치
 
     /// <summary>
     /// 플레이어 데이터 로드
@@ -46,12 +48,28 @@ public class PlayerManager : SerializedMonoBehaviour
 
             // 딕셔너리도 셋팅
             _playerData.SetDictFromStatList();
+
+            // 플레이어 프리팹 생성
+            PlayerPrefabSpawn(_playerData);
         }
         else
         {
             // 딕셔너리도 셋팅
             _playerData.SetDictFromStatList();
+
+            // 플레이어 프리팹 생성
+            PlayerPrefabSpawn(_playerData);
         }
+    }
+
+    /// <summary>
+    /// 플레이어 프리팹 스폰
+    /// </summary>
+    private void PlayerPrefabSpawn(PlayerData playerData)
+    {
+        Player player = Instantiate(_playerPrefab, _playerSpawnPos);
+        player.transform.position = _playerSpawnPos.position;
+        player.Initialize(playerData);
     }
 
     /// <summary>
@@ -70,6 +88,9 @@ public class PlayerManager : SerializedMonoBehaviour
 
             // 그 스탯 레벨업
             _playerData.LevelUpStat(id);
+
+            // 플레이어 프리팹 스탯 업데이트
+            _playerPrefab.UpdateStat(_playerData);
 
             return true;
         }

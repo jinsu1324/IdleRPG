@@ -15,7 +15,7 @@ public class SaveLoadManager
     {
         string json = JsonUtility.ToJson(data); // JSON 직렬화
         File.WriteAllText(_filePath, json); // 파일로 저장
-        Debug.Log($"데이터 저장: {json}");
+        Debug.Log($"데이터 저장");
     }
 
     /// <summary>
@@ -27,7 +27,7 @@ public class SaveLoadManager
         {
             string json = File.ReadAllText(_filePath);  // 파일 읽기
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);   // JSON 역직렬화
-            Debug.Log($"데이터 불러오기: {json}");
+            Debug.Log($"데이터 불러오기");
             return data;
         }
         else
