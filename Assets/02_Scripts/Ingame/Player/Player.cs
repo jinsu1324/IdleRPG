@@ -72,7 +72,7 @@ public class Player : SerializedMonoBehaviour
     private void Attack()
     {
         // Å¸°Ù Ã£±â
-        Enemy targetEnemy = EnemyManager.Instance.Get_ClosestEnemy(transform.position);
+        Enemy targetEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
         if (targetEnemy == null)
         {
             Debug.Log("Å¸°Ù ¾øÀ½!");

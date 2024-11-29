@@ -115,6 +115,30 @@ public class PlayerManager : SerializedMonoBehaviour
     }
 
     /// <summary>
+    /// 현재 스테이지 가져오기
+    /// </summary>
+    public int GetCurrentStage()
+    {
+        return _playerData.CurrentStage;
+    }
+
+    /// <summary>
+    /// 현재 챕터 가져오기
+    /// </summary>
+    public int GetCurrentChapter()
+    {
+        return _playerData.CurrentChapter;
+    }
+
+    /// <summary>
+    /// 플레이어 데이터의 스테이지 레벨업
+    /// </summary>
+    public void StageLevelUp_of_PlayerData()
+    {
+        _playerData.StageLevelUp();
+    }
+
+    /// <summary>
     /// 업그레이드 할만한 돈을 충분히 가지고 있는지
     /// </summary>
     public bool HasEnoughGold(int cost)

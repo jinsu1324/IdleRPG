@@ -7,6 +7,8 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    public int CurrentChapter = 1;                  // 현재 챕터
+    public int CurrentStage = 1;                    // 현재 스테이지
     public int CurrentGold = 100;                   // 현재 Gold
     public int CurrentHp;                           // 현재 HP
     public List<Stat> StatList = new List<Stat>();  // 스탯들 리스트
@@ -73,5 +75,19 @@ public class PlayerData
         // 스타팅 MaxHp로 CurrentHp도 설정
         Stat maxHpStat = StatList.Find(statData => statData.ID == StatID.MaxHp.ToString());
         CurrentHp = maxHpStat.Value;
+    }
+
+    /// <summary>
+    /// 스테이지 레벨업
+    /// </summary>
+    public void StageLevelUp()
+    {
+        CurrentStage++;
+
+        if (CurrentStage > 5)
+        {
+            CurrentStage = 1;
+            CurrentChapter++;
+        }
     }
 }
