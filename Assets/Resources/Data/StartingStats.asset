@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StartingStats
   m_EditorClassIdentifier: 
   DataList:
-  - ID: Attack
+  - ID: AttackPower
     Name: "\uACF5\uACA9\uB825"
     Level: 1
     Value: 50

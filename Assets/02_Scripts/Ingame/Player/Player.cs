@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Player : SerializedMonoBehaviour
 {
-    private int _attack;         // 공격력
+    private int _attackPower;    // 공격력
     private int _attackDelay;    // 공격속도
     private int _maxHp;          // 최대체력
     private int _critical;       // 크리티컬 확률
@@ -26,17 +26,12 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     public void UpdateStat(PlayerData playerData)
     {
-        _attack = playerData.GetStat(StatID.Attack.ToString()).Value;
+        Debug.Log("플레이어 프리팹 스탯 업데이트!");
+        _attackPower = playerData.GetStat(StatID.AttackPower.ToString()).Value;
         _attackDelay = playerData.GetStat(StatID.AttackDelay.ToString()).Value;
         _maxHp = playerData.GetStat(StatID.MaxHp.ToString()).Value;
         _critical = playerData.GetStat(StatID.Critical.ToString()).Value;
         _currentHp = _maxHp;
-
-        Debug.Log($"_attack : {_attack}");
-        Debug.Log($"_attackDelay : {_attackDelay}");
-        Debug.Log($"_maxHp : {_maxHp}");
-        Debug.Log($"_critical : {_critical}");
-        Debug.Log($"_currentHp : {_currentHp}");
     }
 
     private void Attack()
@@ -44,12 +39,13 @@ public class Player : SerializedMonoBehaviour
 
     }
 
-    private void Damaged(int atk)
+    public void Damaged(int atk)
     {
         _currentHp -= atk;
-        
-        if (_currentHp <= 0)
-            Died();
+
+        Debug.Log($"{atk}의 데미지를 받음! 남은 체력 : {_currentHp}");
+        //if (_currentHp <= 0)
+        //    Died();
     }
 
     private void Died()

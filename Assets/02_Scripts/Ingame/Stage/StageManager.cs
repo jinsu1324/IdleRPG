@@ -26,8 +26,8 @@ public class StageManager : MonoBehaviour
 
     private void SpawnEnemyTest()
     {
-        _chapter = 1;
-        _stage = 1;
+        _chapter = 3;
+        _stage = 5;
 
         StageData currentStageData = _stageDataManager.GetStageData(_chapter, _stage);
 
