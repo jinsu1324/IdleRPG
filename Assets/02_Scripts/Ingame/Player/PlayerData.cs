@@ -9,7 +9,7 @@ public class PlayerData
 {
     public int CurrentChapter = 1;                  // 현재 챕터
     public int CurrentStage = 1;                    // 현재 스테이지
-    public int CurrentGold = 100;                   // 현재 Gold
+    public int CurrentGold = 1000000;               // (!!!!!!!!!!!!!임시값!!!!!!!!!!!!!!) 현재 Gold 
     public int CurrentHp;                           // 현재 HP
     public List<Stat> StatList = new List<Stat>();  // 스탯들 리스트
     private Dictionary<string, Stat> _statDict = new Dictionary<string, Stat>(); // 스탯들 리스트 -> 딕셔너리용

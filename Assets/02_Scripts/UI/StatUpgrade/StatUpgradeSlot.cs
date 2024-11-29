@@ -39,8 +39,8 @@ public class StatUpgradeSlot : MonoBehaviour
         {
             _statNameText.text = stat.Name;
             _levelText.text = $"Lv.{stat.Level}";
-            _valueText.text = $"{stat.Value}";
-            _costText.text = $"Cost {stat.Cost}";
+            _valueText.text = AlphabetNumConverter.Convert(stat.Value);
+            _costText.text = AlphabetNumConverter.Convert(stat.Cost);
             _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.ID);
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
