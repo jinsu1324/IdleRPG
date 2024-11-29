@@ -73,7 +73,7 @@ public class Player : SerializedMonoBehaviour
     {
         // 타겟 찾기
         Enemy targetEnemy = EnemyManager.Instance.GetClosestLivingEnemy(transform.position);
-        if (targetEnemy == null)
+        if (targetEnemy == null || targetEnemy.IsDead || targetEnemy.IsGoingToDie)
         {
             Debug.Log("공격 가능한 타겟 없음!");
             return;
