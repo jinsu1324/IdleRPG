@@ -10,6 +10,7 @@ public class StatUpgradeSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _levelText;        // 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _valueText;        // 실제 값 텍스트
     [SerializeField] private TextMeshProUGUI _costText;         // 업그레이드 비용 텍스트
+    [SerializeField] private Image _statIcon;                   // 스탯 아이콘
     [SerializeField] private Button _upgradeButton;             // 업그레이드 버튼
     private string _statID;                                     // 스탯 ID
     private PlayerManager _playerManager;                       // 플레이어 매니저
@@ -17,10 +18,10 @@ public class StatUpgradeSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(string id, PlayerManager playerManager)
+    public void Initialize(string id)
     {
         _statID = id;
-        _playerManager = playerManager;
+        _playerManager = PlayerManager.Instance;
 
         UpdateUI();
     }
@@ -40,6 +41,7 @@ public class StatUpgradeSlot : MonoBehaviour
             _levelText.text = $"Lv.{stat.Level}";
             _valueText.text = $"{stat.Value}";
             _costText.text = $"Cost {stat.Cost}";
+            _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.ID);
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
     }

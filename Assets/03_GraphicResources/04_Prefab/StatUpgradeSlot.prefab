@@ -96,6 +96,7 @@ MonoBehaviour:
   _levelText: {fileID: 1268334829535652351}
   _valueText: {fileID: 7933636439504975401}
   _costText: {fileID: 7820151344939020398}
+  _statIcon: {fileID: 7016770254857778964}
   _upgradeButton: {fileID: 2971267272966164884}
 --- !u!1 &1222435892809987124
 GameObject:

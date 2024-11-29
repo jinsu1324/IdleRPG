@@ -54,9 +54,9 @@ public class PlayerData
     /// <summary>
     /// 스탯들 스타팅값으로 설정
     /// </summary>
-    public void SetToStartingStats(DataManager dataManager)
+    public void SetToStartingStats()
     {
-        StartingStatsSO startingStatsSO = dataManager.StartingStatsSO;
+        StartingStatsSO startingStatsSO = DataManager.Instance.StartingStatsSO;
 
         // 스탯들 스타팅값으로 설정
         StatList = startingStatsSO.DataList.Select(stat => new Stat

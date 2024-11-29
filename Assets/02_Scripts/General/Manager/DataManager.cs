@@ -6,6 +6,23 @@ using UnityEngine;
 
 public class DataManager : SerializedMonoBehaviour
 {
+    #region Singleton
+    public static DataManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+
     [Title("데이터 스크립터블 오브젝트들", Bold = false)]
     [SerializeField] public WeaponDatasSO WeaponDatasSO { get; private set; }           // 무기 데이터
     [SerializeField] public ArmorDatasSO ArmorDatasSO { get; private set; }             // 방어구 데이터

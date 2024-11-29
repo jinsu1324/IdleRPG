@@ -5,12 +5,9 @@ using UnityEngine;
 
 public class StageManager : MonoBehaviour
 {
-    private EnemySpawner _enemySpawner;         // 적 스포너
-    private StageDatasSO _stageDatasSO;            // 스테이지 데이터
-    private StageDataManager _stageDataManager; // 스테이지 데이터 매니저
+    public static event Action<EnemyID, int, int> OnStageStart;             // 스테이지 시작 시 이벤트
 
-
-
+    private StageDataManager _stageDataManager = new StageDataManager();    // 스테이지 데이터 매니저
 
     private int _chapter;
     private int _stage;
@@ -18,27 +15,23 @@ public class StageManager : MonoBehaviour
     private int _count;
     private int _statPercentage;
 
-
-
-
-
     /// <summary>
-    /// 초기화
+    /// Start
     /// </summary>
-    public void Initialize(EnemySpawner enemySpawner, StageDatasSO stageDatasSO, StageDataManager stageDataManager)
+    private void Start()
     {
-        _enemySpawner = enemySpawner;
-        _stageDatasSO = stageDatasSO;
-        _stageDataManager = stageDataManager;
+        _stageDataManager.Initialize();
+        SpawnEnemyTest();
     }
 
-
-    private void Start()
+    private void SpawnEnemyTest()
     {
         _chapter = 1;
         _stage = 1;
 
         StageData currentStageData = _stageDataManager.GetStageData(_chapter, _stage);
+
+        
 
         _appearEnemy = currentStageData.AppearEnemy;
         _count = currentStageData.Count;
@@ -46,6 +39,6 @@ public class StageManager : MonoBehaviour
 
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), _appearEnemy);
 
-        _enemySpawner.SpawnEnemies(appearEnemyID, _count, _statPercentage);
+        OnStageStart?.Invoke(appearEnemyID, _count, _statPercentage);
     }
 }

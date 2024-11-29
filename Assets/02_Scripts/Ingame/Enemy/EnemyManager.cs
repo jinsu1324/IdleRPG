@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    #region Singleton
+    public static EnemyManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    #endregion
+
     private List<Enemy> _fieldEnemyList = new List<Enemy>();    // 필드에 스폰되어 있는 에너미 리스트
 
     /// <summary>

@@ -11,24 +11,42 @@ public class EnemySpawner : SerializedMonoBehaviour
 
     [SerializeField]
     private Dictionary<EnemyID, Enemy> _enemyPrefabDict;            // 에너미 프리팹 딕셔너리              
+
+    private Dictionary<EnemyID, ObjectPool<Enemy>> _enemyPoolDict;  // 에너미 오브젝트 풀 딕셔너리
     
-    private Dictionary<EnemyID, ObjectPool<Enemy>> _enemyPoolDict;  // 에너미 오브젝트 풀 딕셔너리        
-    private EnemyManager _enemyManager;                             // 에너미 매니저
-    private EnemyDatasSO _enemyDatasSO;                                // 적들 데이터 스크립터블 오브젝트
+    /// <summary>
+    /// Awake
+    /// </summary>
+    private void Awake()
+    {
+        SetEnemyPoolDict();
+    }
 
     /// <summary>
-    /// 초기화
+    /// OnEnable
     /// </summary>
-    public void Initialize(EnemyManager enemyManager, EnemyDatasSO enemyDatasSO)
+    private void OnEnable()
     {
-        _enemyManager = enemyManager;
-        _enemyDatasSO = enemyDatasSO;
+        StageManager.OnStageStart += SpawnEnemies;  // 스테이지 시작 시, 적 스폰되도록 구독
+    }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        StageManager.OnStageStart -= SpawnEnemies;  // 구독 해제
+    }
+
+    /// <summary>
+    /// 에너미 풀 딕셔너리 셋팅
+    /// </summary>
+    private void SetEnemyPoolDict()
+    {
         _enemyPoolDict = new Dictionary<EnemyID, ObjectPool<Enemy>>();
         foreach (var kvp in _enemyPrefabDict)
             _enemyPoolDict[kvp.Key] = new ObjectPool<Enemy>(kvp.Value, 10, this.transform);
     }
-   
 
     /// <summary>
     /// 에너미 타입에 맞는 에너미 스폰
@@ -36,7 +54,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     public void SpawnEnemies(EnemyID enemyID, int count, int statPercentage)
     {
         ObjectPool<Enemy> pool = _enemyPoolDict[enemyID];
-        EnemyData enemyData = _enemyDatasSO.GetDataByID(enemyID.ToString());
+        EnemyData enemyData = DataManager.Instance.EnemyDatasSO.GetDataByID(enemyID.ToString());
 
         for (int i = 0; i < count; i++)
         {
@@ -44,7 +62,7 @@ public class EnemySpawner : SerializedMonoBehaviour
             enemy.transform.position = _spawnPosList[i].position;
 
             // Enemy 스폰, 죽음 이벤트 구독
-            _enemyManager.SubscribeToEnemy(enemy);
+            EnemyManager.Instance.SubscribeToEnemy(enemy);
 
             // Enemy 초기화
             enemy.Initialize(pool, enemyData, statPercentage);

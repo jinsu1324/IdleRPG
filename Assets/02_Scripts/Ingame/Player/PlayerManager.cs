@@ -5,17 +5,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : SerializedMonoBehaviour
-{   
+{
+    #region Singleton
+    public static PlayerManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        PlayerDataLoad();
+    }
+    #endregion
+
     [SerializeField] private PlayerData _playerData;        // 플레이어 데이터 (SerializeField는 확인용)
-    private DataManager _dataManager;                       // 데이터 매니저
 
     /// <summary>
-    /// 초기화
+    /// 플레이어 데이터 로드
     /// </summary>
-    public void Initialize(DataManager dataManager)
+    private void PlayerDataLoad()
     {
-        _dataManager = dataManager;
-
         // 데이터 로드
         _playerData = SaveLoadManager.LoadPlayerData();
 
@@ -23,10 +39,10 @@ public class PlayerManager : SerializedMonoBehaviour
         if (_playerData == null)
         {
             Debug.Log("PlayerData가 null입니다. 새 데이터를 생성합니다.");
-            
+
             // 플레이어 데이터 새로 생성
             _playerData = new PlayerData();
-            _playerData.SetToStartingStats(_dataManager);
+            _playerData.SetToStartingStats();
 
             // 딕셔너리도 셋팅
             _playerData.SetDictFromStatList();
