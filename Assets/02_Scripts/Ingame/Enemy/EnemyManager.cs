@@ -104,4 +104,18 @@ public class EnemyManager : MonoBehaviour
             _fieldEnemyList.OrderBy(enemy => Vector3.Distance(pos, enemy.transform.position)).FirstOrDefault();
         return closestEnemy;
     }
+
+    /// <summary>
+    /// 가장 가까운 살아있는 적 찾기
+    /// </summary>
+    public Enemy GetClosestLivingEnemy(Vector3 pos) 
+    {
+        // 살아있는 적들만 필터링 후 거리 기준으로 정렬
+        Enemy closestEnemy = _fieldEnemyList.
+            Where(enemy => enemy != null && !enemy.IsDead && !enemy.IsGoingToDie). // 살아있는 적 필터링 (죽을 예정인적도 제외)
+            OrderBy(enemy => Vector3.Distance(pos, enemy.transform.position)).     // 거리 기준 정렬
+            FirstOrDefault(); // 가장 가까운 적 반환
+
+        return closestEnemy;
+    }
 }

@@ -731,7 +731,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _projectilePrefab: {fileID: 2995312722554096482, guid: 619fdf21e28ef284dba9dddebd9349eb, type: 3}
+  _projectilePrefab: {fileID: 1684082130063320304, guid: 1206aa799fee7aa48b855d0b67eef68e, type: 3}
 --- !u!61 &8349220822790349758
 BoxCollider2D:
   m_ObjectHideFlags: 0

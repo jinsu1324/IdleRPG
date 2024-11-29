@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_targetEnemy == null)
+        if (_targetEnemy == null || _targetEnemy.IsDead)
         {
             Destroy(gameObject); // 타겟이 사라지면 투사체 제거
             return;

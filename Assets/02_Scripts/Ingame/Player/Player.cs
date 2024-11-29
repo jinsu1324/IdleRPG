@@ -72,18 +72,21 @@ public class Player : SerializedMonoBehaviour
     private void Attack()
     {
         // 타겟 찾기
-        Enemy targetEnemy = EnemyManager.Instance.GetClosestEnemy(transform.position);
+        Enemy targetEnemy = EnemyManager.Instance.GetClosestLivingEnemy(transform.position);
         if (targetEnemy == null)
         {
-            Debug.Log("타겟 없음!");
+            Debug.Log("공격 가능한 타겟 없음!");
             return;
         }
+
+        // 이 공격으로 적이 죽는다면, 죽을 예정임을 true로
+        if (targetEnemy.GetCurrentHP() - _attackPower <= 0)
+            targetEnemy.IsGoingToDieTrue(); 
 
         // 투사체 생성 및 초기화
         Projectile projectile = Instantiate(_projectilePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         projectile.Initialize(targetEnemy, _attackPower);
     }
-
 
     /// <summary>
     /// 데미지 받음
