@@ -18,318 +18,318 @@ MonoBehaviour:
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 1
-    Atk: 150
-    AtkSpeed: 110
+    AttackPower: 150
+    AttackSpeed: 110
     Critical: 5
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 2
-    Atk: 160
-    AtkSpeed: 111
+    AttackPower: 160
+    AttackSpeed: 111
     Critical: 6
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 3
-    Atk: 170
-    AtkSpeed: 112
+    AttackPower: 170
+    AttackSpeed: 112
     Critical: 7
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 4
-    Atk: 180
-    AtkSpeed: 113
+    AttackPower: 180
+    AttackSpeed: 113
     Critical: 8
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 5
-    Atk: 190
-    AtkSpeed: 114
+    AttackPower: 190
+    AttackSpeed: 114
     Critical: 9
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 6
-    Atk: 200
-    AtkSpeed: 115
+    AttackPower: 200
+    AttackSpeed: 115
     Critical: 10
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 7
-    Atk: 210
-    AtkSpeed: 116
+    AttackPower: 210
+    AttackSpeed: 116
     Critical: 11
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 8
-    Atk: 220
-    AtkSpeed: 117
+    AttackPower: 220
+    AttackSpeed: 117
     Critical: 12
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 9
-    Atk: 230
-    AtkSpeed: 118
+    AttackPower: 230
+    AttackSpeed: 118
     Critical: 13
   - ID: Weapon_Sword
     EquipmentType: Weapon
     Name: "\uAC80"
     Grade: "\uC77C\uBC18"
     Level: 10
-    Atk: 240
-    AtkSpeed: 119
+    AttackPower: 240
+    AttackSpeed: 119
     Critical: 14
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 1
-    Atk: 170
-    AtkSpeed: 105
+    AttackPower: 170
+    AttackSpeed: 105
     Critical: 2
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 2
-    Atk: 180
-    AtkSpeed: 111
+    AttackPower: 180
+    AttackSpeed: 111
     Critical: 3
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 3
-    Atk: 190
-    AtkSpeed: 112
+    AttackPower: 190
+    AttackSpeed: 112
     Critical: 4
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 4
-    Atk: 200
-    AtkSpeed: 113
+    AttackPower: 200
+    AttackSpeed: 113
     Critical: 5
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 5
-    Atk: 210
-    AtkSpeed: 114
+    AttackPower: 210
+    AttackSpeed: 114
     Critical: 6
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 6
-    Atk: 220
-    AtkSpeed: 115
+    AttackPower: 220
+    AttackSpeed: 115
     Critical: 7
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 7
-    Atk: 230
-    AtkSpeed: 116
+    AttackPower: 230
+    AttackSpeed: 116
     Critical: 8
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 8
-    Atk: 240
-    AtkSpeed: 117
+    AttackPower: 240
+    AttackSpeed: 117
     Critical: 9
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 9
-    Atk: 250
-    AtkSpeed: 118
+    AttackPower: 250
+    AttackSpeed: 118
     Critical: 10
   - ID: Weapon_Axe
     EquipmentType: Weapon
     Name: "\uB3C4\uB07C"
     Grade: "\uC77C\uBC18"
     Level: 10
-    Atk: 260
-    AtkSpeed: 119
+    AttackPower: 260
+    AttackSpeed: 119
     Critical: 11
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 1
-    Atk: 250
-    AtkSpeed: 120
+    AttackPower: 250
+    AttackSpeed: 120
     Critical: 10
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 2
-    Atk: 260
-    AtkSpeed: 121
+    AttackPower: 260
+    AttackSpeed: 121
     Critical: 11
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 3
-    Atk: 270
-    AtkSpeed: 122
+    AttackPower: 270
+    AttackSpeed: 122
     Critical: 12
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 4
-    Atk: 280
-    AtkSpeed: 123
+    AttackPower: 280
+    AttackSpeed: 123
     Critical: 13
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 5
-    Atk: 290
-    AtkSpeed: 124
+    AttackPower: 290
+    AttackSpeed: 124
     Critical: 14
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 6
-    Atk: 300
-    AtkSpeed: 125
+    AttackPower: 300
+    AttackSpeed: 125
     Critical: 15
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 7
-    Atk: 310
-    AtkSpeed: 126
+    AttackPower: 310
+    AttackSpeed: 126
     Critical: 16
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 8
-    Atk: 320
-    AtkSpeed: 127
+    AttackPower: 320
+    AttackSpeed: 127
     Critical: 17
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 9
-    Atk: 330
-    AtkSpeed: 128
+    AttackPower: 330
+    AttackSpeed: 128
     Critical: 18
   - ID: Weapon_ForestSword
     EquipmentType: Weapon
     Name: "\uC232\uC758 \uCE7C\uB0A0"
     Grade: "\uB808\uC5B4"
     Level: 10
-    Atk: 340
-    AtkSpeed: 129
+    AttackPower: 340
+    AttackSpeed: 129
     Critical: 19
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 1
-    Atk: 400
-    AtkSpeed: 130
+    AttackPower: 400
+    AttackSpeed: 130
     Critical: 15
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 2
-    Atk: 410
-    AtkSpeed: 131
+    AttackPower: 410
+    AttackSpeed: 131
     Critical: 16
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 3
-    Atk: 420
-    AtkSpeed: 132
+    AttackPower: 420
+    AttackSpeed: 132
     Critical: 17
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 4
-    Atk: 430
-    AtkSpeed: 133
+    AttackPower: 430
+    AttackSpeed: 133
     Critical: 18
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 5
-    Atk: 440
-    AtkSpeed: 134
+    AttackPower: 440
+    AttackSpeed: 134
     Critical: 19
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 6
-    Atk: 450
-    AtkSpeed: 135
+    AttackPower: 450
+    AttackSpeed: 135
     Critical: 20
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 7
-    Atk: 460
-    AtkSpeed: 136
+    AttackPower: 460
+    AttackSpeed: 136
     Critical: 21
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 8
-    Atk: 470
-    AtkSpeed: 137
+    AttackPower: 470
+    AttackSpeed: 137
     Critical: 22
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 9
-    Atk: 480
-    AtkSpeed: 138
+    AttackPower: 480
+    AttackSpeed: 138
     Critical: 23
   - ID: Weapon_MagicStaff
     EquipmentType: Weapon
     Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
     Grade: "\uC804\uC124"
     Level: 10
-    Atk: 490
-    AtkSpeed: 139
+    AttackPower: 490
+    AttackSpeed: 139
     Critical: 24

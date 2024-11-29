@@ -21,9 +21,10 @@ public class Enemy : SerializedMonoBehaviour
     private int _currentHp;                             // 체력
     private int _maxHp;                                 // 최대체력
     private int _attackPower;                           // 공격력
-    private int _attackDelay;                           // 공격속도
+    private int _attackSpeed;                           // 공격속도
     private int _moveSpeed;                             // 이동속도
 
+    private float _attackCooldown;                      // 공격 쿨타임
     private float _time;                                // 쿨타임 시간 계산용
     private Player _targetPlayer = null;                // 공격 타겟 플레이어
     private EnemyState _currentState = EnemyState.Move; // 현재 상태
@@ -40,14 +41,13 @@ public class Enemy : SerializedMonoBehaviour
         // 스탯 셋팅
         _currentHp = (_enemyData.MaxHp * statPercentage) / 100;
         _maxHp = (_enemyData.MaxHp * statPercentage) / 100;
-        _attackPower = (_enemyData.Atk * statPercentage) / 100;
-        _attackDelay = _enemyData.AtkDelay;
+        _attackPower = (_enemyData.AttackPower * statPercentage) / 100;
+        _attackSpeed = _enemyData.AttackSpeed;
         _moveSpeed = _enemyData.MoveSpeed;
+        _attackCooldown = 1f / _attackSpeed;
 
         // 스폰 이벤트 호출
         OnEnemySpawn?.Invoke(this);
-
-
     }
 
     /// <summary>
@@ -105,9 +105,9 @@ public class Enemy : SerializedMonoBehaviour
     {
         _time += Time.deltaTime;
 
-        if (_time >= _attackDelay)
+        if (_time >= _attackCooldown)
         {
-            _time %= _attackDelay;
+            _time %= _attackCooldown;
             return true;
         }
         else
@@ -122,10 +122,7 @@ public class Enemy : SerializedMonoBehaviour
     private void AttackPlayer()
     {
         if (_targetPlayer != null)
-        {
-            Debug.Log("플레이어 공격!");
             _targetPlayer.TakeDamage(_attackPower);
-        }
     }
 
     /// <summary>
@@ -146,8 +143,6 @@ public class Enemy : SerializedMonoBehaviour
     public void TakeDamage(int atk)
     {
         _currentHp -= atk;
-
-        Debug.Log($"{atk}의 데미지를 받음! 남은 체력 : {_currentHp}");
 
         if (_currentHp <= 0)
             Die();

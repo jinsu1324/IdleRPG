@@ -5,7 +5,7 @@ using UnityEngine;
 public enum StatID
 {
     AttackPower,
-    AttackDelay,
+    AttackSpeed,
     MaxHp,
     Critical
 }

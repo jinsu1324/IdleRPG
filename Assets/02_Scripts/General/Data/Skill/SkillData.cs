@@ -9,8 +9,8 @@ public class SkillData : BaseData
     public string Grade;
     public int Level;
     public string Desc;
-    public int Atk;
-    public int AtkSpeedBuff;
+    public int AttackPowerPercentage;
+    public int AttackSpeedBuff;
     public int Range;
-    public int Delay;
+    public int AttackSpeed;
 }

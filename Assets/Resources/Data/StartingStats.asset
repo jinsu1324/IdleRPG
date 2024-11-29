@@ -20,7 +20,7 @@ MonoBehaviour:
     ValueIncrease: 10
     Cost: 10
     CostIncrease: 1
-  - ID: AttackDelay
+  - ID: AttackSpeed
     Name: "\uACF5\uACA9\uC18D\uB3C4"
     Level: 1
     Value: 1

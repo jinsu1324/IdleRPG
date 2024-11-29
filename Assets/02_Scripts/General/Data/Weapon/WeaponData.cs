@@ -9,7 +9,7 @@ public class WeaponData : BaseData
     public string Name;
     public string Grade;
     public int Level;
-    public int Atk;
-    public int AtkSpeed;
+    public int AttackPower;
+    public int AttackSpeed;
     public int Critical;
 }

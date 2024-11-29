@@ -60,7 +60,7 @@ public class EnemySpawner : SerializedMonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Enemy enemy = pool.GetObject();
-            enemy.transform.position = _spawnPosList[i].position;
+            enemy.transform.position = _spawnPosList[Random.Range(0, _spawnPosList.Count)].position;
 
             // Enemy 스폰, 죽음 이벤트 구독
             EnemyManager.Instance.SubscribeToEnemy(enemy);

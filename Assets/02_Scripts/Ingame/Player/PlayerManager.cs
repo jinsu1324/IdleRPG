@@ -26,6 +26,7 @@ public class PlayerManager : SerializedMonoBehaviour
     #endregion
 
     private PlayerData _playerData;                         // 플레이어 데이터
+    private Player _playerInstance;                         // 실제 필드에 스폰된 플레이어 인스턴스를 저장할 변수
     [SerializeField] private Player _playerPrefab;          // 플레이어 프리팹
     [SerializeField] private Transform _playerSpawnPos;     // 플레이어 스폰 위치
 
@@ -67,9 +68,9 @@ public class PlayerManager : SerializedMonoBehaviour
     /// </summary>
     private void PlayerPrefabSpawn(PlayerData playerData)
     {
-        Player player = Instantiate(_playerPrefab, _playerSpawnPos);
-        player.transform.position = _playerSpawnPos.position;
-        player.Initialize(playerData);
+        _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
+        _playerInstance.transform.position = _playerSpawnPos.position;
+        _playerInstance.Initialize(playerData);
     }
 
     /// <summary>
@@ -90,7 +91,7 @@ public class PlayerManager : SerializedMonoBehaviour
             _playerData.LevelUpStat(id);
 
             // 플레이어 프리팹 스탯 업데이트
-            _playerPrefab.UpdateStat(_playerData);
+            _playerInstance.UpdateStat(_playerData);
 
             return true;
         }
@@ -128,6 +129,14 @@ public class PlayerManager : SerializedMonoBehaviour
     {
         _playerData.CurrentGold -= cost;
         Debug.Log($"남은 골드 : {_playerData.CurrentGold}");
+    }
+
+    /// <summary>
+    /// 실제 필드에 소환되어있는 플레이어 인스턴스 가져오기
+    /// </summary>
+    public Player GetPlayerInstance()
+    {
+        return _playerInstance;
     }
 
     /// <summary>

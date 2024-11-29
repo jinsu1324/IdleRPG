@@ -16,6 +16,6 @@ public class EnemyData : BaseData
     public string Name;
     public int MaxHp;
     public int MoveSpeed;
-    public int Atk;
-    public int AtkDelay;
+    public int AttackPower;
+    public int AttackSpeed;
 }

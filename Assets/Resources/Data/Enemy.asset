@@ -17,23 +17,23 @@ MonoBehaviour:
     Name: "\uBE14\uB8E8 \uC2AC\uB77C\uC784"
     MaxHp: 100
     MoveSpeed: 1
-    Atk: 10
-    AtkDelay: 1
+    AttackPower: 0
+    AttackSpeed: 0
   - ID: Monster_SlimeGreen
     Name: "\uADF8\uB9B0 \uC2AC\uB77C\uC784"
     MaxHp: 120
     MoveSpeed: 1
-    Atk: 8
-    AtkDelay: 1
+    AttackPower: 0
+    AttackSpeed: 0
   - ID: Monster_SlimePink
     Name: "\uD551\uD06C \uC2AC\uB77C\uC784"
     MaxHp: 80
     MoveSpeed: 1
-    Atk: 12
-    AtkDelay: 1
+    AttackPower: 0
+    AttackSpeed: 0
   - ID: Boss_KingSlime
     Name: "\uD0B9\uC2AC\uB77C\uC784"
     MaxHp: 1000
     MoveSpeed: 2
-    Atk: 50
-    AtkDelay: 2
+    AttackPower: 0
+    AttackSpeed: 0
