@@ -26,9 +26,9 @@ public class Enemy : SerializedMonoBehaviour
 
     private float _attackCooldown;                      // 공격 쿨타임
     private float _time;                                // 쿨타임 시간 계산용
-    private Player _targetPlayer = null;                // 공격 타겟 플레이어
-    private EnemyState _currentState = EnemyState.Move; // 현재 상태
-    private bool _isFirstAttack = true;                 // 첫 1회공격인지
+    private Player _targetPlayer;                       // 공격 타겟 플레이어
+    private EnemyState _currentState;                   // 현재 상태
+    private bool _isFirstAttack;                        // 첫 1회공격인지
 
     /// <summary>
     /// 초기화
@@ -45,6 +45,12 @@ public class Enemy : SerializedMonoBehaviour
         _attackSpeed = _enemyData.AttackSpeed;
         _moveSpeed = _enemyData.MoveSpeed;
         _attackCooldown = 1f / _attackSpeed;
+
+        // 정보들 초기화
+        _time = 0f;
+        _targetPlayer = null;
+        _currentState = EnemyState.Move;
+        _isFirstAttack = true;
 
         // 스폰 이벤트 호출
         OnEnemySpawn?.Invoke(this);
