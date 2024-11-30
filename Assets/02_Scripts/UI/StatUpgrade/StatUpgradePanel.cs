@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
+using TMPro;
 using UnityEngine;
 
 public class StatUpgradePanel : MonoBehaviour
 {
     [SerializeField] private StatUpgradeSlot _statUpgradeSlotPrefab;      // 생성할 스탯 업그레이드 슬롯 프리팹
     [SerializeField] private RectTransform _slotParent;                   // 슬롯들 생성할 부모
+    [SerializeField] private TextMeshProUGUI _totalCombatPowerText;       // 총합 전투력 텍스트
 
     /// <summary>
     /// Start
@@ -25,7 +27,15 @@ public class StatUpgradePanel : MonoBehaviour
         foreach (Stat stat in PlayerManager.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
-            statUpgradeSlot.Initialize(stat.ID);
+            statUpgradeSlot.Initialize(stat.ID, Update_TotalCombatPowerText);
         }
+    }
+
+    /// <summary>
+    /// 총합 전투력 텍스트 업데이트
+    /// </summary>
+    private void Update_TotalCombatPowerText()
+    {
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(PlayerManager.Instance.GetTotalCombatPower());
     }
 }

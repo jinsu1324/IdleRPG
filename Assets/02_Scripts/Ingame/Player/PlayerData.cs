@@ -7,11 +7,16 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
+    // Json 저장되는 것들
     public int CurrentChapter = 1;                  // 현재 챕터
     public int CurrentStage = 1;                    // 현재 스테이지
     public int CurrentGold = 1000000;               // (!!!!!!!!!!!!!임시값!!!!!!!!!!!!!!) 현재 Gold 
     public int CurrentHp;                           // 현재 HP
+    public int TotalCombatPower;                    // 총합 전투력
     public List<Stat> StatList = new List<Stat>();  // 스탯들 리스트
+
+    // Json 저장 안되는 것들
+    public int BeforeTotalCombatPower { get; private set; }                      // 이전 총합 전투력
     private Dictionary<string, Stat> _statDict = new Dictionary<string, Stat>(); // 스탯들 리스트 -> 딕셔너리용
 
     /// <summary>
@@ -46,6 +51,7 @@ public class PlayerData
         if (_statDict.TryGetValue(id, out var stat))
         {
             stat.LevelUp();
+            UpdateTotalCombatPower(); // 총합 전투력 업데이트
         }
         else
         {
@@ -75,6 +81,9 @@ public class PlayerData
         // 스타팅 MaxHp로 CurrentHp도 설정
         Stat maxHpStat = StatList.Find(statData => statData.ID == StatID.MaxHp.ToString());
         CurrentHp = maxHpStat.Value;
+
+        // 총합 전투력 업데이트
+        UpdateTotalCombatPower();
     }
 
     /// <summary>
@@ -89,5 +98,19 @@ public class PlayerData
             CurrentStage = 1;
             CurrentChapter++;
         }
+    }
+
+    /// <summary>
+    /// 총합 전투력 업데이트
+    /// </summary>
+    public void UpdateTotalCombatPower()
+    {
+        BeforeTotalCombatPower = TotalCombatPower;
+
+        List<int> statValueList = StatList.Select(stat => stat.Value).ToList();
+
+        TotalCombatPower = 0;
+        foreach (int value in statValueList)
+            TotalCombatPower += value;
     }
 }

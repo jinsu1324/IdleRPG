@@ -131,6 +131,22 @@ public class PlayerManager : SerializedMonoBehaviour
     }
 
     /// <summary>
+    /// 총합 전투력 가져오기
+    /// </summary>
+    public int GetTotalCombatPower()
+    {
+        return _playerData.TotalCombatPower;
+    }
+
+    /// <summary>
+    /// 이전 총합 전투력 가져오기
+    /// </summary>
+    public int GetBeforeTotalCombatPower()
+    {
+        return _playerData.BeforeTotalCombatPower;
+    }
+
+    /// <summary>
     /// 플레이어 데이터의 스테이지 레벨업
     /// </summary>
     public void StageLevelUp_of_PlayerData()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,16 +15,20 @@ public class StatUpgradeSlot : MonoBehaviour
     [SerializeField] private Button _upgradeButton;             // 업그레이드 버튼
     private string _statID;                                     // 스탯 ID
     private PlayerManager _playerManager;                       // 플레이어 매니저
+    private Action _onUpdateTotalCombatPowerText;               // 통합 전투력 텍스트 업데이트 함수를 저장할 대리자
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(string id)
+    public void Initialize(string id, Action updateTotalCombatPowerText)
     {
         _statID = id;
         _playerManager = PlayerManager.Instance;
 
+        _onUpdateTotalCombatPowerText = updateTotalCombatPowerText; // 통합 전투력 텍스트 업데이트 함수 대리자에 저장
+
         UpdateUI();
+
     }
 
     /// <summary>
@@ -44,6 +49,8 @@ public class StatUpgradeSlot : MonoBehaviour
             _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.ID);
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
+
+        _onUpdateTotalCombatPowerText?.Invoke();    // 총합 전투력 텍스트 업데이트
     }
 
     /// <summary>
@@ -56,6 +63,9 @@ public class StatUpgradeSlot : MonoBehaviour
         {
             // UI 업데이트
             UpdateUI();
+
+            // 토스트 메시지 호출
+            ToastManager.Instance.ShowToastCombatPower();
         }
         else
         {
