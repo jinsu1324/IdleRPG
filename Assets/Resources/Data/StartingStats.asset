@@ -16,7 +16,7 @@ MonoBehaviour:
   - ID: AttackPower
     Name: "\uACF5\uACA9\uB825"
     Level: 1
-    Value: 100
+    Value: 5
     ValueIncrease: 100
     Cost: 10
     CostIncrease: 10
@@ -30,7 +30,7 @@ MonoBehaviour:
   - ID: MaxHp
     Name: "\uCCB4\uB825"
     Level: 1
-    Value: 500
+    Value: 1000
     ValueIncrease: 25
     Cost: 15
     CostIncrease: 15

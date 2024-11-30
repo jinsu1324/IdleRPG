@@ -8,6 +8,7 @@ using UnityEngine;
 public class Player : SerializedMonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
+    [SerializeField] private HPCanvas _hpCanvas;            // HP바 들어있는 캔버스
 
     private int _attackPower;                               // 공격력
     private int _attackSpeed;                               // 공격속도
@@ -46,6 +47,8 @@ public class Player : SerializedMonoBehaviour
         _critical = playerData.GetStat(StatID.Critical.ToString()).Value;
         _currentHp = _maxHp;
         _attackCooldown = 1f / _attackSpeed;
+
+        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
     }
 
     /// <summary>
@@ -94,15 +97,14 @@ public class Player : SerializedMonoBehaviour
     public void TakeDamage(int atk)
     {
         _currentHp -= atk;
-
-        //if (_currentHp <= 0)
-        //    Die();
+        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
+        
+        if (_currentHp <= 0)
+            Die();
     }
 
     private void Die()
     {
-
+        Debug.Log("플레이어 죽었습니다!");
     }
-
-
 }

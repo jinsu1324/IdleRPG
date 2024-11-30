@@ -12,6 +12,7 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
+    [SerializeField] private HPCanvas _hpCanvas;        // HP바 들어있는 캔버스
     public bool IsDead { get; private set; }            // 적이 죽었는지
     public bool IsGoingToDie { get; private set; }      // 적이 죽을 예정인지
 
@@ -51,12 +52,13 @@ public class Enemy : SerializedMonoBehaviour
 
         // 정보들 초기화
         IsGoingToDie = false;
-
         IsDead = false;
         _time = 0f;
         _targetPlayer = null;
         _currentState = EnemyState.Move;
         _isFirstAttack = true;
+
+        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
 
         // 스폰 이벤트 호출
         OnEnemySpawn?.Invoke(this);
@@ -155,6 +157,7 @@ public class Enemy : SerializedMonoBehaviour
     public void TakeDamage(int atk)
     {
         _currentHp -= atk;
+        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
 
         if (_currentHp <= 0)
         {
