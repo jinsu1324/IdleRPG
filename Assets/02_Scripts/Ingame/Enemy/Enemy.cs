@@ -14,7 +14,6 @@ public class Enemy : SerializedMonoBehaviour
 {
     [SerializeField] private HPCanvas _hpCanvas;        // HP바 들어있는 캔버스
     public bool IsDead { get; private set; }            // 적이 죽었는지
-    public bool IsGoingToDie { get; private set; }      // 적이 죽을 예정인지
 
     public event Action<Enemy> OnEnemySpawn;            // 스폰시 이벤트
     public event Action<Enemy> OnEnemyDie;              // 죽었을때 이벤트
@@ -51,7 +50,6 @@ public class Enemy : SerializedMonoBehaviour
         _attackCooldown = 1f / _attackSpeed;
 
         // 정보들 초기화
-        IsGoingToDie = false;
         IsDead = false;
         _time = 0f;
         _targetPlayer = null;
@@ -160,18 +158,7 @@ public class Enemy : SerializedMonoBehaviour
         _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
 
         if (_currentHp <= 0)
-        {
-            // 죽었음을 true로
-            IsDead = true;
-
-            // 죽음
             Die();
-        }
-        else
-        {
-            // 혹시 사망하지 않으면 (ex)힐) 플래그 초기화
-            IsGoingToDie = false;
-        }
     }
 
     /// <summary>
@@ -179,19 +166,14 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     private void Die()
     {
+        // 죽었음을 true로
+        IsDead = true;
+
         // 사망 이벤트 호출
         OnEnemyDie?.Invoke(this);  
 
         // 풀로 반환
         _pool.ReturnObject(this); 
-    }
-
-    /// <summary>
-    /// 죽을 예정임을 Ture로
-    /// </summary>
-    public void IsGoingToDieTrue()
-    {
-        IsGoingToDie = true;
     }
 
     /// <summary>

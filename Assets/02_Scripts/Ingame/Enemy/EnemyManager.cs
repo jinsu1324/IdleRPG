@@ -43,8 +43,6 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     private void Plus_KillCount()
     {
-        Debug.Log("Plus_KillCount");
-
         _killCount++;
 
         // 적 다 죽였으면 이벤트 호출
@@ -112,7 +110,7 @@ public class EnemyManager : MonoBehaviour
     {
         // 살아있는 적들만 필터링 후 거리 기준으로 정렬
         Enemy closestEnemy = _fieldEnemyList.
-            Where(enemy => enemy != null && !enemy.IsDead && !enemy.IsGoingToDie). // 살아있는 적만 필터링 (죽을 예정인적도 제외)
+            Where(enemy => enemy != null && !enemy.IsDead). // 살아있는 적만 필터링
             OrderBy(enemy => Vector3.Distance(pos, enemy.transform.position)).     // 거리 기준 정렬
             FirstOrDefault(); // 가장 가까운 적 반환
 

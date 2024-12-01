@@ -9,6 +9,7 @@ public class Player : SerializedMonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
     [SerializeField] private HPCanvas _hpCanvas;            // HP바 들어있는 캔버스
+    [SerializeField] private Animator _animator;            // 애니메이터
 
     private int _attackPower;                               // 공격력
     private int _attackSpeed;                               // 공격속도
@@ -49,6 +50,7 @@ public class Player : SerializedMonoBehaviour
         _attackCooldown = 1f / _attackSpeed;
 
         _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
+        SetAnimatorSpeed(_attackSpeed); ////////////////////원래 상태로 돌아오면 이동애니메이션은 그대로 해야함
     }
 
     /// <summary>
@@ -74,21 +76,16 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void Attack()
     {
-        // 타겟 찾기
-        Enemy targetEnemy = EnemyManager.Instance.GetClosestLivingEnemy(transform.position);
-        if (targetEnemy == null || targetEnemy.IsDead || targetEnemy.IsGoingToDie)
-        {
-            Debug.Log("공격 가능한 타겟 없음!");
-            return;
-        }
+        _animator.SetTrigger("Attack"); // 공격 애니메이션 실행
+    }
 
-        // 이 공격으로 적이 죽는다면, 죽을 예정임을 true로
-        if (targetEnemy.GetCurrentHP() - _attackPower <= 0)
-            targetEnemy.IsGoingToDieTrue(); 
-
-        // 투사체 생성 및 초기화
+    /// <summary>
+    /// 애니메이션 이벤트에서 호출되는 투사체 생성 및 초기화 함수
+    /// </summary>
+    public void SpawnProjectile()
+    {
         Projectile projectile = Instantiate(_projectilePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        projectile.Initialize(targetEnemy, _attackPower);
+        projectile.Initialize(_attackPower, transform.position);
     }
 
     /// <summary>
@@ -103,8 +100,19 @@ public class Player : SerializedMonoBehaviour
             Die();
     }
 
+    /// <summary>
+    /// 죽음
+    /// </summary>
     private void Die()
     {
         Debug.Log("플레이어 죽었습니다!");
+    }
+
+    /// <summary>
+    /// 애니메이터 스피드 조절
+    /// </summary>
+    public void SetAnimatorSpeed(float newSpeed)
+    {
+        _animator.speed = newSpeed;
     }
 }
