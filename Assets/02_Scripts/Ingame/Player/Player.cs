@@ -50,7 +50,7 @@ public class Player : SerializedMonoBehaviour
         _attackCooldown = 1f / _attackSpeed;
 
         _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
-        SetAnimatorSpeed(_attackSpeed); ////////////////////원래 상태로 돌아오면 이동애니메이션은 그대로 해야함
+        _animator.SetFloat("AttackSpeed", _attackSpeed);
     }
 
     /// <summary>
