@@ -24,6 +24,7 @@ public class PlayerData
     [SerializeField]
     private int _currentStage = 1;                    
     public int CurrentStage { get { return _currentStage; } set { _currentStage = value; } }
+    public event Action OnStageChange; // 스테이지 변경 시 이벤트
 
     // 현재 HP
     [SerializeField]
@@ -136,6 +137,8 @@ public class PlayerData
             _currentStage = 1;
             _currentChapter++;
         }
+
+        OnStageChange?.Invoke(); // 스테이지 변경 이벤트 실행
     }
 
     /// <summary>
