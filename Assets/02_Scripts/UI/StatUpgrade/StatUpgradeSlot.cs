@@ -7,15 +7,16 @@ using UnityEngine.UI;
 
 public class StatUpgradeSlot : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _statNameText;     // 스탯 이름 텍스트 
-    [SerializeField] private TextMeshProUGUI _levelText;        // 레벨 텍스트
-    [SerializeField] private TextMeshProUGUI _valueText;        // 실제 값 텍스트
-    [SerializeField] private TextMeshProUGUI _costText;         // 업그레이드 비용 텍스트
-    [SerializeField] private Image _statIcon;                   // 스탯 아이콘
-    [SerializeField] private Button _upgradeButton;             // 업그레이드 버튼
-    private string _statID;                                     // 스탯 ID
-    private PlayerManager _playerManager;                       // 플레이어 매니저
-    private Action _onUpdateTotalCombatPowerText;               // 통합 전투력 텍스트 업데이트 함수를 저장할 대리자
+    [SerializeField] private TextMeshProUGUI _statNameText;         // 스탯 이름 텍스트 
+    [SerializeField] private TextMeshProUGUI _levelText;            // 레벨 텍스트
+    [SerializeField] private TextMeshProUGUI _valueText;            // 실제 값 텍스트
+    [SerializeField] private TextMeshProUGUI _costText;             // 업그레이드 비용 텍스트
+    [SerializeField] private Image _statIcon;                       // 스탯 아이콘
+    [SerializeField] private StatUpgradeButton _statUpgradeButton;  // 스탯 업그레이드 버튼
+    private string _statID;                                         // 스탯 ID
+    private PlayerManager _playerManager;                           // 플레이어 매니저
+    private Action _onUpdateTotalCombatPowerText;                   // 통합 전투력 텍스트 업데이트 함수를 저장할 대리자
+
 
     /// <summary>
     /// 초기화
@@ -26,6 +27,8 @@ public class StatUpgradeSlot : MonoBehaviour
         _playerManager = PlayerManager.Instance;
 
         _onUpdateTotalCombatPowerText = updateTotalCombatPowerText; // 통합 전투력 텍스트 업데이트 함수 대리자에 저장
+
+        _statUpgradeButton.Initialize(UpdateUI, _statID);   // 업그레이드 버튼 초기화
 
         UpdateUI();
 
