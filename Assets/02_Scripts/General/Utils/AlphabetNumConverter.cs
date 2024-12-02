@@ -28,6 +28,6 @@ public class AlphabetNumConverter
             unitIndex++;
         }
 
-        return $"{number:F1}{_units[unitIndex]}"; // 1자리 소수와 단위 추가
+        return $"{number:F2}{_units[unitIndex]}"; // 2자리 소수와 단위 추가
     }
 }

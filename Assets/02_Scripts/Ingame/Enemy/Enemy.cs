@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum EnemyState
 {
@@ -168,6 +169,9 @@ public class Enemy : SerializedMonoBehaviour
     {
         // 죽었음을 true로
         IsDead = true;
+
+        // 플레이어의 골드 추가 // Todo : 얼마 얻을지 데이터로 빼기
+        PlayerManager.Instance.AddGold(1000);
 
         // 사망 이벤트 호출
         OnEnemyDie?.Invoke(this);  

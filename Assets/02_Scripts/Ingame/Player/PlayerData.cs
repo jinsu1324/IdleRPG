@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,54 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    // Json 저장되는 것들
-    public int CurrentChapter = 1;                  // 현재 챕터
-    public int CurrentStage = 1;                    // 현재 스테이지
-    public int CurrentGold = 1000000;               // (!!!!!!!!!!!!!임시값!!!!!!!!!!!!!!) 현재 Gold 
-    public int CurrentHp;                           // 현재 HP
-    public int TotalCombatPower;                    // 총합 전투력
-    public List<Stat> StatList = new List<Stat>();  // 스탯들 리스트
+    /// <summary>
+    /// Json 저장할 데이터
+    /// </summary>
+    
+    // 스탯들 리스트
+    public List<Stat> StatList = new List<Stat>();  
 
-    // Json 저장 안되는 것들
-    public int BeforeTotalCombatPower { get; private set; }                      // 이전 총합 전투력
-    private Dictionary<string, Stat> _statDict = new Dictionary<string, Stat>(); // 스탯들 리스트 -> 딕셔너리용
+    // 현재 챕터
+    [SerializeField]
+    private int _currentChapter = 1;                  
+    public int CurrentChapter { get { return _currentChapter; } set { _currentChapter = value; } }
+
+    // 현재 스테이지
+    [SerializeField]
+    private int _currentStage = 1;                    
+    public int CurrentStage { get { return _currentStage; } set { _currentStage = value; } }
+
+    // 현재 HP
+    [SerializeField]
+    private int _currentHp;                           
+    public int CurrentHp { get { return _currentHp; } set { _currentHp = value; } }
+
+    // 총합 전투력
+    [SerializeField]
+    private int _totalCombatPower;
+    public int TotalCombatPower { get { return _totalCombatPower; } set { _totalCombatPower = value; } }
+
+    // 현재 Gold              
+    [SerializeField] 
+    private int _currentGold = 100000;  // Todo : 최초 골드 확정하기
+    public int CurrentGold                              
+    {
+        get { return _currentGold; }
+        set { _currentGold = value; OnGoldChange?.Invoke(); }
+    }
+    public event Action OnGoldChange; // 골드 변경시 이벤트                  
+
+
+    /// <summary>
+    /// Json 저장안할 데이터
+    /// </summary>
+   
+    // 이전 총합 전투력
+    public int BeforeTotalCombatPower { get; private set; }
+
+    // 스탯들 리스트 -> 딕셔너리용
+    private Dictionary<string, Stat> _statDict = new Dictionary<string, Stat>(); 
+
 
     /// <summary>
     /// 딕셔너리 설정
@@ -80,7 +118,7 @@ public class PlayerData
 
         // 스타팅 MaxHp로 CurrentHp도 설정
         Stat maxHpStat = StatList.Find(statData => statData.ID == StatID.MaxHp.ToString());
-        CurrentHp = maxHpStat.Value;
+        _currentHp = maxHpStat.Value;
 
         // 총합 전투력 업데이트
         UpdateTotalCombatPower();
@@ -91,12 +129,12 @@ public class PlayerData
     /// </summary>
     public void StageLevelUp()
     {
-        CurrentStage++;
+        _currentStage++;
 
-        if (CurrentStage > 5)
+        if (_currentStage > 5)
         {
-            CurrentStage = 1;
-            CurrentChapter++;
+            _currentStage = 1;
+            _currentChapter++;
         }
     }
 
@@ -105,12 +143,12 @@ public class PlayerData
     /// </summary>
     public void UpdateTotalCombatPower()
     {
-        BeforeTotalCombatPower = TotalCombatPower;
+        BeforeTotalCombatPower = _totalCombatPower;
 
         List<int> statValueList = StatList.Select(stat => stat.Value).ToList();
 
-        TotalCombatPower = 0;
+        _totalCombatPower = 0;
         foreach (int value in statValueList)
-            TotalCombatPower += value;
+            _totalCombatPower += value;
     }
 }
