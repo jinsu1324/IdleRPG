@@ -6,9 +6,13 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    #region Singleton
-    public static EnemyManager Instance { get; private set; }
+    public static EnemyManager Instance { get; private set; }   // 싱글톤 인스턴스
 
+    private List<Enemy> _fieldEnemyList = new List<Enemy>();    // 필드에 스폰되어 있는 에너미 리스트
+    
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -21,9 +25,6 @@ public class EnemyManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    #endregion
-
-    private List<Enemy> _fieldEnemyList = new List<Enemy>();    // 필드에 스폰되어 있는 에너미 리스트
 
     /// <summary>
     /// 에너미 이벤트 구독

@@ -74,4 +74,20 @@ public class AttackComponent : MonoBehaviour
         OnAttackedArgs args = new OnAttackedArgs() { AttackSpeed = _attackSpeed };
         OnAttacked?.Invoke(args);
     }
+
+    /// <summary>
+    /// 공격력 변경
+    /// </summary>
+    public void ChangeAttackPower(int value)
+    {
+        _attackPower = value;
+    }
+
+    /// <summary>
+    /// 공격속도 변경
+    /// </summary>
+    public void ChangeAttackSpeed(int value)
+    {
+        _attackSpeed = value;
+    }
 }

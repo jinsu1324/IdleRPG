@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StatUpgradePanel : MonoBehaviour
@@ -9,6 +10,13 @@ public class StatUpgradePanel : MonoBehaviour
     [SerializeField] private StatUpgradeSlot _statUpgradeSlotPrefab;      // 생성할 스탯 업그레이드 슬롯 프리팹
     [SerializeField] private RectTransform _slotParent;                   // 슬롯들 생성할 부모
     [SerializeField] private TextMeshProUGUI _totalCombatPowerText;       // 총합 전투력 텍스트
+
+
+    private void Awake()
+    {
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.OnStatChanged += Update_TotalCombatPowerText;
+    }
 
     private void Start()
     {
@@ -21,18 +29,28 @@ public class StatUpgradePanel : MonoBehaviour
     private void SpawnSlots()
     {
         // 플레이어 스탯 갯수만큼 반복
-        foreach (StatComponent stat in StatManager.Instance.GetAllStats())
+        foreach (StatComponent stat in PlayerManager.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
-            statUpgradeSlot.Init(stat.StatID, Update_TotalCombatPowerText);
+            statUpgradeSlot.Init(stat.StatID);
         }
+
+        OnStatEventArgs args = new OnStatEventArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalCombatPower() };
+        Update_TotalCombatPowerText(args);
     }
 
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void Update_TotalCombatPowerText()
+    private void Update_TotalCombatPowerText(OnStatEventArgs args)
     {
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(StatManager.Instance.GetTotalCombatPower());
+        Debug.Log("3 - 2. Update_TotalCombatPowerText!");
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalCombatPower);
+    }
+
+    private void OnDisable()
+    {
+        if (PlayerManager.Instance != null)
+            PlayerManager.Instance.OnStatChanged -= Update_TotalCombatPowerText;
     }
 }

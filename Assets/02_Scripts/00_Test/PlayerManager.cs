@@ -2,24 +2,41 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public struct OnPlayerStatSettingArgs
+public struct OnStatEventArgs
 {
+    public List<StatComponent> StatComponentList;
+    public int TotalCombatPower;
     public int AttackPower;
     public int AttackSpeed;
     public int MaxHp;
+    public int Critical;
+
 }
 
 
-
-public class StatManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    #region Singleton
-    public static StatManager Instance { get; private set; }
+    public static PlayerManager Instance { get; private set; }      // 싱글톤 인스턴스
 
+    public event Action<OnStatEventArgs> OnStatChanged;
+
+    [SerializeField] private Player _playerPrefab;                  // 플레이어 프리팹
+    [SerializeField] private Transform _playerSpawnPos;             // 플레이어 스폰 위치
+
+    private Dictionary<StatID, StatComponent> _statComponentDict;   // 스탯들 컴포넌트 가져와서 저장할 딕셔너리
+    private Player _playerInstance;                                 // 플레이어 인스턴스
+    private int _totalCombatPower;                                  // 총합 전투력
+    private int _beforeTotalCombatPower;                            // 이전 총합 전투력
+
+
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -32,20 +49,9 @@ public class StatManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        Debug.Log("1. 스탯매니저 awake");
+        Init();
     }
-    #endregion
     
-    public int TotalCombatPower { get; private set; }                // 총합 전투력
-    public int BeforeTotalCombatPower { get; private set; }          // 이전 총합 전투력
-
-
-    private Dictionary<StatID, StatComponent> _statComponentDict;    // 스탯들 컴포넌트 가져와서 저장할 딕셔너리
-
-
-    public event Action<OnPlayerStatSettingArgs> OnPlayerStatSetting;
-
-
     /// <summary>
     /// 초기화
     /// </summary>
@@ -94,26 +100,33 @@ public class StatManager : MonoBehaviour
         UpdateTotalCombatPower();
 
 
-
-        Debug.Log("2. 스탯매니저 초기화");
-
-
-    }
-
-    private void Start()
-    {
-
-
-        OnPlayerStatSettingArgs args = new OnPlayerStatSettingArgs()
+        OnStatEventArgs args = new OnStatEventArgs()
         {
+            StatComponentList = GetAllStats(),
+            TotalCombatPower = _totalCombatPower,
             AttackPower = GetStat(StatID.AttackPower).Value,
             AttackSpeed = GetStat(StatID.AttackSpeed).Value,
-            MaxHp = GetStat(StatID.MaxHp).Value
+            MaxHp = GetStat(StatID.MaxHp).Value,
+            Critical = GetStat(StatID.Critical).Value,
         };
 
-        Debug.Log("4. 이벤트 실행");
-        OnPlayerStatSetting?.Invoke(args);
+
+        PlayerPrefabSpawn();
+        _playerInstance.Init(args);
+
+
+
     }
+
+    /// <summary>
+    /// 플레이어 프리팹 스폰
+    /// </summary>
+    private void PlayerPrefabSpawn()
+    {
+        _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
+        _playerInstance.transform.position = _playerSpawnPos.position;
+    }
+
 
     /// <summary>
     /// 특정 스탯 가져오기
@@ -150,11 +163,24 @@ public class StatManager : MonoBehaviour
         if (_statComponentDict.TryGetValue(id, out var statComponent))
         {
             statComponent.LevelUp();
-
-            // OnStatChanged?.Invoke(id, statComponent.Value);
-
-
+            
             UpdateTotalCombatPower();
+
+            OnStatEventArgs args = new OnStatEventArgs()
+            {
+                StatComponentList = GetAllStats(),
+                TotalCombatPower = _totalCombatPower,
+                AttackPower = GetStat(StatID.AttackPower).Value,
+                AttackSpeed = GetStat(StatID.AttackSpeed).Value,
+                MaxHp = GetStat(StatID.MaxHp).Value,
+                Critical = GetStat(StatID.Critical).Value,
+            };
+
+            Debug.Log("OnStatChanged 실행!");
+            OnStatChanged?.Invoke(args);
+
+            // 토스트 메시지 호출
+            ToastManager.Instance.ShowToastCombatPower();
         }
         else
         {
@@ -189,13 +215,13 @@ public class StatManager : MonoBehaviour
     /// </summary>
     public void UpdateTotalCombatPower()
     {
-        BeforeTotalCombatPower = TotalCombatPower;
+        _beforeTotalCombatPower = _totalCombatPower;
 
         List<int> statValueList = GetAllStats().Select(stat => stat.Value).ToList();
 
-        TotalCombatPower = 0;
+        _totalCombatPower = 0;
         foreach (int value in statValueList)
-            TotalCombatPower += value;
+            _totalCombatPower += value;
     }
 
     /// <summary>
@@ -203,7 +229,7 @@ public class StatManager : MonoBehaviour
     /// </summary>
     public int GetTotalCombatPower() 
     { 
-        return TotalCombatPower; 
+        return _totalCombatPower; 
     }
 
     /// <summary>
@@ -211,6 +237,47 @@ public class StatManager : MonoBehaviour
     /// </summary>
     public int GetBeforeTotalCombatPower() 
     { 
-        return BeforeTotalCombatPower; 
+        return _beforeTotalCombatPower; 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+    ///// <summary>
+    ///// 플레이어 데이터 로드
+    ///// </summary>
+    //private void PlayerDataLoad()
+    //{
+    //    //// 데이터 로드
+    //    //PlayerData = SaveLoadManager.LoadPlayerData();
+
+    //}
+
+
+
+
+    ///// <summary>
+    ///// 현재 플레이어데이터를 저장
+    ///// </summary>
+    //public void SavePlayerData()
+    //{
+    //    SaveLoadManager.SavePlayerData(PlayerData);
+    //}
+
+
+    ///// <summary>
+    ///// 게임 종료 시 저장 호출
+    ///// </summary>
+    //private void OnApplicationQuit()
+    //{
+    //    SavePlayerData();
+    //}
 }

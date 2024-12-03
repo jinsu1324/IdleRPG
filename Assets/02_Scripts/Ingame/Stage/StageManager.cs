@@ -14,8 +14,16 @@ public struct OnStageChangedArgs
 
 public class StageManager : MonoBehaviour
 {
-    #region Singleton
     public static StageManager Instance { get; private set; }
+
+    public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
+
+    // Todo 임시데이터
+    private int _currentChapter = 1;                            // 현재 챕터
+    private int _currentStage = 1;                              // 현재 스테이지
+    private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
+    private int _killCount;                                     // 죽인 적 숫자
+
 
     private void Awake()
     {
@@ -28,28 +36,15 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        //StageBuildAndStart();
     }
-    #endregion
 
-    public event Action OnStageInitCompleted;                   // 스테이지 초기화 완료 시 이벤트
-    public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
-
-    // Todo 임시데이터
-    private int _currentChapter = 1;                            // 현재 챕터
-    private int _currentStage = 1;                              // 현재 스테이지
-    private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
-    private int _killCount;                                     // 죽인 적 숫자
-
-    /// <summary>
-    /// 초기화
-    /// </summary>
-    public void Init()
+    private void Start()
     {
         StageBuildAndStart();
-
-        OnStageInitCompleted?.Invoke();
     }
-    
+
     /// <summary>
     /// 스테이지 만들고 시작하기
     /// </summary>
@@ -76,6 +71,8 @@ public class StageManager : MonoBehaviour
             Count = count, 
             StatPercantage = statPercentage 
         };
+
+        Debug.Log("OnStageChanged 이벤트 실행!");
         OnStageChanged?.Invoke(args); 
 
         Debug.Log($"{_currentChapter}-{_currentStage} 시작!");

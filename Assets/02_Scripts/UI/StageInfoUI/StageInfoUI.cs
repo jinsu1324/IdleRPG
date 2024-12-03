@@ -20,7 +20,8 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void Awake()
     {
-        StageManager.Instance.OnStageInitCompleted += Init;
+        Debug.Log("OnStageChanged 구독! (UpdateUI)");
+        StageManager.Instance.OnStageChanged += UpdateUI;
     }
 
     /// <summary>
@@ -28,8 +29,12 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        StageManager.Instance.OnStageInitCompleted -= Init;
         StageManager.Instance.OnStageChanged -= UpdateUI;
+    }
+
+    private void Start()
+    {
+        Init();
     }
 
     /// <summary>
@@ -37,8 +42,6 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void Init()
     {
-        StageManager.Instance.OnStageChanged += UpdateUI;
-
         // Todo 임시데이터
         OnStageChangedArgs args = new OnStageChangedArgs() { CurrentChapter = 1, CurrentStage = 1 };
         UpdateUI(args);

@@ -6,9 +6,14 @@ using UnityEngine;
 
 public class ResourceManager : SerializedMonoBehaviour
 {
-    #region Singleton
-    public static ResourceManager Instance { get; private set; }
+    public static ResourceManager Instance { get; private set; }                            // 싱글톤 인스턴스
 
+    [SerializeField]
+    private Dictionary<StatID, Sprite> _statIconDict = new Dictionary<StatID, Sprite>();    // 아이콘 딕셔너리
+
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -21,10 +26,6 @@ public class ResourceManager : SerializedMonoBehaviour
             Destroy(gameObject);
         }
     }
-    #endregion
-
-    [SerializeField]
-    private Dictionary<StatID, Sprite> _statIconDict = new Dictionary<StatID, Sprite>();    // 아이콘 딕셔너리
 
     /// <summary>
     /// 아이콘 가져오기

@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ToastManager : MonoBehaviour
 {
-    #region Singleton
-    public static ToastManager Instance { get; private set; }
+    public static ToastManager Instance { get; private set; }       // 싱글톤 인스턴스
 
+    [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
+    private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
+
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -19,11 +24,6 @@ public class ToastManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    #endregion
-
-    [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
-
-    private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
 
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주기

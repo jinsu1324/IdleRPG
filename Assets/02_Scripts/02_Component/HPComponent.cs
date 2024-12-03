@@ -36,4 +36,12 @@ public class HPComponent : MonoBehaviour
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = _currentHp, MaxHp = _maxHp };
         OnTakeDamaged?.Invoke(args);
     }
+
+    /// <summary>
+    /// 최대체력 변경
+    /// </summary>
+    public void ChangeMaxHp(int value)
+    {
+        _maxHp = value;
+    }
 }

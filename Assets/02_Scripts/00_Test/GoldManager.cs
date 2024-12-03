@@ -6,9 +6,14 @@ using UnityEngine;
 
 public class GoldManager : MonoBehaviour, ICurrencyManager
 {
-    #region Singleton
-    public static GoldManager Instance { get; private set; }
+    public static GoldManager Instance { get; private set; }    // 싱글톤 인스턴스
 
+    private int _currentGold = 100000;                          // 현재 골드
+    public event Action<int> OnCurrencyChanged;                 // 골드 변경 되었을 때 이벤트
+
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -21,10 +26,6 @@ public class GoldManager : MonoBehaviour, ICurrencyManager
             Destroy(gameObject);
         }
     }
-    #endregion
-
-    private int _currentGold = 100000;              // 현재 골드
-    public event Action<int> OnCurrencyChanged;     // 골드 변경 되었을 때 이벤트
 
     /// <summary>
     /// 골드 추가

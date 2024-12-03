@@ -11,17 +11,15 @@ public class StatUpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private bool _isPressed = false;        // 버튼이 눌린 상태 확인
     private Coroutine _upgradeCoroutine;    // 현재 실행중인 Coroutine 참조
     private StatID _statID;                 // 슬롯의 스탯 ID
-    private Action _onUpdateUI;             // 업그레이드 하면 UI업데이트 되는 함수 담을 이벤트
 
     private Vector3 _originalScale;         // 원래 스케일 저장
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(Action updateUI, StatID statID)
+    public void Init(StatID statID)
     {
         _statID = statID;
-        _onUpdateUI = updateUI;
 
         // 초기 스케일 저장
         _originalScale = transform.localScale;
@@ -74,14 +72,8 @@ public class StatUpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void Upgrade()
     {
         // 레벨업 가능하면 레벨업 로직실행하고 true 반환 (TryLevelUpStatByID 내부에 구현되어있음)
-        if (StatManager.Instance.TryLevelUpStatByID(_statID))
+        if (PlayerManager.Instance.TryLevelUpStatByID(_statID))
         {
-            // UI 업데이트
-            _onUpdateUI?.Invoke();
-
-            // 토스트 메시지 호출
-            ToastManager.Instance.ShowToastCombatPower();
-
             // 스케일 애니메이션 실행
             PlayScaleAnimation();
         }

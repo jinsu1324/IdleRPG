@@ -21,13 +21,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     private void Awake()
     {
         SetEnemyPoolDict();
-    }
-
-    /// <summary>
-    /// OnEnable
-    /// </summary>
-    private void OnEnable()
-    {
+        Debug.Log("OnStageChanged 구독! (SpawnEnemies)");
         StageManager.Instance.OnStageChanged += SpawnEnemies;  // 스테이지 시작 시, 적 스폰되도록 구독
     }
 

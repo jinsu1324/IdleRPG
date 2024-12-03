@@ -6,49 +6,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+/// <summary>
+/// 플레이어 프리팹 코어
+/// </summary>
 public class Player : SerializedMonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
-    
+
     private HPComponent _hpComponent;                       // HP 컴포넌트
     private HPBar _hpBar;                                   // HP 바
     private AttackComponent _attackComponent;               // 공격 컴포넌트
     private AnimComponent _animComponent;                   // 애님 컴포넌트
 
-    
-
-
-
-
-    public void OnEnable()
+    private void Awake()
     {
-        Debug.Log("3이전 : 겟 컴포넌트");
+        PlayerManager.Instance.OnStatChanged += UpdateStatAtComponents;
+    }
+
+    public void Init(OnStatEventArgs statArgs)
+    {
         _hpComponent = GetComponent<HPComponent>();
         _hpBar = GetComponentInChildren<HPBar>();
         _attackComponent = GetComponent<AttackComponent>();
         _animComponent = GetComponent<AnimComponent>();
 
-
-        Debug.Log("3. 구독");
-        StatManager.Instance.OnPlayerStatSetting += ComponentInit;
-        //StatManager.Instance.OnStatChanged
-    }
-
-
-
-
-
-
-
-    private void ComponentInit(OnPlayerStatSettingArgs statArgs)
-    {
-        Debug.Log("5. 이벤트 핸들러 실행");
-
         int attackPower = statArgs.AttackPower;
         int attackSpeed = statArgs.AttackSpeed;
         int maxHp = statArgs.MaxHp;
 
-        
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
         _hpComponent.OnTakeDamaged += TakeDamage;
 
@@ -67,6 +52,14 @@ public class Player : SerializedMonoBehaviour
 
         
         _animComponent.Init(); // 애님 컴포넌트 초기화
+    }
+
+
+    private void UpdateStatAtComponents(OnStatEventArgs args)
+    {
+        _hpComponent.ChangeMaxHp(args.MaxHp);
+        _attackComponent.ChangeAttackPower(args.AttackPower);
+        _attackComponent.ChangeAttackSpeed(args.AttackSpeed);
     }
 
 
