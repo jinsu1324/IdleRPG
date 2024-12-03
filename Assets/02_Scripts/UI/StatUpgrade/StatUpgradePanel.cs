@@ -10,9 +10,6 @@ public class StatUpgradePanel : MonoBehaviour
     [SerializeField] private RectTransform _slotParent;                   // 슬롯들 생성할 부모
     [SerializeField] private TextMeshProUGUI _totalCombatPowerText;       // 총합 전투력 텍스트
 
-    /// <summary>
-    /// Start
-    /// </summary>
     private void Start()
     {
         SpawnSlots();
@@ -24,10 +21,10 @@ public class StatUpgradePanel : MonoBehaviour
     private void SpawnSlots()
     {
         // 플레이어 스탯 갯수만큼 반복
-        foreach (Stat stat in PlayerManager.Instance.GetAllStats())
+        foreach (StatComponent stat in StatManager.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
-            statUpgradeSlot.Init(stat.ID, Update_TotalCombatPowerText);
+            statUpgradeSlot.Init(stat.StatID, Update_TotalCombatPowerText);
         }
     }
 
@@ -36,6 +33,6 @@ public class StatUpgradePanel : MonoBehaviour
     /// </summary>
     private void Update_TotalCombatPowerText()
     {
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(PlayerManager.Instance.GetTotalCombatPower());
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(StatManager.Instance.GetTotalCombatPower());
     }
 }

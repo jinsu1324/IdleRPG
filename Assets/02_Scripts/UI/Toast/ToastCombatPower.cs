@@ -10,15 +10,11 @@ public class ToastCombatPower : MonoBehaviour
     [SerializeField] private GameObject _arrowIncrease;             // 위 방향 화살표
     [SerializeField] private GameObject _arrowDecrease;             // 아래 방향 화살표
 
-    private PlayerManager _playerManager;                           // 플레이어 매니저
-
     /// <summary>
     /// 초기화
     /// </summary>
     public void Init()
     {
-        _playerManager = PlayerManager.Instance;
-        
         UpdateUI();
     }
 
@@ -28,11 +24,11 @@ public class ToastCombatPower : MonoBehaviour
     private void UpdateUI()
     {
         // 수치 표시
-        _valueText.text = AlphabetNumConverter.Convert(_playerManager.GetTotalCombatPower());
+        _valueText.text = AlphabetNumConverter.Convert(StatManager.Instance.GetTotalCombatPower());
 
         // 화살표 방향 표시
-        int TotalCombatPower = _playerManager.GetTotalCombatPower();
-        int beforeTotalCombatPower = _playerManager.GetBeforeTotalCombatPower();
+        int TotalCombatPower = StatManager.Instance.GetTotalCombatPower();
+        int beforeTotalCombatPower = StatManager.Instance.GetBeforeTotalCombatPower();
         if (TotalCombatPower > beforeTotalCombatPower)
             ArrowUp();
         else

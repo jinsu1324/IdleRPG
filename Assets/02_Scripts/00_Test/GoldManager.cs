@@ -73,6 +73,5 @@ public class GoldManager : MonoBehaviour, ICurrencyManager
     private void NotifyChanged()
     {
         OnCurrencyChanged?.Invoke(_currentGold);
-        Debug.Log($"ÇöÀç °ñµå : {_currentGold}");
     }
 }

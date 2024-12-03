@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartingStatsSO : BaseDatasSO<Stat>
+public class StartingStatDatasSO : BaseDatasSO<StatData>
 {
 
 }

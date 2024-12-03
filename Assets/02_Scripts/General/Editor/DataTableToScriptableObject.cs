@@ -50,7 +50,7 @@ public class DataTableToScriptableObject : OdinEditorWindow
         FetchAndConvertData<EnemyData, EnemyDatasSO>(_sheetName_Enemy);
         FetchAndConvertData<SkillData, SkillDatasSO>(_sheetName_Skill);
         FetchAndConvertData<StageData, StageDatasSO>(_sheetName_Stage);
-        FetchAndConvertData<Stat, StartingStatsSO>(_sheetName_StartingStats);
+        FetchAndConvertData<StatData, StartingStatDatasSO>(_sheetName_StartingStats);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class DataTableToScriptableObject : OdinEditorWindow
         dataManager.SetEnemyDatasSO(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_Enemy}"));
         dataManager.SetSkillDatasSO(Resources.Load<SkillDatasSO>($"Data/{_sheetName_Skill}"));
         dataManager.SetStageDatasSO(Resources.Load<StageDatasSO>($"Data/{_sheetName_Stage}"));
-        dataManager.SetStartingStatsSO(Resources.Load<StartingStatsSO>($"Data/{_sheetName_StartingStats}"));
+        dataManager.SetStartingStatDatasSO(Resources.Load<StartingStatDatasSO>($"Data/{_sheetName_StartingStats}"));
 
         // ¿˙¿Â
         EditorUtility.SetDirty(dataManager);

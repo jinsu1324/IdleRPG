@@ -11,7 +11,7 @@ public enum StatID
 }
 
 [System.Serializable]
-public class Stat : BaseData
+public class StatData : BaseData
 {
     public string Name;          // 스탯 이름
     public int Level;            // 레벨

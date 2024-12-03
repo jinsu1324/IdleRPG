@@ -15,51 +15,61 @@ public class Player : SerializedMonoBehaviour
     private AttackComponent _attackComponent;               // 공격 컴포넌트
     private AnimComponent _animComponent;                   // 애님 컴포넌트
 
+    
 
-    /// <summary>
-    /// 초기화
-    /// </summary>
-    public void Init()
+
+
+
+    public void OnEnable()
     {
+        Debug.Log("3이전 : 겟 컴포넌트");
         _hpComponent = GetComponent<HPComponent>();
-        _hpComponent.OnTakeDamaged += TakeDamage;
-
         _hpBar = GetComponentInChildren<HPBar>();
-
         _attackComponent = GetComponent<AttackComponent>();
-
         _animComponent = GetComponent<AnimComponent>();
-        _animComponent.Init();
 
-        UpdateStat();
+
+        Debug.Log("3. 구독");
+        StatManager.Instance.OnPlayerStatSetting += ComponentInit;
+        //StatManager.Instance.OnStatChanged
     }
 
-    /// <summary>
-    /// 스탯 업데이트
-    /// </summary>
-    public void UpdateStat()
+
+
+
+
+
+
+    private void ComponentInit(OnPlayerStatSettingArgs statArgs)
     {
+        Debug.Log("5. 이벤트 핸들러 실행");
+
+        int attackPower = statArgs.AttackPower;
+        int attackSpeed = statArgs.AttackSpeed;
+        int maxHp = statArgs.MaxHp;
+
         
-        _hpComponent.Init(PlayerManager.PlayerData.GetStat(StatID.MaxHp.ToString()).Value);
-        _hpBar.Init(PlayerManager.PlayerData.GetStat(StatID.MaxHp.ToString()).Value);
+        _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
+        _hpComponent.OnTakeDamaged += TakeDamage;
 
+        
+        _hpBar.Init(maxHp); // HP바 초기화
 
-
-        ProjectileAttack projectileAttack = new ProjectileAttack
-        (
-            _projectilePrefab,
-            transform
-        );
-
+        
+        ProjectileAttack projectileAttack = new ProjectileAttack(_projectilePrefab, transform);
         AttackComponentArgs args = new AttackComponentArgs()
         {
             Attack = projectileAttack,
-            AttackPower = PlayerManager.PlayerData.GetStat(StatID.AttackPower.ToString()).Value,
-            AttackSpeed = PlayerManager.PlayerData.GetStat(StatID.AttackSpeed.ToString()).Value
+            AttackPower = attackPower,
+            AttackSpeed = attackSpeed
         };
+        _attackComponent.Init(args); // Attack 컴포넌트 초기화
 
-        _attackComponent.Init(args);
+        
+        _animComponent.Init(); // 애님 컴포넌트 초기화
     }
+
+
 
     /// <summary>
     /// 데미지 받음

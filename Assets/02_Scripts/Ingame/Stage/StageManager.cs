@@ -31,6 +31,7 @@ public class StageManager : MonoBehaviour
     }
     #endregion
 
+    public event Action OnStageInitCompleted;                   // 스테이지 초기화 완료 시 이벤트
     public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
 
     // Todo 임시데이터
@@ -40,11 +41,13 @@ public class StageManager : MonoBehaviour
     private int _killCount;                                     // 죽인 적 숫자
 
     /// <summary>
-    /// Start
+    /// 초기화
     /// </summary>
-    private void Start()
+    public void Init()
     {
         StageBuildAndStart();
+
+        OnStageInitCompleted?.Invoke();
     }
     
     /// <summary>
