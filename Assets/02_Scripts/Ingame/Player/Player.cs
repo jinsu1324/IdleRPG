@@ -20,10 +20,10 @@ public class Player : SerializedMonoBehaviour
 
     private void Awake()
     {
-        PlayerManager.Instance.OnStatChanged += UpdateStatAtComponents;
+        PlayerManager.Instance.OnStatChanged += UpdateStatComponents;
     }
 
-    public void Init(OnStatEventArgs statArgs)
+    public void Init(OnStatChangedArgs statArgs)
     {
         _hpComponent = GetComponent<HPComponent>();
         _hpBar = GetComponentInChildren<HPBar>();
@@ -55,7 +55,7 @@ public class Player : SerializedMonoBehaviour
     }
 
 
-    private void UpdateStatAtComponents(OnStatEventArgs args)
+    private void UpdateStatComponents(OnStatChangedArgs args)
     {
         _hpComponent.ChangeMaxHp(args.MaxHp);
         _attackComponent.ChangeAttackPower(args.AttackPower);
@@ -79,5 +79,10 @@ public class Player : SerializedMonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 죽었습니다!");
+    }
+
+    private void OnDestroy()
+    {
+        PlayerManager.Instance.OnStatChanged -= UpdateStatComponents;
     }
 }

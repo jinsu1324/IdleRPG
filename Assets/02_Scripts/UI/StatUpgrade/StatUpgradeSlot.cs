@@ -18,12 +18,12 @@ public class StatUpgradeSlot : MonoBehaviour
 
     private void Awake()
     {
-        PlayerManager.Instance.OnStatChanged += UpdateUI;
+        PlayerManager.Instance.OnStatChanged += UpdateSlotUI;
     }
 
     private void OnDisable()
     {
-        PlayerManager.Instance.OnStatChanged -= UpdateUI;
+        PlayerManager.Instance.OnStatChanged -= UpdateSlotUI;
     }
 
     /// <summary>
@@ -35,15 +35,15 @@ public class StatUpgradeSlot : MonoBehaviour
 
         _statUpgradeButton.Init(_statID);   // 업그레이드 버튼 초기화
 
-        OnStatEventArgs args = new OnStatEventArgs();
-        UpdateUI(args);
+        OnStatChangedArgs args = new OnStatChangedArgs();
+        UpdateSlotUI(args);
 
     }
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    private void UpdateUI(OnStatEventArgs args)
+    private void UpdateSlotUI(OnStatChangedArgs args)
     {
         // 이 슬롯의 스탯ID에 맞게 스탯 가져오기
         StatComponent stat = PlayerManager.Instance.GetStat(_statID);

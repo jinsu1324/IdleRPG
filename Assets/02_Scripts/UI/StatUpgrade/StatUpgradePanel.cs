@@ -15,7 +15,7 @@ public class StatUpgradePanel : MonoBehaviour
     private void Awake()
     {
         if (PlayerManager.Instance != null)
-            PlayerManager.Instance.OnStatChanged += Update_TotalCombatPowerText;
+            PlayerManager.Instance.OnStatChanged += UpdateTotalCombatPowerText;
     }
 
     private void Start()
@@ -35,14 +35,14 @@ public class StatUpgradePanel : MonoBehaviour
             statUpgradeSlot.Init(stat.StatID);
         }
 
-        OnStatEventArgs args = new OnStatEventArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalCombatPower() };
-        Update_TotalCombatPowerText(args);
+        OnStatChangedArgs args = new OnStatChangedArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalCombatPower() };
+        UpdateTotalCombatPowerText(args);
     }
 
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void Update_TotalCombatPowerText(OnStatEventArgs args)
+    private void UpdateTotalCombatPowerText(OnStatChangedArgs args)
     {
         Debug.Log("3 - 2. Update_TotalCombatPowerText!");
         _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalCombatPower);
@@ -51,6 +51,6 @@ public class StatUpgradePanel : MonoBehaviour
     private void OnDisable()
     {
         if (PlayerManager.Instance != null)
-            PlayerManager.Instance.OnStatChanged -= Update_TotalCombatPowerText;
+            PlayerManager.Instance.OnStatChanged -= UpdateTotalCombatPowerText;
     }
 }

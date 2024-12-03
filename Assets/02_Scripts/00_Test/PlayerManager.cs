@@ -7,7 +7,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public struct OnStatEventArgs
+public struct OnStatChangedArgs
 {
     public List<StatComponent> StatComponentList;
     public int TotalCombatPower;
@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance { get; private set; }      // 싱글톤 인스턴스
 
-    public event Action<OnStatEventArgs> OnStatChanged;
+    public event Action<OnStatChangedArgs> OnStatChanged;           // 스탯이 변경되었을 때 이벤트
 
     [SerializeField] private Player _playerPrefab;                  // 플레이어 프리팹
     [SerializeField] private Transform _playerSpawnPos;             // 플레이어 스폰 위치
@@ -100,7 +100,7 @@ public class PlayerManager : MonoBehaviour
         UpdateTotalCombatPower();
 
 
-        OnStatEventArgs args = new OnStatEventArgs()
+        OnStatChangedArgs args = new OnStatChangedArgs()
         {
             StatComponentList = GetAllStats(),
             TotalCombatPower = _totalCombatPower,
@@ -166,7 +166,7 @@ public class PlayerManager : MonoBehaviour
             
             UpdateTotalCombatPower();
 
-            OnStatEventArgs args = new OnStatEventArgs()
+            OnStatChangedArgs args = new OnStatChangedArgs()
             {
                 StatComponentList = GetAllStats(),
                 TotalCombatPower = _totalCombatPower,
