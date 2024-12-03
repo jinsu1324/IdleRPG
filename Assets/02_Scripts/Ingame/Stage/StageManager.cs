@@ -18,13 +18,19 @@ public class StageManager : MonoBehaviour
 
     public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
 
+    [SerializeField] private EnemySpawner _enemySpawner;
+
     // Todo 임시데이터
     private int _currentChapter = 1;                            // 현재 챕터
     private int _currentStage = 1;                              // 현재 스테이지
     private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
     private int _killCount;                                     // 죽인 적 숫자
+    
+    private OnStageChangedArgs _onStageChangedArgs;
 
-
+    /// <summary>
+    /// Awake
+    /// </summary>
     private void Awake()
     {
         if (Instance == null)
@@ -36,13 +42,14 @@ public class StageManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //StageBuildAndStart();
     }
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
-        StageBuildAndStart();
+        StageBuildAndStart();   // 스테이지 시작
     }
 
     /// <summary>
@@ -54,8 +61,7 @@ public class StageManager : MonoBehaviour
         StageData stageData = DataManager.Instance.StageDatasSO.GetStageData(_currentChapter, _currentStage);
 
         // 데이터에서 필요한 정보들 할당
-        string appearEnemy = stageData.AppearEnemy;
-        EnemyID enemyID = (EnemyID)Enum.Parse(typeof(EnemyID), appearEnemy);
+        EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), stageData.AppearEnemy);
         int count = stageData.Count;
         int statPercentage = stageData.StatPercentage;
 
@@ -67,9 +73,9 @@ public class StageManager : MonoBehaviour
         { 
             CurrentChapter = _currentChapter, 
             CurrentStage = _currentStage, 
-            EnemyID = enemyID, 
+            EnemyID = appearEnemyID, 
             Count = count, 
-            StatPercantage = statPercentage 
+            StatPercantage = statPercentage
         };
 
         Debug.Log("OnStageChanged 이벤트 실행!");
