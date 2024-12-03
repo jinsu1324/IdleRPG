@@ -28,7 +28,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        StageManager.OnStageStart += SpawnEnemies;  // 스테이지 시작 시, 적 스폰되도록 구독
+        StageManager.Instance.OnStageChanged += SpawnEnemies;  // 스테이지 시작 시, 적 스폰되도록 구독
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        StageManager.OnStageStart -= SpawnEnemies;  // 구독 해제
+        StageManager.Instance.OnStageChanged -= SpawnEnemies;  // 구독 해제
     }
 
     /// <summary>
@@ -52,8 +52,12 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// <summary>
     /// 에너미 타입에 맞는 에너미 스폰
     /// </summary>
-    public void SpawnEnemies(EnemyID enemyID, int count, int statPercentage)
+    public void SpawnEnemies(OnStageChangedArgs args)
     {
+        EnemyID enemyID = args.EnemyID;
+        int count = args.Count;
+        int statPercentage = args.StatPercantage;
+
         ObjectPool<Enemy> pool = _enemyPoolDict[enemyID];
         EnemyData enemyData = DataManager.Instance.EnemyDatasSO.GetDataByID(enemyID.ToString());
 
@@ -67,7 +71,7 @@ public class EnemySpawner : SerializedMonoBehaviour
             EnemyManager.Instance.Subscribe_EnemyEvents(enemy);
 
             // Enemy 초기화
-            enemy.Initialize(pool, enemyData, statPercentage);
+            enemy.Init(pool, enemyData, statPercentage);
         }
     }
 }

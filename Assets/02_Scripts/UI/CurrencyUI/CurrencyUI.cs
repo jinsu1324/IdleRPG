@@ -12,8 +12,11 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        PlayerManager.Instance.PlayerData.OnGoldChange += UpdateUI; // 골드 변경 이벤트 구독
-        UpdateUI();
+        //PlayerManager.PlayerData.OnGoldChange += UpdateUI; // 골드 변경 이벤트 구독
+
+        GoldManager.Instance.OnCurrencyChanged += UpdateUI;
+
+        UpdateUI(GoldManager.Instance.GetCurrencyCount());
     }
 
     /// <summary>
@@ -21,14 +24,15 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.Instance.PlayerData.OnGoldChange -= UpdateUI; // 골드 변경 이벤트 구독해제 
+        //PlayerManager.PlayerData.OnGoldChange -= UpdateUI; // 골드 변경 이벤트 구독해제 
+        GoldManager.Instance.OnCurrencyChanged -= UpdateUI;
     }
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    public void UpdateUI()
+    public void UpdateUI(int amout)
     {
-        _goldText.text = AlphabetNumConverter.Convert(PlayerManager.Instance.GetCurrentGold());
+        _goldText.text = AlphabetNumConverter.Convert(amout);
     }
 }

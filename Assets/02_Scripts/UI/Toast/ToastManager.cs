@@ -45,7 +45,7 @@ public class ToastManager : MonoBehaviour
     {
         _toastCombatPower.gameObject.SetActive(false);
 
-        _toastCombatPower.Initialize();
+        _toastCombatPower.Init();
         _toastCombatPower.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1f);

@@ -27,7 +27,7 @@ public class StatUpgradePanel : MonoBehaviour
         foreach (Stat stat in PlayerManager.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
-            statUpgradeSlot.Initialize(stat.ID, Update_TotalCombatPowerText);
+            statUpgradeSlot.Init(stat.ID, Update_TotalCombatPowerText);
         }
     }
 

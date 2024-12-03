@@ -11,20 +11,9 @@ public class PlayerData
     /// <summary>
     /// Json 저장할 데이터
     /// </summary>
-    
+
     // 스탯들 리스트
     public List<Stat> StatList = new List<Stat>();  
-
-    // 현재 챕터
-    [SerializeField]
-    private int _currentChapter = 1;                  
-    public int CurrentChapter { get { return _currentChapter; } set { _currentChapter = value; } }
-
-    // 현재 스테이지
-    [SerializeField]
-    private int _currentStage = 1;                    
-    public int CurrentStage { get { return _currentStage; } set { _currentStage = value; } }
-    public event Action OnStageChange; // 스테이지 변경 시 이벤트
 
     // 현재 HP
     [SerializeField]
@@ -35,16 +24,6 @@ public class PlayerData
     [SerializeField]
     private int _totalCombatPower;
     public int TotalCombatPower { get { return _totalCombatPower; } set { _totalCombatPower = value; } }
-
-    // 현재 Gold              
-    [SerializeField] 
-    private int _currentGold = 100000;  // Todo : 최초 골드 확정하기
-    public int CurrentGold                              
-    {
-        get { return _currentGold; }
-        set { _currentGold = value; OnGoldChange?.Invoke(); }
-    }
-    public event Action OnGoldChange; // 골드 변경시 이벤트                  
 
 
     /// <summary>
@@ -123,22 +102,6 @@ public class PlayerData
 
         // 총합 전투력 업데이트
         UpdateTotalCombatPower();
-    }
-
-    /// <summary>
-    /// 스테이지 레벨업
-    /// </summary>
-    public void StageLevelUp()
-    {
-        _currentStage++;
-
-        if (_currentStage > 5)
-        {
-            _currentStage = 1;
-            _currentChapter++;
-        }
-
-        OnStageChange?.Invoke(); // 스테이지 변경 이벤트 실행
     }
 
     /// <summary>

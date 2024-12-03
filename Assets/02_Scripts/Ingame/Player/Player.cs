@@ -5,98 +5,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Player : SerializedMonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
-    [SerializeField] private HPCanvas _hpCanvas;            // HP바 들어있는 캔버스
-    [SerializeField] private Animator _animator;            // 애니메이터
+    
+    private HPComponent _hpComponent;                       // HP 컴포넌트
+    private HPBar _hpBar;                                   // HP 바
+    private AttackComponent _attackComponent;               // 공격 컴포넌트
+    private AnimComponent _animComponent;                   // 애님 컴포넌트
 
-    private int _attackPower;                               // 공격력
-    private int _attackSpeed;                               // 공격속도
-    private int _maxHp;                                     // 최대체력
-    private int _critical;                                  // 크리티컬 확률
-    private int _currentHp;                                 // 현재체력
-
-    private float _attackCooldown;                          // 공격 쿨타임
-    private float _time;                                    // 쿨타임 시간 계산용
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(PlayerData playerData)
+    public void Init()
     {
-        UpdateStat(playerData);
-    }
+        _hpComponent = GetComponent<HPComponent>();
+        _hpComponent.OnTakeDamaged += TakeDamage;
 
-    /// <summary>
-    /// Update
-    /// </summary>
-    private void Update()
-    {
-        if (IsAttackCoolTime())
-            Attack();   
+        _hpBar = GetComponentInChildren<HPBar>();
+
+        _attackComponent = GetComponent<AttackComponent>();
+
+        _animComponent = GetComponent<AnimComponent>();
+        _animComponent.Init();
+
+        UpdateStat();
     }
 
     /// <summary>
     /// 스탯 업데이트
     /// </summary>
-    public void UpdateStat(PlayerData playerData)
+    public void UpdateStat()
     {
-        _attackPower = playerData.GetStat(StatID.AttackPower.ToString()).Value;
-        _attackSpeed = playerData.GetStat(StatID.AttackSpeed.ToString()).Value;
-        _maxHp = playerData.GetStat(StatID.MaxHp.ToString()).Value;
-        _critical = playerData.GetStat(StatID.Critical.ToString()).Value;
-        _currentHp = _maxHp;
-        _attackCooldown = 1f / _attackSpeed;
+        
+        _hpComponent.Init(PlayerManager.PlayerData.GetStat(StatID.MaxHp.ToString()).Value);
+        _hpBar.Init(PlayerManager.PlayerData.GetStat(StatID.MaxHp.ToString()).Value);
 
-        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
-        _animator.SetFloat("AttackSpeed", _attackSpeed);
-    }
 
-    /// <summary>
-    /// 공격 쿨타임 계산
-    /// </summary>
-    private bool IsAttackCoolTime()
-    {
-        _time += Time.deltaTime;
 
-        if (_time >= _attackCooldown)
+        ProjectileAttack projectileAttack = new ProjectileAttack
+        (
+            _projectilePrefab,
+            transform
+        );
+
+        AttackComponentArgs args = new AttackComponentArgs()
         {
-            _time %= _attackCooldown;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+            Attack = projectileAttack,
+            AttackPower = PlayerManager.PlayerData.GetStat(StatID.AttackPower.ToString()).Value,
+            AttackSpeed = PlayerManager.PlayerData.GetStat(StatID.AttackSpeed.ToString()).Value
+        };
 
-    /// <summary>
-    /// 공격
-    /// </summary>
-    private void Attack()
-    {
-        _animator.SetTrigger("Attack"); // 공격 애니메이션 실행
-    }
-
-    /// <summary>
-    /// 애니메이션 이벤트에서 호출되는 투사체 생성 및 초기화 함수
-    /// </summary>
-    public void SpawnProjectile()
-    {
-        Projectile projectile = Instantiate(_projectilePrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        projectile.Initialize(_attackPower, transform.position);
+        _attackComponent.Init(args);
     }
 
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public void TakeDamage(int atk)
+    public void TakeDamage(OnTakeDamagedArgs args)
     {
-        _currentHp -= atk;
-        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
-        
-        if (_currentHp <= 0)
+        if (args.CurrentHp <= 0)
             Die();
     }
 
@@ -106,13 +76,5 @@ public class Player : SerializedMonoBehaviour
     private void Die()
     {
         Debug.Log("플레이어 죽었습니다!");
-    }
-
-    /// <summary>
-    /// 애니메이터 스피드 조절
-    /// </summary>
-    public void SetAnimatorSpeed(float newSpeed)
-    {
-        _animator.speed = newSpeed;
     }
 }

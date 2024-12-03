@@ -12,7 +12,7 @@ public class BaseDatasSO<Data> : ScriptableObject where Data : BaseData
     /// <summary>
     /// 딕셔너리 초기화
     /// </summary>
-    public void InitializeDictionary()
+    public void InitDictionary()
     {
         _dataDict = new Dictionary<string, Data>();
 
@@ -27,7 +27,7 @@ public class BaseDatasSO<Data> : ScriptableObject where Data : BaseData
     {
         // 딕셔너리 아직 초기화 안했으면 초기화
         if (_dataDict == null)
-            InitializeDictionary();
+            InitDictionary();
 
         // id에 해당하는 데이터가 있으면 반환
         if (_dataDict.TryGetValue(id, out var data))

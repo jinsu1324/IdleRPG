@@ -7,13 +7,13 @@ public class Projectile : MonoBehaviour
 {
     private float _speed = 10f;         // 투사체 속도
     private int _attackPower;           // 공격력
-    private Enemy _targetEnemy;         // 타겟 에너미
+    private Enemy _targetEnemy;         // 타겟 에너미      --------------> Enemy가 아니라 Animal이면 어떡할건데? 이런느낌
     private Vector3 _spawnPos;          // 투사체 생성 위치
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(int attackPower, Vector3 spawnPos)
+    public void Init(int attackPower, Vector3 spawnPos)
     {
         _attackPower = attackPower;
         _spawnPos = spawnPos;
@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _targetEnemy.TakeDamage(_attackPower);
+        _targetEnemy.GetComponent<HPComponent>().TakeDamage(_attackPower);
         Destroy(gameObject);
     }
 }

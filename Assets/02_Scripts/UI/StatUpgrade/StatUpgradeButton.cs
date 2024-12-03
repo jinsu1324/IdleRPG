@@ -19,7 +19,7 @@ public class StatUpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     /// <summary>
     /// √ ±‚»≠
     /// </summary>
-    public void Initialize(Action updateUI, string statID)
+    public void Init(Action updateUI, string statID)
     {
         _statID = statID;
         _playerManager = PlayerManager.Instance;

@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 4485462762655471560}
   - component: {fileID: 2925946695956037309}
   m_Layer: 5
-  m_Name: HPBar
+  m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 2891778959032968266}
   - component: {fileID: 5984039095879034061}
   m_Layer: 0
-  m_Name: HPCanvas
+  m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2891778959032968266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,4 +444,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a9207554cba7248a35bdee8e9580e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hpBar: {fileID: 2925946695956037309}
+  _hpSlider: {fileID: 2925946695956037309}

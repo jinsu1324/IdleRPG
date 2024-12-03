@@ -23,34 +23,7 @@ public class EnemyManager : MonoBehaviour
     }
     #endregion
 
-    public event Action OnEnemyClear;                           // 적을 다 죽였을 때 이벤트
-
     private List<Enemy> _fieldEnemyList = new List<Enemy>();    // 필드에 스폰되어 있는 에너미 리스트
-    private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
-    private int _killCount;                                     // 죽인 적 숫자
-
-    /// <summary>
-    /// 목표 + 죽인 적 숫자 리셋
-    /// </summary>
-    public void ResetCounts(int targetCount)
-    {
-        _targetCount = targetCount;
-        _killCount = 0;
-    }
-
-    /// <summary>
-    /// 킬 카운트 1 증가
-    /// </summary>
-    private void Plus_KillCount()
-    {
-        _killCount++;
-
-        // 적 다 죽였으면 이벤트 호출
-        if (_killCount >= _targetCount)
-        {
-            OnEnemyClear?.Invoke();
-        }
-    }
 
     /// <summary>
     /// 에너미 이벤트 구독
@@ -68,9 +41,6 @@ public class EnemyManager : MonoBehaviour
     {
         // 적 필드 리스트에서 제거
         RemoveFieldEnemyList(enemy);
-
-        // 킬 카운트 증가
-        Plus_KillCount();               
 
         // 모든 구독 해제
         enemy.OnEnemySpawn -= AddFieldEnemyList;

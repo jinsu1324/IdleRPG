@@ -13,7 +13,10 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
-    [SerializeField] private HPCanvas _hpCanvas;        // HP바 들어있는 캔버스
+    private HPComponent _hpComponent;                   // HP 컴포넌트
+    private HPBar _hpBar;                               // HP 바
+
+
     public bool IsDead { get; private set; }            // 적이 죽었는지
 
     public event Action<Enemy> OnEnemySpawn;            // 스폰시 이벤트
@@ -37,8 +40,9 @@ public class Enemy : SerializedMonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
+    public void Init(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
     {
+
         _pool = pool;
         _enemyData = enemyData;
 
@@ -57,7 +61,14 @@ public class Enemy : SerializedMonoBehaviour
         _currentState = EnemyState.Move;
         _isFirstAttack = true;
 
-        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
+
+        _hpBar = GetComponentInChildren<HPBar>();
+        _hpBar.Init(_maxHp);
+
+        _hpComponent = GetComponent<HPComponent>();
+        _hpComponent.Init(_maxHp);
+        _hpComponent.OnTakeDamaged += TakeDamage;
+
 
         // 스폰 이벤트 호출
         OnEnemySpawn?.Invoke(this);
@@ -135,7 +146,9 @@ public class Enemy : SerializedMonoBehaviour
     private void AttackPlayer()
     {
         if (_targetPlayer != null)
-            _targetPlayer.TakeDamage(_attackPower);
+        {
+            _targetPlayer.GetComponent<HPComponent>().TakeDamage(_attackPower);
+        }
     }
 
     /// <summary>
@@ -153,12 +166,9 @@ public class Enemy : SerializedMonoBehaviour
     /// <summary>
     /// 공격 받음
     /// </summary>
-    public void TakeDamage(int atk)
+    public void TakeDamage(OnTakeDamagedArgs args)
     {
-        _currentHp -= atk;
-        _hpCanvas.UpdateHPBar(_currentHp, _maxHp);
-
-        if (_currentHp <= 0)
+        if (args.CurrentHp <= 0)
             Die();
     }
 
@@ -171,7 +181,10 @@ public class Enemy : SerializedMonoBehaviour
         IsDead = true;
 
         // 플레이어의 골드 추가 // Todo : 얼마 얻을지 데이터로 빼기
-        PlayerManager.Instance.AddGold(1000);
+        GoldManager.Instance.AddCurrency(1000);
+
+        // 킬카운트 증가
+        StageManager.Instance.AddKillCount(1);
 
         // 사망 이벤트 호출
         OnEnemyDie?.Invoke(this);  

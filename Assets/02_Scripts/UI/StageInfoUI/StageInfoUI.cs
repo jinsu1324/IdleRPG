@@ -12,10 +12,6 @@ public class StageInfoUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _currentText;       // 현재 챕터 스테이지 텍스트
 
-    private int _currentChapter;                                 // 현재 챕터
-    private int _currentStage;                                   // 현재 스테이지
-    private PlayerManager _playerManager;                        // 플레이어 매니저 캐싱용
-
     [SerializeField] private RectTransform _currentPosArrow;
     [SerializeField] private List<RectTransform> _stagePosList;
 
@@ -24,11 +20,11 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _playerManager = PlayerManager.Instance;
-        
-        _playerManager.PlayerData.OnStageChange += UpdateUI;    // 스테이지 변경 이벤트 구독
+        StageManager.Instance.OnStageChanged += UpdateUI;    // 스테이지 변경 이벤트 구독
 
-        UpdateUI();
+        // Todo 임시데이터
+        OnStageChangedArgs args = new OnStageChangedArgs() { CurrentChapter = 1, CurrentStage = 1 };
+        UpdateUI(args);
     }
 
     /// <summary>
@@ -36,17 +32,18 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        _playerManager.PlayerData.OnStageChange -= UpdateUI;    // 스테이지 변경 이벤트 구독해제
+        StageManager.Instance.OnStageChanged -= UpdateUI;    // 스테이지 변경 이벤트 구독해제
     }
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    private void UpdateUI()
+    private void UpdateUI(OnStageChangedArgs args)
     {
-        _currentStage = _playerManager.GetCurrentStage();
-        _currentPosArrow.localPosition = _stagePosList[_currentStage - 1].localPosition + new Vector3(0, -30, 0);
+        int currentChapter = args.CurrentChapter;
+        int currentStage = args.CurrentStage;
 
-        _currentText.text = $"{_playerManager.GetCurrentChapter()}-{_playerManager.GetCurrentStage()}";
+        _currentPosArrow.localPosition = _stagePosList[currentStage - 1].localPosition + new Vector3(0, -30, 0);
+        _currentText.text = $"{currentChapter}-{currentStage}";
     }
 }

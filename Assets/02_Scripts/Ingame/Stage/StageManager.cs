@@ -3,72 +3,116 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct OnStageChangedArgs
+{
+    public int CurrentChapter;
+    public int CurrentStage;
+    public EnemyID EnemyID;
+    public int Count;
+    public int StatPercantage;
+}
+
 public class StageManager : MonoBehaviour
 {
-    public static event Action<EnemyID, int, int> OnStageStart;             // 스테이지 시작 시 이벤트
+    #region Singleton
+    public static StageManager Instance { get; private set; }
 
-    private StageDataManager _stageDataManager = new StageDataManager();    // 스테이지 데이터 매니저
-    private PlayerManager _playerManager;                                   // 플레이어 매니저 담을 변수
-    private StageData _currentStageData;                                    // 현재 스테이지 데이터 담을 변수
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    #endregion
 
-    private int _chapter;               // 현재 챕터
-    private int _stage;                 // 현재 스테이지
-    private string _appearEnemyID;      // 나와야 하는 적ID
-    private int _enemyCount;            // 스테이지에 나오는 적 숫자
-    private int _statPercentage;        // 스테이지에 나오는 적 스탯에 곱해줄 퍼센티지
+    public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
+
+    // Todo 임시데이터
+    private int _currentChapter = 1;                            // 현재 챕터
+    private int _currentStage = 1;                              // 현재 스테이지
+    private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
+    private int _killCount;                                     // 죽인 적 숫자
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
-        // 필요한 매니저들 할당
-        _stageDataManager.Initialize();
-        _playerManager = PlayerManager.Instance;
-
-        // 적 다 잡았을 때 이벤트에, 스테이지 끝났을때 처리할 함수 등록
-        EnemyManager.Instance.OnEnemyClear += StageFinish;
-
-        // 스테이지 셋팅
-        StageSetting();
+        StageBuildAndStart();
     }
     
     /// <summary>
-    /// 스테이지 셋팅
+    /// 스테이지 만들고 시작하기
     /// </summary>
-    private void StageSetting()
+    private void StageBuildAndStart()
     {
-        // 챕터와 스테이지 데이터 가져오기
-        _chapter = _playerManager.GetCurrentChapter();
-        _stage = _playerManager.GetCurrentStage();
-
-        Debug.Log($"스테이지 셋팅! chapter : {_chapter} - stage : {_stage}");
-
         // 현재 챕터와 스테이지에 맞는 스테이지 데이터 가져오기
-        _currentStageData = _stageDataManager.GetStageData(_chapter, _stage);
+        StageData stageData = DataManager.Instance.StageDatasSO.GetStageData(_currentChapter, _currentStage);
 
         // 데이터에서 필요한 정보들 할당
-        _enemyCount = _currentStageData.Count;
-        _statPercentage = _currentStageData.StatPercentage;
-        _appearEnemyID = _currentStageData.AppearEnemy;
-        EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), _appearEnemyID);
+        string appearEnemy = stageData.AppearEnemy;
+        EnemyID enemyID = (EnemyID)Enum.Parse(typeof(EnemyID), appearEnemy);
+        int count = stageData.Count;
+        int statPercentage = stageData.StatPercentage;
 
         // 잡아야하는 적 숫자 정보들 리셋
-        EnemyManager.Instance.ResetCounts(_enemyCount);
+        ResetTargetCount(count);
 
-        // 스테이지 시작 이벤트 호출 (현재 : 적 스폰하는 함수 등록중)
-        OnStageStart?.Invoke(appearEnemyID, _enemyCount, _statPercentage);
+        // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
+        OnStageChangedArgs args = new OnStageChangedArgs() 
+        { 
+            CurrentChapter = _currentChapter, 
+            CurrentStage = _currentStage, 
+            EnemyID = enemyID, 
+            Count = count, 
+            StatPercantage = statPercentage 
+        };
+        OnStageChanged?.Invoke(args); 
+
+        Debug.Log($"{_currentChapter}-{_currentStage} 시작!");
     }
 
     /// <summary>
-    /// 스테이지 끝났을때 호출될 함수
+    /// 스테이지 레벨업
     /// </summary>
-    private void StageFinish()
+    private void StageLevelUp()
     {
-        // 플레이어 데이터 스테이지 레벨업
-        PlayerManager.Instance.StageLevelUp_of_PlayerData();
+        _currentStage++;
 
-        // 스테이지 셋팅
-        StageSetting();
+        if (_currentStage > 5)
+        {
+            _currentStage = 1;
+            _currentChapter++;
+        }
+    }
+
+    /// <summary>
+    /// 킬 카운트 1 증가
+    /// </summary>
+    public void AddKillCount(int count)
+    {
+        _killCount += count;
+
+        // 적 다 죽였으면 이벤트 호출
+        if (_killCount >= _targetCount)
+        {
+            StageLevelUp();
+            StageBuildAndStart();
+        }
+    }
+
+    /// <summary>
+    /// 목표 + 죽인 적 숫자 리셋
+    /// </summary>
+    private void ResetTargetCount(int targetCount)
+    {
+        _targetCount = targetCount;
+        _killCount = 0;
     }
 }

@@ -25,8 +25,10 @@ public class PlayerManager : SerializedMonoBehaviour
     }
     #endregion
 
-    public PlayerData PlayerData { get; private set; }      // 플레이어 데이터
-    private Player _playerInstance;                         // 실제 필드에 스폰된 플레이어 인스턴스를 저장할 변수
+    public static PlayerData PlayerData { get; private set; }      // 플레이어 데이터
+    public static Player PlayerInstance { get; private set; }      // 실제 필드에 스폰된 플레이어 인스턴스를 저장할 변수
+    
+    
     [SerializeField] private Player _playerPrefab;          // 플레이어 프리팹
     [SerializeField] private Transform _playerSpawnPos;     // 플레이어 스폰 위치
 
@@ -51,7 +53,7 @@ public class PlayerManager : SerializedMonoBehaviour
             PlayerData.SetDictFromStatList();
 
             // 플레이어 프리팹 생성
-            PlayerPrefabSpawn(PlayerData);
+            PlayerPrefabSpawn();
         }
         else
         {
@@ -59,18 +61,18 @@ public class PlayerManager : SerializedMonoBehaviour
             PlayerData.SetDictFromStatList();
 
             // 플레이어 프리팹 생성
-            PlayerPrefabSpawn(PlayerData);
+            PlayerPrefabSpawn();
         }
     }
 
     /// <summary>
     /// 플레이어 프리팹 스폰
     /// </summary>
-    private void PlayerPrefabSpawn(PlayerData playerData)
+    private void PlayerPrefabSpawn()
     {
-        _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
-        _playerInstance.transform.position = _playerSpawnPos.position;
-        _playerInstance.Initialize(playerData);
+        PlayerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
+        PlayerInstance.transform.position = _playerSpawnPos.position;
+        PlayerInstance.Init();
     }
 
     /// <summary>
@@ -82,60 +84,21 @@ public class PlayerManager : SerializedMonoBehaviour
         Stat stat = PlayerData.GetStat(id);
 
         // 스탯이 있고 + 자금이 된다면
-        if (stat != null && HasEnoughGold(stat.Cost))
+        if (stat != null && GoldManager.Instance.HasEnoughCurrency(stat.Cost))
         {
             // 돈 감소
-            MinusGold(stat.Cost);
+            //ReduceGold(stat.Cost);
+            GoldManager.Instance.ReduceCurrency(stat.Cost);
 
             // 그 스탯 레벨업
             PlayerData.LevelUpStat(id);
 
             // 플레이어 프리팹 스탯 업데이트
-            _playerInstance.UpdateStat(PlayerData);
+            PlayerInstance.UpdateStat();
 
             return true;
         }
         return false;
-    }
-
-    /// <summary>
-    /// 플레이어 데이터의 스테이지 레벨업
-    /// </summary>
-    public void StageLevelUp_of_PlayerData()
-    {
-        PlayerData.StageLevelUp();
-    }
-
-    /// <summary>
-    /// 업그레이드 할만한 돈을 충분히 가지고 있는지
-    /// </summary>
-    public bool HasEnoughGold(int cost)
-    {
-        return PlayerData.CurrentGold >= cost;
-    }
-
-    /// <summary>
-    /// 골드 획득
-    /// </summary>
-    public void AddGold(int value)
-    {
-        PlayerData.CurrentGold += value;
-    }
-
-    /// <summary>
-    /// 골드 감소
-    /// </summary>
-    private void MinusGold(int value)
-    {
-        PlayerData.CurrentGold -= value;
-    }
-
-    /// <summary>
-    /// 실제 필드에 소환되어있는 플레이어 인스턴스 가져오기
-    /// </summary>
-    public Player GetPlayerInstance()
-    {
-        return _playerInstance;
     }
 
     /// <summary>
@@ -158,16 +121,6 @@ public class PlayerManager : SerializedMonoBehaviour
     public List<Stat> GetAllStats() { return PlayerData.StatList; }
 
     /// <summary>
-    /// 현재 스테이지 가져오기
-    /// </summary>
-    public int GetCurrentStage() { return PlayerData.CurrentStage; }
-
-    /// <summary>
-    /// 현재 챕터 가져오기
-    /// </summary>
-    public int GetCurrentChapter() { return PlayerData.CurrentChapter; }
-
-    /// <summary>
     /// 총합 전투력 가져오기
     /// </summary>
     public int GetTotalCombatPower() { return PlayerData.TotalCombatPower; }
@@ -176,20 +129,5 @@ public class PlayerManager : SerializedMonoBehaviour
     /// 이전 총합 전투력 가져오기
     /// </summary>
     public int GetBeforeTotalCombatPower() { return PlayerData.BeforeTotalCombatPower; }
-
-    /// <summary>
-    /// 현재 골드 가져오기
-    /// </summary>
-    public int GetCurrentGold() { return PlayerData.CurrentGold; }
     #endregion
-
-
-
-
-
-    // 임시 치트
-    public void OnPlusGold()
-    {
-        PlayerData.CurrentGold += 1000;
-    }
 }

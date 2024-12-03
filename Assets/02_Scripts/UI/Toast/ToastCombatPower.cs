@@ -15,7 +15,7 @@ public class ToastCombatPower : MonoBehaviour
     /// <summary>
     /// √ ±‚»≠
     /// </summary>
-    public void Initialize()
+    public void Init()
     {
         _playerManager = PlayerManager.Instance;
         

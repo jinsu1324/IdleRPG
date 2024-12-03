@@ -21,14 +21,14 @@ public class StatUpgradeSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Initialize(string id, Action updateTotalCombatPowerText)
+    public void Init(string id, Action updateTotalCombatPowerText)
     {
         _statID = id;
         _playerManager = PlayerManager.Instance;
 
         _onUpdateTotalCombatPowerText = updateTotalCombatPowerText; // 통합 전투력 텍스트 업데이트 함수 대리자에 저장
 
-        _statUpgradeButton.Initialize(UpdateUI, _statID);   // 업그레이드 버튼 초기화
+        _statUpgradeButton.Init(UpdateUI, _statID);   // 업그레이드 버튼 초기화
 
         UpdateUI();
 
