@@ -14,22 +14,14 @@ public class EnemySpawner : SerializedMonoBehaviour
     private Dictionary<EnemyID, Enemy> _enemyPrefabDict;            // ø°≥ πÃ «¡∏Æ∆’ µÒº≈≥ ∏Æ              
 
     private Dictionary<EnemyID, ObjectPool<Enemy>> _enemyPoolDict;  // ø°≥ πÃ ø¿∫Í¡ß∆Æ «Æ µÒº≈≥ ∏Æ
-    
+
     /// <summary>
     /// Awake
     /// </summary>
-    private void Awake()
+    private void OnEnable()
     {
         SetEnemyPoolDict();
         StageManager.Instance.OnStageChanged += SpawnEnemies;
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        StageManager.Instance.OnStageChanged -= SpawnEnemies;
     }
 
     /// <summary>
@@ -67,4 +59,13 @@ public class EnemySpawner : SerializedMonoBehaviour
             enemy.Init(pool, enemyData, statPercentage);
         }
     }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        StageManager.Instance.OnStageChanged -= SpawnEnemies;
+    }
+
 }

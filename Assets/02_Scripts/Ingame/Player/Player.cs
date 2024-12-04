@@ -5,9 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 /// <summary>
-/// 플레이어 프리팹 코어
+/// 플레이어 프리팹
 /// </summary>
 public class Player : SerializedMonoBehaviour
 {
@@ -18,11 +17,17 @@ public class Player : SerializedMonoBehaviour
     private AttackComponent _attackComponent;               // 공격 컴포넌트
     private AnimComponent _animComponent;                   // 애님 컴포넌트
 
-    private void Awake()
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void OnEnable()
     {
-        PlayerManager.Instance.OnStatChanged += UpdateStatComponents;
+        PlayerManager.Instance.OnStatChanged += ChangeComponentsValue;
     }
 
+    /// <summary>
+    /// 초기화
+    /// </summary>
     public void Init(OnStatChangedArgs statArgs)
     {
         _hpComponent = GetComponent<HPComponent>();
@@ -55,11 +60,11 @@ public class Player : SerializedMonoBehaviour
     }
 
 
-    private void UpdateStatComponents(OnStatChangedArgs args)
+    private void ChangeComponentsValue(OnStatChangedArgs? args)
     {
-        _hpComponent.ChangeMaxHp(args.MaxHp);
-        _attackComponent.ChangeAttackPower(args.AttackPower);
-        _attackComponent.ChangeAttackSpeed(args.AttackSpeed);
+        _hpComponent.ChangeMaxHp(args?.MaxHp ?? 0); // null 이면 0(기본값 설정가능) 이 할당
+        _attackComponent.ChangeAttackPower(args?.AttackPower ?? 0);
+        _attackComponent.ChangeAttackSpeed(args?.AttackSpeed ?? 0);
     }
 
 
@@ -83,6 +88,6 @@ public class Player : SerializedMonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerManager.Instance.OnStatChanged -= UpdateStatComponents;
+        PlayerManager.Instance.OnStatChanged -= ChangeComponentsValue;
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatComponent : SerializedMonoBehaviour
+public class Stat : SerializedMonoBehaviour
 {
     [SerializeField] public StatID StatID { get; set; } // Ω∫≈» ID
     public string Name { get; private set; }            // ¿Ã∏ß 

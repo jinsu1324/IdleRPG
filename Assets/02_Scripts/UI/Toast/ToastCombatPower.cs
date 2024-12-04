@@ -24,11 +24,11 @@ public class ToastCombatPower : MonoBehaviour
     private void UpdateUI()
     {
         // 수치 표시
-        _valueText.text = AlphabetNumConverter.Convert(PlayerManager.Instance.GetTotalCombatPower());
+        _valueText.text = AlphabetNumConverter.Convert(PlayerManager.Instance.GetTotalPower());
 
         // 화살표 방향 표시
-        int TotalCombatPower = PlayerManager.Instance.GetTotalCombatPower();
-        int beforeTotalCombatPower = PlayerManager.Instance.GetBeforeTotalCombatPower();
+        int TotalCombatPower = PlayerManager.Instance.GetTotalPower();
+        int beforeTotalCombatPower = PlayerManager.Instance.GetBeforeTotalPower();
         if (TotalCombatPower > beforeTotalCombatPower)
             ArrowUp();
         else

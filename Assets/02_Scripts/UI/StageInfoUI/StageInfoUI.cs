@@ -15,25 +15,9 @@ public class StageInfoUI : MonoBehaviour
     [SerializeField] private RectTransform _currentPosArrow;
     [SerializeField] private List<RectTransform> _stagePosList;
 
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Awake()
+    private void OnEnable()
     {
-        Debug.Log("OnStageChanged ±¸µ¶! (UpdateUI)");
         StageManager.Instance.OnStageChanged += UpdateUI;
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        StageManager.Instance.OnStageChanged -= UpdateUI;
-    }
-
-    private void Start()
-    {
         Init();
     }
 
@@ -57,5 +41,13 @@ public class StageInfoUI : MonoBehaviour
 
         _currentPosArrow.localPosition = _stagePosList[currentStage - 1].localPosition + new Vector3(0, -30, 0);
         _currentText.text = $"{currentChapter}-{currentStage}";
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        StageManager.Instance.OnStageChanged -= UpdateUI;
     }
 }

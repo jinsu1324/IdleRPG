@@ -26,9 +26,18 @@ public class ToastManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Start
+    /// </summary>
+    private void OnEnable()
+    {
+        PlayerManager.Instance.OnStatChanged += ShowToastCombatPower; // 스탯 바뀌면 토스트메시지 뜨도록 이벤트 구독
+        Debug.Log("ToastManager OnEnable 구독완료!");
+    }
+
+    /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
     /// </summary>
-    public void ShowToastCombatPower()
+    public void ShowToastCombatPower(OnStatChangedArgs? args)
     {
         // 이미 코루틴 있으면 실행 중단
         if (_toastCombatPowerCoroutine != null) 
@@ -51,5 +60,13 @@ public class ToastManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         _toastCombatPower.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        PlayerManager.Instance.OnStatChanged -= ShowToastCombatPower;
     }
 }

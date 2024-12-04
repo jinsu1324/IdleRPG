@@ -10,18 +10,12 @@ public class CurrencyUI : MonoBehaviour
     /// <summary>
     /// Start
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
         GoldManager.Instance.OnCurrencyChanged += UpdateUI;
-        UpdateUI(GoldManager.Instance.GetCurrencyCount());
-    }
+        Debug.Log("CurrencyUI OnEnable 구독완료!");
 
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        GoldManager.Instance.OnCurrencyChanged -= UpdateUI;
+        UpdateUI(GoldManager.Instance.GetCurrencyCount());
     }
 
     /// <summary>
@@ -30,5 +24,13 @@ public class CurrencyUI : MonoBehaviour
     public void UpdateUI(int amout)
     {
         _goldText.text = AlphabetNumConverter.Convert(amout);
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        GoldManager.Instance.OnCurrencyChanged -= UpdateUI;
     }
 }

@@ -11,15 +11,15 @@ public class StatUpgradePanel : MonoBehaviour
     [SerializeField] private RectTransform _slotParent;                   // 슬롯들 생성할 부모
     [SerializeField] private TextMeshProUGUI _totalCombatPowerText;       // 총합 전투력 텍스트
 
-
-    private void Awake()
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void OnEnable()
     {
-        if (PlayerManager.Instance != null)
-            PlayerManager.Instance.OnStatChanged += UpdateTotalCombatPowerText;
-    }
+        PlayerManager.Instance.OnStatChanged += UpdateTotalCombatPowerText;
+        Debug.Log("StatUpgradePanel OnEnable 구독완료!");
 
-    private void Start()
-    {
+
         SpawnSlots();
     }
 
@@ -29,28 +29,29 @@ public class StatUpgradePanel : MonoBehaviour
     private void SpawnSlots()
     {
         // 플레이어 스탯 갯수만큼 반복
-        foreach (StatComponent stat in PlayerManager.Instance.GetAllStats())
+        foreach (Stat stat in PlayerManager.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
             statUpgradeSlot.Init(stat.StatID);
         }
 
-        OnStatChangedArgs args = new OnStatChangedArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalCombatPower() };
+        OnStatChangedArgs args = new OnStatChangedArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalPower() };
         UpdateTotalCombatPowerText(args);
     }
 
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void UpdateTotalCombatPowerText(OnStatChangedArgs args)
+    private void UpdateTotalCombatPowerText(OnStatChangedArgs? args)
     {
-        Debug.Log("3 - 2. Update_TotalCombatPowerText!");
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalCombatPower);
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args?.TotalCombatPower ?? 0);
     }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
     private void OnDisable()
     {
-        if (PlayerManager.Instance != null)
-            PlayerManager.Instance.OnStatChanged -= UpdateTotalCombatPowerText;
+        PlayerManager.Instance.OnStatChanged -= UpdateTotalCombatPowerText;
     }
 }

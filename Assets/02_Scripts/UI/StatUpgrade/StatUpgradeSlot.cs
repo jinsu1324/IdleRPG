@@ -15,15 +15,12 @@ public class StatUpgradeSlot : MonoBehaviour
     [SerializeField] private StatUpgradeButton _statUpgradeButton;  // 스탯 업그레이드 버튼
     private StatID _statID;                                         // 스탯 ID
 
-
-    private void Awake()
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void OnEnable()
     {
         PlayerManager.Instance.OnStatChanged += UpdateSlotUI;
-    }
-
-    private void OnDisable()
-    {
-        PlayerManager.Instance.OnStatChanged -= UpdateSlotUI;
     }
 
     /// <summary>
@@ -35,18 +32,16 @@ public class StatUpgradeSlot : MonoBehaviour
 
         _statUpgradeButton.Init(_statID);   // 업그레이드 버튼 초기화
 
-        OnStatChangedArgs args = new OnStatChangedArgs();
-        UpdateSlotUI(args);
-
+        UpdateSlotUI(null);
     }
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    private void UpdateSlotUI(OnStatChangedArgs args)
+    private void UpdateSlotUI(OnStatChangedArgs? args)
     {
         // 이 슬롯의 스탯ID에 맞게 스탯 가져오기
-        StatComponent stat = PlayerManager.Instance.GetStat(_statID);
+        Stat stat = PlayerManager.Instance.GetStat(_statID);
 
         // UI 요소들 업데이트
         if (stat != null)
@@ -58,5 +53,13 @@ public class StatUpgradeSlot : MonoBehaviour
             _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.StatID.ToString());
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        PlayerManager.Instance.OnStatChanged -= UpdateSlotUI;
     }
 }
