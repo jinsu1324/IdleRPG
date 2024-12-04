@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 {
     private float _speed = 10f;         // 투사체 속도
     private int _attackPower;           // 공격력
-    private Enemy _targetEnemy;         // 타겟 에너미      --------------> Enemy가 아니라 Animal이면 어떡할건데? 이런느낌
+    private IDamagable _target;         // 타겟
     private Vector3 _spawnPos;          // 투사체 생성 위치
 
     /// <summary>
@@ -26,7 +26,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        if (_targetEnemy == null || _targetEnemy.IsDead)
+        if (_target == null || _target.IsDead)
         {
             //Debug.Log("타겟없음!!");
             Destroy(gameObject); // 타겟이 사라지면 투사체 제거
@@ -35,11 +35,11 @@ public class Projectile : MonoBehaviour
         else
         {
             // 타겟 방향으로 이동
-            Vector3 direction = (_targetEnemy.transform.position - transform.position).normalized;
+            Vector3 direction = ((_target as Component).transform.position - transform.position).normalized;
             transform.Translate(direction * _speed * Time.deltaTime);
 
             // 타겟에 도달했는지 확인 및 공격
-            if (Vector3.Distance(transform.position, _targetEnemy.transform.position) < 0.1f)
+            if (Vector3.Distance(transform.position, (_target as Component).transform.position) < 0.1f)
                 AttackTargetEnemy();
         }
     }
@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void FindTarget()
     {
-        _targetEnemy = EnemyManager.Instance.GetClosestLivingEnemy(_spawnPos);
+        _target = DamagableTargetManager.Instance.GetClosestLivingTarget(_spawnPos);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _targetEnemy.GetComponent<IDamagable>().TakeDamage(_attackPower);
+        _target.TakeDamage(_attackPower);
         Destroy(gameObject);
     }
 }

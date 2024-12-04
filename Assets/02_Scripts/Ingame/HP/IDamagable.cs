@@ -6,6 +6,7 @@ public interface IDamagable
 {
     int CurrentHp { get; }
     int MaxtHp { get; }
+    bool IsDead { get; }
     void TakeDamage(int atk);
     void Die();
 }

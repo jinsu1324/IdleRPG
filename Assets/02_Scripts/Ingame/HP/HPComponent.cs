@@ -16,6 +16,7 @@ public class HPComponent : MonoBehaviour, IDamagable
 
     public int CurrentHp { get; private set; }      // 현재 체력 
     public int MaxtHp { get; private set; }         // 최대 체력
+    public bool IsDead { get; private set; }        // 죽었는지
 
     /// <summary>
     /// 초기화
