@@ -18,7 +18,7 @@ public class HPBar : MonoBehaviour
 
         HPComponent hpComponent = GetComponentInParent<HPComponent>();
         if (hpComponent != null)
-            hpComponent.OnTakeDamaged += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트 되도록
+            hpComponent.OnTakeDamaged += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트
 
         OnTakeDamagedArgs initArgs = new OnTakeDamagedArgs() { CurrentHp = initHp, MaxHp = initHp };
         UpdateHPSlider(initArgs);  // 초기체력 값으로 HP슬라이더 업데이트

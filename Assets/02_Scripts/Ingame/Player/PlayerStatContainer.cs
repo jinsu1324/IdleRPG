@@ -12,44 +12,34 @@ using static UnityEngine.Rendering.DebugUI;
 /// </summary>
 public struct OnStatChangedArgs
 {
-    public List<Stat> StatList;                     // 스탯 리스트
-    public int TotalCombatPower;                    // 총합 전투력
-    public int AttackPower;                         // 공격력
-    public int AttackSpeed;                         // 공격속도
-    public int MaxHp;                               // 최대 체력
-    public int Critical;                            // 크리티컬 확률
+    public List<Stat> StatList;     // 스탯 리스트
+    public int TotalPower;          // 총합 전투력
+    public int AttackPower;         // 공격력
+    public int AttackSpeed;         // 공격속도
+    public int MaxHp;               // 최대 체력
+    public int Critical;            // 크리티컬 확률
 }
 
 /// <summary>
-/// 플레이어 관리자
+/// 플레이어 스탯 컨테이너
 /// </summary>
-public class PlayerManager : SingletonBase<PlayerManager>
+public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
 {
-    public static event Action<OnStatChangedArgs?> OnStatChanged;          // 스탯이 변경되었을 때 이벤트
-
-    [SerializeField] private Player _playerPrefab;                  // 생성할 플레이어 프리팹
-    [SerializeField] private Transform _playerSpawnPos;             // 생성할 플레이어의 스폰위치
+    public static event Action<OnStatChangedArgs?> OnStatChanged;   // 스탯이 변경되었을 때 이벤트
+    public int TotalPower { get; private set; }                     // 총합 전투력
+    public int BeforeTotalPower { get; private set; }               // 이전 총합 전투력
 
     private Dictionary<StatID, Stat> _statDict;                     // 컴포넌트에 있는 스탯들을 딕셔너리로 저장할 변수
-    private Player _playerInstance;                                 // 생성한 플레이어 인스턴스
-    private int _totalPower;                                        // 총합 전투력
-    private int _beforeTotalPower;                                  // 이전 총합 전투력
-
+    
+    /// <summary>
+    /// Awake
+    /// </summary>
     protected override void Awake()
     {
         base.Awake(); // 싱글톤 먼저
 
         SetStatDict(); // 스탯 딕셔너리 셋팅
         UpdateTotalPower();  // 총합 전투력 업데이트
-    }
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
-    {
-        Debug.Log("PlayerManager Start!!!!!!!!!");
-        SpawnPlayer(); // 플레이어 스폰
     }
 
     /// <summary>
@@ -95,30 +85,6 @@ public class PlayerManager : SingletonBase<PlayerManager>
             _statDict.Add(stat.StatID, stat); 
         }
     }
-
-    /// <summary>
-    /// 플레이어 스폰
-    /// </summary>
-    public void SpawnPlayer()
-    {
-        Debug.Log("SpawnPlayer");
-
-        // 플레이어 인스턴스 생성
-        _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
-        _playerInstance.transform.position = _playerSpawnPos.position;
-        
-        OnStatChangedArgs args = new OnStatChangedArgs()
-        {
-            StatList = GetAllStats(),
-            TotalCombatPower = _totalPower,
-            AttackPower = GetStat(StatID.AttackPower).Value,
-            AttackSpeed = GetStat(StatID.AttackSpeed).Value,
-            MaxHp = GetStat(StatID.MaxHp).Value,
-            Critical = GetStat(StatID.Critical).Value,
-        };
-        _playerInstance.Init(args); // 인스턴스 초기화
-    }
-
 
     /// <summary>
     /// 특정 스탯 가져오기
@@ -182,14 +148,13 @@ public class PlayerManager : SingletonBase<PlayerManager>
             OnStatChangedArgs args = new OnStatChangedArgs()
             {
                 StatList = GetAllStats(),
-                TotalCombatPower = _totalPower,
+                TotalPower = TotalPower,
                 AttackPower = GetStat(StatID.AttackPower).Value,
                 AttackSpeed = GetStat(StatID.AttackSpeed).Value,
                 MaxHp = GetStat(StatID.MaxHp).Value,
                 Critical = GetStat(StatID.Critical).Value,
             };
 
-            Debug.Log("OnStatChanged 이벤트 호출!");
             // 스탯 변경 이벤트 호출
             OnStatChanged?.Invoke(args);
         }
@@ -199,19 +164,18 @@ public class PlayerManager : SingletonBase<PlayerManager>
         }
     }
 
-
     /// <summary>
     /// 총합 전투력 업데이트
     /// </summary>
     public void UpdateTotalPower()
     {
-        _beforeTotalPower = _totalPower;
+        BeforeTotalPower = TotalPower;
 
         List<int> statValueList = GetAllStats().Select(stat => stat.Value).ToList();
 
-        _totalPower = 0;
+        TotalPower = 0;
         foreach (int value in statValueList)
-            _totalPower += value;
+            TotalPower += value;
     }
 
     /// <summary>
@@ -219,7 +183,7 @@ public class PlayerManager : SingletonBase<PlayerManager>
     /// </summary>
     public int GetTotalPower() 
     { 
-        return _totalPower; 
+        return TotalPower; 
     }
 
     /// <summary>
@@ -227,7 +191,7 @@ public class PlayerManager : SingletonBase<PlayerManager>
     /// </summary>
     public int GetBeforeTotalPower() 
     { 
-        return _beforeTotalPower; 
+        return BeforeTotalPower; 
     }
 
 

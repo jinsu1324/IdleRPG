@@ -14,22 +14,26 @@ public struct OnStageChangedArgs
 
 public class StageManager : SingletonBase<StageManager>
 {
-    public static event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
+    public static event Action<OnStageChangedArgs> OnStageChanged;  // 스테이지 변경 시 이벤트
 
     // Todo 임시데이터
-    private int _currentChapter = 1;                            // 현재 챕터
-    private int _currentStage = 1;                              // 현재 스테이지
-    private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
-    private int _killCount;                                     // 죽인 적 숫자
+    private int _currentChapter = 1;                                // 현재 챕터
+    private int _currentStage = 1;                                  // 현재 스테이지
 
-    
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable()
+    {
+        StageKillCounter.OnClearAllEnemies += StageLevelUp; // 전체 적 섬멸했을 때 스테이지 레벨업
+    }
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
-        StageBuildAndStart();   // 스테이지 시작
+        StageBuildAndStart(); // 스테이지 시작
     }
 
     /// <summary>
@@ -42,23 +46,20 @@ public class StageManager : SingletonBase<StageManager>
 
         // 데이터에서 필요한 정보들 할당
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), stageData.AppearEnemy);
-        int count = stageData.Count;
+        int targetCount = stageData.Count;
         int statPercentage = stageData.StatPercentage;
 
-        // 잡아야하는 적 숫자 정보들 리셋
-        ResetTargetCount(count);
-
-        // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
+        
         OnStageChangedArgs args = new OnStageChangedArgs() 
         { 
             CurrentChapter = _currentChapter, 
             CurrentStage = _currentStage, 
             EnemyID = appearEnemyID, 
-            Count = count, 
+            Count = targetCount, 
             StatPercantage = statPercentage
         };
 
-        OnStageChanged?.Invoke(args); 
+        OnStageChanged?.Invoke(args);  // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
 
         Debug.Log($"{_currentChapter}-{_currentStage} 시작!");
     }
@@ -75,29 +76,15 @@ public class StageManager : SingletonBase<StageManager>
             _currentStage = 1;
             _currentChapter++;
         }
+
+        StageBuildAndStart(); // 레벨업된 스테이지대로 스테이지 만들고 시작하기
     }
 
     /// <summary>
-    /// 킬 카운트 1 증가
+    /// OnDisable
     /// </summary>
-    public void AddKillCount(int count)
+    private void OnDisable()
     {
-        _killCount += count;
-
-        // 적 다 죽였으면 이벤트 호출
-        if (_killCount >= _targetCount)
-        {
-            StageLevelUp();
-            StageBuildAndStart();
-        }
-    }
-
-    /// <summary>
-    /// 목표 + 죽인 적 숫자 리셋
-    /// </summary>
-    private void ResetTargetCount(int targetCount)
-    {
-        _targetCount = targetCount;
-        _killCount = 0;
+        StageKillCounter.OnClearAllEnemies -= StageLevelUp; 
     }
 }

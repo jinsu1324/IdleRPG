@@ -18,7 +18,7 @@ public class AnimComponent : MonoBehaviour
         _animator = GetComponent<Animator>();
         AttackComponent attackComponent = GetComponent<AttackComponent>();
         if (attackComponent != null)
-            attackComponent.OnAttacked += PlayAttackAnim;
+            attackComponent.OnAttacked += PlayAttackAnim;   // 공격할 때, 공격 애니메이션 재생
 
         _isInit = true; // 초기화 완료
     }

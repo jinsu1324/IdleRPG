@@ -8,11 +8,11 @@ public class ToastManager : MonoBehaviour
     private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.OnStatChanged += ShowToastCombatPower; // 스탯 바뀌면 토스트메시지 뜨도록 이벤트 구독
+        PlayerStatContainer.OnStatChanged += ShowToastCombatPower; // 스탯이 변경될 때, 총합공격력 토스트메시지 보여주기
     }
 
     /// <summary>
@@ -48,6 +48,6 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.OnStatChanged -= ShowToastCombatPower;
+        PlayerStatContainer.OnStatChanged -= ShowToastCombatPower;
     }
 }

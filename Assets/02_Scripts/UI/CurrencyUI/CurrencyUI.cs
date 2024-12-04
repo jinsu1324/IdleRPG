@@ -6,13 +6,13 @@ using UnityEngine;
 public class CurrencyUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _goldText;     // 현재 골드 텍스트
-    
+
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        GoldManager.OnCurrencyChanged += UpdateUI;
+        GoldManager.OnCurrencyChanged += UpdateCurrencyUI;  // 재화가 변경될 때, 재화UI 업데이트
     }
 
     /// <summary>
@@ -20,13 +20,13 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        UpdateUI(GoldManager.Instance.GetCurrencyCount());
+        UpdateCurrencyUI(GoldManager.Instance.GetCurrencyCount());
     }
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    public void UpdateUI(int amout)
+    public void UpdateCurrencyUI(int amout)
     {
         _goldText.text = AlphabetNumConverter.Convert(amout);
     }
@@ -36,6 +36,6 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        GoldManager.OnCurrencyChanged -= UpdateUI;
+        GoldManager.OnCurrencyChanged -= UpdateCurrencyUI;
     }
 }

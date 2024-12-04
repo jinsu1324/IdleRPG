@@ -18,11 +18,11 @@ public class Player : SerializedMonoBehaviour
     private AnimComponent _animComponent;                   // 애님 컴포넌트
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.OnStatChanged += ChangeComponentsValue;
+        PlayerStatContainer.OnStatChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
     }
 
     /// <summary>
@@ -40,9 +40,9 @@ public class Player : SerializedMonoBehaviour
         int maxHp = statArgs.MaxHp;
 
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
-        _hpComponent.OnTakeDamaged += TakeDamage;
+        _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크 
 
-        
+
         _hpBar.Init(maxHp); // HP바 초기화
 
         
@@ -59,7 +59,6 @@ public class Player : SerializedMonoBehaviour
         _animComponent.Init(); // 애님 컴포넌트 초기화
     }
 
-
     private void ChangeComponentsValue(OnStatChangedArgs? args)
     {
         _hpComponent.ChangeMaxHp(args?.MaxHp ?? 0); // null 이면 0(기본값 설정가능) 이 할당
@@ -68,11 +67,10 @@ public class Player : SerializedMonoBehaviour
     }
 
 
-
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public void TakeDamage(OnTakeDamagedArgs args)
+    public void CheckDead(OnTakeDamagedArgs args)
     {
         if (args.CurrentHp <= 0)
             Die();
@@ -86,8 +84,11 @@ public class Player : SerializedMonoBehaviour
         Debug.Log("플레이어 죽었습니다!");
     }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
     private void OnDisable()
     {
-        PlayerManager.OnStatChanged -= ChangeComponentsValue;
+        PlayerStatContainer.OnStatChanged -= ChangeComponentsValue;
     }
 }

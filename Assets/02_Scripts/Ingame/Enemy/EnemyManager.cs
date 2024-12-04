@@ -9,41 +9,28 @@ public class EnemyManager : SingletonBase<EnemyManager>
     private List<Enemy> _fieldEnemyList = new List<Enemy>();    // 필드에 스폰되어 있는 에너미 리스트
 
     /// <summary>
-    /// 에너미 이벤트 구독
+    /// OnEnable
     /// </summary>
-    public void Subscribe_EnemyEvents(Enemy enemy)
+    private void OnEnable()
     {
-        enemy.OnEnemySpawn += AddFieldEnemyList;    
-        enemy.OnEnemyDie += OnEnemyDieHandler;      
-    }
-
-    /// <summary>
-    /// 적이 죽을때 이벤트가 실행될때 처리할 것들
-    /// </summary>
-    private void OnEnemyDieHandler(Enemy enemy)
-    {
-        // 적 필드 리스트에서 제거
-        RemoveFieldEnemyList(enemy);
-
-        // 모든 구독 해제
-        enemy.OnEnemySpawn -= AddFieldEnemyList;
-        enemy.OnEnemyDie -= OnEnemyDieHandler;
+        Enemy.OnEnemySpawn += AddFieldEnemyList;  // 적 스폰될 때, 필드 적 리스트에 추가
+        Enemy.OnEnemyDie += RemoveFieldEnemyList;  // 적 죽을 때, 필드 적 리스트에서 제거
     }
 
     /// <summary>
     /// 필드 에너미 리스트에 에너미 추가
     /// </summary>
-    public void AddFieldEnemyList(Enemy enemy)
+    public void AddFieldEnemyList(EnemyEventArgs args)
     {
-        _fieldEnemyList.Add(enemy);
+        _fieldEnemyList.Add(args.Enemy);
     }
 
     /// <summary>
     /// 필드 에너미 리스트에서 에너미 삭제
     /// </summary>
-    public void RemoveFieldEnemyList(Enemy enemy)
+    public void RemoveFieldEnemyList(EnemyEventArgs args)
     {
-        _fieldEnemyList.Remove(enemy);
+        _fieldEnemyList.Remove(args.Enemy);
     }
 
     /// <summary>
@@ -68,5 +55,14 @@ public class EnemyManager : SingletonBase<EnemyManager>
             FirstOrDefault(); // 가장 가까운 적 반환
 
         return closestEnemy;
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        Enemy.OnEnemySpawn -= AddFieldEnemyList;
+        Enemy.OnEnemyDie -= RemoveFieldEnemyList; 
     }
 }

@@ -16,7 +16,7 @@ public class StatUpgradePanel : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.OnStatChanged += UpdateTotalCombatPowerText;
+        PlayerStatContainer.OnStatChanged += UpdateTotalPowerTextUI;    // 스탯이 변경될 때, 총합 전투력 텍스트UI 업데이트 
     }
 
     /// <summary>
@@ -33,22 +33,22 @@ public class StatUpgradePanel : MonoBehaviour
     private void SpawnSlots()
     {
         // 플레이어 스탯 갯수만큼 반복
-        foreach (Stat stat in PlayerManager.Instance.GetAllStats())
+        foreach (Stat stat in PlayerStatContainer.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
             statUpgradeSlot.Init(stat.StatID);
         }
 
-        OnStatChangedArgs args = new OnStatChangedArgs() { TotalCombatPower = PlayerManager.Instance.GetTotalPower() };
-        UpdateTotalCombatPowerText(args);
+        OnStatChangedArgs args = new OnStatChangedArgs() { TotalPower = PlayerStatContainer.Instance.GetTotalPower() };
+        UpdateTotalPowerTextUI(args);
     }
 
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void UpdateTotalCombatPowerText(OnStatChangedArgs? args)
+    private void UpdateTotalPowerTextUI(OnStatChangedArgs? args)
     {
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args?.TotalCombatPower ?? 0);
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args?.TotalPower ?? 0);
     }
 
     /// <summary>
@@ -56,6 +56,6 @@ public class StatUpgradePanel : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.OnStatChanged -= UpdateTotalCombatPowerText;
+        PlayerStatContainer.OnStatChanged -= UpdateTotalPowerTextUI;
     }
 }

@@ -72,7 +72,7 @@ public class StatUpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpH
     private void Upgrade()
     {
         // 레벨업 가능하면 레벨업 로직실행하고 true 반환 (TryLevelUpStatByID 내부에 구현되어있음)
-        if (PlayerManager.Instance.TryStatLevelUp(_statID))
+        if (PlayerStatContainer.Instance.TryStatLevelUp(_statID))
         {
             // 스케일 애니메이션 실행
             PlayScaleAnimation();

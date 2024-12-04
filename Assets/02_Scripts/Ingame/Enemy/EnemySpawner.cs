@@ -28,7 +28,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        StageManager.OnStageChanged += SpawnEnemies;
+        StageManager.OnStageChanged += SpawnEnemies;    // 스테이지 변경될 때, 적들 스폰
     }
 
     /// <summary>
@@ -57,13 +57,8 @@ public class EnemySpawner : SerializedMonoBehaviour
         {
             Enemy enemy = pool.GetObject();
             enemy.transform.position = _spawnPosList[i].position;
-            //enemy.transform.position = _spawnPosList[Random.Range(0, _spawnPosList.Count)].position;
-
-            // Enemy 스폰, 죽음 이벤트 구독
-            EnemyManager.Instance.Subscribe_EnemyEvents(enemy);
-
-            // Enemy 초기화
-            enemy.Init(pool, enemyData, statPercentage);
+            //enemy.transform.position = _spawnPosList[Random.Range(0, _spawnPosList.Count)].position; 랜덤위치 테스트
+            enemy.Init(pool, enemyData, statPercentage); // Enemy 초기화
         }
     }
 

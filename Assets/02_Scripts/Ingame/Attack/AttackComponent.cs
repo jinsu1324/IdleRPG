@@ -89,5 +89,6 @@ public class AttackComponent : MonoBehaviour
     public void ChangeAttackSpeed(int value)
     {
         _attackSpeed = value;
+        _attackCooldown = 1f / _attackSpeed;
     }
 }
