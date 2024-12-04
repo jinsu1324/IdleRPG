@@ -19,24 +19,23 @@ public class AttackComponent : MonoBehaviour
 {
     public event Action<OnAttackedArgs> OnAttacked;  // 공격 했을 때 이벤트
 
+    [SerializeField] private int _attackMotionFrame; // 공격 모션 프레임
+
     private IAttackable _attack;                     // 공격
     private int _attackPower;                        // 공격력
     private int _attackSpeed;                        // 공격속도
 
     private float _attackCooldown;                   // 공격 쿨타임
     private float _time;                             // 쿨타임 시간 계산
-    private int _attackMotionFrame;                  // 공격 모션 프레임
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(AttackComponentArgs initArgs, int attackMotionFrame)
+    public void Init(AttackComponentArgs initArgs)
     {
         _attack = initArgs.Attack;
         _attackPower = initArgs.AttackPower;
         _attackSpeed = initArgs.AttackSpeed;
-
-        _attackMotionFrame = attackMotionFrame;
 
         _attackCooldown = 1f / _attackSpeed;
     }

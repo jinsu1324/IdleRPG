@@ -12,7 +12,6 @@ using UnityEngine;
 public class Player : SerializedMonoBehaviour
 {
     [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
-    [SerializeField] private int _attackMotionFrame = 25;   // 공격 모션 프레임
 
     private HPComponent _hpComponent;                       // HP 컴포넌트
     private HPBar _hpBar;                                   // HP 바
@@ -75,7 +74,7 @@ public class Player : SerializedMonoBehaviour
             AttackPower = attackPower,
             AttackSpeed = attackSpeed
         };
-        _attackComponent.Init(args, _attackMotionFrame); // Attack 컴포넌트 초기화
+        _attackComponent.Init(args); // Attack 컴포넌트 초기화
     }
 
     /// <summary>
