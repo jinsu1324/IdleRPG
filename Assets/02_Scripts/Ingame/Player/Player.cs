@@ -48,7 +48,7 @@ public class Player : SerializedMonoBehaviour
     {
         _hpComponent = GetComponent<HPComponent>();
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
-        _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크 
+        _hpComponent.OnDead += PlayerDeadTask;  // 죽었을 때, 플레이어에서 처리해야할 것들 처리
     }
 
     /// <summary>
@@ -98,20 +98,11 @@ public class Player : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// 데미지 받았을 때, 죽었는지 체크
+    /// 플레이어 죽었을 때 처리할 것들
     /// </summary>
-    public void CheckDead(OnTakeDamagedArgs args)
+    private void PlayerDeadTask()
     {
-        if (args.CurrentHp <= 0)
-            Die();
-    }
-
-    /// <summary>
-    /// 죽음
-    /// </summary>
-    private void Die()
-    {
-        Debug.Log("플레이어 죽었습니다!");
+        Debug.Log("Player Dead Task");
     }
 
     /// <summary>
@@ -120,5 +111,8 @@ public class Player : SerializedMonoBehaviour
     private void OnDisable()
     {
         PlayerStatContainer.OnStatChanged -= ChangeComponentsValue;
+
+        if (_hpComponent != null)
+            _hpComponent.OnDead -= PlayerDeadTask;
     }
 }

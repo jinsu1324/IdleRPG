@@ -19,14 +19,12 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
+    public static event Action<EnemyEventArgs> OnEnemySpawn; // 스폰시 이벤트
+    public static event Action<EnemyEventArgs> OnEnemyDie;   // 죽었을때 이벤트
+
     private HPComponent _hpComponent;                   // HP 컴포넌트
     private HPBar _hpBar;                               // HP 바
 
-
-    public bool IsDead { get; private set; }            // 적이 죽었는지
-
-    public static event Action<EnemyEventArgs> OnEnemySpawn;            // 스폰시 이벤트
-    public static event Action<EnemyEventArgs> OnEnemyDie;              // 죽었을때 이벤트
 
     private ObjectPool<Enemy> _pool;                    // 자신을 반환할 풀 참조
     private EnemyData _enemyData;                       // 데이터
@@ -37,7 +35,7 @@ public class Enemy : SerializedMonoBehaviour
 
     private float _attackCooldown;                      // 공격 쿨타임
     private float _time;                                // 쿨타임 시간 계산용
-    private IDamagable _target;                   // 공격 타겟 플레이어
+    private IDamagable _target;                         // 공격 타겟
     private EnemyState _currentState;                   // 현재 상태
     private bool _isFirstAttack;                        // 첫 1회공격인지
 
@@ -57,7 +55,6 @@ public class Enemy : SerializedMonoBehaviour
         _attackCooldown = 1f / _attackSpeed;
 
         // 정보들 초기화
-        IsDead = false;
         _time = 0f;
         _target = null;
         _currentState = EnemyState.Move;
@@ -78,7 +75,7 @@ public class Enemy : SerializedMonoBehaviour
     {
         _hpComponent = GetComponent<HPComponent>();
         _hpComponent.Init(maxHp);
-        _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크
+        _hpComponent.OnDead += EnemyDeadTask; // 죽었을 때, 에너미에서 처리해야할 것들 처리
     }
 
     /// <summary>
@@ -181,28 +178,23 @@ public class Enemy : SerializedMonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public void CheckDead(OnTakeDamagedArgs args)
-    {
-        if (args.CurrentHp <= 0)
-            Die();
-    }
 
     /// <summary>
-    /// 죽음
+    /// 죽었을 때, 에너미에서 처리해야할 것들 처리
     /// </summary>
-    private void Die()
+    private void EnemyDeadTask()
     {
-        
-        IsDead = true; // 죽었음을 true로
-
         GoldManager.Instance.AddCurrency(1000); // 플레이어의 골드 추가 // Todo : 얼마 얻을지 데이터로 빼기
 
         EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, Count = 1 };
         OnEnemyDie?.Invoke(args); // 사망 이벤트 호출  
 
         _pool.ReturnObject(this); // 풀로 반환
+    }
+
+    private void OnDisable()
+    {
+        if (_hpComponent != null)
+            _hpComponent.OnDead -= EnemyDeadTask;
     }
 }

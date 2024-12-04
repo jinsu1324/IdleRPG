@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public struct OnTakeDamagedArgs
@@ -13,6 +14,7 @@ public struct OnTakeDamagedArgs
 public class HPComponent : MonoBehaviour, IDamagable
 {
     public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
+    public Action OnDead;                           // 죽었을 때 이벤트
 
     public int CurrentHp { get; private set; }      // 현재 체력 
     public int MaxtHp { get; private set; }         // 최대 체력
@@ -23,6 +25,7 @@ public class HPComponent : MonoBehaviour, IDamagable
     /// </summary>
     public void Init(int initHp)
     {
+        IsDead = false;
         MaxtHp = initHp;
         CurrentHp = MaxtHp;
     }
@@ -36,6 +39,9 @@ public class HPComponent : MonoBehaviour, IDamagable
         
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
         OnTakeDamaged?.Invoke(args);
+
+        if (CurrentHp <= 0)
+            Die();
     }
 
     /// <summary>
@@ -46,8 +52,12 @@ public class HPComponent : MonoBehaviour, IDamagable
         MaxtHp = value;
     }
 
+    /// <summary>
+    /// 죽음
+    /// </summary>
     public void Die()
     {
-        Debug.Log("죽었습니다.");
+        IsDead = true;
+        OnDead?.Invoke();
     }
 }
