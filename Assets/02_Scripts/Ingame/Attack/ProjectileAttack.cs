@@ -21,6 +21,14 @@ public class ProjectileAttack : IAttackable
     /// </summary>
     public void ExecuteAttack(int attackPower)
     {
+        SpawnProjectile(attackPower);
+    }
+
+    /// <summary>
+    /// 프로젝타일 생성
+    /// </summary>
+    private void SpawnProjectile(int attackPower)
+    {
         Projectile projectile = GameObject.Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity);
         projectile.Init(attackPower, _spawnPoint.position);
     }
