@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _targetEnemy.GetComponent<HPComponent>().TakeDamage(_attackPower);
+        _targetEnemy.GetComponent<IDamagable>().TakeDamage(_attackPower);
         Destroy(gameObject);
     }
 }

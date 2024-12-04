@@ -31,15 +31,13 @@ public class Enemy : SerializedMonoBehaviour
     private ObjectPool<Enemy> _pool;                    // 자신을 반환할 풀 참조
     private EnemyData _enemyData;                       // 데이터
 
-    private int _currentHp;                             // 체력
-    private int _maxHp;                                 // 최대체력
     private int _attackPower;                           // 공격력
     private int _attackSpeed;                           // 공격속도
     private int _moveSpeed;                             // 이동속도
 
     private float _attackCooldown;                      // 공격 쿨타임
     private float _time;                                // 쿨타임 시간 계산용
-    private Player _targetPlayer;                       // 공격 타겟 플레이어
+    private IDamagable _target;                   // 공격 타겟 플레이어
     private EnemyState _currentState;                   // 현재 상태
     private bool _isFirstAttack;                        // 첫 1회공격인지
 
@@ -48,13 +46,11 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     public void Init(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
     {
-
         _pool = pool;
         _enemyData = enemyData;
 
         // 스탯 셋팅
-        _currentHp = (_enemyData.MaxHp * statPercentage) / 100;
-        _maxHp = (_enemyData.MaxHp * statPercentage) / 100;
+        int maxHp = (_enemyData.MaxHp * statPercentage) / 100;
         _attackPower = (_enemyData.AttackPower * statPercentage) / 100;
         _attackSpeed = _enemyData.AttackSpeed;
         _moveSpeed = _enemyData.MoveSpeed;
@@ -63,21 +59,38 @@ public class Enemy : SerializedMonoBehaviour
         // 정보들 초기화
         IsDead = false;
         _time = 0f;
-        _targetPlayer = null;
+        _target = null;
         _currentState = EnemyState.Move;
         _isFirstAttack = true;
 
 
-        _hpBar = GetComponentInChildren<HPBar>();
-        _hpBar.Init(_maxHp);
-
-        _hpComponent = GetComponent<HPComponent>();
-        _hpComponent.Init(_maxHp);
-        _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크
+        Init_HPComponent(maxHp);
+        Init_HPBar(maxHp);
 
         EnemyEventArgs args = new EnemyEventArgs() { Enemy = this };
         OnEnemySpawn?.Invoke(args); // 스폰 이벤트 호출
     }
+
+    /// <summary>
+    /// HP 컴포넌트 초기화
+    /// </summary>
+    private void Init_HPComponent(int maxHp)
+    {
+        _hpComponent = GetComponent<HPComponent>();
+        _hpComponent.Init(maxHp);
+        _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크
+    }
+
+    /// <summary>
+    /// HP바 컴포넌트 초기화
+    /// </summary>
+    private void Init_HPBar(int maxHp)
+    {
+        _hpBar = GetComponentInChildren<HPBar>();
+        _hpBar.Init(maxHp);
+    }
+
+
 
     /// <summary>
     /// Update
@@ -150,9 +163,9 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     private void AttackPlayer()
     {
-        if (_targetPlayer != null)
+        if (_target != null)
         {
-            _targetPlayer.GetComponent<HPComponent>().TakeDamage(_attackPower);
+            _target.TakeDamage(_attackPower);
         }
     }
 
@@ -163,7 +176,7 @@ public class Enemy : SerializedMonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _targetPlayer = collision.gameObject.GetComponent<Player>();
+            _target = collision.gameObject.GetComponent<IDamagable>();
             _currentState = EnemyState.Attack;
         }
     }
@@ -192,13 +205,4 @@ public class Enemy : SerializedMonoBehaviour
 
         _pool.ReturnObject(this); // 풀로 반환
     }
-
-    /// <summary>
-    /// 현재 HP 가져오기
-    /// </summary>
-    public int GetCurrentHP()
-    {
-        return _currentHp;
-    }
-
 }

@@ -10,20 +10,20 @@ public struct OnTakeDamagedArgs
 }
 
 
-public class HPComponent : MonoBehaviour
+public class HPComponent : MonoBehaviour, IDamagable
 {
     public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
-    
-    private int _currentHp;                         // 현재 체력  
-    private int _maxHp;                             // 최대 체력
+
+    public int CurrentHp { get; private set; }      // 현재 체력 
+    public int MaxtHp { get; private set; }         // 최대 체력
 
     /// <summary>
     /// 초기화
     /// </summary>
     public void Init(int initHp)
     {
-        _maxHp = initHp;
-        _currentHp = _maxHp;
+        MaxtHp = initHp;
+        CurrentHp = MaxtHp;
     }
 
     /// <summary>
@@ -31,9 +31,9 @@ public class HPComponent : MonoBehaviour
     /// </summary>
     public void TakeDamage(int atk)
     {
-        _currentHp -= atk;
+        CurrentHp -= atk;
         
-        OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = _currentHp, MaxHp = _maxHp };
+        OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
         OnTakeDamaged?.Invoke(args);
     }
 
@@ -42,6 +42,11 @@ public class HPComponent : MonoBehaviour
     /// </summary>
     public void ChangeMaxHp(int value)
     {
-        _maxHp = value;
+        MaxtHp = value;
+    }
+
+    public void Die()
+    {
+        Debug.Log("죽었습니다.");
     }
 }

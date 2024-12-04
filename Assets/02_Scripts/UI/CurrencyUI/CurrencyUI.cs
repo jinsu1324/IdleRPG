@@ -12,7 +12,7 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        GoldManager.OnCurrencyChanged += UpdateCurrencyUI;  // 재화가 변경될 때, 재화UI 업데이트
+        GoldManager.OnGoldChanged += UpdateCurrencyUI;  // 재화가 변경될 때, 재화UI 업데이트
     }
 
     /// <summary>
@@ -36,6 +36,6 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        GoldManager.OnCurrencyChanged -= UpdateCurrencyUI;
+        GoldManager.OnGoldChanged -= UpdateCurrencyUI;
     }
 }
