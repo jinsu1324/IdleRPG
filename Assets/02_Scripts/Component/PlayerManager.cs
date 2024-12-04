@@ -23,11 +23,9 @@ public struct OnStatChangedArgs
 /// <summary>
 /// 플레이어 관리자
 /// </summary>
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : SingletonBase<PlayerManager>
 {
-    public static PlayerManager Instance { get; private set; }      // 싱글톤 인스턴스
-
-    public event Action<OnStatChangedArgs?> OnStatChanged;          // 스탯이 변경되었을 때 이벤트
+    public static event Action<OnStatChangedArgs?> OnStatChanged;          // 스탯이 변경되었을 때 이벤트
 
     [SerializeField] private Player _playerPrefab;                  // 생성할 플레이어 프리팹
     [SerializeField] private Transform _playerSpawnPos;             // 생성할 플레이어의 스폰위치
@@ -37,32 +35,11 @@ public class PlayerManager : MonoBehaviour
     private int _totalPower;                                        // 총합 전투력
     private int _beforeTotalPower;                                  // 이전 총합 전투력
 
-    /// <summary>
-    /// Awake
-    /// </summary>
-    private void Awake()
+    protected override void Awake()
     {
-        Debug.Log("Awake 1");
-        if (Instance == null)
-        {
-            Debug.Log("Awake 2");
+        base.Awake(); // 싱글톤 먼저
 
-            Instance = this;
-
-            Debug.Log("Awake 3");
-
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Debug.Log("Awake 4");
-            Destroy(gameObject);
-        }
-
-        Debug.Log("Awake 5");
         SetStatDict(); // 스탯 딕셔너리 셋팅
-
-        Debug.Log("Awake 6");
         UpdateTotalPower();  // 총합 전투력 업데이트
     }
 
@@ -71,6 +48,7 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     private void Start()
     {
+        Debug.Log("PlayerManager Start!!!!!!!!!");
         SpawnPlayer(); // 플레이어 스폰
     }
 
@@ -123,6 +101,8 @@ public class PlayerManager : MonoBehaviour
     /// </summary>
     public void SpawnPlayer()
     {
+        Debug.Log("SpawnPlayer");
+
         // 플레이어 인스턴스 생성
         _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
         _playerInstance.transform.position = _playerSpawnPos.position;

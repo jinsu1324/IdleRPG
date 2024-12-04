@@ -18,10 +18,17 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// <summary>
     /// Awake
     /// </summary>
-    private void OnEnable()
+    private void Awake()
     {
         SetEnemyPoolDict();
-        StageManager.Instance.OnStageChanged += SpawnEnemies;
+    }
+
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable()
+    {
+        StageManager.OnStageChanged += SpawnEnemies;
     }
 
     /// <summary>
@@ -65,7 +72,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        StageManager.Instance.OnStageChanged -= SpawnEnemies;
+        StageManager.OnStageChanged -= SpawnEnemies;
     }
 
 }

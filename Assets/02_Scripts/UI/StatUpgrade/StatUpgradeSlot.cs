@@ -16,11 +16,11 @@ public class StatUpgradeSlot : MonoBehaviour
     private StatID _statID;                                         // Ω∫≈» ID
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.Instance.OnStatChanged += UpdateSlotUI;
+        PlayerManager.OnStatChanged += UpdateSlotUI;
     }
 
     /// <summary>
@@ -60,6 +60,6 @@ public class StatUpgradeSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.Instance.OnStatChanged -= UpdateSlotUI;
+        PlayerManager.OnStatChanged -= UpdateSlotUI;
     }
 }

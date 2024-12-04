@@ -22,7 +22,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.Instance.OnStatChanged += ChangeComponentsValue;
+        PlayerManager.OnStatChanged += ChangeComponentsValue;
     }
 
     /// <summary>
@@ -86,8 +86,8 @@ public class Player : SerializedMonoBehaviour
         Debug.Log("플레이어 죽었습니다!");
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
-        PlayerManager.Instance.OnStatChanged -= ChangeComponentsValue;
+        PlayerManager.OnStatChanged -= ChangeComponentsValue;
     }
 }

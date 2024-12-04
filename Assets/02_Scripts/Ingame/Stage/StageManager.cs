@@ -12,11 +12,9 @@ public struct OnStageChangedArgs
     public int StatPercantage;  // 등장적 스탯 퍼센티지
 }
 
-public class StageManager : MonoBehaviour
+public class StageManager : SingletonBase<StageManager>
 {
-    public static StageManager Instance { get; private set; }   // 싱글톤 인스턴스
-
-    public event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
+    public static event Action<OnStageChangedArgs> OnStageChanged;     // 스테이지 변경 시 이벤트
 
     // Todo 임시데이터
     private int _currentChapter = 1;                            // 현재 챕터
@@ -24,21 +22,7 @@ public class StageManager : MonoBehaviour
     private int _targetCount;                                   // 죽여야 하는 목표 적 숫자
     private int _killCount;                                     // 죽인 적 숫자
 
-    /// <summary>
-    /// Awake
-    /// </summary>
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    
 
     /// <summary>
     /// Start

@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class DataManager : SerializedMonoBehaviour
+public class DataManager : SingletonBase<DataManager>
 {
-    public static DataManager Instance { get; private set; }                                // 싱글톤 인스턴스
-    
     [Title("데이터 스크립터블 오브젝트들", Bold = false)]
     [SerializeField] public WeaponDatasSO WeaponDatasSO { get; private set; }               // 무기 데이터
     [SerializeField] public ArmorDatasSO ArmorDatasSO { get; private set; }                 // 방어구 데이터
@@ -15,22 +13,6 @@ public class DataManager : SerializedMonoBehaviour
     [SerializeField] public SkillDatasSO SkillDatasSO { get; private set; }                 // 스킬 데이터
     [SerializeField] public StageDatasSO StageDatasSO { get; private set; }                 // 스테이지 데이터
     [SerializeField] public StartingStatDatasSO StartingStatDatasSO { get; private set; }   // 스타팅 스탯 데이터
-    
-    /// <summary>
-    /// Awake
-    /// </summary>
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // 데이터들 set 함수들
     public void SetWeaponDatasSO(WeaponDatasSO data) => WeaponDatasSO = data;

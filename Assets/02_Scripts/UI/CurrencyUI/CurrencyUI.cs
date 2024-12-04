@@ -12,9 +12,14 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        GoldManager.Instance.OnCurrencyChanged += UpdateUI;
-        Debug.Log("CurrencyUI OnEnable 구독완료!");
+        GoldManager.OnCurrencyChanged += UpdateUI;
+    }
 
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
         UpdateUI(GoldManager.Instance.GetCurrencyCount());
     }
 
@@ -31,6 +36,6 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        GoldManager.Instance.OnCurrencyChanged -= UpdateUI;
+        GoldManager.OnCurrencyChanged -= UpdateUI;
     }
 }

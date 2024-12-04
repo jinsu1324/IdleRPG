@@ -6233,6 +6233,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af5d4f387ec57d459f7b54dc64ca72d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &678096030
 GameObject:
   m_ObjectHideFlags: 0
@@ -6244,7 +6253,7 @@ GameObject:
   - component: {fileID: 678096031}
   - component: {fileID: 678096032}
   m_Layer: 0
-  m_Name: '@ToastManager'
+  m_Name: ToastManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12497,7 +12506,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dde2dd4445a00124f9792af68c41b700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemySpawner: {fileID: 1912893505}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &869192974
 GameObject:
   m_ObjectHideFlags: 0
@@ -20321,6 +20338,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d77735478cdf2468f937f0a5b87eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   _playerPrefab: {fileID: 3383299509001523722, guid: 520b62d3fdb9b774b86bfb74654c7e28, type: 3}
   _playerSpawnPos: {fileID: 39856988}
 --- !u!114 &1326020186
@@ -25883,6 +25909,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a412aef4a0d5b1342b0509ebd1d0d3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
 --- !u!1 &2095686934
 GameObject:
   m_ObjectHideFlags: 0
@@ -54389,10 +54424,10 @@ SceneRoots:
   - {fileID: 2069427238}
   - {fileID: 865284025}
   - {fileID: 1326020184}
-  - {fileID: 678096031}
   - {fileID: 614746832}
   - {fileID: 993146092}
   - {fileID: 1912893504}
+  - {fileID: 678096031}
   - {fileID: 1569924137}
   - {fileID: 519420032}
   - {fileID: 70367107}

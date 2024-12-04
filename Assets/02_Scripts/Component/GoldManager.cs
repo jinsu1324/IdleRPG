@@ -4,28 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GoldManager : MonoBehaviour, ICurrencyManager
+public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
 {
-    public static GoldManager Instance { get; private set; }    // 싱글톤 인스턴스
-
     private int _currentGold = 100000;                          // 현재 골드
-    public event Action<int> OnCurrencyChanged;                 // 골드 변경 되었을 때 이벤트
+    public static event Action<int> OnCurrencyChanged;          // 골드 변경 되었을 때 이벤트
 
-    /// <summary>
-    /// Awake
-    /// </summary>
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     /// <summary>
     /// 골드 추가

@@ -4,34 +4,15 @@ using UnityEngine;
 
 public class ToastManager : MonoBehaviour
 {
-    public static ToastManager Instance { get; private set; }       // 싱글톤 인스턴스
-
     [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
     private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
-
-    /// <summary>
-    /// Awake
-    /// </summary>
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     /// <summary>
     /// Start
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.Instance.OnStatChanged += ShowToastCombatPower; // 스탯 바뀌면 토스트메시지 뜨도록 이벤트 구독
-        Debug.Log("ToastManager OnEnable 구독완료!");
+        PlayerManager.OnStatChanged += ShowToastCombatPower; // 스탯 바뀌면 토스트메시지 뜨도록 이벤트 구독
     }
 
     /// <summary>
@@ -67,6 +48,6 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.Instance.OnStatChanged -= ShowToastCombatPower;
+        PlayerManager.OnStatChanged -= ShowToastCombatPower;
     }
 }

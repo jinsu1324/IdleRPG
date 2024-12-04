@@ -12,14 +12,18 @@ public class StatUpgradePanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _totalCombatPowerText;       // 총합 전투력 텍스트
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        PlayerManager.Instance.OnStatChanged += UpdateTotalCombatPowerText;
-        Debug.Log("StatUpgradePanel OnEnable 구독완료!");
+        PlayerManager.OnStatChanged += UpdateTotalCombatPowerText;
+    }
 
-
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
         SpawnSlots();
     }
 
@@ -52,6 +56,6 @@ public class StatUpgradePanel : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerManager.Instance.OnStatChanged -= UpdateTotalCombatPowerText;
+        PlayerManager.OnStatChanged -= UpdateTotalCombatPowerText;
     }
 }
