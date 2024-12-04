@@ -3,6 +3,7 @@ using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 /// <summary>
@@ -30,22 +31,42 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     public void Init(OnStatChangedArgs statArgs)
     {
-        _hpComponent = GetComponent<HPComponent>();
-        _hpBar = GetComponentInChildren<HPBar>();
-        _attackComponent = GetComponent<AttackComponent>();
-        _animComponent = GetComponent<AnimComponent>();
-
         int attackPower = statArgs.AttackPower;
         int attackSpeed = statArgs.AttackSpeed;
         int maxHp = statArgs.MaxHp;
 
+        Init_HPComponent(maxHp);
+        Init_HPBar(maxHp);
+        Init_AttackComponent(attackPower, attackSpeed);
+        Init_AnimComponent();
+    }
+
+    /// <summary>
+    /// HP 컴포넌트 초기화
+    /// </summary>
+    private void Init_HPComponent(int maxHp)
+    {
+        _hpComponent = GetComponent<HPComponent>();
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
         _hpComponent.OnTakeDamaged += CheckDead; // 데미지 받았을 때, 죽었는지 체크 
+    }
 
+    /// <summary>
+    /// HP바 컴포넌트 초기화
+    /// </summary>
+    private void Init_HPBar(int maxHp)
+    {
+        _hpBar = GetComponentInChildren<HPBar>();
+        _hpBar.Init(maxHp);
+    }
 
-        _hpBar.Init(maxHp); // HP바 초기화
+    /// <summary>
+    /// Attack 컴포넌트 초기화
+    /// </summary>
+    private void Init_AttackComponent(int attackPower, int attackSpeed)
+    {
+        _attackComponent = GetComponent<AttackComponent>();
 
-        
         ProjectileAttack projectileAttack = new ProjectileAttack(_projectilePrefab, transform);
         AttackComponentArgs args = new AttackComponentArgs()
         {
@@ -54,11 +75,21 @@ public class Player : SerializedMonoBehaviour
             AttackSpeed = attackSpeed
         };
         _attackComponent.Init(args); // Attack 컴포넌트 초기화
-
-        
-        _animComponent.Init(); // 애님 컴포넌트 초기화
     }
 
+    /// <summary>
+    /// Anim 컴포넌트 초기화
+    /// </summary>
+    private void Init_AnimComponent()
+    {
+        _animComponent = GetComponent<AnimComponent>();
+        _animComponent.Init();
+
+    }
+
+    /// <summary>
+    /// 컴포넌트들 수치 변겅
+    /// </summary>
     private void ChangeComponentsValue(OnStatChangedArgs? args)
     {
         _hpComponent.ChangeMaxHp(args?.MaxHp ?? 0); // null 이면 0(기본값 설정가능) 이 할당
@@ -66,9 +97,8 @@ public class Player : SerializedMonoBehaviour
         _attackComponent.ChangeAttackSpeed(args?.AttackSpeed ?? 0);
     }
 
-
     /// <summary>
-    /// 데미지 받음
+    /// 데미지 받았을 때, 죽었는지 체크
     /// </summary>
     public void CheckDead(OnTakeDamagedArgs args)
     {
