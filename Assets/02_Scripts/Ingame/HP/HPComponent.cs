@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +16,6 @@ public class HPComponent : MonoBehaviour, IDamagable
 {
     public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
     public Action OnDead;                           // 죽었을 때 이벤트
-
     public int CurrentHp { get; private set; }      // 현재 체력 
     public int MaxtHp { get; private set; }         // 최대 체력
     public bool IsDead { get; private set; }        // 죽었는지
@@ -60,4 +60,5 @@ public class HPComponent : MonoBehaviour, IDamagable
         IsDead = true;
         OnDead?.Invoke();
     }
+
 }

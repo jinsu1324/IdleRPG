@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 7311143484968025262}
   - component: {fileID: 2045125254143713738}
   - component: {fileID: 9089488451489771133}
+  - component: {fileID: -6448673031243422742}
   - component: {fileID: 6333267185805702242}
   - component: {fileID: 8349220822790349758}
   - component: {fileID: 6723706231830955227}
@@ -432,7 +433,6 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  _projectilePrefab: {fileID: 1684082130063320304, guid: 1206aa799fee7aa48b855d0b67eef68e, type: 3}
 --- !u!114 &7311143484968025262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +472,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14925c6a8a0ffc54db42bddf454448e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6448673031243422742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7612278914373717722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe93d125950ea540af336a6d0c9aab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteList:
+  - {fileID: 1396592692638216305}
+  - {fileID: 4607665519624409756}
+  - {fileID: 1316853216420402269}
 --- !u!95 &6333267185805702242
 Animator:
   serializedVersion: 5

@@ -31,6 +31,7 @@ public class Enemy : SerializedMonoBehaviour
     private AttackComponentCollision _attackComponentCollision; // 어택 컴포넌트 프로젝타일 충돌타입
     private AnimComponent _animComponent;                       // 애님 컴포넌트
     private MoveComponent _moveComponent;                       // 무브 컴포넌트
+    private BlinkOnHit _blinkOnHit;                             // 데미지 받았을 때 스프라이트 깜빡여주는 컴포넌트
 
     /// <summary>
     /// 초기화
@@ -51,6 +52,7 @@ public class Enemy : SerializedMonoBehaviour
         Init_AttackComponentCollision(attackPower, attackSpeed);
         Init_AnimComponent();
         Init_MoveComponent(moveSpeed);
+        Init_BlinkOnHit();
 
         EnemyEventArgs args = new EnemyEventArgs() { Enemy = this };
         OnEnemySpawn?.Invoke(args); // 스폰 이벤트 호출
@@ -100,6 +102,15 @@ public class Enemy : SerializedMonoBehaviour
     {
         _moveComponent = GetComponent<MoveComponent>();
         _moveComponent.Init(moveSpeed);
+    }
+
+    /// <summary>
+    /// BlinkOnHit 컴포넌트 초기화
+    /// </summary>
+    private void Init_BlinkOnHit()
+    {
+        _blinkOnHit = GetComponent<BlinkOnHit>();
+        _blinkOnHit.Init();
     }
 
     /// <summary>
