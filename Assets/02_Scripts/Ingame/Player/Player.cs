@@ -11,12 +11,10 @@ using UnityEngine;
 /// </summary>
 public class Player : SerializedMonoBehaviour
 {
-    [SerializeField] private Projectile _projectilePrefab;  // 투사체 프리팹 
-
-    private HPComponent _hpComponent;                       // HP 컴포넌트
-    private HPBar _hpBar;                                   // HP 바
-    private AttackComponent _attackComponent;               // 공격 컴포넌트
-    private AnimComponent _animComponent;                   // 애님 컴포넌트
+    private HPComponent _hpComponent;                               // HP 컴포넌트
+    private HPBar _hpBar;                                           // HP 바
+    private AttackComponentProjectile _attackComponentProjectile;   // 어택 컴포넌트 프로젝타일 발사타입
+    private AnimComponent _animComponent;                           // 애님 컴포넌트
 
     /// <summary>
     /// OnEnable
@@ -37,7 +35,7 @@ public class Player : SerializedMonoBehaviour
 
         Init_HPComponent(maxHp);
         Init_HPBar(maxHp);
-        Init_AttackComponent(attackPower, attackSpeed);
+        Init_AttackComponentProjectile(attackPower, attackSpeed);
         Init_AnimComponent();
     }
 
@@ -61,20 +59,12 @@ public class Player : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// Attack 컴포넌트 초기화
+    /// 어택 컴포넌트 프로젝타일 발사타입 초기화
     /// </summary>
-    private void Init_AttackComponent(int attackPower, int attackSpeed)
+    private void Init_AttackComponentProjectile(int attackPower, int attackSpeed)
     {
-        _attackComponent = GetComponent<AttackComponent>();
-
-        ProjectileAttack projectileAttack = new ProjectileAttack(_projectilePrefab, transform);
-        AttackComponentArgs args = new AttackComponentArgs()
-        {
-            Attack = projectileAttack,
-            AttackPower = attackPower,
-            AttackSpeed = attackSpeed
-        };
-        _attackComponent.Init(args); // Attack 컴포넌트 초기화
+        _attackComponentProjectile = GetComponent<AttackComponentProjectile>();
+        _attackComponentProjectile.Init(attackPower, attackSpeed);
     }
 
     /// <summary>
@@ -93,8 +83,8 @@ public class Player : SerializedMonoBehaviour
     private void ChangeComponentsValue(OnStatChangedArgs? args)
     {
         _hpComponent.ChangeMaxHp(args?.MaxHp ?? 0); // null 이면 0(기본값 설정가능) 이 할당
-        _attackComponent.ChangeAttackPower(args?.AttackPower ?? 0);
-        _attackComponent.ChangeAttackSpeed(args?.AttackSpeed ?? 0);
+        _attackComponentProjectile.ChangeAttackPower(args?.AttackPower ?? 0);
+        _attackComponentProjectile.ChangeAttackSpeed(args?.AttackSpeed ?? 0);
     }
 
     /// <summary>

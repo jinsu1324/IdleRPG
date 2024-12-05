@@ -16,7 +16,7 @@ public class AnimComponent : MonoBehaviour
         _isInit = false;
 
         _animator = GetComponent<Animator>();
-        AttackComponent attackComponent = GetComponent<AttackComponent>();
+        AttackComponentBase attackComponent = GetComponent<AttackComponentBase>();
         if (attackComponent != null)
             attackComponent.OnAttacked += PlayAttackAnim;   // 공격할 때, 공격 애니메이션 재생
 
@@ -40,7 +40,7 @@ public class AnimComponent : MonoBehaviour
         if (_isInit == false) // 초기화 안된상태면 리턴 (오브젝트 풀링 때문)
             return;
 
-        AttackComponent attackComponent = GetComponentInChildren<AttackComponent>();
+        AttackComponentBase attackComponent = GetComponentInChildren<AttackComponentBase>();
         if (attackComponent != null)
             attackComponent.OnAttacked -= PlayAttackAnim;
     }

@@ -17,38 +17,38 @@ MonoBehaviour:
     Chapter: 1
     Stage: 1
     AppearEnemy: Monster_SlimeBlue
-    Count: 5
-    StatPercentage: 50
+    Count: 1
+    StatPercentage: 100
   - ID: 1
     Chapter: 1
     Stage: 2
     AppearEnemy: Monster_SlimeGreen
-    Count: 5
-    StatPercentage: 50
+    Count: 1
+    StatPercentage: 100
   - ID: 1
     Chapter: 1
     Stage: 3
     AppearEnemy: Monster_SlimePink
-    Count: 5
-    StatPercentage: 50
+    Count: 1
+    StatPercentage: 100
   - ID: 1
     Chapter: 1
     Stage: 4
     AppearEnemy: Monster_SlimeBlue
-    Count: 5
-    StatPercentage: 50
+    Count: 1
+    StatPercentage: 100
   - ID: 1
     Chapter: 1
     Stage: 5
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 50
+    StatPercentage: 100
   - ID: 2
     Chapter: 2
     Stage: 1
     AppearEnemy: Monster_SlimeGreen
     Count: 5
-    StatPercentage: 50
+    StatPercentage: 100
   - ID: 2
     Chapter: 2
     Stage: 2

@@ -5,54 +5,35 @@ using UnityEngine;
 
 public struct OnAttackedArgs
 {
-    public int AttackSpeed; 
-}
-
-public struct AttackComponentArgs
-{
-    public IAttackable Attack;
-    public int AttackPower;
     public int AttackSpeed;
 }
 
-public class AttackComponent : MonoBehaviour
+public abstract class AttackComponentBase : MonoBehaviour
 {
-    public event Action<OnAttackedArgs> OnAttacked;  // 공격 했을 때 이벤트
+    public event Action<OnAttackedArgs> OnAttacked;     // 공격 했을 때 이벤트
 
-    [SerializeField] private int _attackMotionFrame; // 공격 모션 프레임
+    [SerializeField] protected int _attackMotionFrame;  // 공격 모션 프레임
 
-    private IAttackable _attack;                     // 공격
-    private int _attackPower;                        // 공격력
-    private int _attackSpeed;                        // 공격속도
-
-    private float _attackCooldown;                   // 공격 쿨타임
-    private float _time;                             // 쿨타임 시간 계산
+    protected int _attackPower;                         // 공격력
+    protected int _attackSpeed;                         // 공격속도
+    protected float _attackCooldown;                    // 공격 쿨타임
+    protected float _time;                              // 쿨타임 시간 계산
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(AttackComponentArgs initArgs)
+    public void Init(int attackPower, int attackSpeed)
     {
-        _attack = initArgs.Attack;
-        _attackPower = initArgs.AttackPower;
-        _attackSpeed = initArgs.AttackSpeed;
+        _attackPower = attackPower;
+        _attackSpeed = attackSpeed;
 
         _attackCooldown = 1f / _attackSpeed;
     }
 
     /// <summary>
-    /// Update
-    /// </summary>
-    private void Update()
-    {
-        if (IsAttackCoolTime())
-            StartAttackProcess();
-    }
-
-    /// <summary>
     /// 공격 쿨타임 계산
     /// </summary>
-    private bool IsAttackCoolTime()
+    protected bool IsAttackCoolTime()
     {
         _time += Time.deltaTime;
 
@@ -68,21 +49,18 @@ public class AttackComponent : MonoBehaviour
     /// <summary>
     /// 공격 프로세스 시작
     /// </summary>
-    private void StartAttackProcess()
+    protected void StartAttackProcess()
     {
         OnAttackedArgs args = new OnAttackedArgs() { AttackSpeed = _attackSpeed };
         OnAttacked?.Invoke(args); // 공격 애니메이션 재생
 
         Invoke("Attack", FrameToSecond(AttackTiming()));  // 공격모션에 타이밍에 맞게 실제 공격
     }
-    
+
     /// <summary>
     /// 실제 공격
     /// </summary>
-    private void Attack()
-    {
-        _attack.ExecuteAttack(_attackPower);
-    }
+    protected abstract void Attack();
 
     /// <summary>
     /// 공격력 변경
@@ -104,7 +82,7 @@ public class AttackComponent : MonoBehaviour
     /// <summary>
     /// 프레임을 초로 바꿔주는 함수
     /// </summary>
-    private float FrameToSecond(float frame)
+    protected float FrameToSecond(float frame)
     {
         return frame / 60.0f;
     }
@@ -112,7 +90,7 @@ public class AttackComponent : MonoBehaviour
     /// <summary>
     /// 공격타이밍을 계산해서 반환해주는 함수
     /// </summary>
-    private float AttackTiming()
+    protected float AttackTiming()
     {
         return _attackMotionFrame / _attackSpeed;
     }

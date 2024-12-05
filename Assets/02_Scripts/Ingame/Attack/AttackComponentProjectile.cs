@@ -2,26 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileAttack : IAttackable
+public class AttackComponentProjectile : AttackComponentBase
 {
-    private Projectile _projectilePrefab;   // 프로젝타일 프리팹
-    private Transform _spawnPoint;          // 스폰 위치
+    [SerializeField] private Projectile _projectilePrefab;   // 프로젝타일 프리팹
+    [SerializeField] private Transform _spawnPoint;          // 스폰 위치
 
     /// <summary>
-    /// 생성자
+    /// Update
     /// </summary>
-    public ProjectileAttack(Projectile projectilePrefab, Transform spawnPoint)
+    private void Update()
     {
-        _projectilePrefab = projectilePrefab;
-        _spawnPoint = spawnPoint;
+        if (IsAttackCoolTime()) // 쿨타임마다 공격 프로세스 시작
+            StartAttackProcess();
     }
 
     /// <summary>
-    /// 공격 실행
+    /// 실제 공격
     /// </summary>
-    public void ExecuteAttack(int attackPower)
+    protected override void Attack()
     {
-        SpawnProjectile(attackPower);
+        SpawnProjectile(_attackPower);  // 프로젝타일 생성
     }
 
     /// <summary>

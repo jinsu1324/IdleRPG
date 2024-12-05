@@ -19,25 +19,16 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
-    public static event Action<EnemyEventArgs> OnEnemySpawn; // 스폰시 이벤트
-    public static event Action<EnemyEventArgs> OnEnemyDie;   // 죽었을때 이벤트
+    public static event Action<EnemyEventArgs> OnEnemySpawn;    // 스폰시 이벤트
+    public static event Action<EnemyEventArgs> OnEnemyDie;      // 죽었을때 이벤트
 
-    private HPComponent _hpComponent;                   // HP 컴포넌트
-    private HPBar _hpBar;                               // HP 바
+    private ObjectPool<Enemy> _pool;                            // 자신을 반환할 풀 참조
 
-
-    private ObjectPool<Enemy> _pool;                    // 자신을 반환할 풀 참조
-    private EnemyData _enemyData;                       // 데이터
-
-    private int _attackPower;                           // 공격력
-    private int _attackSpeed;                           // 공격속도
-    private int _moveSpeed;                             // 이동속도
-
-    private float _attackCooldown;                      // 공격 쿨타임
-    private float _time;                                // 쿨타임 시간 계산용
-    private IDamagable _target;                         // 공격 타겟
-    private EnemyState _currentState;                   // 현재 상태
-    private bool _isFirstAttack;                        // 첫 1회공격인지
+    private HPComponent _hpComponent;                           // HP 컴포넌트
+    private HPBar _hpBar;                                       // HP 바
+    private AttackComponentCollision _attackComponentCollision; // 어택 컴포넌트 프로젝타일 충돌타입
+    private AnimComponent _animComponent;                       // 애님 컴포넌트
+    private MoveComponent _moveComponent;                       // 무브 컴포넌트
 
     /// <summary>
     /// 초기화
@@ -45,24 +36,18 @@ public class Enemy : SerializedMonoBehaviour
     public void Init(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
     {
         _pool = pool;
-        _enemyData = enemyData;
 
         // 스탯 셋팅
-        int maxHp = (_enemyData.MaxHp * statPercentage) / 100;
-        _attackPower = (_enemyData.AttackPower * statPercentage) / 100;
-        _attackSpeed = _enemyData.AttackSpeed;
-        _moveSpeed = _enemyData.MoveSpeed;
-        _attackCooldown = 1f / _attackSpeed;
-
-        // 정보들 초기화
-        _time = 0f;
-        _target = null;
-        _currentState = EnemyState.Move;
-        _isFirstAttack = true;
-
+        int maxHp = (enemyData.MaxHp * statPercentage) / 100;
+        int attackPower = (enemyData.AttackPower * statPercentage) / 100;
+        int attackSpeed = enemyData.AttackSpeed;
+        int moveSpeed = enemyData.MoveSpeed;
 
         Init_HPComponent(maxHp);
         Init_HPBar(maxHp);
+        Init_AttackComponentCollision(attackPower, attackSpeed);
+        Init_AnimComponent();
+        Init_MoveComponent(moveSpeed);
 
         EnemyEventArgs args = new EnemyEventArgs() { Enemy = this };
         OnEnemySpawn?.Invoke(args); // 스폰 이벤트 호출
@@ -87,97 +72,32 @@ public class Enemy : SerializedMonoBehaviour
         _hpBar.Init(maxHp);
     }
 
-
-
     /// <summary>
-    /// Update
+    /// 충돌방식 공격 컴포넌트  초기화
     /// </summary>
-    private void Update()
+    private void Init_AttackComponentCollision(int attackPower, int attackSpeed)
     {
-        switch (_currentState)
-        {
-            case EnemyState.Move:
-                MoveStateHandler();
-                break;
-            case EnemyState.Attack:
-                AttackStateHandler(); 
-                break;
-        }
+        _attackComponentCollision = GetComponent<AttackComponentCollision>();
+        _attackComponentCollision.Init(attackPower, attackSpeed);
     }
 
     /// <summary>
-    /// 움직임 상태 관련 처리들
+    /// Anim 컴포넌트 초기화
     /// </summary>
-    private void MoveStateHandler()
+    private void Init_AnimComponent()
     {
-        MoveLeft();
+        _animComponent = GetComponent<AnimComponent>();
+        _animComponent.Init();
     }
 
     /// <summary>
-    /// 왼쪽으로 이동
+    /// 무브 컴포넌트 초기화
     /// </summary>
-    private void MoveLeft()
+    private void Init_MoveComponent(int moveSpeed)
     {
-        transform.position += Vector3.left * _moveSpeed * Time.deltaTime;
+        _moveComponent = GetComponent<MoveComponent>();
+        _moveComponent.Init(moveSpeed);
     }
-
-    /// <summary>
-    /// 공격상태 관련 처리들
-    /// </summary>
-    private void AttackStateHandler()
-    {
-        if (_isFirstAttack)
-        {
-            AttackPlayer();
-            _isFirstAttack = false; 
-        }
-        else if (IsAttackCoolTime())
-        {
-            AttackPlayer();
-        }
-    }
-
-    /// <summary>
-    /// 공격 쿨타임 계산
-    /// </summary>
-    private bool IsAttackCoolTime()
-    {
-        _time += Time.deltaTime;
-
-        if (_time >= _attackCooldown)
-        {
-            _time %= _attackCooldown;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    /// <summary>
-    /// 플레이어 공격
-    /// </summary>
-    private void AttackPlayer()
-    {
-        if (_target != null)
-        {
-            _target.TakeDamage(_attackPower);
-        }
-    }
-
-    /// <summary>
-    /// 플레이어 감지해서 타겟 설정하고 공격상태로 변경
-    /// </summary>
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
-        {
-            _target = collision.gameObject.GetComponent<IDamagable>();
-            _currentState = EnemyState.Attack;
-        }
-    }
-
 
     /// <summary>
     /// 죽었을 때, 에너미에서 처리해야할 것들 처리
@@ -192,6 +112,9 @@ public class Enemy : SerializedMonoBehaviour
         _pool.ReturnObject(this); // 풀로 반환
     }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
     private void OnDisable()
     {
         if (_hpComponent != null)

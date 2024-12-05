@@ -381,8 +381,8 @@ GameObject:
   - component: {fileID: 5014093900466492040}
   - component: {fileID: 3383299509001523722}
   - component: {fileID: 7311143484968025262}
-  - component: {fileID: 183271218149002748}
-  - component: {fileID: 3295323479270741018}
+  - component: {fileID: 2045125254143713738}
+  - component: {fileID: 9089488451489771133}
   - component: {fileID: 6333267185805702242}
   - component: {fileID: 8349220822790349758}
   - component: {fileID: 6723706231830955227}
@@ -445,7 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d899fecb9774c154d86d8cf0f3f52442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &183271218149002748
+--- !u!114 &2045125254143713738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,11 +454,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7612278914373717722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d9f33afc8ebdc4c9d4da65caeb5be2, type: 3}
+  m_Script: {fileID: 11500000, guid: 197d92ef96215484da95a932a9c23430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _attackMotionFrame: 25
---- !u!114 &3295323479270741018
+  _projectilePrefab: {fileID: 1684082130063320304, guid: 1206aa799fee7aa48b855d0b67eef68e, type: 3}
+  _spawnPoint: {fileID: 5014093900466492040}
+--- !u!114 &9089488451489771133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
