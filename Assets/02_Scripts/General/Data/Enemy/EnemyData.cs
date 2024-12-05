@@ -18,4 +18,5 @@ public class EnemyData : BaseData
     public int MoveSpeed;
     public int AttackPower;
     public int AttackSpeed;
+    public int DropGold;
 }

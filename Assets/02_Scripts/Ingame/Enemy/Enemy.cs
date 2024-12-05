@@ -8,6 +8,7 @@ using static UnityEngine.Rendering.DebugUI;
 public struct EnemyEventArgs
 {
     public Enemy Enemy;
+    public EnemyID EnemyID;
     public int Count;
 }
 
@@ -24,6 +25,7 @@ public class Enemy : SerializedMonoBehaviour
 
     private ObjectPool<Enemy> _pool;                            // 자신을 반환할 풀 참조
 
+    private EnemyID _enemyID;                                   // ID
     private HPComponent _hpComponent;                           // HP 컴포넌트
     private HPBar _hpBar;                                       // HP 바
     private AttackComponentCollision _attackComponentCollision; // 어택 컴포넌트 프로젝타일 충돌타입
@@ -36,6 +38,7 @@ public class Enemy : SerializedMonoBehaviour
     public void Init(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
     {
         _pool = pool;
+        _enemyID = (EnemyID)Enum.Parse(typeof(EnemyID), enemyData.ID);
 
         // 스탯 셋팅
         int maxHp = (enemyData.MaxHp * statPercentage) / 100;
@@ -73,7 +76,7 @@ public class Enemy : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// 충돌방식 공격 컴포넌트  초기화
+    /// 충돌방식 공격 컴포넌트 초기화
     /// </summary>
     private void Init_AttackComponentCollision(int attackPower, int attackSpeed)
     {
@@ -104,9 +107,7 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     private void EnemyDeadTask()
     {
-        GoldManager.Instance.AddCurrency(1000); // 플레이어의 골드 추가 // Todo : 얼마 얻을지 데이터로 빼기
-
-        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, Count = 1 };
+        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, EnemyID = _enemyID, Count = 1 };
         OnEnemyDie?.Invoke(args); // 사망 이벤트 호출  
 
         _pool.ReturnObject(this); // 풀로 반환

@@ -19,21 +19,25 @@ MonoBehaviour:
     MoveSpeed: 1
     AttackPower: 100
     AttackSpeed: 1
+    DropGold: 10000
   - ID: Monster_SlimeGreen
     Name: "\uADF8\uB9B0 \uC2AC\uB77C\uC784"
     MaxHp: 120
     MoveSpeed: 1
     AttackPower: 80
     AttackSpeed: 1
+    DropGold: 20000
   - ID: Monster_SlimePink
     Name: "\uD551\uD06C \uC2AC\uB77C\uC784"
     MaxHp: 80
     MoveSpeed: 1
     AttackPower: 120
     AttackSpeed: 1
+    DropGold: 50000
   - ID: Boss_KingSlime
     Name: "\uD0B9\uC2AC\uB77C\uC784"
     MaxHp: 1000
     MoveSpeed: 2
     AttackPower: 500
     AttackSpeed: 2
+    DropGold: 100000
