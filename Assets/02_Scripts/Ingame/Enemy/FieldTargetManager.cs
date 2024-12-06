@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// 공격 가능한 타겟들 관리자
+/// 필드 타겟들 관리자
 /// </summary>
-public class DamagableTargetManager : SingletonBase<DamagableTargetManager>
+public class FieldTargetManager : SingletonBase<FieldTargetManager>
 {
     private List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
 
@@ -62,6 +62,23 @@ public class DamagableTargetManager : SingletonBase<DamagableTargetManager>
             FirstOrDefault(); // 가장 가까운 타겟 반환
 
         return closestTarget;
+    }
+
+    /// <summary>
+    /// 필드 타겟 모두 제거
+    /// </summary>
+    public void ClearAllFieldTarget()
+    {
+        foreach(IDamagable target in _fieldTargetList)
+        {
+            if (target is HPComponent hpComponent)
+            {
+                Enemy enemy = hpComponent.GetComponent<Enemy>();
+                enemy.ReturnPool(); // 필드 적들을 풀로 돌려보냄
+            }
+        }
+
+        _fieldTargetList.Clear(); // 리스트 비우기
     }
 
     /// <summary>

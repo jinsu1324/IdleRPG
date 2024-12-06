@@ -17,7 +17,7 @@ MonoBehaviour:
     Name: "\uACF5\uACA9\uB825"
     Level: 1
     Value: 10
-    ValueIncrease: 100
+    ValueIncrease: 1
     Cost: 10
     CostIncrease: 10
   - ID: AttackSpeed

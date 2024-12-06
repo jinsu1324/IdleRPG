@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 /// <summary>
 /// 스탯이 변경되었을 때 이벤트에 사용되는 구조체
@@ -25,7 +22,7 @@ public struct OnStatChangedArgs
 /// </summary>
 public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
 {
-    public static event Action<OnStatChangedArgs?> OnStatChanged;   // 스탯이 변경되었을 때 이벤트
+    public static event Action<OnStatChangedArgs> OnStatChanged;   // 스탯이 변경되었을 때 이벤트
     public int TotalPower { get; private set; }                     // 총합 전투력
     public int BeforeTotalPower { get; private set; }               // 이전 총합 전투력
 

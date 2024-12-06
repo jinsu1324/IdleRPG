@@ -32,13 +32,14 @@ public class StatUpgradeSlot : MonoBehaviour
 
         _statUpgradeButton.Init(_statID);   // 업그레이드 버튼 초기화
 
-        UpdateStatUpgradeSlotUI(null);
+        OnStatChangedArgs args = new OnStatChangedArgs();
+        UpdateStatUpgradeSlotUI(args);
     }
 
     /// <summary>
     /// 슬롯 UI 업데이트
     /// </summary>
-    private void UpdateStatUpgradeSlotUI(OnStatChangedArgs? args)
+    private void UpdateStatUpgradeSlotUI(OnStatChangedArgs args)
     {
         // 이 슬롯의 스탯ID에 맞게 스탯 가져오기
         Stat stat = PlayerStatContainer.Instance.GetStat(_statID);

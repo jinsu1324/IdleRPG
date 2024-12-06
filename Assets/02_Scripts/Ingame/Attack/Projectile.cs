@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void FindTarget()
     {
-        _target = DamagableTargetManager.Instance.GetClosestLivingTarget(_spawnPos);
+        _target = FieldTargetManager.Instance.GetClosestLivingTarget(_spawnPos);
     }
 
     /// <summary>

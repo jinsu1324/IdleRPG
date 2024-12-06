@@ -18,7 +18,7 @@ public class ToastManager : MonoBehaviour
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
     /// </summary>
-    public void ShowToastCombatPower(OnStatChangedArgs? args)
+    public void ShowToastCombatPower(OnStatChangedArgs args)
     {
         // 이미 코루틴 있으면 실행 중단
         if (_toastCombatPowerCoroutine != null) 

@@ -35,6 +35,9 @@ public class HPComponent : MonoBehaviour, IDamagable
     /// </summary>
     public void TakeDamage(int atk)
     {
+        if (IsDead) 
+            return;
+
         CurrentHp -= atk;
         
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
@@ -57,8 +60,10 @@ public class HPComponent : MonoBehaviour, IDamagable
     /// </summary>
     public void Die()
     {
+        if (IsDead) 
+            return;
+
         IsDead = true;
         OnDead?.Invoke();
     }
-
 }

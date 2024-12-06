@@ -6,7 +6,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private Player _playerPrefab;                  // 생성할 플레이어 프리팹
     [SerializeField] private Transform _playerSpawnPos;             // 생성할 플레이어의 스폰위치
-    private Player _playerInstance;                                 // 생성한 플레이어 인스턴스
+    public static Player PlayerInstance { get; private set; }      // 생성한 플레이어 인스턴스
 
     /// <summary>
     /// Start
@@ -19,11 +19,11 @@ public class PlayerSpawner : MonoBehaviour
     /// <summary>
     /// 플레이어 스폰
     /// </summary>
-    public void SpawnPlayer()
+    private void SpawnPlayer()
     {
         // 플레이어 인스턴스 생성
-        _playerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
-        _playerInstance.transform.position = _playerSpawnPos.position;
+        PlayerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
+        PlayerInstance.transform.position = _playerSpawnPos.position;
 
         OnStatChangedArgs args = new OnStatChangedArgs()
         {
@@ -34,6 +34,23 @@ public class PlayerSpawner : MonoBehaviour
             MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
             Critical = PlayerStatContainer.Instance.GetStat(StatID.Critical).Value,
         };
-        _playerInstance.Init(args); // 인스턴스 초기화
+        PlayerInstance.Init(args); // 인스턴스 초기화
+    }
+
+    /// <summary>
+    /// 플레이어 스탯 복구
+    /// </summary>
+    public static void RestorePlayerStats()
+    {
+        OnStatChangedArgs args = new OnStatChangedArgs()
+        {
+            StatList = PlayerStatContainer.Instance.GetAllStats(),
+            TotalPower = PlayerStatContainer.Instance.TotalPower,
+            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower).Value,
+            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed).Value,
+            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
+            Critical = PlayerStatContainer.Instance.GetStat(StatID.Critical).Value,
+        };
+        PlayerInstance.Init(args);
     }
 }

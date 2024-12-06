@@ -11,6 +11,8 @@ using UnityEngine;
 /// </summary>
 public class Player : SerializedMonoBehaviour
 {
+    public static event Action OnPlayerDie;                         // 플레이어 죽었을때 이벤트
+
     private HPComponent _hpComponent;                               // HP 컴포넌트
     private HPBar _hpBar;                                           // HP 바
     private AttackComponentProjectile _attackComponentProjectile;   // 어택 컴포넌트 프로젝타일 발사타입
@@ -48,6 +50,7 @@ public class Player : SerializedMonoBehaviour
     {
         _hpComponent = GetComponent<HPComponent>();
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
+        _hpComponent.OnDead -= PlayerDeadTask;  // 이벤트 중복방지 (플레이어 리셋할때는 OnDisable이 안되기 때문)
         _hpComponent.OnDead += PlayerDeadTask;  // 죽었을 때, 플레이어에서 처리해야할 것들 처리
     }
 
@@ -90,11 +93,11 @@ public class Player : SerializedMonoBehaviour
     /// <summary>
     /// 컴포넌트들 수치 변겅
     /// </summary>
-    private void ChangeComponentsValue(OnStatChangedArgs? args)
+    private void ChangeComponentsValue(OnStatChangedArgs args)
     {
-        _hpComponent.ChangeMaxHp(args?.MaxHp ?? 0); // null 이면 0(기본값 설정가능) 이 할당
-        _attackComponentProjectile.ChangeAttackPower(args?.AttackPower ?? 0);
-        _attackComponentProjectile.ChangeAttackSpeed(args?.AttackSpeed ?? 0);
+        _hpComponent.ChangeMaxHp(args.MaxHp);
+        _attackComponentProjectile.ChangeAttackPower(args.AttackPower);
+        _attackComponentProjectile.ChangeAttackSpeed(args.AttackSpeed);
     }
 
     /// <summary>
@@ -103,6 +106,7 @@ public class Player : SerializedMonoBehaviour
     private void PlayerDeadTask()
     {
         Debug.Log("Player Dead Task");
+        OnPlayerDie?.Invoke();
     }
 
     /// <summary>

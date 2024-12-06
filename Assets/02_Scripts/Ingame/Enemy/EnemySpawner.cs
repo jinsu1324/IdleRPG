@@ -69,5 +69,4 @@ public class EnemySpawner : SerializedMonoBehaviour
     {
         StageManager.OnStageChanged -= SpawnEnemies;
     }
-
 }

@@ -46,9 +46,9 @@ public class StatUpgradePanel : MonoBehaviour
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void UpdateTotalPowerTextUI(OnStatChangedArgs? args)
+    private void UpdateTotalPowerTextUI(OnStatChangedArgs args)
     {
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args?.TotalPower ?? 0);
+        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalPower);
     }
 
     /// <summary>

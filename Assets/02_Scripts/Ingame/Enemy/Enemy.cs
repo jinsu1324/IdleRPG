@@ -9,7 +9,6 @@ public struct EnemyEventArgs
 {
     public Enemy Enemy;
     public EnemyID EnemyID;
-    public int Count;
 }
 
 public enum EnemyState
@@ -118,10 +117,18 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     private void EnemyDeadTask()
     {
-        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, EnemyID = _enemyID, Count = 1 };
+        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, EnemyID = _enemyID };
         OnEnemyDie?.Invoke(args); // 사망 이벤트 호출  
 
-        _pool.ReturnObject(this); // 풀로 반환
+        ReturnPool();
+    }
+
+    /// <summary>
+    /// 풀로 반환
+    /// </summary>
+    public void ReturnPool()
+    {
+        _pool.ReturnObject(this);
     }
 
     /// <summary>
