@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageInfoUI : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class StageInfoUI : MonoBehaviour
     [InfoBox("StagePos가 모여있는 부모의 LayoutGroup을 꺼주세요.", InfoMessageType.Info)]
 
     [SerializeField] private TextMeshProUGUI _currentText;       // 현재 챕터 스테이지 텍스트
+    [SerializeField] private RectTransform _currentPosArrow;     // 현재 내 위치 화살표
+    [SerializeField] private List<RectTransform> _stagePosList;  // 스테이지들 위치
+    [SerializeField] private GameObject _infiniteAnimIcon;       // 무한반복 애니메이션 아이콘
+    [SerializeField] private Button _challangeButton;            // 도전 버튼
 
-    [SerializeField] private RectTransform _currentPosArrow;
-    [SerializeField] private List<RectTransform> _stagePosList;
+    // 도전버튼 누르면
+    // 모드를 일반모드로 바꾸고
+    // 스테이지를 레벨업한다음에
+    // 원래대로 다시 시작
 
     /// <summary>
     /// OnEnable
@@ -39,6 +46,8 @@ public class StageInfoUI : MonoBehaviour
         // Todo 임시데이터
         OnStageChangedArgs args = new OnStageChangedArgs() { CurrentChapter = 1, CurrentStage = 1 };
         UpdateStageInfoUI(args);
+
+        RegisterListener_ChallangeButton(); // 도전버튼에 리스너 등록
     }
 
     /// <summary>
@@ -51,6 +60,26 @@ public class StageInfoUI : MonoBehaviour
 
         _currentPosArrow.localPosition = _stagePosList[currentStage - 1].localPosition + new Vector3(0, -30, 0);
         _currentText.text = $"{currentChapter}-{currentStage}";
+
+        InfiniteGOs_OnOff(); // 무한 스테이지 애니메이션 켜기 / 끄기
+    }
+
+    /// <summary>
+    /// 무한 스테이지관련 게임오브젝트들 켜기 / 끄기
+    /// </summary>
+    private void InfiniteGOs_OnOff()
+    {
+        _infiniteAnimIcon.gameObject.SetActive(StageManager.Instance.IsInfiniteStage());
+        _challangeButton.gameObject.SetActive(StageManager.Instance.IsInfiniteStage());
+    }
+
+    /// <summary>
+    /// 도전버튼에 리스너 등록
+    /// </summary>
+    private void RegisterListener_ChallangeButton()
+    {
+        _challangeButton.onClick.RemoveAllListeners();
+        _challangeButton.onClick.AddListener(StageManager.Instance.ChallangeRestartGame);
     }
 
     /// <summary>

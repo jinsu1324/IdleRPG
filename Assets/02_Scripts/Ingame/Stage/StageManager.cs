@@ -28,13 +28,15 @@ public class StageManager : SingletonBase<StageManager>
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
 
+    
+
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
         Enemy.OnEnemyDie += AddKillCount;   // 적 죽었을 때, 킬카운트 증가
-        Player.OnPlayerDie += PauseAndRestartGame;    // 플레이어 죽었을 때, 게임 재시작
+        Player.OnPlayerDie += DefeatRestartGame;    // 플레이어 죽었을 때, 게임 재시작
     }
 
     /// <summary>
@@ -87,7 +89,7 @@ public class StageManager : SingletonBase<StageManager>
             {
                 StageLevelUp();
                 
-                PlayerSpawner.RestorePlayerStats(); // 플레이어 스탯 리셋
+                PlayerSpawner.RestorePlayerStats(); // 플레이어 스탯 복구
 
                 StageBuildAndStart();
             }
@@ -98,7 +100,7 @@ public class StageManager : SingletonBase<StageManager>
             
             if (_killCount >= _targetCount)
             {
-                PlayerSpawner.RestorePlayerStats();  // 플레이어 스탯 리셋
+                PlayerSpawner.RestorePlayerStats();  // 플레이어 스탯 복구
 
                 StageBuildAndStart();
             }
@@ -157,30 +159,53 @@ public class StageManager : SingletonBase<StageManager>
         _currentStageType = StageType.Infinite;
     }
 
-
-
-
+    /// <summary>
+    /// 현재 무한 스테이지인지 반환
+    /// </summary>
+    public bool IsInfiniteStage()
+    {
+        if (_currentStageType == StageType.Infinite)
+            return true;
+        else
+            return false;
+    }
 
     /// <summary>
-    /// 일시정지 후 게임 재시작
+    /// 패배 시 게임재시작
     /// </summary>
-    private void PauseAndRestartGame()
+    public void DefeatRestartGame()
     {
-        // 일시정지
-        GameManager.Instance.Pause();
-        
-        // UI 팝업 표시 (예: "게임 종료" UI 활성화)
+        SetStageType_Infinite();    // 무한모드로 변경
+        StartRestartGameCoroutine();    // 게임 재시작 코루틴 시작
+    }
 
-        // 대기 후 게임 재시작
-        StartCoroutine(WaitAndRestartGame());
+    /// <summary>
+    /// 도전버튼 눌렀을 시 게임재시작
+    /// </summary>
+    public void ChallangeRestartGame()
+    {
+        SetStageType_Normal();  // 일반모드로 변경
+        StartRestartGameCoroutine(); // 게임 재시작 코루틴 시작
+    }
+
+    /// <summary>
+    /// 게임재시작 코루틴
+    /// </summary>
+    private void StartRestartGameCoroutine()
+    {
+        StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
 
     /// <summary>
     /// 일정시간 대기 후 게임 재시작 코루틴
     /// </summary>
-    private IEnumerator WaitAndRestartGame()
+    private IEnumerator RestartGameCoroutine()
     {
-        // 2초 대기
+        // 일시정지
+        GameManager.Instance.Pause(); 
+
+        // UI 팝업 표시 (예: "게임 종료" UI 활성화)
+        
         yield return new WaitForSecondsRealtime(2f); // Time.timeScale = 0에서도 동작
 
         // 게임 다시 시작
@@ -189,25 +214,25 @@ public class StageManager : SingletonBase<StageManager>
     }
 
     /// <summary>
-    /// 게임 재시작 프로세스들
+    /// 실제 게임 재시작 처리들
     /// </summary>
     private void RestartGame()
     {
         // 필드 정리: 모든 몬스터 제거
         FieldTargetManager.Instance.ClearAllFieldTarget();
 
-        // 플레이어 스탯 초기화
+        // 플레이어 스탯 복구
         PlayerSpawner.RestorePlayerStats();
 
-        // 이전 스테이지로 복귀
-        StageLevelDown();
-
-        // 무한 스테이지 모드로 설정
-        SetStageType_Infinite();
+        if (_currentStageType == StageType.Infinite) // 무한모드면 이전스테이지로
+            StageLevelDown();
+        else if (_currentStageType == StageType.Normal) // 일반모드면 다음스테이지로
+            StageLevelUp();
 
         // 스테이지 재시작
         StageBuildAndStart();
     }
+
 
     /// <summary>
     /// OnDisable
@@ -215,6 +240,6 @@ public class StageManager : SingletonBase<StageManager>
     private void OnDisable()
     {
         Enemy.OnEnemyDie -= AddKillCount;
-        Player.OnPlayerDie -= PauseAndRestartGame;
+        Player.OnPlayerDie -= DefeatRestartGame;
     }
 }
