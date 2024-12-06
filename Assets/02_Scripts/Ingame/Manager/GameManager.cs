@@ -19,4 +19,12 @@ public class GameManager : SingletonBase<GameManager>
     {
         Time.timeScale = 1f;
     }
+
+    /// <summary>
+    /// 게임 배속 (일단 임시)
+    /// </summary>
+    public void Speed()
+    {
+        Time.timeScale = 2f;
+    }
 }
