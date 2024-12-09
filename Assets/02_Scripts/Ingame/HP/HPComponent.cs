@@ -43,7 +43,7 @@ public class HPComponent : MonoBehaviour, IDamagable
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
         OnTakeDamaged?.Invoke(args); // 데미지 받았을때 이벤트 실행
 
-        DamageTextManager.Instance.ShowDamageText(atk, transform.position, isCritical); // 데미지 텍스트 띄우기
+        DamageTextManager.ShowDamageText(atk, transform.position, isCritical); // 데미지 텍스트 띄우기
 
         if (CurrentHp <= 0)
             Die();

@@ -6,18 +6,16 @@ using UnityEngine;
 public class DamageTextManager : SingletonBase<DamageTextManager>
 {
     [SerializeField] private DamageText _damageTextPrefab;          // 데미지 텍스트 프리팹
-    private ObjectPool<DamageText> _damageTextPool;                 // 데미지 텍스트 풀
+    private static ObjectPool<DamageText> _damageTextPool;          // 데미지 텍스트 풀
 
     [SerializeField] private DamageText _criticalDamageTextPrefab;  // 크리티컬 데미지 텍스트 프리팹
-    private ObjectPool<DamageText> _criticalDamageTextPool;         // 크리티컬 데미지 텍스트 풀
+    private static ObjectPool<DamageText> _criticalDamageTextPool;  // 크리티컬 데미지 텍스트 풀
 
     /// <summary>
-    /// Awake
+    /// Start
     /// </summary>
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake(); // 싱글톤 먼저
-
         _damageTextPool = new ObjectPool<DamageText>(_damageTextPrefab, 10, transform); // 풀 생성
         _criticalDamageTextPool = new ObjectPool<DamageText>(_criticalDamageTextPrefab, 10, transform); // 크리 풀 생성
     }
@@ -25,7 +23,7 @@ public class DamageTextManager : SingletonBase<DamageTextManager>
     /// <summary>
     /// 데미지 테스트 표시
     /// </summary>
-    public void ShowDamageText(float damage, Vector3 position, bool isCritical)
+    public static void ShowDamageText(float damage, Vector3 position, bool isCritical)
     {
         DamageText damageText = null;
 

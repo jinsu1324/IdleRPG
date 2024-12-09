@@ -21,37 +21,26 @@ public struct OnStatChangedArgs
 }
 
 /// <summary>
-/// 플레이어 스탯 컨테이너
+/// 플레이어 스탯 매니저
 /// </summary>
-public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
+public class PlayerStatManager
 {
     public static event Action<OnStatChangedArgs> OnStatChanged;    // 스탯이 변경되었을 때 이벤트
-    public int TotalPower { get; private set; }                     // 총합 전투력
-    public int BeforeTotalPower { get; private set; }               // 이전 총합 전투력
+    public static int TotalPower { get; private set; }              // 총합 전투력
+    public static int BeforeTotalPower { get; private set; }        // 이전 총합 전투력
 
-    private Dictionary<string, Stat> _statDict;                     // 스탯들 딕셔너리
-
-    /// <summary>
-    /// Awake
-    /// </summary>
-    protected override void Awake()
-    {
-        base.Awake(); // 싱글톤 먼저
-
-        SetStatDict(); // 스탯 딕셔너리 셋팅
-        UpdateTotalPower();  // 총합 전투력 업데이트
-    }
+    private static Dictionary<string, Stat> _statDict;              // 스탯들 딕셔너리
 
     /// <summary>
     /// 스탯 딕셔너리 셋팅
     /// </summary>
-    private void SetStatDict()
+    public void Init(List<StatData> startingStatDataList)
     {
         // 딕셔너리 초기화
         _statDict = new Dictionary<string, Stat>();
 
         // 스타팅 스탯 데이터 리스트 가져오기
-        List<StatData> startingDataList = DataManager.Instance.StartingStatDatasSO.DataList;
+        //List<StatData> startingDataList = DataManager.Instance.StartingStatDatasSO.DataList;
 
         // 스탯 ID들 배열
         StatID[] statIDArr = (StatID[])Enum.GetValues(typeof(StatID));
@@ -63,7 +52,7 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
             string id = statID.ToString();
 
             // 초기스탯 리스트중에서 ID 매칭되는것 찾기
-            StatData findStatData = startingDataList.FirstOrDefault(x => x.ID == id);
+            StatData findStatData = startingStatDataList.FirstOrDefault(x => x.ID == id);
 
             // null 체크
             if (findStatData == null)
@@ -93,12 +82,14 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
             // 딕셔너리에 추가
             _statDict.Add(id, stat);
         }
+
+        UpdateTotalPower();  // 총합 전투력 업데이트
     }
 
     /// <summary>
     /// 특정 스탯 가져오기
     /// </summary>
-    public Stat GetStat(string id)
+    public static Stat GetStat(string id)
     {
         if (_statDict.TryGetValue(id, out var stat))
         {
@@ -114,7 +105,7 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 모든 스탯 가져오기
     /// </summary>
-    public List<Stat> GetAllStats()
+    public static List<Stat> GetAllStats()
     {
         List<Stat> statList = new List<Stat>();
         statList = _statDict.Values.ToList();
@@ -125,7 +116,7 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 특정 스탯 레벨업 시도
     /// </summary>
-    public bool TryStatLevelUp(string id)
+    public static bool TryStatLevelUp(string id)
     {
         Stat stat = GetStat(id); // id 에 맞는 스탯 가져오기
 
@@ -141,7 +132,7 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 특정 스탯 레벨업
     /// </summary>
-    public void StatLevelUp(string id)
+    public static void StatLevelUp(string id)
     {
         if (_statDict.TryGetValue(id.ToString(), out var stat))
         {
@@ -177,7 +168,7 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 총합 전투력 업데이트
     /// </summary>
-    public void UpdateTotalPower()
+    public static void UpdateTotalPower()
     {
         BeforeTotalPower = TotalPower;
 
@@ -188,21 +179,21 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
             TotalPower += value;
     }
 
-    /// <summary>
-    /// 총합 전투력 가져오기
-    /// </summary>
-    public int GetTotalPower() 
-    { 
-        return TotalPower; 
-    }
+    ///// <summary>
+    ///// 총합 전투력 가져오기
+    ///// </summary>
+    //public int GetTotalPower() 
+    //{ 
+    //    return TotalPower; 
+    //}
 
-    /// <summary>
-    /// 이전 총합 전투력 가져오기
-    /// </summary>
-    public int GetBeforeTotalPower() 
-    { 
-        return BeforeTotalPower; 
-    }
+    ///// <summary>
+    ///// 이전 총합 전투력 가져오기
+    ///// </summary>
+    //public int GetBeforeTotalPower() 
+    //{ 
+    //    return BeforeTotalPower; 
+    //}
 
 
 

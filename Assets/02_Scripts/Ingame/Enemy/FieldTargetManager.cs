@@ -12,32 +12,19 @@ public class FieldTargetManager
     private static List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
 
     /// <summary>
-    /// OnEnable
-    /// </summary>
-    private void OnEnable()
-    {
-        Enemy.OnEnemySpawn += AddFieldEnemyList;  // 적 스폰될 때, 필드 타겟 리스트에 추가
-        Enemy.OnEnemyDie += RemoveFieldEnemyList;  // 적 죽을 때, 필드 타겟 리스트에서 제거
-    }
-
-    /// <summary>
     /// 필드 타겟 리스트에 추가
     /// </summary>
-    public void AddFieldEnemyList(EnemyEventArgs args)
+    public static void AddFieldEnemyList(IDamagable target)
     {
-        IDamagable target = args.Enemy.GetComponent<IDamagable>();
-        if (target != null)
-            _fieldTargetList.Add(target);
+        _fieldTargetList.Add(target);
     }
 
     /// <summary>
     /// 필드 에너미 리스트에서 삭제
     /// </summary>
-    public void RemoveFieldEnemyList(EnemyEventArgs args)
+    public static void RemoveFieldEnemyList(IDamagable target)
     {
-        IDamagable target = args.Enemy.GetComponent<IDamagable>();
-        if(target != null)
-            _fieldTargetList.Remove(target);
+        _fieldTargetList.Remove(target);
     }
 
     /// <summary>
@@ -69,14 +56,5 @@ public class FieldTargetManager
         }
 
         _fieldTargetList.Clear(); // 리스트 비우기
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        Enemy.OnEnemySpawn -= AddFieldEnemyList;
-        Enemy.OnEnemyDie -= RemoveFieldEnemyList; 
     }
 }

@@ -21,4 +21,20 @@ public class DataManager : SingletonBase<DataManager>
     public void SetSkillDatasSO(SkillDatasSO data) => SkillDatasSO = data;
     public void SetStageDatasSO(StageDatasSO data) => StageDatasSO = data;
     public void SetStartingStatDatasSO(StartingStatDatasSO data) => StartingStatDatasSO = data;
+
+    /// <summary>
+    /// Awake
+    /// </summary>
+    protected override void Awake()
+    {
+        base.Awake(); // 싱글톤 먼저
+
+        // 플레이어 스탯 데이터 셋팅
+        PlayerStatManager playerStatManager = new PlayerStatManager();
+        playerStatManager.Init(StartingStatDatasSO.DataList);
+
+        // 적 드랍 골드량 데이터 셋팅
+        EnemyDropGoldManager enemyDropGoldManager = new EnemyDropGoldManager();
+        enemyDropGoldManager.Init(EnemyDatasSO);
+    }
 }

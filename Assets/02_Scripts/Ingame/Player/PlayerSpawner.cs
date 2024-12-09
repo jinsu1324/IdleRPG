@@ -27,14 +27,16 @@ public class PlayerSpawner : MonoBehaviour
 
         OnStatChangedArgs args = new OnStatChangedArgs()
         {
-            StatList = PlayerStatContainer.Instance.GetAllStats(),
-            TotalPower = PlayerStatContainer.Instance.TotalPower,
-            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower.ToString()).Value,
-            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed.ToString()).Value,
-            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp.ToString()).Value,
-            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate.ToString()).Value,
-            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple.ToString()).Value
+            StatList = PlayerStatManager.GetAllStats(),
+            TotalPower = PlayerStatManager.TotalPower,
+            AttackPower = PlayerStatManager.GetStat(StatID.AttackPower.ToString()).Value,
+            AttackSpeed = PlayerStatManager.GetStat(StatID.AttackSpeed.ToString()).Value,
+            MaxHp = PlayerStatManager.GetStat(StatID.MaxHp.ToString()).Value,
+            CriticalRate = PlayerStatManager.GetStat(StatID.CriticalRate.ToString()).Value,
+            CriticalMultiple = PlayerStatManager.GetStat(StatID.CriticalMultiple.ToString()).Value
         };
+
+
         PlayerInstance.Init(args); // 인스턴스 초기화
     }
 
@@ -45,13 +47,13 @@ public class PlayerSpawner : MonoBehaviour
     {
         OnStatChangedArgs args = new OnStatChangedArgs()
         {
-            StatList = PlayerStatContainer.Instance.GetAllStats(),
-            TotalPower = PlayerStatContainer.Instance.TotalPower,
-            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower.ToString()).Value,
-            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed.ToString()).Value,
-            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp.ToString()).Value,
-            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate.ToString()).Value,
-            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple.ToString()).Value
+            StatList = PlayerStatManager.GetAllStats(),
+            TotalPower = PlayerStatManager.TotalPower,
+            AttackPower = PlayerStatManager.GetStat(StatID.AttackPower.ToString()).Value,
+            AttackSpeed = PlayerStatManager.GetStat(StatID.AttackSpeed.ToString()).Value,
+            MaxHp = PlayerStatManager.GetStat(StatID.MaxHp.ToString()).Value,
+            CriticalRate = PlayerStatManager.GetStat(StatID.CriticalRate.ToString()).Value,
+            CriticalMultiple = PlayerStatManager.GetStat(StatID.CriticalMultiple.ToString()).Value
         };
         PlayerInstance.Init(args);
     }

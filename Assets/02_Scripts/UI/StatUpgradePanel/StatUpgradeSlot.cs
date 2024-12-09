@@ -20,7 +20,7 @@ public class StatUpgradeSlot : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerStatContainer.OnStatChanged += UpdateStatUpgradeSlotUI;   // 스탯이 변경될 때, 스탯 업그레이드 슬롯 UI 업데이트 
+        PlayerStatManager.OnStatChanged += UpdateStatUpgradeSlotUI;   // 스탯이 변경될 때, 스탯 업그레이드 슬롯 UI 업데이트 
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ public class StatUpgradeSlot : MonoBehaviour
     private void UpdateStatUpgradeSlotUI(OnStatChangedArgs args)
     {
         // 이 슬롯의 스탯ID에 맞게 스탯 가져오기
-        Stat stat = PlayerStatContainer.Instance.GetStat(_id);
+        Stat stat = PlayerStatManager.GetStat(_id);
 
         //Debug.Log($"{_statID} 슬롯의 스탯이름 : {stat.Name}");
 
@@ -63,6 +63,6 @@ public class StatUpgradeSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerStatContainer.OnStatChanged -= UpdateStatUpgradeSlotUI;
+        PlayerStatManager.OnStatChanged -= UpdateStatUpgradeSlotUI;
     }
 }

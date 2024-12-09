@@ -29,15 +29,6 @@ public class StageManager : SingletonBase<StageManager>
     private int _killCount;                                         // 죽인 적 숫자
 
     /// <summary>
-    /// OnEnable
-    /// </summary>
-    private void OnEnable()
-    {
-        Enemy.OnEnemyDie += AddKillCount;   // 적 죽었을 때, 킬카운트 증가
-        Player.OnPlayerDie += DefeatRestartGame;    // 플레이어 죽었을 때, 게임 재시작
-    }
-
-    /// <summary>
     /// Start
     /// </summary>
     private void Start()
@@ -57,7 +48,6 @@ public class StageManager : SingletonBase<StageManager>
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), stageData.AppearEnemy);
         int targetCount = stageData.Count;
         int statPercentage = stageData.StatPercentage;
-
         
         OnStageChangedArgs args = new OnStageChangedArgs() 
         { 
@@ -77,7 +67,7 @@ public class StageManager : SingletonBase<StageManager>
     /// <summary>
     /// 킬 카운트 증가
     /// </summary>
-    public void AddKillCount(EnemyEventArgs args)
+    public void AddKillCount()
     {
         if (_currentStageType == StageType.Normal)  // 일반모드면, 타겟 다잡으면 스테이지 레벨업
         {
@@ -200,14 +190,14 @@ public class StageManager : SingletonBase<StageManager>
     private IEnumerator RestartGameCoroutine()
     {
         // 일시정지
-        GameManager.Instance.Pause(); 
+        GameTimeController.Pause(); 
 
         // UI 팝업 표시 (예: "게임 종료" UI 활성화)
         
         yield return new WaitForSecondsRealtime(2f); // Time.timeScale = 0에서도 동작
 
         // 게임 다시 시작
-        GameManager.Instance.Resume();
+        GameTimeController.Resume();
         RestartGame();
     }
 
@@ -229,15 +219,5 @@ public class StageManager : SingletonBase<StageManager>
 
         // 스테이지 재시작
         StageBuildAndStart();
-    }
-
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        Enemy.OnEnemyDie -= AddKillCount;
-        Player.OnPlayerDie -= DefeatRestartGame;
     }
 }

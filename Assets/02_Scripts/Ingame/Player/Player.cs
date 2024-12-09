@@ -11,8 +11,6 @@ using UnityEngine;
 /// </summary>
 public class Player : SerializedMonoBehaviour
 {
-    public static event Action OnPlayerDie;                         // 플레이어 죽었을때 이벤트
-
     private HPComponent _hpComponent;                               // HP 컴포넌트
     private HPBar _hpBar;                                           // HP 바
     private AttackComponentProjectile _attackComponentProjectile;   // 어택 컴포넌트 프로젝타일 발사타입
@@ -24,7 +22,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerStatContainer.OnStatChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
+        PlayerStatManager.OnStatChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
     }
 
     /// <summary>
@@ -107,8 +105,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void PlayerDeadTask()
     {
-        Debug.Log("Player Dead Task");
-        OnPlayerDie?.Invoke();
+        StageManager.Instance.DefeatRestartGame();
     }
 
     /// <summary>
@@ -116,7 +113,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerStatContainer.OnStatChanged -= ChangeComponentsValue;
+        PlayerStatManager.OnStatChanged -= ChangeComponentsValue;
 
         if (_hpComponent != null)
             _hpComponent.OnDead -= PlayerDeadTask;

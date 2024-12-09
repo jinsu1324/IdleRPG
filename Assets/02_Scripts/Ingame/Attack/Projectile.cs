@@ -30,7 +30,7 @@ public class Projectile : MonoBehaviour
     {
         if (_target == null || _target.IsDead)
         {
-            //Debug.Log("타겟없음!!");
+            Debug.Log("타겟없음!!");
             Destroy(gameObject); // 타겟이 사라지면 투사체 제거
             return;
         }

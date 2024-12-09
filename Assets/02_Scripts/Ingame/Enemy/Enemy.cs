@@ -5,12 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public struct EnemyEventArgs
-{
-    public Enemy Enemy;
-    public EnemyID EnemyID;
-}
-
 public enum EnemyState
 {
     Move,
@@ -19,11 +13,7 @@ public enum EnemyState
 
 public class Enemy : SerializedMonoBehaviour
 {
-    public static event Action<EnemyEventArgs> OnEnemySpawn;    // 스폰시 이벤트
-    public static event Action<EnemyEventArgs> OnEnemyDie;      // 죽었을때 이벤트
-
     private ObjectPool<Enemy> _pool;                            // 자신을 반환할 풀 참조
-
     private EnemyID _enemyID;                                   // ID
     private HPComponent _hpComponent;                           // HP 컴포넌트
     private HPBar _hpBar;                                       // HP 바
@@ -53,8 +43,7 @@ public class Enemy : SerializedMonoBehaviour
         Init_MoveComponent(moveSpeed);
         Init_BlinkOnHit();
 
-        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this };
-        OnEnemySpawn?.Invoke(args); // 스폰 이벤트 호출
+        FieldTargetManager.AddFieldEnemyList(_hpComponent); // 필드타겟 리스트에 추가
     }
 
     /// <summary>
@@ -117,10 +106,11 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     private void EnemyDeadTask()
     {
-        EnemyEventArgs args = new EnemyEventArgs() { Enemy = this, EnemyID = _enemyID };
-        OnEnemyDie?.Invoke(args); // 사망 이벤트 호출  
+        StageManager.Instance.AddKillCount();   // 킬 카운트 증가
+        EnemyDropGoldManager.AddGoldByEnemy(_enemyID); // 골드 추가
+        FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
 
-        ReturnPool();
+        ReturnPool();   // 풀로 돌려보내기
     }
 
     /// <summary>

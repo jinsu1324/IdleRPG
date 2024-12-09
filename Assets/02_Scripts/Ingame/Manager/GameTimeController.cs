@@ -2,22 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : SingletonBase<GameManager>
+public class GameTimeController 
 {
-
-
-
-
-
-
-
-
-
-
     /// <summary>
     /// 게임 멈춤
     /// </summary>
-    public void Pause()
+    public static void Pause()
     {
         Time.timeScale = 0f;
     }
@@ -25,7 +15,7 @@ public class GameManager : SingletonBase<GameManager>
     /// <summary>
     /// 게임 다시 시작
     /// </summary>
-    public void Resume()
+    public static void Resume()
     {
         Time.timeScale = 1f;
     }
@@ -33,7 +23,7 @@ public class GameManager : SingletonBase<GameManager>
     /// <summary>
     /// 게임 배속 (일단 임시)
     /// </summary>
-    public void Speed()
+    public static void Speed()
     {
         Time.timeScale = 2f;
     }
