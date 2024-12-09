@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 스탯이 변경되었을 때 이벤트에 사용되는 구조체
@@ -23,12 +25,12 @@ public struct OnStatChangedArgs
 /// </summary>
 public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
 {
-    public static event Action<OnStatChangedArgs> OnStatChanged;   // 스탯이 변경되었을 때 이벤트
+    public static event Action<OnStatChangedArgs> OnStatChanged;    // 스탯이 변경되었을 때 이벤트
     public int TotalPower { get; private set; }                     // 총합 전투력
     public int BeforeTotalPower { get; private set; }               // 이전 총합 전투력
 
-    private Dictionary<StatID, Stat> _statDict;                     // 컴포넌트에 있는 스탯들을 딕셔너리로 저장할 변수
-    
+    private Dictionary<string, Stat> _statDict;                     // 스탯들 딕셔너리
+
     /// <summary>
     /// Awake
     /// </summary>
@@ -45,49 +47,58 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// </summary>
     private void SetStatDict()
     {
-        List<Stat> statList = GetComponentsInChildren<Stat>().ToList(); // 게임오브젝트에 붙어있는 스탯 컴포넌트들 가져오기
-        List<StatData> startingDataList = DataManager.Instance.StartingStatDatasSO.DataList;// 스타팅 스탯 데이터 리스트 가져오기
-        _statDict = new Dictionary<StatID, Stat>(); // 딕셔너리 초기화
+        // 딕셔너리 초기화
+        _statDict = new Dictionary<string, Stat>();
 
-        // 데이터의 ID와 스탯의 StatID가 일치하는 스탯컴포넌트를 찾아 컴포넌트의 데이터를 설정
-        foreach (Stat stat in statList)
+        // 스타팅 스탯 데이터 리스트 가져오기
+        List<StatData> startingDataList = DataManager.Instance.StartingStatDatasSO.DataList;
+
+        // 스탯 ID들 배열
+        StatID[] statIDArr = (StatID[])Enum.GetValues(typeof(StatID));
+
+        // 스탯 ID 만큼 반복
+        foreach (StatID statID in statIDArr)
         {
-            // ID 일치하는 데이터 검색
-            StatData findData = startingDataList.FirstOrDefault(statData => statData.ID == stat.StatID.ToString());
+            // 스탯 ID 문자열로 변환
+            string id = statID.ToString();
+
+            // 초기스탯 리스트중에서 ID 매칭되는것 찾기
+            StatData findStatData = startingDataList.FirstOrDefault(x => x.ID == id);
 
             // null 체크
-            if (findData == null)
+            if (findStatData == null)
             {
-                Debug.Log($"{stat.StatID}에 해당하는 데이터를 찾을 수 없습니다.");
+                Debug.Log($"초기스탯 스크립터블 오브젝트에서 {statID}에 해당하는 데이터를 찾을 수 없습니다.");
                 return;
             }
 
-            // 데이터 셋팅
-            stat.Init(
-                findData.Name,
-                findData.Level,
-                findData.Value,
-                findData.ValueIncrease,
-                findData.Cost,
-                findData.CostIncrease
-            );
-           
-            // 중복 키 체크
-            if (_statDict.ContainsKey(stat.StatID) == true)
+            // 찾은 초기스탯 데이터로 스탯 생성 
+            Stat stat = new Stat(
+                            findStatData.ID,
+                            findStatData.Name,
+                            findStatData.Level,
+                            findStatData.Value,
+                            findStatData.ValueIncrease,
+                            findStatData.Cost,
+                            findStatData.CostIncrease
+                           );
+
+            // 딕셔너리 ID 중복체크
+            if (_statDict.ContainsKey(id) == true)
             {
-                Debug.LogWarning($"딕셔너리 속 중복된 스탯 ID 입니다 : {stat.StatID}");
+                Debug.LogWarning($"{id} 는 이미 딕셔너리 속 중복된 스탯 ID 입니다");
                 return;
             }
 
             // 딕셔너리에 추가
-            _statDict.Add(stat.StatID, stat); 
+            _statDict.Add(id, stat);
         }
     }
 
     /// <summary>
     /// 특정 스탯 가져오기
     /// </summary>
-    public Stat GetStat(StatID id)
+    public Stat GetStat(string id)
     {
         if (_statDict.TryGetValue(id, out var stat))
         {
@@ -114,11 +125,11 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 특정 스탯 레벨업 시도
     /// </summary>
-    public bool TryStatLevelUp(StatID id)
+    public bool TryStatLevelUp(string id)
     {
         Stat stat = GetStat(id); // id 에 맞는 스탯 가져오기
 
-        if (stat != null && GoldManager.Instance.HasEnoughCurrency(stat.Cost)) // 스탯이 있고 + 자금이 된다면
+        if (stat != null && GoldManager.HasEnoughCurrency(stat.Cost)) // 스탯이 있고 + 자금이 된다면
         {
             StatLevelUp(id); // 그 스탯 레벨업
             return true;
@@ -130,12 +141,12 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
     /// <summary>
     /// 특정 스탯 레벨업
     /// </summary>
-    public void StatLevelUp(StatID id)
+    public void StatLevelUp(string id)
     {
-        if (_statDict.TryGetValue(id, out var stat))
+        if (_statDict.TryGetValue(id.ToString(), out var stat))
         {
             // 골드 감소
-            GoldManager.Instance.ReduceCurrency(stat.Cost);
+            GoldManager.ReduceCurrency(stat.Cost);
 
             // 스탯 레벨업
             stat.LevelUp();
@@ -147,11 +158,11 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
             {
                 StatList = GetAllStats(),
                 TotalPower = TotalPower,
-                AttackPower = GetStat(StatID.AttackPower).Value,
-                AttackSpeed = GetStat(StatID.AttackSpeed).Value,
-                MaxHp = GetStat(StatID.MaxHp).Value,
-                CriticalRate = GetStat(StatID.CriticalRate).Value,
-                CriticalMultiple = GetStat(StatID.CriticalMultiple).Value
+                AttackPower = GetStat(StatID.AttackPower.ToString()).Value,
+                AttackSpeed = GetStat(StatID.AttackSpeed.ToString()).Value,
+                MaxHp = GetStat(StatID.MaxHp.ToString()).Value,
+                CriticalRate = GetStat(StatID.CriticalRate.ToString()).Value,
+                CriticalMultiple = GetStat(StatID.CriticalMultiple.ToString()).Value
             };
 
             // 스탯 변경 이벤트 호출

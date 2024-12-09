@@ -36,7 +36,7 @@ public class StatUpgradePanel : MonoBehaviour
         foreach (Stat stat in PlayerStatContainer.Instance.GetAllStats())
         {
             StatUpgradeSlot statUpgradeSlot = Instantiate(_statUpgradeSlotPrefab, _slotParent);
-            statUpgradeSlot.Init(stat.StatID);
+            statUpgradeSlot.Init(stat.ID);
         }
 
         OnStatChangedArgs args = new OnStatChangedArgs() { TotalPower = PlayerStatContainer.Instance.GetTotalPower() };

@@ -28,8 +28,6 @@ public class StageManager : SingletonBase<StageManager>
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
 
-    
-
     /// <summary>
     /// OnEnable
     /// </summary>
@@ -219,7 +217,7 @@ public class StageManager : SingletonBase<StageManager>
     private void RestartGame()
     {
         // 필드 정리: 모든 몬스터 제거
-        FieldTargetManager.Instance.ClearAllFieldTarget();
+        FieldTargetManager.ClearAllFieldTarget();
 
         // 플레이어 스탯 복구
         PlayerSpawner.RestorePlayerStats();

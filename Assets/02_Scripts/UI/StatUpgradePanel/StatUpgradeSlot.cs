@@ -13,7 +13,7 @@ public class StatUpgradeSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _costText;             // 업그레이드 비용 텍스트
     [SerializeField] private Image _statIcon;                       // 스탯 아이콘
     [SerializeField] private StatUpgradeButton _statUpgradeButton;  // 스탯 업그레이드 버튼
-    private StatID _statID;                                         // 스탯 ID
+    private string _id;                                             // 스탯 ID
 
     /// <summary>
     /// OnEnable
@@ -26,11 +26,11 @@ public class StatUpgradeSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(StatID id)
+    public void Init(string id)
     {
-        _statID = id;
+        _id = id;
 
-        _statUpgradeButton.Init(_statID);   // 업그레이드 버튼 초기화
+        _statUpgradeButton.Init(_id);   // 업그레이드 버튼 초기화
 
         OnStatChangedArgs args = new OnStatChangedArgs();
         UpdateStatUpgradeSlotUI(args);
@@ -42,7 +42,9 @@ public class StatUpgradeSlot : MonoBehaviour
     private void UpdateStatUpgradeSlotUI(OnStatChangedArgs args)
     {
         // 이 슬롯의 스탯ID에 맞게 스탯 가져오기
-        Stat stat = PlayerStatContainer.Instance.GetStat(_statID);
+        Stat stat = PlayerStatContainer.Instance.GetStat(_id);
+
+        //Debug.Log($"{_statID} 슬롯의 스탯이름 : {stat.Name}");
 
         // UI 요소들 업데이트
         if (stat != null)
@@ -51,7 +53,7 @@ public class StatUpgradeSlot : MonoBehaviour
             _levelText.text = $"Lv.{stat.Level}";
             _valueText.text = AlphabetNumConverter.Convert(stat.Value);
             _costText.text = AlphabetNumConverter.Convert(stat.Cost);
-            _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.StatID.ToString());
+            _statIcon.sprite = ResourceManager.Instance.GetIcon(stat.ID.ToString());
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
     }

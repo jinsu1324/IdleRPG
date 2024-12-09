@@ -7,9 +7,9 @@ using UnityEngine;
 /// <summary>
 /// 필드 타겟들 관리자
 /// </summary>
-public class FieldTargetManager : SingletonBase<FieldTargetManager>
+public class FieldTargetManager
 {
-    private List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
+    private static List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
 
     /// <summary>
     /// OnEnable
@@ -41,19 +41,9 @@ public class FieldTargetManager : SingletonBase<FieldTargetManager>
     }
 
     /// <summary>
-    /// 특정위치에서 가장 가까운 타겟 반환
-    /// </summary>
-    public IDamagable GetClosestTarget(Vector3 pos)
-    {
-        IDamagable closestTarget = 
-            _fieldTargetList.OrderBy(target => Vector3.Distance(pos, (target as Component).transform.position)).FirstOrDefault();
-        return closestTarget;
-    }
-
-    /// <summary>
     /// 가장 가까운 살아있는 타겟 찾기
     /// </summary>
-    public IDamagable GetClosestLivingTarget(Vector3 pos) 
+    public static IDamagable GetClosestLivingTarget(Vector3 pos) 
     {
         // 살아있는 적들만 필터링 후 거리 기준으로 정렬
         IDamagable closestTarget = _fieldTargetList.
@@ -67,7 +57,7 @@ public class FieldTargetManager : SingletonBase<FieldTargetManager>
     /// <summary>
     /// 필드 타겟 모두 제거
     /// </summary>
-    public void ClearAllFieldTarget()
+    public static void ClearAllFieldTarget()
     {
         foreach(IDamagable target in _fieldTargetList)
         {

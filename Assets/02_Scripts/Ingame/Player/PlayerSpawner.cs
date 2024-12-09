@@ -29,11 +29,11 @@ public class PlayerSpawner : MonoBehaviour
         {
             StatList = PlayerStatContainer.Instance.GetAllStats(),
             TotalPower = PlayerStatContainer.Instance.TotalPower,
-            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower).Value,
-            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed).Value,
-            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
-            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate).Value,
-            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple).Value
+            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower.ToString()).Value,
+            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed.ToString()).Value,
+            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp.ToString()).Value,
+            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate.ToString()).Value,
+            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple.ToString()).Value
         };
         PlayerInstance.Init(args); // 인스턴스 초기화
     }
@@ -47,11 +47,11 @@ public class PlayerSpawner : MonoBehaviour
         {
             StatList = PlayerStatContainer.Instance.GetAllStats(),
             TotalPower = PlayerStatContainer.Instance.TotalPower,
-            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower).Value,
-            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed).Value,
-            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
-            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate).Value,
-            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple).Value
+            AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower.ToString()).Value,
+            AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed.ToString()).Value,
+            MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp.ToString()).Value,
+            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate.ToString()).Value,
+            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple.ToString()).Value
         };
         PlayerInstance.Init(args);
     }

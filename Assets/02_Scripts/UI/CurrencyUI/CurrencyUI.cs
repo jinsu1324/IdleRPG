@@ -20,7 +20,7 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        UpdateCurrencyUI(GoldManager.Instance.GetCurrencyCount());
+        UpdateCurrencyUI(GoldManager.GetCurrencyCount());
     }
 
     /// <summary>

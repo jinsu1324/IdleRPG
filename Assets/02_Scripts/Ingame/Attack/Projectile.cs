@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void FindTarget()
     {
-        _target = FieldTargetManager.Instance.GetClosestLivingTarget(_spawnPos);
+        _target = FieldTargetManager.GetClosestLivingTarget(_spawnPos);
     }
 
     /// <summary>

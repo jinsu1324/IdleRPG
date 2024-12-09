@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
+/// <summary>
+/// 골드 관리자
+/// </summary>
+public static class GoldManager
 {
-    private int _currentGold = 100000;                          // 현재 골드
+    private static int _currentGold = 100000;                   // 현재 골드
     public static event Action<int> OnGoldChanged;              // 골드 변경 되었을 때 이벤트
 
     /// <summary>
     /// 골드 추가
     /// </summary>
-    public void AddCurrency(int amount)
+    public static void AddCurrency(int amount)
     {
         _currentGold += amount;
         NotifyChanged();
@@ -21,7 +23,7 @@ public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
     /// <summary>
     /// 골드 감소
     /// </summary>
-    public void ReduceCurrency(int amount)
+    public static void ReduceCurrency(int amount)
     {
         if (_currentGold >= amount)
         {
@@ -37,7 +39,7 @@ public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
     /// <summary>
     /// 골드 가져오기
     /// </summary>
-    public int GetCurrencyCount()
+    public static int GetCurrencyCount()
     {
         return _currentGold;
     }
@@ -45,7 +47,7 @@ public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
     /// <summary>
     /// 골드 충분한지 체크
     /// </summary>
-    public bool HasEnoughCurrency(int cost)
+    public static bool HasEnoughCurrency(int cost)
     {
         return _currentGold >= cost;
     }
@@ -53,7 +55,7 @@ public class GoldManager : SingletonBase<GoldManager>, ICurrencyManager
     /// <summary>
     /// 골드 변경 이벤트 호출
     /// </summary>
-    private void NotifyChanged()
+    private static void NotifyChanged()
     {
         OnGoldChanged?.Invoke(_currentGold);
     }

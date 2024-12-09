@@ -55,6 +55,6 @@ public class EnemyManager : MonoBehaviour
     private void AddGoldByEnemy(EnemyEventArgs args)
     {
         int gold = _enemyDropGoldDict[args.EnemyID];
-        GoldManager.Instance.AddCurrency(gold);
+        GoldManager.AddCurrency(gold);
     }
 }

@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class GameManager : SingletonBase<GameManager>
 {
+
+
+
+
+
+
+
+
+
+
     /// <summary>
     /// ∞‘¿” ∏ÿ√„
     /// </summary>
