@@ -32,7 +32,8 @@ public class PlayerSpawner : MonoBehaviour
             AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower).Value,
             AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed).Value,
             MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
-            Critical = PlayerStatContainer.Instance.GetStat(StatID.Critical).Value,
+            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate).Value,
+            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple).Value
         };
         PlayerInstance.Init(args); // 인스턴스 초기화
     }
@@ -49,7 +50,8 @@ public class PlayerSpawner : MonoBehaviour
             AttackPower = PlayerStatContainer.Instance.GetStat(StatID.AttackPower).Value,
             AttackSpeed = PlayerStatContainer.Instance.GetStat(StatID.AttackSpeed).Value,
             MaxHp = PlayerStatContainer.Instance.GetStat(StatID.MaxHp).Value,
-            Critical = PlayerStatContainer.Instance.GetStat(StatID.Critical).Value,
+            CriticalRate = PlayerStatContainer.Instance.GetStat(StatID.CriticalRate).Value,
+            CriticalMultiple = PlayerStatContainer.Instance.GetStat(StatID.CriticalMultiple).Value
         };
         PlayerInstance.Init(args);
     }

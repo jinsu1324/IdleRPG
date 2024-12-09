@@ -21,18 +21,19 @@ public abstract class AttackComponentBase : MonoBehaviour
     protected float _time;                              // 쿨타임 시간 계산
 
     protected float _criticalRate;                      // 치명타 확률
-    protected float _criticalMultiplier = 2.0f;         // 치명타 피해 배율 // Todo : 나중에 업그레이드나 테이블로 빼도됨
+    protected float _criticalMultiple;                  // 치명타 피해 배율
     protected bool _isCritical;                         // 치명타 공격인지
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int attackPower, int attackSpeed, int CriticalRate = 0)
+    public void Init(int attackPower, int attackSpeed, int criticalRate = 0, int criticalMultiple = 0)
     {
         _attackPower = attackPower;
         _attackSpeed = attackSpeed;
         _attackCooldown = 1f / _attackSpeed;
-        _criticalRate = ((float)CriticalRate / 100.0f);
+        _criticalRate = ((float)criticalRate / 100.0f);
+        _criticalMultiple = ((float)criticalMultiple / 100.0f);
     }
 
     /// <summary>
@@ -110,7 +111,7 @@ public abstract class AttackComponentBase : MonoBehaviour
         if (isCritical)
         {
             _isCritical = true;
-            return (int)(_attackPower * _criticalMultiplier); // 치명타 피해 적용
+            return (int)(_attackPower * _criticalMultiple); // 치명타 피해 적용
         }
         else
         {

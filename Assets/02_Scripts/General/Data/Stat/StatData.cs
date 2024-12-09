@@ -7,7 +7,8 @@ public enum StatID
     AttackPower,
     AttackSpeed,
     MaxHp,
-    Critical
+    CriticalRate,
+    CriticalMultiple
 }
 
 [System.Serializable]

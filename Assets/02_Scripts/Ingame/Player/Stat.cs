@@ -36,6 +36,5 @@ public class Stat : SerializedMonoBehaviour
         Level++;
         Value += ValueIncrease;
         Cost += CostIncrease;
-
     }
 }

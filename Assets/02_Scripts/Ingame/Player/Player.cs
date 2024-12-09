@@ -35,11 +35,12 @@ public class Player : SerializedMonoBehaviour
         int attackPower = statArgs.AttackPower;
         int attackSpeed = statArgs.AttackSpeed;
         int maxHp = statArgs.MaxHp;
-        int criticalRate = statArgs.Critical;
+        int criticalRate = statArgs.CriticalRate;
+        int criticalMultiple = statArgs.CriticalMultiple;
 
         Init_HPComponent(maxHp);
         Init_HPBar(maxHp);
-        Init_AttackComponentProjectile(attackPower, attackSpeed, criticalRate);
+        Init_AttackComponentProjectile(attackPower, attackSpeed, criticalRate, criticalMultiple);
         Init_AnimComponent();
         Init_BlinkOnHit();
     }
@@ -67,10 +68,10 @@ public class Player : SerializedMonoBehaviour
     /// <summary>
     /// 어택 컴포넌트 프로젝타일 발사타입 초기화
     /// </summary>
-    private void Init_AttackComponentProjectile(int attackPower, int attackSpeed, int criticalRate)
+    private void Init_AttackComponentProjectile(int attackPower, int attackSpeed, int criticalRate, int criticalMultiple)
     {
         _attackComponentProjectile = GetComponent<AttackComponentProjectile>();
-        _attackComponentProjectile.Init(attackPower, attackSpeed, criticalRate);
+        _attackComponentProjectile.Init(attackPower, attackSpeed, criticalRate, criticalMultiple);
     }
 
     /// <summary>

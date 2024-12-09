@@ -34,10 +34,17 @@ MonoBehaviour:
     ValueIncrease: 25
     Cost: 15
     CostIncrease: 15
-  - ID: Critical
+  - ID: CriticalRate
     Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
     Level: 1
     Value: 50
     ValueIncrease: 1
     Cost: 15
     CostIncrease: 15
+  - ID: CriticalMultiple
+    Name: "\uCE58\uBA85\uD0C0 \uBC30\uC728"
+    Level: 1
+    Value: 200
+    ValueIncrease: 10
+    Cost: 20
+    CostIncrease: 20

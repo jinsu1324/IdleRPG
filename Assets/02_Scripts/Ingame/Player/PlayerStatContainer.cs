@@ -14,7 +14,8 @@ public struct OnStatChangedArgs
     public int AttackPower;         // 공격력
     public int AttackSpeed;         // 공격속도
     public int MaxHp;               // 최대 체력
-    public int Critical;            // 크리티컬 확률
+    public int CriticalRate;        // 크리티컬 확률
+    public int CriticalMultiple;    // 크리티컬 배율
 }
 
 /// <summary>
@@ -149,7 +150,8 @@ public class PlayerStatContainer : SingletonBase<PlayerStatContainer>
                 AttackPower = GetStat(StatID.AttackPower).Value,
                 AttackSpeed = GetStat(StatID.AttackSpeed).Value,
                 MaxHp = GetStat(StatID.MaxHp).Value,
-                Critical = GetStat(StatID.Critical).Value,
+                CriticalRate = GetStat(StatID.CriticalRate).Value,
+                CriticalMultiple = GetStat(StatID.CriticalMultiple).Value
             };
 
             // 스탯 변경 이벤트 호출
