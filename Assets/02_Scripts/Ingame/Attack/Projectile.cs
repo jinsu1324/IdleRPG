@@ -9,14 +9,16 @@ public class Projectile : MonoBehaviour
     private int _attackPower;           // 공격력
     private IDamagable _target;         // 타겟
     private Vector3 _spawnPos;          // 투사체 생성 위치
+    private bool _isCritical;
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int attackPower, Vector3 spawnPos)
+    public void Init(int attackPower, Vector3 spawnPos, bool isCritical)
     {
         _attackPower = attackPower;
         _spawnPos = spawnPos;
+        _isCritical = isCritical;
 
         FindTarget(); // 타겟 검색
     }
@@ -57,7 +59,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _target.TakeDamage(_attackPower);
+        _target.TakeDamage(_attackPower, _isCritical);
         Destroy(gameObject);
     }
 }

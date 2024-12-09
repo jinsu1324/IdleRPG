@@ -21,7 +21,8 @@ public class AttackComponentProjectile : AttackComponentBase
     /// </summary>
     protected override void Attack()
     {
-        SpawnProjectile(_attackPower);  // 프로젝타일 생성
+        int finalDamage = CalculateDamage();
+        SpawnProjectile(finalDamage);  // 프로젝타일 생성
     }
 
     /// <summary>
@@ -30,6 +31,6 @@ public class AttackComponentProjectile : AttackComponentBase
     private void SpawnProjectile(int attackPower)
     {
         Projectile projectile = GameObject.Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity);
-        projectile.Init(attackPower, _spawnPoint.position);
+        projectile.Init(attackPower, _spawnPoint.position, _isCritical);
     }
 }

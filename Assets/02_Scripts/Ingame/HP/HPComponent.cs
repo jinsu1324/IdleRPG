@@ -33,7 +33,7 @@ public class HPComponent : MonoBehaviour, IDamagable
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public void TakeDamage(int atk)
+    public void TakeDamage(int atk, bool isCritical)
     {
         if (IsDead) 
             return;
@@ -41,7 +41,9 @@ public class HPComponent : MonoBehaviour, IDamagable
         CurrentHp -= atk;
         
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
-        OnTakeDamaged?.Invoke(args);
+        OnTakeDamaged?.Invoke(args); // 데미지 받았을때 이벤트 실행
+
+        DamageTextManager.Instance.ShowDamageText(atk, transform.position, isCritical); // 데미지 텍스트 띄우기
 
         if (CurrentHp <= 0)
             Die();

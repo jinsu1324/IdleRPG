@@ -75,6 +75,6 @@ public class AttackComponentCollision : AttackComponentBase
             return;
         }
 
-        _target.TakeDamage(_attackPower); // 데미지 전달   
+        _target.TakeDamage(_attackPower, _isCritical); // 데미지 전달   
     }
 }

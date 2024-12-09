@@ -37,7 +37,7 @@ MonoBehaviour:
   - ID: Critical
     Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
     Level: 1
-    Value: 10
+    Value: 50
     ValueIncrease: 1
     Cost: 15
     CostIncrease: 15

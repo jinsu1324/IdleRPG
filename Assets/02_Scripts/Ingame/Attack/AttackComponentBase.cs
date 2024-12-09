@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public struct OnAttackedArgs
 {
@@ -19,15 +20,19 @@ public abstract class AttackComponentBase : MonoBehaviour
     protected float _attackCooldown;                    // 공격 쿨타임
     protected float _time;                              // 쿨타임 시간 계산
 
+    protected float _criticalRate;                      // 치명타 확률
+    protected float _criticalMultiplier = 2.0f;         // 치명타 피해 배율 // Todo : 나중에 업그레이드나 테이블로 빼도됨
+    protected bool _isCritical;                         // 치명타 공격인지
+
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int attackPower, int attackSpeed)
+    public void Init(int attackPower, int attackSpeed, int CriticalRate = 0)
     {
         _attackPower = attackPower;
         _attackSpeed = attackSpeed;
-
         _attackCooldown = 1f / _attackSpeed;
+        _criticalRate = ((float)CriticalRate / 100.0f);
     }
 
     /// <summary>
@@ -93,5 +98,24 @@ public abstract class AttackComponentBase : MonoBehaviour
     protected float AttackTiming()
     {
         return _attackMotionFrame / _attackSpeed;
+    }
+
+    /// <summary>
+    /// 치명타를 계산하여 최종 데미지를 반환
+    /// </summary>
+    protected int CalculateDamage()
+    {
+        bool isCritical = Random.value <= _criticalRate;    // 치명타 여부 결정
+
+        if (isCritical)
+        {
+            _isCritical = true;
+            return (int)(_attackPower * _criticalMultiplier); // 치명타 피해 적용
+        }
+        else
+        {
+            _isCritical = false;
+            return _attackPower;
+        }
     }
 }
