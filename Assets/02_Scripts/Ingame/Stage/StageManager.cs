@@ -61,7 +61,7 @@ public class StageManager : SingletonBase<StageManager>
         ResetTargetCount(args); // 목표 + 죽인 적 숫자 리셋
         OnStageChanged?.Invoke(args);  // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
 
-        Debug.Log($"{_currentChapter}-{_currentStage} 시작!");
+        //Debug.Log($"{_currentChapter}-{_currentStage} 시작!");
     }
     
     /// <summary>

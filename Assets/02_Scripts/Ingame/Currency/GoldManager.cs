@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 골드 관리자
 /// </summary>
-public static class GoldManager
+public class GoldManager
 {
     private static int _currentGold = 100000;                   // 현재 골드
     public static event Action<int> OnGoldChanged;              // 골드 변경 되었을 때 이벤트

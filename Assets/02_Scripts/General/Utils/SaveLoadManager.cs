@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveLoadManager
+public static class SaveLoadManager
 {
     // 저장 경로
     private static string _filePath = Application.persistentDataPath + "/SaveData.json";
