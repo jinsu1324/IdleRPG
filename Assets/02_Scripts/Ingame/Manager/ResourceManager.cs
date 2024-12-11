@@ -7,14 +7,14 @@ using UnityEngine;
 public class ResourceManager : SingletonBase<ResourceManager>
 {
     [SerializeField]
-    private Dictionary<StatID, Sprite> _statIconDict = new Dictionary<StatID, Sprite>();    // 아이콘 딕셔너리
+    private Dictionary<UpgradeID, Sprite> _statIconDict = new Dictionary<UpgradeID, Sprite>();    // 아이콘 딕셔너리
 
     /// <summary>
     /// 아이콘 가져오기
     /// </summary>
     public Sprite GetIcon(string id)
     {
-        StatID statID = (StatID)Enum.Parse(typeof(StatID), id);
+        UpgradeID statID = (UpgradeID)Enum.Parse(typeof(UpgradeID), id);
 
         if (_statIconDict.TryGetValue(statID, out Sprite icon))
         {

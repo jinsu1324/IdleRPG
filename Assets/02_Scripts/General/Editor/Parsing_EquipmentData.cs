@@ -89,7 +89,7 @@ public class Parsing_EquipmentData : Parsing_Base
                 {
                     EquipmentStat stat = new EquipmentStat()
                     {
-                        StatKey = row[k],
+                        StatType = row[k],
                         StatValue = row[k + 1]
                     };
                     upgradeInfo.EquipmentStatList.Add(stat);

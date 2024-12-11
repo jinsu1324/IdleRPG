@@ -22,7 +22,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerStatManager.OnStatChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
+        UpgradeManager.OnUpgradeChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
     }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerStatManager.OnStatChanged -= ChangeComponentsValue;
+        UpgradeManager.OnUpgradeChanged -= ChangeComponentsValue;
 
         if (_hpComponent != null)
             _hpComponent.OnDead -= PlayerDeadTask;

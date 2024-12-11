@@ -12,7 +12,7 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        PlayerStatManager.OnStatChanged += ShowToastCombatPower; // 스탯이 변경될 때, 총합공격력 토스트메시지 보여주기
+        UpgradeManager.OnUpgradeChanged += ShowToastCombatPower; // 스탯이 변경될 때, 총합공격력 토스트메시지 보여주기
     }
 
     /// <summary>
@@ -48,6 +48,6 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        PlayerStatManager.OnStatChanged -= ShowToastCombatPower;
+        UpgradeManager.OnUpgradeChanged -= ShowToastCombatPower;
     }
 }

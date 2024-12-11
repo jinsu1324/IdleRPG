@@ -23,7 +23,7 @@ public class Parsing_GeneralData : OdinEditorWindow
     private readonly string _sheetName_Enemy = "Enemy";
     private readonly string _sheetName_Skill = "Skill";
     private readonly string _sheetName_Stage = "Stage";
-    private readonly string _sheetName_StartingStats = "StartingStats";
+    private readonly string _sheetName_StartingUpgrade = "StartingUpgrade";
 
     /// <summary>
     /// 메뉴
@@ -48,7 +48,7 @@ public class Parsing_GeneralData : OdinEditorWindow
         FetchAndConvertData<EnemyData, EnemyDatasSO>(_sheetName_Enemy);
         FetchAndConvertData<SkillData, SkillDatasSO>(_sheetName_Skill);
         FetchAndConvertData<StageData, StageDatasSO>(_sheetName_Stage);
-        FetchAndConvertData<StatData, StartingStatDatasSO>(_sheetName_StartingStats);
+        FetchAndConvertData<Upgrade, StartingUpgradeDatasSO>(_sheetName_StartingUpgrade);
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class Parsing_GeneralData : OdinEditorWindow
         dataManager.SetEnemyDatasSO(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_Enemy}"));
         dataManager.SetSkillDatasSO(Resources.Load<SkillDatasSO>($"Data/{_sheetName_Skill}"));
         dataManager.SetStageDatasSO(Resources.Load<StageDatasSO>($"Data/{_sheetName_Stage}"));
-        dataManager.SetStartingStatDatasSO(Resources.Load<StartingStatDatasSO>($"Data/{_sheetName_StartingStats}"));
+        dataManager.SetStartingUpgradeDatasSO(Resources.Load<StartingUpgradeDatasSO>($"Data/{_sheetName_StartingUpgrade}"));
 
         // 저장
         EditorUtility.SetDirty(dataManager);

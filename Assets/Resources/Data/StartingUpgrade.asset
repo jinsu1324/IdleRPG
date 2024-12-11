@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d4e3e4852d49f43bfb319069eac932, type: 3}
+  m_Name: StartingUpgrade
+  m_EditorClassIdentifier: 
+  DataList:
+  - ID: AttackPower
+    Name: "\uACF5\uACA9\uB825"
+    Level: 1
+    Value: 10
+    ValueIncrease: 1
+    Cost: 10
+    CostIncrease: 10
+  - ID: AttackSpeed
+    Name: "\uACF5\uACA9\uC18D\uB3C4"
+    Level: 1
+    Value: 1
+    ValueIncrease: 1
+    Cost: 10
+    CostIncrease: 10
+  - ID: MaxHp
+    Name: "\uCCB4\uB825"
+    Level: 1
+    Value: 1000
+    ValueIncrease: 25
+    Cost: 15
+    CostIncrease: 15
+  - ID: CriticalRate
+    Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
+    Level: 1
+    Value: 50
+    ValueIncrease: 1
+    Cost: 15
+    CostIncrease: 15
+  - ID: CriticalMultiple
+    Name: "\uCE58\uBA85\uD0C0 \uBC30\uC728"
+    Level: 1
+    Value: 200
+    ValueIncrease: 10
+    Cost: 20
+    CostIncrease: 20

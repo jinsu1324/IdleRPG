@@ -23,14 +23,19 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private Image _equippedItemIcon;                       // 장착한 아이템 아이콘
-    [SerializeField] private List<InventorySlot> _inventorySlotList;        // 인벤토리 슬롯 리스트
-    [SerializeField] private SelectItemInfoPanel _selectedItemInfoPanel;    // 선택된 아이템 정보 패널
+    private List<Equipment> _haveItemList = new List<Equipment>();      // 가지고 있는 아이템 리스트
 
-    private List<Equipment> _haveItemList = new List<Equipment>();          // 가지고 있는 아이템 리스트 
-    private Equipment _equippedItem;                                        // 장착한 아이템
-    private InventorySlot _selectedSlot;                                    // 선택된 슬롯
+    [SerializeField]
+    private List<Image> _equippedItemIconList;                          // 장착한 아이템 아이콘 리스트 (최대 3개)
+    private List<Equipment> _equippedItemList = new List<Equipment>();  // 장착된 아이템 리스트
+    private int _maxEquipableItemCount = 3;                             // 최대 장착 가능한 아이템 개수
 
+    [SerializeField]
+    private List<InventorySlot> _inventorySlotList;                     // 인벤토리 슬롯 리스트
+    private InventorySlot _selectedSlot;                                // 선택된 슬롯
+
+    [SerializeField]
+    private SelectItemInfoPanel _selectedItemInfoPanel;                 // 선택된 아이템 정보 패널
 
     /// <summary>
     /// 선택된 슬롯 하이라이팅
@@ -54,28 +59,38 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// 아이템 장착
+    /// 장착
     /// </summary>
     public void Equip(Equipment item)
     {
-        // 장착된 아이템이 존재하면 그 아이템 해제
-        if (_equippedItem != null) 
+        // 이미 장착된 아이템이, 최대 장착갯수를 초과했으면 그냥 리턴
+        if (_equippedItemList.Count >= _maxEquipableItemCount)
         {
-            // 장착중인 아이템이, 장착하려고 하는 아이템과 동일하다면 아무일도 하지 않고 그냥 리턴
-            if (IsEquipped(item))  
-                return;
-
-            // 해제 및 장착아이콘 OFF
-            UnEquip(_equippedItem);
-            FindSlotByItem(_equippedItem).EqiuppedIconOFF();   
+            Debug.Log("장착 가능한 최대 아이템 개수를 초과했습니다!");
+            return;
         }
 
-        // 장착 및 장착아이콘 ON
-        _equippedItem = item; 
-        FindSlotByItem(_equippedItem).EquippedIconON();
+        // 이미 장착된 아이템이면 그냥 리턴
+        if (IsEquipped(item))
+        {
+            Debug.Log("이미 장착된 아이템입니다!");
+            return;
+        }
 
-        // 장착된 아이템 아이콘도 설정
-        _equippedItemIcon.sprite = _equippedItem.Icon;  
+        // 장착
+        _equippedItemList.Add(item);
+
+        // 플레이어 스탯에 아이템 스탯들 추가
+        AddItemStatsToPlayer(item.GetStatDictionaryByLevel(), item);
+
+        // 슬롯에 장착 아이콘 ON
+        FindSlotByItem(item).EquippedIconON();
+
+        // 장착 아이콘 리스트 UI 업데이트
+        Update_EquippedItemIconListUI();
+
+        // 스탯 보여주는 UI 업데이트
+        PlayerStats.Instance.AllStatUIUpdate(); 
     }
 
     /// <summary>
@@ -83,10 +98,45 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void UnEquip(Equipment item)
     {
-        // 해제 및 아이콘들도 다 제거
-        _equippedItem = null;   
-        _equippedItemIcon.sprite = null;
+        // 해제하려는 아이템이 장착되지 않았으면 그냥 리턴
+        if (_equippedItemList.Contains(item) == false)
+        {
+            Debug.Log("해제하려는 아이템이 장착되지 않았습니다!");
+            return;
+        }
+
+        // 해제
+        _equippedItemList.Remove(item);
+
+        // 플레이어 스탯에서 아이템 스탯들 제거
+        RemoveItemStatsToPlayer(item.GetStatDictionaryByLevel(), item);
+
+        // 슬롯에 장착 아이콘 OFF
         FindSlotByItem(item).EqiuppedIconOFF();
+
+        // 장착 아이콘 리스트 UI 업데이트
+        Update_EquippedItemIconListUI();
+
+        // 스탯 보여주는 UI 업데이트
+        PlayerStats.Instance.AllStatUIUpdate();
+    }
+
+    /// <summary>
+    /// 플레이어 스탯에 아이템 스탯들 추가
+    /// </summary>
+    private void AddItemStatsToPlayer(Dictionary<StatType, int> statDict, Equipment selfItem)
+    {
+        foreach (var kvp in statDict)
+            PlayerStats.Instance.AddModifier(kvp.Key, kvp.Value, selfItem);
+    }
+
+    /// <summary>
+    /// 플레이어 스탯에서 아이템 스탯들 제거
+    /// </summary>
+    private void RemoveItemStatsToPlayer(Dictionary<StatType, int> statDict, Equipment selfItem)
+    {
+        foreach (var kvp in statDict)
+            PlayerStats.Instance.RemoveModifier(kvp.Key, selfItem);
     }
 
     /// <summary>
@@ -97,18 +147,38 @@ public class Inventory : MonoBehaviour
         foreach (InventorySlot slot in _inventorySlotList)
         {
             if (slot.CurrentItem == item)
-                return slot;
+                return slot; 
         }
 
         return null;
     }
 
     /// <summary>
-    /// 이 아이템이 장착된 아이템인지
+    /// 장착한 아이템 아이콘 리스트 UI 업데이트
+    /// </summary>
+    private void Update_EquippedItemIconListUI()
+    {
+        for (int i = 0; i < _equippedItemIconList.Count; i++)   // 3개만큼 반복 (아이콘 슬롯 최대 갯수)
+        {
+            if (i < _equippedItemList.Count) // 가진 아이템 갯수까지는 아이콘 표시
+            {
+                _equippedItemIconList[i].sprite = _equippedItemList[i].Icon;
+                _equippedItemIconList[i].gameObject.SetActive(true);
+            }
+            else // 나머지는 비활성화
+            {
+                _equippedItemIconList[i].sprite = null;
+                _equippedItemIconList[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    /// <summary>
+    /// 해당 아이템이 장착된 아이템인지 확인
     /// </summary>
     public bool IsEquipped(Equipment item)
     {
-        return _equippedItem == item;
+        return _equippedItemList.Contains(item);
     }
 
     /// <summary>
@@ -118,6 +188,10 @@ public class Inventory : MonoBehaviour
     {
         _selectedItemInfoPanel.OpenAndInit(_selectedSlot);
     }
+
+
+
+
 
 
 
@@ -133,8 +207,13 @@ public class Inventory : MonoBehaviour
         EquipmentDataSO equipmentDataSO 
             = DataManager.Instance.GetEquipmentDataSOByID(GetRandomEquipmentID().ToString());
 
+        //EquipmentDataSO equipmentDataSO
+        //   = DataManager.Instance.GetEquipmentDataSOByID(EquipmentID.Armor_ForestArmor.ToString());
+
+
         // 랜덤 장비 하나 생성
-        Equipment equipment = new Equipment(equipmentDataSO);
+        //Equipment equipment = new Equipment(equipmentDataSO);
+        Equipment equipment = new Equipment(equipmentDataSO, 1);
 
         // 추가
         if (AddItem(equipment))
@@ -218,4 +297,31 @@ public class Inventory : MonoBehaviour
         // 랜덤 EquipmentID 반환
         return (EquipmentID)values.GetValue(randomIndex);
     }
+
+
+
+
+
+
+
+    //private void Start()
+    //{
+    //    // PlayerStats 초기화
+    //    PlayerStats playerStats = new PlayerStats();
+
+    //    // 장비 생성
+    //    Equipment sword = new Equipment("전설의 검", new Dictionary<StatType, float>
+    //    {
+    //        { StatType.AttackPower, 50 },
+    //        { StatType.AttackSpeed, 10 }
+    //    });
+
+    //    // 장비 장착
+    //    sword.Equip(playerStats);
+    //    Debug.Log("장착 후 공격력: " + playerStats.GetFinalStat(StatType.AttackPower)); // +50
+
+    //    // 장비 해제
+    //    sword.Unequip(playerStats);
+    //    Debug.Log("해제 후 공격력: " + playerStats.GetFinalStat(StatType.AttackPower)); // 0
+    //}
 }

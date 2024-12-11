@@ -20,61 +20,61 @@ MonoBehaviour:
   UpgradeInfoList:
   - Level: 1
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 170
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 5
   - Level: 2
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 180
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 6
   - Level: 3
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 190
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 7
   - Level: 4
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 200
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 8
   - Level: 5
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 210
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 9
   - Level: 6
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 220
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 10
   - Level: 7
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 230
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 11
   - Level: 8
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 240
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 12
   - Level: 9
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 250
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 13
   - Level: 10
     EquipmentStatList:
-    - StatKey: Hp
+    - StatType: MaxHp
       StatValue: 260
-    - StatKey: Critical
+    - StatType: CriticalRate
       StatValue: 14

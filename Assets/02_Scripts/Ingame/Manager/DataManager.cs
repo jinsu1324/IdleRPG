@@ -10,7 +10,7 @@ public class DataManager : SingletonBase<DataManager>
     [SerializeField] public EnemyDatasSO EnemyDatasSO { get; private set; }                 // 적 데이터
     [SerializeField] public SkillDatasSO SkillDatasSO { get; private set; }                 // 스킬 데이터
     [SerializeField] public StageDatasSO StageDatasSO { get; private set; }                 // 스테이지 데이터
-    [SerializeField] public StartingStatDatasSO StartingStatDatasSO { get; private set; }   // 스타팅 스탯 데이터
+    [SerializeField] public StartingUpgradeDatasSO StartingUpgradeDatasSO { get; private set; }   // 스타팅 업그레이드 데이터
 
     [Title("장비 데이터", Bold = false)]
     [SerializeField] private List<EquipmentDataSO> _equipmentDataSOList;      // 장비 데이터 리스트
@@ -20,23 +20,28 @@ public class DataManager : SingletonBase<DataManager>
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
     public void SetSkillDatasSO(SkillDatasSO data) => SkillDatasSO = data;
     public void SetStageDatasSO(StageDatasSO data) => StageDatasSO = data;
-    public void SetStartingStatDatasSO(StartingStatDatasSO data) => StartingStatDatasSO = data;
+    public void SetStartingUpgradeDatasSO(StartingUpgradeDatasSO data) => StartingUpgradeDatasSO = data;
     
 
     /// <summary>
-    /// Awake
+    /// Awake 일단...
     /// </summary>
     protected override void Awake()
     {
-        base.Awake(); // 싱글톤 먼저
+        // 싱글톤 먼저
+        base.Awake(); 
+
+        // 장비 데이터 초기화
+        InitEquipmentDataSODict();    
 
 
-        InitEquipmentDataSODict();    // 장비 데이터 초기화
+        // 플레이어 스탯 모디파이어 딕셔너리를 먼저 초기화
+        PlayerStats.Instance.InitStatModifierDict(); 
 
 
-        // 플레이어 스탯 데이터 셋팅
-        PlayerStatManager playerStatManager = new PlayerStatManager();
-        playerStatManager.Init(StartingStatDatasSO.DataList);
+        // 스타팅 업그레이드 데이터 셋팅
+        UpgradeManager upgradeManager = new UpgradeManager();
+        upgradeManager.Init(StartingUpgradeDatasSO.DataList);
 
         // 적 드랍 골드량 데이터 셋팅
         EnemyDropGoldManager enemyDropGoldManager = new EnemyDropGoldManager();

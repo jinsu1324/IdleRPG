@@ -20,81 +20,81 @@ MonoBehaviour:
   UpgradeInfoList:
   - Level: 1
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 400
-    - StatKey: AttackSpeed
-      StatValue: 130
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 1
+    - StatType: CriticalRate
       StatValue: 15
   - Level: 2
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 410
-    - StatKey: AttackSpeed
-      StatValue: 131
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 2
+    - StatType: CriticalRate
       StatValue: 16
   - Level: 3
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 420
-    - StatKey: AttackSpeed
-      StatValue: 132
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 3
+    - StatType: CriticalRate
       StatValue: 17
   - Level: 4
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 430
-    - StatKey: AttackSpeed
-      StatValue: 133
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 4
+    - StatType: CriticalRate
       StatValue: 18
   - Level: 5
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 440
-    - StatKey: AttackSpeed
-      StatValue: 134
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 5
+    - StatType: CriticalRate
       StatValue: 19
   - Level: 6
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 450
-    - StatKey: AttackSpeed
-      StatValue: 135
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 6
+    - StatType: CriticalRate
       StatValue: 20
   - Level: 7
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 460
-    - StatKey: AttackSpeed
-      StatValue: 136
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 7
+    - StatType: CriticalRate
       StatValue: 21
   - Level: 8
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 470
-    - StatKey: AttackSpeed
-      StatValue: 137
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 8
+    - StatType: CriticalRate
       StatValue: 22
   - Level: 9
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 480
-    - StatKey: AttackSpeed
-      StatValue: 138
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 9
+    - StatType: CriticalRate
       StatValue: 23
   - Level: 10
     EquipmentStatList:
-    - StatKey: AttackPower
+    - StatType: AttackPower
       StatValue: 490
-    - StatKey: AttackSpeed
-      StatValue: 139
-    - StatKey: Critical
+    - StatType: AttackSpeed
+      StatValue: 10
+    - StatType: CriticalRate
       StatValue: 24

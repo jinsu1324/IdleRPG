@@ -89,7 +89,6 @@ public class InventorySlot : MonoBehaviour
     /// </summary>
     public void SelectFrameOFF() => _slotSelectedFrame.SetActive(false);
 
-
     /// <summary>
     /// 장착 아이템 ON
     /// </summary>
@@ -99,5 +98,4 @@ public class InventorySlot : MonoBehaviour
     /// 장착 아이템 OFF
     /// </summary>
     public void EqiuppedIconOFF() => _equippedIcon.SetActive(false);
-
 }

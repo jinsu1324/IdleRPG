@@ -97,8 +97,10 @@ public class SelectItemInfoPanel : MonoBehaviour
     /// </summary>
     private void ButtonsON()
     {
-        _unEquipButton.gameObject.SetActive(true);
-        _unEquipButton.gameObject.SetActive(Inventory.Instance.IsEquipped(CurrentItem)); // 해제버튼은 '패널 아이템' = '장착된 아이템' 일 때만 활성화
+        bool isEquipped = Inventory.Instance.IsEquipped(CurrentItem);
+
+        _equipButton.gameObject.SetActive(!isEquipped);  // 장착버튼은 장착되어있으면 비활성화
+        _unEquipButton.gameObject.SetActive(isEquipped);   // 해제버튼은 '패널 아이템' = '장착된 아이템' 일 때만 활성화
     }
 
     /// <summary>
