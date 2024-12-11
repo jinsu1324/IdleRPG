@@ -5,72 +5,108 @@ using UnityEngine.UI;
 
 public class SelectItemInfoPanel : MonoBehaviour
 {
-    public Equipment CurrentSelectedItem { get; private set; }
-    [SerializeField] private Image _selectedItemIcon;
-    [SerializeField] private Button _equipButton;
-    [SerializeField] private Button _unEquipButton;
+    public Equipment CurrentItem { get; private set; }  // 현재 아이템
 
+    [SerializeField] private Image _itemIcon;           // 아이템 아이콘
+    [SerializeField] private Button _equipButton;       // 장착 버튼
+    [SerializeField] private Button _unEquipButton;     // 장착 해제 버튼
+
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
-        _equipButton.onClick.AddListener(OnClickEquipButton);
-        _unEquipButton.onClick.AddListener(OnClickUnEquipButton);
+        _equipButton.onClick.AddListener(OnClickEquipButton);       
+        _unEquipButton.onClick.AddListener(OnClickUnEquipButton);   
     }
 
-    public void OnClickEquipButton()
+    /// <summary>
+    /// 초기화 및 열기
+    /// </summary>
+    public void OpenAndInit(InventorySlot selectedSlot)
     {
-        if (CurrentSelectedItem != null)
-        {
-            Inventory.Instance.Equip(CurrentSelectedItem);
-            UIUpdate();
-        }
-        else
-        {
-            Debug.Log("장착 실패.");
-        }
-    }
-
-    public void OnClickUnEquipButton()
-    {
-        if (CurrentSelectedItem != null)
-        {
-            Inventory.Instance.UnEquip(CurrentSelectedItem); // 장착 해제 호출
-            UIUpdate();
-        }
-        else
-        {
-            Debug.Log("해제 실패. 선택된 아이템이 없습니다.");
-        }
-    }
-
-
-
-
-    public void Init(InventorySlot selectInventorySlot)
-    {
-        CurrentSelectedItem = selectInventorySlot.CurrentSlotItem;
+        CurrentItem = selectedSlot.CurrentItem;
         UIUpdate();
 
         gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// UI 업데이트
+    /// </summary>
     private void UIUpdate()
     {
-        if (CurrentSelectedItem == null)
+        // 현재 아이템이 없으면 전부 다 끄고 리턴
+        if (CurrentItem == null) 
         {
-            _selectedItemIcon = null;
-            _selectedItemIcon.gameObject.SetActive(false);
+            ClearItemIcon();
+            ButtonsOFF();
 
-            _equipButton.gameObject.SetActive(false);
-            _unEquipButton.gameObject.SetActive(false);
+            return;
         }
-        else
-        {
-            _selectedItemIcon.sprite = CurrentSelectedItem.Icon;
-            _selectedItemIcon.gameObject.SetActive(true);
 
-            _unEquipButton.gameObject.SetActive(true);
-            _unEquipButton.gameObject.SetActive(Inventory.Instance.IsEquipped(CurrentSelectedItem)); // 장착 중인 아이템인지 확인하여 해제 버튼 활성화
-        }
-        
+        // 아이콘 셋팅 및 버튼 켜기
+        SetItemIcon();
+        ButtonsON();
+    }
+
+    /// <summary>
+    /// 장착버튼 클릭
+    /// </summary>
+    public void OnClickEquipButton()
+    {
+        if (CurrentItem == null)
+            return;
+
+        Inventory.Instance.Equip(CurrentItem);  // 현재 아이템 장착
+        UIUpdate();
+    }
+
+    /// <summary>
+    /// 장착 해제 버튼 클릭
+    /// </summary>
+    public void OnClickUnEquipButton()
+    {
+        if (CurrentItem == null)
+            return;
+
+        Inventory.Instance.UnEquip(CurrentItem); // 현재 아이템 장착 해제
+        UIUpdate();
+    }
+
+    /// <summary>
+    /// 아이템 아이콘 셋팅
+    /// </summary>
+    private void SetItemIcon()
+    {
+        _itemIcon.sprite = CurrentItem.Icon;
+        _itemIcon.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 아이템 아이콘 클리어
+    /// </summary>
+    private void ClearItemIcon()
+    {
+        _itemIcon = null;
+        _itemIcon.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 버튼들 켜기
+    /// </summary>
+    private void ButtonsON()
+    {
+        _unEquipButton.gameObject.SetActive(true);
+        _unEquipButton.gameObject.SetActive(Inventory.Instance.IsEquipped(CurrentItem)); // 해제버튼은 '패널 아이템' = '장착된 아이템' 일 때만 활성화
+    }
+
+    /// <summary>
+    /// 버튼들 끄기
+    /// </summary>
+    private void ButtonsOFF()
+    {
+        _equipButton.gameObject.SetActive(false);
+        _unEquipButton.gameObject.SetActive(false);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class Inventory : MonoBehaviour
 {
@@ -23,216 +23,199 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
-    private InventorySlot _selectSlot = null;   // 선택된 슬롯 
+    [SerializeField] private Image _equippedItemIcon;                       // 장착한 아이템 아이콘
+    [SerializeField] private List<InventorySlot> _inventorySlotList;        // 인벤토리 슬롯 리스트
+    [SerializeField] private SelectItemInfoPanel _selectedItemInfoPanel;    // 선택된 아이템 정보 패널
+
+    private List<Equipment> _haveItemList = new List<Equipment>();          // 가지고 있는 아이템 리스트 
+    private Equipment _equippedItem;                                        // 장착한 아이템
+    private InventorySlot _selectedSlot;                                    // 선택된 슬롯
 
 
-    public void SelectSlot(InventorySlot newSelectSlot)
+    /// <summary>
+    /// 선택된 슬롯 하이라이팅
+    /// </summary>
+    public void HighlightingSelectdSlot(InventorySlot newSelectedSlot)
     {
-        // 이미 활성화된 슬롯을 다시 클릭했을 경우 무시
-        if (_selectSlot == newSelectSlot)
-            return; 
+        // 이미 선택된 슬롯을 다시 클릭했을 경우 무시
+        if (_selectedSlot == newSelectedSlot)
+            return;
 
-        // 이전 활성화된 슬롯이 있다면, 그 슬롯의 하이라이트 OFF
-        if (_selectSlot != null)
-            _selectSlot.HigilightIconOFF();
+        // 이전에 선택된 슬롯이 있다면, 그 슬롯의 하이라이트 OFF
+        if (_selectedSlot != null)
+            _selectedSlot.SelectFrameOFF();
 
         // 새 슬롯으로 교체 후 하이라이트 ON
-        _selectSlot = newSelectSlot;
-        _selectSlot.HigilightIconON();
+        _selectedSlot = newSelectedSlot;
+        _selectedSlot.SelectFrameON();
 
-        // 패널 켜기 및 초기화
-        _selectItemInfoPanel.Init(_selectSlot);
+        // 선택된 아이템 정보 패널 켜기
+        SelectedItemInfoPanel_ON();
     }
 
+    /// <summary>
+    /// 아이템 장착
+    /// </summary>
+    public void Equip(Equipment item)
+    {
+        // 장착된 아이템이 존재하면 그 아이템 해제
+        if (_equippedItem != null) 
+        {
+            // 장착중인 아이템이, 장착하려고 하는 아이템과 동일하다면 아무일도 하지 않고 그냥 리턴
+            if (IsEquipped(item))  
+                return;
 
+            // 해제 및 장착아이콘 OFF
+            UnEquip(_equippedItem);
+            FindSlotByItem(_equippedItem).EqiuppedIconOFF();   
+        }
 
-    // sdfsdf 
+        // 장착 및 장착아이콘 ON
+        _equippedItem = item; 
+        FindSlotByItem(_equippedItem).EquippedIconON();
+
+        // 장착된 아이템 아이콘도 설정
+        _equippedItemIcon.sprite = _equippedItem.Icon;  
+    }
+
+    /// <summary>
+    /// 장착 해제
+    /// </summary>
+    public void UnEquip(Equipment item)
+    {
+        // 해제 및 아이콘들도 다 제거
+        _equippedItem = null;   
+        _equippedItemIcon.sprite = null;
+        FindSlotByItem(item).EqiuppedIconOFF();
+    }
+
+    /// <summary>
+    /// 해당 아이템이 들어있는 슬롯 찾기
+    /// </summary>
+    private InventorySlot FindSlotByItem(Equipment item)
+    {
+        foreach (InventorySlot slot in _inventorySlotList)
+        {
+            if (slot.CurrentItem == item)
+                return slot;
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// 이 아이템이 장착된 아이템인지
+    /// </summary>
     public bool IsEquipped(Equipment item)
     {
         return _equippedItem == item;
     }
 
-    private InventorySlot _equippedSlot = null; // 현재 장착된 슬롯
-
-
-
-
-    private List<Equipment> _equipmentList = new List<Equipment>();
-
-    private Equipment _equippedItem;
-
-    [SerializeField] private List<InventorySlot> _inventorySlotList;
-
-    [SerializeField] private Image _equippedItemIcon;
-
-    [SerializeField] private SelectItemInfoPanel _selectItemInfoPanel;
-
-
-    public void Equip(Equipment item)
+    /// <summary>
+    /// 선택된 아이템 정보 패널 켜기
+    /// </summary>
+    private void SelectedItemInfoPanel_ON()
     {
-        if (_equippedItem != null) // 장착된 아이템이 존재하면
-        {
-            if (_equippedItem == item)
-            {
-                Debug.Log("이미 착용중이니까 아무것도 안할게!");
-                return;
-            }
-
-            UnEquip(_equippedItem); // 해제하고
-        }
-
-        _equippedItem = item; // 장착!
-        Debug.Log($"{item.Name}를 장착했습니다.");
-
-        // 이전 슬롯의 아이콘 끄기
-        if (_equippedSlot != null)
-        {
-            _equippedSlot.EqiupIconOFF();
-        }
-        // 새로운 슬롯의 아이콘 켜기
-        _equippedSlot = FindSlotByItem(item); // 아이템에 해당하는 슬롯 찾기
-        if (_equippedSlot != null)
-        {
-            _equippedSlot.EquipIconON();
-        }
-
-        _equippedItemIcon.sprite = _equippedItem.Icon;  
-    }
-
-    public void UnEquip(Equipment item)
-    {
-        if (_equippedItem == item) // 하려는 아이템이 장착된 아이템이면
-        {
-            _equippedItem = null;   // 해제
-            Debug.Log($"{item.Name}를 해제했습니다.");
-
-            _equippedItemIcon.sprite = null;
-
-            if (_equippedSlot != null)
-            {
-                _equippedSlot.EqiupIconOFF(); // 장착 아이콘 끄기
-                _equippedSlot = null; // 현재 슬롯 초기화
-            }
-        }
-    }
-
-
-    private InventorySlot FindSlotByItem(Equipment item)
-    {
-        foreach (var slot in _inventorySlotList)
-        {
-            if (slot.CurrentSlotItem == item)
-            {
-                return slot; // 해당 아이템을 가진 슬롯 반환
-            }
-        }
-        return null; // 아이템을 가진 슬롯이 없으면 null
+        _selectedItemInfoPanel.OpenAndInit(_selectedSlot);
     }
 
 
 
+    //--------------- 아래부터는 임시 아이템 랜덤 획득 제거 코드
 
 
-
-    public void AddRandomEquipment()
+    /// <summary>
+    /// 랜덤 아이템 추가 버튼
+    /// </summary>
+    public void OnClickAddRandomItem()
     {
+        // 랜덤한 장비데이터 가져오기
         EquipmentDataSO equipmentDataSO 
             = DataManager.Instance.GetEquipmentDataSOByID(GetRandomEquipmentID().ToString());
 
+        // 랜덤 장비 하나 생성
         Equipment equipment = new Equipment(equipmentDataSO);
 
+        // 추가
         if (AddItem(equipment))
-        {
             Debug.Log($"{equipment.Name} ---- 획득!");
-        }
         else
-        {
-            Debug.Log("추가할 빈슬롯 없음!");
-
-        }
+            Debug.Log("추가 실패!");
 
     }
-
-    public bool AddItem(Equipment equipment)
+    
+    /// <summary>
+    /// 아이템 추가
+    /// </summary>
+    public bool AddItem(Equipment item)
     {
-        foreach (InventorySlot inventorySlot in _inventorySlotList)
+        // 비어있는 슬롯을 찾아서, 슬롯에 아이템 추가 + 가진 아이템리스트에도 추가
+        foreach (InventorySlot slot in _inventorySlotList)
         {
-            if (inventorySlot.IsSlotEmpty)
+            if (slot.IsSlotEmpty)
             {
-                inventorySlot.AddItem(equipment);
-
-                _equipmentList.Add(equipment);
+                slot.AddItem(item);
+                _haveItemList.Add(item);
 
                 return true;
             }
         }
 
-        return false;
+        return false; // 실패
     }
 
-
-
-
-
-
-
-    public void RemoveRandomItem()
+    /// <summary>
+    /// 랜덤 아이템 제거 버튼
+    /// </summary>
+    public void OnClickRemoveRandomItem()
     {
-        Equipment havEquipment = null;
-
-        if (_equipmentList.Count > 0)
-        {
-            Random random = new Random(); // Random 객체 생성
-            int randomIndex = random.Next(0, _equipmentList.Count); // 0부터 리스트 개수-1 사이의 랜덤 인덱스
-            havEquipment = _equipmentList[randomIndex];
-        }
-        else
-        {
-            havEquipment = null;
-            Debug.Log("가진 아이템이 없습니다!");
+        // 가진 아이템 아무것도 없으면 그냥 리턴
+        if (_haveItemList.Count <= 0)
             return;
-        }
 
+        // 가진 아이템들 중에 아무거나 랜덤픽
+        int randomIndex = Random.Range(0, _haveItemList.Count);
+        Equipment randomPickedEquipment = _haveItemList[randomIndex];
 
-        if (RemoveItem(havEquipment))
-        {
-            Debug.Log($"{havEquipment.Name} ---- 제거!");
-        }
+        // 제거
+        if (RemoveItem(randomPickedEquipment))
+            Debug.Log($"{randomPickedEquipment.Name} ---- 제거!");
         else
-        {
-            Debug.Log($"{havEquipment.Name} 가지고 있지 않음");
-        }
+            Debug.Log($"제거 실패!");
     }
 
-    public bool RemoveItem(Equipment equipment)
+    /// <summary>
+    /// 아이템 제거
+    /// </summary>
+    public bool RemoveItem(Equipment item)
     {
-        foreach (InventorySlot inventorySlot in _inventorySlotList)
+        // 해당 아이템이 있는 슬롯을 찾아서 아이템 제거 + 가진 아이템에서도 제거
+        foreach (InventorySlot slot in _inventorySlotList)
         {
-            if (inventorySlot.CurrentSlotItem == equipment)
+            if (slot.CurrentItem == item)
             {
-                inventorySlot.ClearItem();
-                _equipmentList.Remove(equipment);
+                slot.ClearItem();
+                _haveItemList.Remove(item);
+
                 return true;
             }
         }
 
-        return false;
+        return false; // 실패
     }
 
-
-
-
-
-
+    /// <summary>
+    /// 랜덤 EquipmentID 반환
+    /// </summary>
     public EquipmentID GetRandomEquipmentID()
     {
         // Enum 값들을 배열로 가져옴
         Array values = Enum.GetValues(typeof(EquipmentID));
+
         // 랜덤 인덱스 선택
-        Random random = new Random();
-        int randomIndex = random.Next(values.Length);
-        // 랜덤 값 반환
+        int randomIndex = Random.Range(0, values.Length);
+
+        // 랜덤 EquipmentID 반환
         return (EquipmentID)values.GetValue(randomIndex);
     }
-
 }
