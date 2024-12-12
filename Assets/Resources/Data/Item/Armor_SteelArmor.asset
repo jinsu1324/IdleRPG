@@ -9,72 +9,72 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66cf78092f6081f499f31691d49e450e, type: 3}
-  m_Name: Armor_WizardRobe
+  m_Script: {fileID: 11500000, guid: 610534f5f25936f45bdc319be49e65ae, type: 3}
+  m_Name: Armor_SteelArmor
   m_EditorClassIdentifier: 
-  ID: Armor_WizardRobe
-  EquipmentType: Armor
-  Name: "\uB9C8\uBC95\uC0AC\uC758 \uB85C\uBE0C"
-  Grade: "\uC804\uC124"
-  Icon: {fileID: 21300000, guid: 6f41c3cd9c67e474c99900c302c5cb7c, type: 3}
+  ID: Armor_SteelArmor
+  ItemType: Armor
+  Name: "\uAC15\uCCA0 \uAC11\uC637"
+  Grade: "\uC77C\uBC18"
+  Icon: {fileID: 21300000, guid: a47b03b59c561964a91fbf1a21c6902c, type: 3}
   UpgradeInfoList:
   - Level: 1
-    EquipmentStatList:
+    ItemStatList:
     - StatType: MaxHp
-      StatValue: 400
+      StatValue: 170
+    - StatType: CriticalRate
+      StatValue: 5
+  - Level: 2
+    ItemStatList:
+    - StatType: MaxHp
+      StatValue: 180
+    - StatType: CriticalRate
+      StatValue: 6
+  - Level: 3
+    ItemStatList:
+    - StatType: MaxHp
+      StatValue: 190
+    - StatType: CriticalRate
+      StatValue: 7
+  - Level: 4
+    ItemStatList:
+    - StatType: MaxHp
+      StatValue: 200
+    - StatType: CriticalRate
+      StatValue: 8
+  - Level: 5
+    ItemStatList:
+    - StatType: MaxHp
+      StatValue: 210
+    - StatType: CriticalRate
+      StatValue: 9
+  - Level: 6
+    ItemStatList:
+    - StatType: MaxHp
+      StatValue: 220
     - StatType: CriticalRate
       StatValue: 10
-  - Level: 2
-    EquipmentStatList:
+  - Level: 7
+    ItemStatList:
     - StatType: MaxHp
-      StatValue: 410
+      StatValue: 230
     - StatType: CriticalRate
       StatValue: 11
-  - Level: 3
-    EquipmentStatList:
+  - Level: 8
+    ItemStatList:
     - StatType: MaxHp
-      StatValue: 420
+      StatValue: 240
     - StatType: CriticalRate
       StatValue: 12
-  - Level: 4
-    EquipmentStatList:
+  - Level: 9
+    ItemStatList:
     - StatType: MaxHp
-      StatValue: 430
+      StatValue: 250
     - StatType: CriticalRate
       StatValue: 13
-  - Level: 5
-    EquipmentStatList:
+  - Level: 10
+    ItemStatList:
     - StatType: MaxHp
-      StatValue: 440
+      StatValue: 260
     - StatType: CriticalRate
       StatValue: 14
-  - Level: 6
-    EquipmentStatList:
-    - StatType: MaxHp
-      StatValue: 450
-    - StatType: CriticalRate
-      StatValue: 15
-  - Level: 7
-    EquipmentStatList:
-    - StatType: MaxHp
-      StatValue: 460
-    - StatType: CriticalRate
-      StatValue: 16
-  - Level: 8
-    EquipmentStatList:
-    - StatType: MaxHp
-      StatValue: 470
-    - StatType: CriticalRate
-      StatValue: 17
-  - Level: 9
-    EquipmentStatList:
-    - StatType: MaxHp
-      StatValue: 480
-    - StatType: CriticalRate
-      StatValue: 18
-  - Level: 10
-    EquipmentStatList:
-    - StatType: MaxHp
-      StatValue: 490
-    - StatType: CriticalRate
-      StatValue: 19

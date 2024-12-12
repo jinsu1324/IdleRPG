@@ -12,9 +12,9 @@ public class DataManager : SingletonBase<DataManager>
     [SerializeField] public StageDatasSO StageDatasSO { get; private set; }                 // 스테이지 데이터
     [SerializeField] public StartingUpgradeDatasSO StartingUpgradeDatasSO { get; private set; }   // 스타팅 업그레이드 데이터
 
-    [Title("장비 데이터", Bold = false)]
-    [SerializeField] private List<EquipmentDataSO> _equipmentDataSOList;      // 장비 데이터 리스트
-    private Dictionary<string, EquipmentDataSO> _equipmentDataSODict;         // 장비 데이터 딕셔너리
+    [Title("아이템 데이터", Bold = false)]
+    [SerializeField] private List<ItemDataSO> _itemDataSOList;      // 아이템 데이터 리스트
+    private Dictionary<string, ItemDataSO> _itemDataSODict;         // 아이템 데이터 딕셔너리
 
     // 데이터들 set 함수들
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
@@ -31,8 +31,8 @@ public class DataManager : SingletonBase<DataManager>
         // 싱글톤 먼저
         base.Awake(); 
 
-        // 장비 데이터 초기화
-        InitEquipmentDataSODict();    
+        // 아이템 데이터 초기화
+        Init_ItemDataSODict();    
 
 
         // 플레이어 스탯 모디파이어 딕셔너리를 먼저 초기화
@@ -50,27 +50,27 @@ public class DataManager : SingletonBase<DataManager>
     }
 
     /// <summary>
-    /// 장비 데이터 리스트 -> 딕셔너리 초기화
+    /// 아이템 데이터 리스트 -> 딕셔너리 초기화
     /// </summary>
-    private void InitEquipmentDataSODict()
+    private void Init_ItemDataSODict()
     {
-        _equipmentDataSODict = new Dictionary<string, EquipmentDataSO>();
+        _itemDataSODict = new Dictionary<string, ItemDataSO>();
 
-        foreach (EquipmentDataSO equipmentDataSO in _equipmentDataSOList)
+        foreach (ItemDataSO itemDataSO in _itemDataSOList)
         {
-            if (_equipmentDataSODict.ContainsKey(equipmentDataSO.ID) == false)
-                _equipmentDataSODict.Add(equipmentDataSO.ID, equipmentDataSO);
+            if (_itemDataSODict.ContainsKey(itemDataSO.ID) == false)
+                _itemDataSODict.Add(itemDataSO.ID, itemDataSO);
             else
-                Debug.LogWarning($"InitEquipmentDataDict 중 중복된 아이디입니다. : {equipmentDataSO.ID}");
+                Debug.LogWarning($"Init_ItemDataSODict 중 중복된 아이디입니다. : {itemDataSO.ID}");
         }
     }
 
     /// <summary>
-    /// 장비 가져오기
+    /// 아이템 가져오기
     /// </summary>
-    public EquipmentDataSO GetEquipmentDataSOByID(string id)
+    public ItemDataSO GetItemDataSOByID(string id)
     {
-        if (_equipmentDataSODict.TryGetValue(id, out var equipment))
+        if (_itemDataSODict.TryGetValue(id, out var equipment))
         {
             return equipment;
         }
@@ -80,10 +80,10 @@ public class DataManager : SingletonBase<DataManager>
     }
 
     /// <summary>
-    /// 모든 장비 리스트 반환
+    /// 모든 아이템 리스트 반환
     /// </summary>
-    public List<EquipmentDataSO> GetAllEquipmentDataSO()
+    public List<ItemDataSO> GetAllItemDataSO()
     {
-        return new List<EquipmentDataSO>(_equipmentDataSODict.Values);
+        return new List<ItemDataSO>(_itemDataSODict.Values);
     }
 }

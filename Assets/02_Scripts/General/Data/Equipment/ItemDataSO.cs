@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentType
+public enum ItemType
 {
     Weapon,
     Armor
 }
 
-public enum EquipmentID
+public enum ItemID
 {
     Weapon_Sword,
     Weapon_Axe,
@@ -22,10 +22,10 @@ public enum EquipmentID
 }
 
 [System.Serializable]
-public class EquipmentDataSO : ScriptableObject
+public class ItemDataSO : ScriptableObject
 {
     public string ID;
-    public string EquipmentType;
+    public string ItemType;
     public string Name;
     public string Grade;
     public Sprite Icon;
@@ -51,10 +51,10 @@ public class EquipmentDataSO : ScriptableObject
         }
 
         // 해당 레벨의 equipmentStat들을 딕셔너리에 넣기
-        foreach (EquipmentStat equipmentStat in upgradeInfo.EquipmentStatList)
+        foreach (ItemStat itemStat in upgradeInfo.ItemStatList)
         {
-            StatType statType = (StatType)Enum.Parse(typeof(StatType), equipmentStat.StatType);
-            int value = int.Parse(equipmentStat.StatValue);
+            StatType statType = (StatType)Enum.Parse(typeof(StatType), itemStat.StatType);
+            int value = int.Parse(itemStat.StatValue);
 
             statDict.Add(statType, value);
         }
@@ -70,14 +70,14 @@ public class EquipmentDataSO : ScriptableObject
 public class UpgradeInfo
 {
     public string Level;                            // 레벨
-    public List<EquipmentStat> EquipmentStatList;   // 가지고 있는 스탯들 리스트
+    public List<ItemStat> ItemStatList;   // 가지고 있는 스탯들 리스트
 }
 
 /// <summary>
-/// 장비스탯
+/// 아이템 스탯
 /// </summary>
 [System.Serializable]
-public class EquipmentStat
+public class ItemStat
 {
     public string StatType;
     public string StatValue;

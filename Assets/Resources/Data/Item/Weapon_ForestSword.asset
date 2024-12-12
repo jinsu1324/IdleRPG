@@ -9,92 +9,92 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66cf78092f6081f499f31691d49e450e, type: 3}
-  m_Name: Weapon_MagicStaff
+  m_Script: {fileID: 11500000, guid: 610534f5f25936f45bdc319be49e65ae, type: 3}
+  m_Name: Weapon_ForestSword
   m_EditorClassIdentifier: 
-  ID: Weapon_MagicStaff
-  EquipmentType: Weapon
-  Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
-  Grade: "\uC804\uC124"
-  Icon: {fileID: 21300000, guid: b0d8c4dad7f99d4478efdf18f6188d5d, type: 3}
+  ID: Weapon_ForestSword
+  ItemType: Weapon
+  Name: "\uC232\uC758 \uCE7C\uB0A0"
+  Grade: "\uB808\uC5B4"
+  Icon: {fileID: 21300000, guid: d3404beae08505845bfedc0956c2eeb6, type: 3}
   UpgradeInfoList:
   - Level: 1
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 400
+      StatValue: 250
     - StatType: AttackSpeed
       StatValue: 1
     - StatType: CriticalRate
-      StatValue: 15
+      StatValue: 10
   - Level: 2
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 410
+      StatValue: 260
     - StatType: AttackSpeed
       StatValue: 2
     - StatType: CriticalRate
-      StatValue: 16
+      StatValue: 11
   - Level: 3
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 420
+      StatValue: 270
     - StatType: AttackSpeed
       StatValue: 3
     - StatType: CriticalRate
-      StatValue: 17
+      StatValue: 12
   - Level: 4
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 430
+      StatValue: 280
     - StatType: AttackSpeed
       StatValue: 4
     - StatType: CriticalRate
-      StatValue: 18
+      StatValue: 13
   - Level: 5
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 440
+      StatValue: 290
     - StatType: AttackSpeed
       StatValue: 5
     - StatType: CriticalRate
-      StatValue: 19
+      StatValue: 14
   - Level: 6
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 450
+      StatValue: 300
     - StatType: AttackSpeed
       StatValue: 6
     - StatType: CriticalRate
-      StatValue: 20
+      StatValue: 15
   - Level: 7
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 460
+      StatValue: 310
     - StatType: AttackSpeed
       StatValue: 7
     - StatType: CriticalRate
-      StatValue: 21
+      StatValue: 16
   - Level: 8
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 470
+      StatValue: 320
     - StatType: AttackSpeed
       StatValue: 8
     - StatType: CriticalRate
-      StatValue: 22
+      StatValue: 17
   - Level: 9
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 480
+      StatValue: 330
     - StatType: AttackSpeed
       StatValue: 9
     - StatType: CriticalRate
-      StatValue: 23
+      StatValue: 18
   - Level: 10
-    EquipmentStatList:
+    ItemStatList:
     - StatType: AttackPower
-      StatValue: 490
+      StatValue: 340
     - StatType: AttackSpeed
       StatValue: 10
     - StatType: CriticalRate
-      StatValue: 24
+      StatValue: 19

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SelectItemInfoPanel : MonoBehaviour
 {
-    public Equipment CurrentItem { get; private set; }  // 현재 아이템
+    public Item CurrentItem { get; private set; }  // 현재 아이템
 
     [SerializeField] private Image _itemIcon;           // 아이템 아이콘
     [SerializeField] private Button _equipButton;       // 장착 버튼
@@ -25,7 +25,7 @@ public class SelectItemInfoPanel : MonoBehaviour
     /// <summary>
     /// 초기화 및 열기
     /// </summary>
-    public void OpenAndInit(InventorySlot selectedSlot)
+    public void OpenAndInit(ItemSlot selectedSlot)
     {
         CurrentItem = selectedSlot.CurrentItem;
         UIUpdate();
@@ -83,7 +83,6 @@ public class SelectItemInfoPanel : MonoBehaviour
 
         CurrentItem.Enhance();
 
-        Inventory.Instance.FindSlotByItem(CurrentItem); // 슬롯 UI 업데이트
 
         UIUpdate(); // 패널 UI 업데이트
     }

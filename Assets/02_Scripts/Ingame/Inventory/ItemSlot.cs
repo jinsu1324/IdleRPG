@@ -4,9 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour
 {
-    public Equipment CurrentItem { get; private set; }      // 현재 슬롯 아이템
+    public Item CurrentItem { get; private set; }      // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;         // 슬롯이 비어있는지 
     
     [SerializeField] private Image _itemIcon;               // 아이템 아이콘
@@ -36,13 +36,14 @@ public class InventorySlot : MonoBehaviour
         if (CurrentItem == null)
             return;
 
-        Inventory.Instance.HighlightingSelectdSlot(this);
+        //Inventory.Instance.HighlightingSelectdSlot(this);
+        ItemSlotContainer.Instance.HighlightingSelectdSlot(this);
     }
 
     /// <summary>
     /// 아이템 추가
     /// </summary>
-    public void AddItem(Equipment item)
+    public void AddItem(Item item)
     {
         CurrentItem = item;
         UpdateItemInfoUI();
@@ -122,5 +123,5 @@ public class InventorySlot : MonoBehaviour
     /// <summary>
     /// 장착 아이템 OFF
     /// </summary>
-    public void EqiuppedIconOFF() => _equippedIcon.SetActive(false);
+    public void EquippedIconOFF() => _equippedIcon.SetActive(false);
 }

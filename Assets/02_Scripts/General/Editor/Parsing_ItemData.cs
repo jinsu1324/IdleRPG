@@ -7,27 +7,27 @@ using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 
-public class Parsing_EquipmentData : Parsing_Base
+public class Parsing_ItemData : Parsing_Base
 {
     // 시트 이름
-    private readonly string _sheetName_Equipment = "Equipment";
+    private readonly string _sheetName_Item = "Item";
 
     /// <summary>
     /// 메뉴
     /// </summary>
-    [MenuItem("My Menu/Fetch EquipmentData")]
+    [MenuItem("My Menu/Fetch ItemData")]
     public static void OpenWindow()
     {
-        GetWindow<Parsing_EquipmentData>().Show();
+        GetWindow<Parsing_ItemData>().Show();
     }
 
     /// <summary>
     /// 버튼
     /// </summary>
-    [Button("Fetch EquipmentData", ButtonSizes.Large)]
-    public void Fetch_EquipmentData()
+    [Button("Fetch ItemData", ButtonSizes.Large)]
+    public void Fetch_ItemData()
     {
-        Request_DataSheet(_sheetName_Equipment);
+        Request_DataSheet(_sheetName_Item);
     }
 
     /// <summary>
@@ -35,13 +35,13 @@ public class Parsing_EquipmentData : Parsing_Base
     /// </summary>
     public override void Parsing(string json, string sheetName)
     {
-        ParseEquipmentData(json, sheetName);
+        ParseItemData(json, sheetName);
     }
 
     /// <summary>
     /// 장비 데이터 파싱
     /// </summary>
-    private void ParseEquipmentData(string json, string sheetName)
+    private void ParseItemData(string json, string sheetName)
     {
         // Json 데이터를 JsonFormat 객체로 디시리얼라이즈함 (문자열에서 객체로 변환)
         var jsonData = JsonConvert.DeserializeObject<JsonFormat>(json);
@@ -50,7 +50,7 @@ public class Parsing_EquipmentData : Parsing_Base
         var headers = jsonData.values[1];
 
         // ID별로 데이터를 그룹화하기 위한 Dictionary
-        Dictionary<string, EquipmentDataSO> equipmentDataSODict = new Dictionary<string, EquipmentDataSO>();
+        Dictionary<string, ItemDataSO> itemDataSODict = new Dictionary<string, ItemDataSO>();
 
         // 헤더 밑 부분부터 전체 반복
         for (int i = 2; i < jsonData.values.Length; i++)
@@ -63,23 +63,23 @@ public class Parsing_EquipmentData : Parsing_Base
 
             // 딕셔너리에 ID로 id가 없으면 새로 데이터를어서 딕셔너리에 넣고나서 equipmentData로 out
             // 딕셔너리에 ID로 id가 이미 있으면, 그대로 value를 equipmentData에 넣어서 out 
-            if (equipmentDataSODict.TryGetValue(id, out EquipmentDataSO equipmentDataSO) == false)
+            if (itemDataSODict.TryGetValue(id, out ItemDataSO itemDataSO) == false)
             {
-                equipmentDataSO = CreateInstance<EquipmentDataSO>();
-                equipmentDataSO.ID = row[0];
-                equipmentDataSO.EquipmentType = row[1];
-                equipmentDataSO.Name = row[2];
-                equipmentDataSO.Grade = row[3];
-                equipmentDataSO.UpgradeInfoList = new List<UpgradeInfo>();
+                itemDataSO = CreateInstance<ItemDataSO>();
+                itemDataSO.ID = row[0];
+                itemDataSO.ItemType = row[1];
+                itemDataSO.Name = row[2];
+                itemDataSO.Grade = row[3];
+                itemDataSO.UpgradeInfoList = new List<UpgradeInfo>();
                 
-                equipmentDataSODict[id] = equipmentDataSO;
+                itemDataSODict[id] = itemDataSO;
             }
 
             // 업그레이드 인포 추가
             UpgradeInfo upgradeInfo = new UpgradeInfo()
             {
                 Level = row[4],
-                EquipmentStatList = new List<EquipmentStat>()
+                ItemStatList = new List<ItemStat>()
             };
 
             // 한 행에 있는 (한 레벨의) 스탯 정보들 모두 업그레이드 인포의 스탯리스트에 추가
@@ -87,64 +87,64 @@ public class Parsing_EquipmentData : Parsing_Base
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    EquipmentStat stat = new EquipmentStat()
+                    ItemStat stat = new ItemStat()
                     {
                         StatType = row[k],
                         StatValue = row[k + 1]
                     };
-                    upgradeInfo.EquipmentStatList.Add(stat);
+                    upgradeInfo.ItemStatList.Add(stat);
                 }
             }
 
-            // equipmentData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            equipmentDataSO.UpgradeInfoList.Add(upgradeInfo);
+            // itemData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
+            itemDataSO.UpgradeInfoList.Add(upgradeInfo);
         }
 
         // 스크립터블 오브젝트로 저장
-        SaveScriptableObjects(equipmentDataSODict);
+        SaveScriptableObjects(itemDataSODict);
     }
 
 
     /// <summary>
     /// 스크립터블 오브젝트로 저장
     /// </summary>
-    private void SaveScriptableObjects(Dictionary<string, EquipmentDataSO> equipmentDataSODict)
+    private void SaveScriptableObjects(Dictionary<string, ItemDataSO> itemDataSODict)
     {
         // 폴더가 없으면 새로 생성
-        string folderPath = $"Assets/Resources/Data/Equipment/";
+        string folderPath = $"Assets/Resources/Data/Item/";
         if (System.IO.Directory.Exists(folderPath) == false)
             System.IO.Directory.CreateDirectory(folderPath);
 
-        foreach (var kvp in equipmentDataSODict)
+        foreach (var kvp in itemDataSODict)
         {
             string id = kvp.Key;
-            EquipmentDataSO data = kvp.Value;
+            ItemDataSO data = kvp.Value;
 
             // ScriptableObject 경로 설정
             string path = $"{folderPath}{id}.asset";
 
             // ScriptableObject가 이미 있는지 확인
-            EquipmentDataSO equipmentDataSO = AssetDatabase.LoadAssetAtPath<EquipmentDataSO>(path);
+            ItemDataSO itemDataSO = AssetDatabase.LoadAssetAtPath<ItemDataSO>(path);
 
             // ScriptableObject가 없으면 새로 생성, 있으면 그 Load한 데이터를 그대로 사용
-            if (equipmentDataSO == null)
-                equipmentDataSO = CreateInstance<EquipmentDataSO>(); 
+            if (itemDataSO == null)
+                itemDataSO = CreateInstance<ItemDataSO>(); 
             else
                 Debug.Log($"{id} 데이터가 존재해서 업데이트했습니다.");
 
             // ScriptableObject 생성
-            equipmentDataSO.ID = data.ID;
-            equipmentDataSO.EquipmentType = data.EquipmentType;
-            equipmentDataSO.Name = data.Name;
-            equipmentDataSO.Grade = data.Grade;
-            equipmentDataSO.UpgradeInfoList = data.UpgradeInfoList;
+            itemDataSO.ID = data.ID;
+            itemDataSO.ItemType = data.ItemType;
+            itemDataSO.Name = data.Name;
+            itemDataSO.Grade = data.Grade;
+            itemDataSO.UpgradeInfoList = data.UpgradeInfoList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
-            if (AssetDatabase.Contains(equipmentDataSO) == false) 
-                AssetDatabase.CreateAsset(equipmentDataSO, path);
+            if (AssetDatabase.Contains(itemDataSO) == false) 
+                AssetDatabase.CreateAsset(itemDataSO, path);
 
             // 변경된 데이터 저장
-            EditorUtility.SetDirty(equipmentDataSO); 
+            EditorUtility.SetDirty(itemDataSO); 
         }
 
         // 에셋 저장
