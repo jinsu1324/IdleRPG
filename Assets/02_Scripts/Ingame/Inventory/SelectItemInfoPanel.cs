@@ -10,6 +10,7 @@ public class SelectItemInfoPanel : MonoBehaviour
     [SerializeField] private Image _itemIcon;           // 아이템 아이콘
     [SerializeField] private Button _equipButton;       // 장착 버튼
     [SerializeField] private Button _unEquipButton;     // 장착 해제 버튼
+    [SerializeField] private Button _enhanceButton;     // 강화 버튼
 
     /// <summary>
     /// Start
@@ -17,7 +18,8 @@ public class SelectItemInfoPanel : MonoBehaviour
     private void Start()
     {
         _equipButton.onClick.AddListener(OnClickEquipButton);       
-        _unEquipButton.onClick.AddListener(OnClickUnEquipButton);   
+        _unEquipButton.onClick.AddListener(OnClickUnEquipButton);
+        _enhanceButton.onClick.AddListener(OnClickEnhanceButton);
     }
 
     /// <summary>
@@ -74,6 +76,20 @@ public class SelectItemInfoPanel : MonoBehaviour
         UIUpdate();
     }
 
+    public void OnClickEnhanceButton()
+    {
+        if (CurrentItem == null)
+            return;
+
+        CurrentItem.Enhance();
+
+        Inventory.Instance.FindSlotByItem(CurrentItem); // 슬롯 UI 업데이트
+
+        UIUpdate(); // 패널 UI 업데이트
+    }
+
+
+
     /// <summary>
     /// 아이템 아이콘 셋팅
     /// </summary>
@@ -99,8 +115,12 @@ public class SelectItemInfoPanel : MonoBehaviour
     {
         bool isEquipped = Inventory.Instance.IsEquipped(CurrentItem);
 
+        bool isEnhanceable = CurrentItem.IsEnhanceable();
+
         _equipButton.gameObject.SetActive(!isEquipped);  // 장착버튼은 장착되어있으면 비활성화
         _unEquipButton.gameObject.SetActive(isEquipped);   // 해제버튼은 '패널 아이템' = '장착된 아이템' 일 때만 활성화
+        _enhanceButton.gameObject.SetActive(isEnhanceable); // 강화 가능할때만 활성화
+
     }
 
     /// <summary>
@@ -110,5 +130,6 @@ public class SelectItemInfoPanel : MonoBehaviour
     {
         _equipButton.gameObject.SetActive(false);
         _unEquipButton.gameObject.SetActive(false);
+        _enhanceButton.gameObject.SetActive(false);
     }
 }

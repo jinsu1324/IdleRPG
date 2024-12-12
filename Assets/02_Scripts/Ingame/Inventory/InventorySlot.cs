@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,11 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private Image _itemIcon;               // 아이템 아이콘
     [SerializeField] private Button _slotClickButton;       // 슬롯 클릭 버튼
     [SerializeField] private GameObject _equippedIcon;      // 장착되었을 때 아이콘
-    [SerializeField] private GameObject _slotSelectedFrame; // 슬롯 선택했을 때 프레임      
+    [SerializeField] private GameObject _slotSelectedFrame; // 슬롯 선택했을 때 프레임
+
+    [SerializeField] private TextMeshProUGUI _levelText;               // 아이템 레벨 텍스트
+    [SerializeField] private TextMeshProUGUI _countText;               // 아이템 갯수 텍스트
+    [SerializeField] private TextMeshProUGUI _enhanceableCountText;    // 강화 가능한 아이템 갯수 텍스트
 
     /// <summary>
     /// Start
@@ -19,6 +24,8 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         _slotClickButton.onClick.AddListener(OnSlotClicked);    // 슬롯 클릭 시 버튼 이벤트 연결
+
+
     }
 
     /// <summary>
@@ -38,7 +45,7 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Equipment item)
     {
         CurrentItem = item;
-        UpdateItemIcon();
+        UpdateItemInfoUI();
     }        
 
     /// <summary>
@@ -47,36 +54,54 @@ public class InventorySlot : MonoBehaviour
     public void ClearItem()
     {
         CurrentItem = null;
-        UpdateItemIcon();
+        UpdateItemInfoUI();
     }
 
     /// <summary>
-    /// 아이콘 표시 업데이트
+    /// 아이템 정보 UI 업데이트
     /// </summary>
-    private void UpdateItemIcon()
+    public void UpdateItemInfoUI()
     {
         if (CurrentItem == null) 
-            ClearItemIcon();
+            ClearItemInfoUI();
 
-        SetItemIcon();
+        SetItemInfoUI();
     }
 
     /// <summary>
-    /// 아이템 아이콘 셋팅
+    /// 아이템 정보 UI 셋팅
     /// </summary>
-    private void SetItemIcon()
+    private void SetItemInfoUI()
     {
         _itemIcon.sprite = CurrentItem.Icon;
         _itemIcon.gameObject.SetActive(true);
+
+        _levelText.text = CurrentItem.Level.ToString();
+        _levelText.gameObject.SetActive(true);
+
+        _countText.text = CurrentItem.Count.ToString();
+        _countText.gameObject.SetActive(true);
+
+        _enhanceableCountText.text = CurrentItem.EnhanceableCount.ToString();
+        _enhanceableCountText.gameObject.SetActive(true);
     }
 
     /// <summary>
-    /// 아이템 아이콘 클리어
+    /// 아이템 정보 UI 클리어
     /// </summary>
-    private void ClearItemIcon()
+    private void ClearItemInfoUI()
     {
         _itemIcon.sprite = null;
         _itemIcon.gameObject.SetActive(false);
+
+        _levelText.text = string.Empty;
+        _levelText.gameObject.SetActive(false);
+
+        _countText.text = string.Empty;
+        _countText.gameObject.SetActive(false);
+
+        _enhanceableCountText.text = string.Empty;
+        _enhanceableCountText.gameObject.SetActive(false);
     }
 
     /// <summary>

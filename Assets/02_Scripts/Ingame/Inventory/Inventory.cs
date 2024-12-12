@@ -142,7 +142,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// 해당 아이템이 들어있는 슬롯 찾기
     /// </summary>
-    private InventorySlot FindSlotByItem(Equipment item)
+    public InventorySlot FindSlotByItem(Equipment item)
     {
         foreach (InventorySlot slot in _inventorySlotList)
         {
@@ -207,20 +207,20 @@ public class Inventory : MonoBehaviour
         EquipmentDataSO equipmentDataSO 
             = DataManager.Instance.GetEquipmentDataSOByID(GetRandomEquipmentID().ToString());
 
-        //EquipmentDataSO equipmentDataSO
-        //   = DataManager.Instance.GetEquipmentDataSOByID(EquipmentID.Armor_ForestArmor.ToString());
-
 
         // 랜덤 장비 하나 생성
-        //Equipment equipment = new Equipment(equipmentDataSO);
         Equipment equipment = new Equipment(equipmentDataSO, 1);
 
-        // 추가
-        if (AddItem(equipment))
-            Debug.Log($"{equipment.Name} ---- 획득!");
-        else
-            Debug.Log("추가 실패!");
+        int obtainsCount = Random.Range(1, 5); // 1, 2, 3, 4
 
+        for (int i = 0; i < obtainsCount; i++)
+        {
+            // 추가
+            if (AddItem(equipment))
+                Debug.Log($"{equipment.Name} ---- 획득! {i+1}");
+            else
+                Debug.Log("추가 실패!");
+        }
     }
     
     /// <summary>
@@ -228,19 +228,40 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public bool AddItem(Equipment item)
     {
-        // 비어있는 슬롯을 찾아서, 슬롯에 아이템 추가 + 가진 아이템리스트에도 추가
-        foreach (InventorySlot slot in _inventorySlotList)
-        {
-            if (slot.IsSlotEmpty)
-            {
-                slot.AddItem(item);
-                _haveItemList.Add(item);
+        Equipment existEquipment = _haveItemList.Find(x => x.ID == item.ID);    // 이미 있는지 체크
 
-                return true;
+        // 이미 있으면, 그 아이템의 갯수를 추가해주자
+        if (existEquipment != null)
+        {
+            // 갯수 추가
+            existEquipment.AddCount();
+
+            // 해당 아이템의 슬롯을 찾아 UI 갱신
+            InventorySlot slot = FindSlotByItem(existEquipment);
+            slot.UpdateItemInfoUI();
+
+            return true;
+        }
+
+        // 없으면, 새로 아이템을 획득해주자
+        else
+        {
+            // 비어있는 슬롯을 찾아서, 슬롯에 아이템 추가 + 가진 아이템리스트에도 추가
+            foreach (InventorySlot slot in _inventorySlotList)
+            {
+                if (slot.IsSlotEmpty)
+                {
+                    slot.AddItem(item);
+                    _haveItemList.Add(item);
+
+                    return true;
+                }
             }
         }
 
-        return false; // 실패
+       
+        // 그 어떤것도 못했으면 실패야
+        return false;
     }
 
     /// <summary>
@@ -300,28 +321,4 @@ public class Inventory : MonoBehaviour
 
 
 
-
-
-
-
-    //private void Start()
-    //{
-    //    // PlayerStats 초기화
-    //    PlayerStats playerStats = new PlayerStats();
-
-    //    // 장비 생성
-    //    Equipment sword = new Equipment("전설의 검", new Dictionary<StatType, float>
-    //    {
-    //        { StatType.AttackPower, 50 },
-    //        { StatType.AttackSpeed, 10 }
-    //    });
-
-    //    // 장비 장착
-    //    sword.Equip(playerStats);
-    //    Debug.Log("장착 후 공격력: " + playerStats.GetFinalStat(StatType.AttackPower)); // +50
-
-    //    // 장비 해제
-    //    sword.Unequip(playerStats);
-    //    Debug.Log("해제 후 공격력: " + playerStats.GetFinalStat(StatType.AttackPower)); // 0
-    //}
 }
