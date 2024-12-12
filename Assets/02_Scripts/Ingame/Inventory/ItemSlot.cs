@@ -37,7 +37,10 @@ public class ItemSlot : MonoBehaviour
             return;
 
         //Inventory.Instance.HighlightingSelectdSlot(this);
-        ItemSlotContainer.Instance.HighlightingSelectdSlot(this);
+        //ItemSlotManager.Instance.HighlightingSelectdSlot(this);
+
+        InventoryManager.Instance.GetItemSlotManager(CurrentItem.ItemType).HighlightingSelectdSlot(this);
+
     }
 
     /// <summary>

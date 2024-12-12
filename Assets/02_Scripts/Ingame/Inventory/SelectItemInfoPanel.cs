@@ -60,7 +60,8 @@ public class SelectItemInfoPanel : MonoBehaviour
         if (CurrentItem == null)
             return;
 
-        Inventory.Instance.Equip(CurrentItem);  // 현재 아이템 장착
+        //ItemEquipManager.Instance.Equip(CurrentItem);  // 현재 아이템 장착
+        InventoryManager.Instance.GetItemEquipManager(CurrentItem.ItemType).Equip(CurrentItem);
         UIUpdate();
     }
 
@@ -72,7 +73,8 @@ public class SelectItemInfoPanel : MonoBehaviour
         if (CurrentItem == null)
             return;
 
-        Inventory.Instance.UnEquip(CurrentItem); // 현재 아이템 장착 해제
+        //ItemEquipManager.Instance.UnEquip(CurrentItem); // 현재 아이템 장착 해제
+        InventoryManager.Instance.GetItemEquipManager(CurrentItem.ItemType).UnEquip(CurrentItem);
         UIUpdate();
     }
 
@@ -112,7 +114,9 @@ public class SelectItemInfoPanel : MonoBehaviour
     /// </summary>
     private void ButtonsON()
     {
-        bool isEquipped = Inventory.Instance.IsEquipped(CurrentItem);
+
+        //bool isEquipped = ItemEquipManager.Instance.IsEquipped(CurrentItem);
+        bool isEquipped = InventoryManager.Instance.GetItemEquipManager(CurrentItem.ItemType).IsEquipped(CurrentItem);
 
         bool isEnhanceable = CurrentItem.IsEnhanceable();
 

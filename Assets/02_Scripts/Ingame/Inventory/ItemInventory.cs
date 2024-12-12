@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HaveItemContainer
+public class ItemInventory : MonoBehaviour
 {
-    private static List<Item> _haveItemList = new List<Item>();      // 가지고 있는 아이템 리스트
+    private List<Item> _itemList = new List<Item>();      // 가지고 있는 아이템 리스트
 
     /// <summary>
-    /// 가지고 있는 아이템인지 체크
+    /// 가지고 있는 아이템인지
     /// </summary>
-    public static Item HaveItemCheck(Item item)
+    public Item HasItemInInventory(Item item)
     {
-        Item existItem = _haveItemList.Find(x => x.ID == item.ID);
+        Item existItem = _itemList.Find(x => x.ID == item.ID);
 
         if (existItem != null)
         {
@@ -27,8 +27,8 @@ public class HaveItemContainer
     /// <summary>
     /// 가지고 있는 아이템 리스트에 추가
     /// </summary>
-    public static void AddHaveItemList(Item item)
+    public void AddInventory(Item item)
     {
-        _haveItemList.Add(item);
+        _itemList.Add(item);
     }
 }

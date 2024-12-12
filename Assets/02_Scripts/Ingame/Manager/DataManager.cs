@@ -80,6 +80,15 @@ public class DataManager : SingletonBase<DataManager>
     }
 
     /// <summary>
+    /// 아이템 타입에 맞는 모든 아이템데이터 리스트로 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public List<ItemDataSO> GetAllItemDataSOByItemType(ItemType itemType)
+    {
+        return _itemDataSOList.FindAll(x => x.ItemType == itemType.ToString());
+    }
+
+    /// <summary>
     /// 모든 아이템 리스트 반환
     /// </summary>
     public List<ItemDataSO> GetAllItemDataSO()
