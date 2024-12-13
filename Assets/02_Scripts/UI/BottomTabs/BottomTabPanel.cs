@@ -1,86 +1,58 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum BottomTabType
-{
-    PlayerDetail,
-    Shop
-}
-
-
 public class BottomTabPanel : SerializedMonoBehaviour
 {
-    [SerializeField] private Dictionary<BottomTabType, GameObject> _tabPopupDict;
-    [SerializeField] private List<BottomTab> _bottomBatList;
-    private GameObject _currentPopup;
+    private BottomTab _currentOpenTab;    // 현재 열려있는 하단탭
 
-
-    // 버튼 클릭하면,
-        // 팝업 켜지고
-        // x버튼 켜지기
-    // 다른버튼 클릭하면
-        // 원래팝업 닫히고
-        // x버튼도 꺼지고
-        // 다른버튼의 팝업 켜지고
-        // 다른버튼의 x버튼 켜지기
-
-
+    /// <summary>
+    /// OnEnable
+    /// </summary>
     private void OnEnable()
     {
-        BottomTab.OnButtonClicked += ShowPopup;
+        BottomTab.OnOpenButtonClicked += Update_CurrentOpenTab; // 열기버튼 눌렀을 때, 현재열린 탭 업데이트
+        BottomTab.OnCloseButtonClicked += Clear_CurrentOpenTab; // 닫기버튼 눌렀을 때, 현재열린 탭 비우기
     }
 
-    
-
-
-
-
-
-
-    public void ShowPopup(BottomTabType bottomTabType, BottomTab bottomTab)
+    /// <summary>
+    /// 현재열린탭 업데이트
+    /// </summary>
+    public void Update_CurrentOpenTab(BottomTab bottomTab)
     {
-        if (_tabPopupDict.TryGetValue(bottomTabType, out GameObject popup))
+        // 1. 아직 열린 탭이 하나도 없으면 현재탭으로 
+        if (_currentOpenTab == null)
+            _currentOpenTab = bottomTab;
+
+        // 2. 같은 탭이 눌리면 그냥 그대로
+        if (_currentOpenTab == bottomTab)
+            return;
+
+        // 3. 다른 탭이 눌리면
+        if (_currentOpenTab != bottomTab)
         {
-            // 전체 창 끄기
-            foreach (var kvp in _tabPopupDict)
-                kvp.Value.SetActive(false);
-
-            // x아이콘도 다 끄기
-            foreach (BottomTab tab in _bottomBatList)
-                tab.CloseGO_OFF();
-
-
-
-
-            // 이미열려있는 창이면 열지말고 그냥 나가기
-            if (popup == _currentPopup)
-            {
-                Debug.Log("이미 열려있는 창임");
-                _currentPopup = null;
-                bottomTab.CloseGO_OFF();
-                return;
-            }
-
-
-            // 창 열기
-            _currentPopup = popup;
-            popup.SetActive(true);
-            bottomTab.CloseGO_ON();
+            _currentOpenTab.CloseTabPopup();  // 원래 탭 끄고
+            _currentOpenTab = bottomTab;      // 새로운 탭이 현재탭을 대체
         }
     }
 
-    private void OnDisable()
+    /// <summary>
+    /// 현재열린탭 비우기
+    /// </summary>
+    public void Clear_CurrentOpenTab()
     {
-        BottomTab.OnButtonClicked -= ShowPopup;
-
+        _currentOpenTab = null;   // 현재 열린탭을 아무것도 없게
     }
 
-
-
-    
-
-
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        BottomTab.OnOpenButtonClicked -= Update_CurrentOpenTab;
+        BottomTab.OnCloseButtonClicked -= Clear_CurrentOpenTab;
+    }
 }

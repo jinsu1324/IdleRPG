@@ -6,39 +6,41 @@ using UnityEngine.UI;
 
 public class BottomTab : MonoBehaviour
 {
-    [SerializeField] private Button _openButton;
-    [SerializeField] private GameObject _closeGO;
-    [SerializeField] private BottomTabType _bottomTabType;
+    public static event Action<BottomTab> OnOpenButtonClicked;   // ¿­±â¹öÆ° ´­·¶À» ¶§ ÀÌº¥Æ®
+    public static event Action OnCloseButtonClicked;             // ´Ý±â¹öÆ° ´­·¶À» ¶§ ÀÌº¥Æ®
 
-    public static event Action<BottomTabType, BottomTab> OnButtonClicked;
+    [SerializeField] private GameObject _tabPopup;  // ÀÌ ÅÇ ´©¸£¸é ¿­¸± ÆË¾÷
+    [SerializeField] private Button _openButton;    // ¿­±â ¹öÆ°
+    [SerializeField] private Button _closeButton;   // ´Ý±â ¹öÆ°
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
-        _openButton.onClick.AddListener(ONClickOpenButton);
+        _openButton.onClick.AddListener(OpenTabPopup);
+        _closeButton.onClick.AddListener(CloseTabPopup);
     }
 
-
-
-
-    public void ONClickOpenButton()
+    /// <summary>
+    /// ÆË¾÷ ¿­±â
+    /// </summary>
+    public void OpenTabPopup()
     {
-        OnButtonClicked?.Invoke(_bottomTabType, this); // ÆË¾÷ ¿­¸²
+        _tabPopup.SetActive(true);  // ÆË¾÷ ¿­±â
+        _openButton.gameObject.SetActive(false);  // ¿­±â ¹öÆ°Àº ²û
+        _closeButton.gameObject.SetActive(true);  // ´Ý±â ¹öÆ°Àº ÄÔ
+
+        OnOpenButtonClicked?.Invoke(this);
     }
 
-
-
-
-
-
-    public void CloseGO_ON()
+    /// <summary>
+    /// ÆË¾÷ ´Ý±â
+    /// </summary>
+    public void CloseTabPopup()
     {
-        _closeGO.SetActive(true);
+        _tabPopup.SetActive(false); // ÆË¾÷ ´Ý±â
+        _openButton.gameObject.SetActive(true);   // ¿­±â ¹öÆ°Àº ÄÔ
+        _closeButton.gameObject.SetActive(false); // ´Ý±â ¹öÆ°Àº ²û
     }
-
-    public void CloseGO_OFF()
-    {
-        Debug.Log($"{_bottomTabType} go ´ÝÈû");
-        _closeGO.SetActive(false);
-    }
-
 }
