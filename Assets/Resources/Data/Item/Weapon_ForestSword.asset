@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: Weapon_ForestSword
   ItemType: Weapon
   Name: "\uC232\uC758 \uCE7C\uB0A0"
-  Grade: "\uB808\uC5B4"
+  Grade: Rare
   Icon: {fileID: 21300000, guid: d3404beae08505845bfedc0956c2eeb6, type: 3}
   UpgradeInfoList:
   - Level: 1

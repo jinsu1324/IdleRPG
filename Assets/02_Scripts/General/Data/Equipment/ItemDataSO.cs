@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ItemGrade
+{
+    Normal,
+    Rare,
+    Legendary
+}
+
 public enum ItemType
 {
     Weapon,
@@ -35,7 +42,7 @@ public class ItemDataSO : ScriptableObject
     /// <summary>
     /// 원하는 레벨에 맞는 스탯들 딕셔너리로 가져오기
     /// </summary>
-    public Dictionary<StatType, int> GetStatDictionaryByLevel(int level)
+    public Dictionary<StatType, int> GetStatDictByLevel(int level)
     {
         // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
         Dictionary<StatType, int> statDict = new Dictionary<StatType, int>();

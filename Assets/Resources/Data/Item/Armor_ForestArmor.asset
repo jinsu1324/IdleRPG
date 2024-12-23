@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: Armor_ForestArmor
   ItemType: Armor
   Name: "\uC232\uC758 \uAC11\uC637"
-  Grade: "\uB808\uC5B4"
+  Grade: Rare
   Icon: {fileID: 21300000, guid: 53487e5eda7895e4ca68f6d0a2c609f7, type: 3}
   UpgradeInfoList:
   - Level: 1

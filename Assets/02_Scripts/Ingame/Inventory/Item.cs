@@ -7,16 +7,15 @@ public class Item
 {
     private readonly ItemDataSO _baseData;                      // 아이템 데이터
     public string ID { get; private set; }                      // ID
+    public ItemType ItemType { get; private set; }              // 아이템이 속한 아이템 타입
     public string Name { get; private set; }                    // 이름
+    public string Grade { get; private set; }                   // 등급
     public Sprite Icon { get; private set; }                    // 아이콘
+    public int Level { get; private set; }                      // 레벨
+    public int Count { get; private set; }                      // 갯수
+    public int EnhanceableCount { get; private set; }           // 강화 가능한 갯수
 
-    private Dictionary<StatType, int> _statDictionaryByLevel;   // 아이템이 제공하는 스탯들 딕셔너리 (레벨에 맞게)
-
-    public int Level { get; private set; }  // 레벨
-    public int Count { get; private set; }  // 갯수
-    public int EnhanceableCount { get; private set; }   // 강화 가능한 갯수
-
-    public ItemType ItemType { get; private set; }  // 아이템이 속한 아이템 타입
+    private Dictionary<StatType, int> _statDict;                // 아이템이 제공하는 스탯들 딕셔너리 (레벨에 맞게)
 
     /// <summary>
     /// 생성자
@@ -24,47 +23,43 @@ public class Item
     public Item(ItemDataSO baseData, int level)
     {
         _baseData = baseData;
-        ID = _baseData.ID;
-        Name = _baseData.Name;
-        Icon = _baseData.Icon;
+        ID = baseData.ID;
+        ItemType = (ItemType)Enum.Parse(typeof(ItemType), baseData.ItemType) ;
+        Name = baseData.Name;
+        Grade = baseData.Grade;
+        Icon = baseData.Icon;
         Level = level;
-        ItemType = (ItemType)Enum.Parse(typeof(ItemType), _baseData.ItemType) ;
-
         Count = 1;
         EnhanceableCount = 10;
-
-        // 생성된 아이템의 level에 맞는 스탯들을 딕셔너리로 가져오기
-        _statDictionaryByLevel = new Dictionary<StatType, int>(_baseData.GetStatDictionaryByLevel(level));
+        _statDict = new Dictionary<StatType, int>(_baseData.GetStatDictByLevel(level));
     }
 
     /// <summary>
-    /// 장비가 제공하는 스탯들 딕셔너리 리턴 (레벨에 맞게)
+    /// 스탯들 딕셔너리 가져오기
     /// </summary>
-    public Dictionary<StatType, int> GetStatDictionaryByLevel() => _statDictionaryByLevel;
+    public Dictionary<StatType, int> GetStatDict() => _statDict;
 
+    /// <summary>
+    /// 아이템 갯수 추가
+    /// </summary>
+    public void AddCount() => Count++;
 
+    /// <summary>
+    /// 아이템 갯수 강화갯수만큼 소비
+    /// </summary>
+    public void RemoveCountByEnhance() => Count -= EnhanceableCount;
 
-    public void AddCount()
+    /// <summary>
+    /// 아이템 레벨업
+    /// </summary>
+    public void ItemLevelUp()
     {
-        Count++;
+        Level++;    // 레벨업
+        _statDict = new Dictionary<StatType, int>(_baseData.GetStatDictByLevel(Level));  // 레벨에 맞는 새로운 스탯들 적용
     }
 
-    public bool IsEnhanceable()
-    {
-        return Count >= EnhanceableCount;
-    }
-
-    public void Enhance()
-    {
-        Debug.Log("강화버튼 눌렸습니다! 강화합니다!");
-
-        Count -= EnhanceableCount; // 갯수 소비
-
-        Level++;    // 레벨 증가
-
-        _statDictionaryByLevel = new Dictionary<StatType, int>(_baseData.GetStatDictionaryByLevel(Level));  // 레벨에 맞는 새로운 스탯들 적용
-
-        //ItemSlotFinder.FindSlot_ContainItem(this, ItemSlotManager.Instance.GetItemSlotList()).UpdateItemInfoUI();
-        ItemSlotFinder.FindSlot_ContainItem(this, InventoryManager.Instance.GetItemSlotManager(ItemType).GetItemSlotList()).UpdateItemInfoUI();
-    }
+    /// <summary>
+    /// 강화 가능한지?
+    /// </summary>
+    public bool IsEnhanceable() => Count >= EnhanceableCount;
 }

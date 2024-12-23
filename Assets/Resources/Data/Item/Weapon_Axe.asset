@@ -15,7 +15,7 @@ MonoBehaviour:
   ID: Weapon_Axe
   ItemType: Weapon
   Name: "\uB3C4\uB07C"
-  Grade: "\uC77C\uBC18"
+  Grade: Normal
   Icon: {fileID: 21300000, guid: 1c2a7e12ca40c1e4a9245b3da20a13a4, type: 3}
   UpgradeInfoList:
   - Level: 1

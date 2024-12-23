@@ -35,8 +35,6 @@ public class PlayerSpawner : MonoBehaviour
             CriticalRate = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalRate),
             CriticalMultiple = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)
         };
-
-        Debug.Log($"AttackSpeed : {args.AttackSpeed}");
         PlayerInstance.Init(args); // 인스턴스 초기화
     }
 

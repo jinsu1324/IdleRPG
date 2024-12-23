@@ -86,49 +86,6 @@ public class PlayerStats : SingletonBase<PlayerStats>
 
 
 
-
-
-
-
-
-
-    /// <summary>
-    /// 플레이어 스탯에 아이템 스탯들 추가
-    /// </summary>
-    public void AddItemStatsToPlayer(Dictionary<StatType, int> statDict, Item selfItem)
-    {
-        foreach (var kvp in statDict)
-            PlayerStats.Instance.UpdateModifier(kvp.Key, kvp.Value, selfItem);
-    }
-
-    /// <summary>
-    /// 플레이어 스탯에서 아이템 스탯들 제거
-    /// </summary>
-    public void RemoveItemStatsToPlayer(Dictionary<StatType, int> statDict, Item selfItem)
-    {
-        foreach (var kvp in statDict)
-            PlayerStats.Instance.RemoveModifier(kvp.Key, selfItem);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //--------------------------------------------------------------
     public TextMeshProUGUI _attackPowerText;
     public TextMeshProUGUI _attackSpeedText;

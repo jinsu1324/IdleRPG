@@ -5,22 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-// 실제 에어컨이나 공기청정기 같은 기계를 만든다고 생각해보자.
-// 어디에 추가될지는 얘 자체가 가지고 있을 필요가 없어.
-// 연결해주는 통로는 필요해 어디에 추가할지는
-// 얘는 드롭머신일 뿐이지. 그 저장소가 아니란말이야
-// 저장소가 어딘지 연결할건 필요해
-// 그 저장소가 추상적인 곳이 아니라면, 어디서라도 반드시 참조는 해줘야해
-
 /// <summary>
 /// 아이템 획득 기계
 /// </summary>
 public class ItemDropMachine : MonoBehaviour
 {
-    [Title("획득한 아이템을 저장할 인벤토리", Bold = false)]
-    [SerializeField] private ItemInventory _itemInventory;    // 아이템 인벤토리
-
-    [SerializeField] private ItemType _itemType;    // 인벤토리의 아이템 타입
+    [SerializeField] private ItemType _itemType;    // 획득할 아이템 타입
 
     /// <summary>
     /// 랜덤 아이템 획득 버튼
@@ -32,47 +22,29 @@ public class ItemDropMachine : MonoBehaviour
         
         for (int i = 0; i < dropCount; i++) // 획득 수 만큼 반복 획득
             AcquireItem(item);
+
+        Debug.Log("------------------------------");
+        ItemInven.CheckCurrentItemInven(item);  // 일단 디버그로 체크용
     }
 
     /// <summary>
     /// 아이템 획득
     /// </summary>
-    private bool AcquireItem(Item item)
+    private void AcquireItem(Item item)
     {
         // 가지고 있는 아이템인지 체크
-        Item existItem = _itemInventory.HasItemInInventory(item); 
+        Item existItem = ItemInven.HasItemInInven(item); 
 
-        // 이미 있으면, 그 아이템의 갯수를 추가해주자
+        // 이미 있으면, 그 아이템의 갯수만 추가
         if (existItem != null)
         {
-            // 갯수 추가
             existItem.AddCount();
-
-            // 해당 아이템의 슬롯을 찾아 UI 갱신
-            ItemSlot itemSlot = ItemSlotFinder.FindSlot_ContainItem(existItem, InventoryManager.Instance.GetItemSlotManager(existItem.ItemType).GetItemSlotList());
-            itemSlot.UpdateItemInfoUI();
-
-            
-
-            return true;
+            return;
         }
-
-        // 없으면, 새로 아이템을 획득해주자
-        else
-        {
-            ItemSlot emptySlot = ItemSlotFinder.FindSlot_Empty(InventoryManager.Instance.GetItemSlotManager(item.ItemType).GetItemSlotList());
-
-            if (emptySlot != null)
-            {
-                emptySlot.AddItem(item);
-                _itemInventory.AddInventory(item);
-
-                return true;
-            }
-        }
-
-        Debug.Log("아이템을 추가하지 못했습니다.");
-        return false; // 그 어떤것도 못했으면 실패
+        
+        // 없으면, 새로 아이템을 추가
+        ItemInven.AddItem(item);
+        return;
     }
 
     /// <summary>
@@ -80,13 +52,16 @@ public class ItemDropMachine : MonoBehaviour
     /// </summary>
     private Item RandomPickItem()
     {
-        List<ItemDataSO> typeItemDataSOList =  DataManager.Instance.GetAllItemDataSOByItemType(_itemType);
+        // 같은 아이템타입의 아이템데이터는 모두 가져오기
+        List<ItemDataSO> typeItemDataSOList =  DataManager.Instance.GetAllItemDataSOByItemType(_itemType);  
 
+        // 그 아이템데이터들 중에서 하나 랜덤 픽
         ItemDataSO itemDataSO = typeItemDataSOList[RandomPickItemIndex(typeItemDataSOList.Count)];
 
-        Item equipment = new Item(itemDataSO, 1); // 아이템 타입에 맞는 랜덤한 장비 하나 생성
+        // 랜덤픽된 데이터로 아이템 만들기
+        Item item = new Item(itemDataSO, 1);
 
-        return equipment;
+        return item;
     }
 
     /// <summary>
@@ -95,7 +70,6 @@ public class ItemDropMachine : MonoBehaviour
     private int RandomPickItemIndex(int maxCount)
     {
         int index = Random.Range(0, maxCount);
-
         return index;
     }
 
@@ -105,22 +79,6 @@ public class ItemDropMachine : MonoBehaviour
     private int RandomPickDropCount(int maxCount)
     {
         int dropCount = Random.Range(1, 5 + 1);
-
         return dropCount;
-    }
-
-    /// <summary>
-    /// 랜덤 EquipmentID 반환
-    /// </summary>
-    private ItemID GetRandomItemID()
-    {
-        // Enum 값들을 배열로 가져옴
-        Array values = Enum.GetValues(typeof(ItemID));
-
-        // 랜덤 인덱스 선택
-        int randomIndex = Random.Range(0, values.Length);
-
-        // 랜덤 EquipmentID 반환
-        return (ItemID)values.GetValue(randomIndex);
     }
 }
