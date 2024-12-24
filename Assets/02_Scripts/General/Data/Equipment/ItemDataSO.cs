@@ -13,7 +13,8 @@ public enum ItemGrade
 public enum ItemType
 {
     Weapon,
-    Armor
+    Armor,
+    Helmet
 }
 
 public enum ItemID
@@ -25,7 +26,11 @@ public enum ItemID
     Armor_LeatherArmor,
     Armor_SteelArmor,
     Armor_ForestArmor,
-    Armor_WizardRobe
+    Armor_WizardRobe,
+    Helmet_BikingHelmet,
+    Helmet_KnightHelmet,
+    Helmet_ForestHelmet,
+    Helmet_WizardHelmet
 }
 
 [System.Serializable]

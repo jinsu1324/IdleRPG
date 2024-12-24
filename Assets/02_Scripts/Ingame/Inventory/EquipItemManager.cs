@@ -9,7 +9,8 @@ public class EquipItemManager
     private static Dictionary<ItemType, Item> _equipItemDict = new Dictionary<ItemType, Item>
     { 
         { ItemType.Weapon, null},
-        { ItemType.Armor, null}
+        { ItemType.Armor, null},
+        { ItemType.Helmet, null}
     };
 
     /// <summary>

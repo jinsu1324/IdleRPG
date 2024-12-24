@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Armor
   Name: "\uC232\uC758 \uAC11\uC637"
   Grade: Rare
-  Icon: {fileID: 21300000, guid: 53487e5eda7895e4ca68f6d0a2c609f7, type: 3}
+  Icon: {fileID: 21300000, guid: 74676c0c7ec2ff94fb0092535cc8a686, type: 3}
   UpgradeInfoList:
   - Level: 1
     ItemStatList:

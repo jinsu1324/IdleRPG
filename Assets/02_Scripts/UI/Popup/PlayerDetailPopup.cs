@@ -24,6 +24,7 @@ public class PlayerDetailPopup : PopupBase
     [Title("인벤토리 버튼", bold : false)]
     [SerializeField] private Button _weaponInvenButton;             // 무기 인벤토리 버튼
     [SerializeField] private Button _armorInvenButton;              // 갑옷 인벤토리 버튼
+    [SerializeField] private Button _helmetInvenButton;             // 헬멧 인벤토리 버튼
 
     [Title("인벤토리 팝업", bold: false)]
     [SerializeField] private InvenPopup _invenPopup;                // 인벤토리 팝업
@@ -35,6 +36,7 @@ public class PlayerDetailPopup : PopupBase
     {
         _weaponInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Weapon)); // 버튼 누르면 타입에 맞는 인벤토리 켜지게
         _armorInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Armor));
+        _helmetInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Helmet));
     }
 
     /// <summary>

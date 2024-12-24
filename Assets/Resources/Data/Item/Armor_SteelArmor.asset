@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Armor
   Name: "\uAC15\uCCA0 \uAC11\uC637"
   Grade: Normal
-  Icon: {fileID: 21300000, guid: a47b03b59c561964a91fbf1a21c6902c, type: 3}
+  Icon: {fileID: 21300000, guid: 8f243b23814ba334b815abb6af6bcdcb, type: 3}
   UpgradeInfoList:
   - Level: 1
     ItemStatList:
