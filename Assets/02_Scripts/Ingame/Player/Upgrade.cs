@@ -57,10 +57,10 @@ public class Upgrade : BaseData
     private void UpdatePlayerStats()
     {
         StatType statType = (StatType)Enum.Parse(typeof(StatType), ID);
-        PlayerStats.Instance.UpdateModifier(statType, Value, this); // 업그레이드 소스를 고유하게 설정
 
+        Dictionary<StatType, int> dict = new Dictionary<StatType, int>();
+        dict[statType] = Value;
 
-
-        PlayerStats.Instance.AllStatUIUpdate();
+        PlayerStats.Instance.UpdateModifier(dict, this); // 업그레이드 소스를 고유하게 설정
     }
 }

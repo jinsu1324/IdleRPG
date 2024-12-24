@@ -42,21 +42,42 @@ public class PlayerDetailPopup : PopupBase
     /// </summary>
     public override void Show()
     {
-        SelectItemInfoUI.OnItemStatueChanged += UIUpdate;   // 아이템 상태가 바뀌면, 캐릭터 정보팝업 UI 업데이트
-        UIUpdate();
+        SelectItemInfoUI.OnItemStatueChanged += Update_EquipSlots;   // 아이템 상태가 바뀌면, 캐릭터 정보팝업 UI 업데이트
+        PlayerStats.OnPlayerStatChanged += Update_StatTexts;
+
+
+        PlayerStatArgs args = PlayerStats.Instance.CalculateStats(0);
+        Update_StatTexts(args);
+        
+        Update_EquipSlots();
+        
         gameObject.SetActive(true);
     }
+
+
+
+    private void Update_StatTexts(PlayerStatArgs args)
+    {
+        _attackPowerText.text = $"{args.AttackPower}";
+        _attackSpeedText.text = $"{args.AttackSpeed}";
+        _maxHpText.text = $"{args.MaxHp}";
+        _criticalRateText.text = $"{args.CriticalRate}";
+        _criticalMultipleText.text = $"{args.CriticalMultiple}";
+    }
+
+
+
 
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    private void UIUpdate()
+    private void Update_EquipSlots()
     {
-        _attackPowerText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.AttackPower)}";
-        _attackSpeedText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)}";
-        _maxHpText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.MaxHp)}";
-        _criticalRateText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)}";
-        _criticalMultipleText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)}";
+        //_attackPowerText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.AttackPower)}";
+        //_attackSpeedText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)}";
+        //_maxHpText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.MaxHp)}";
+        //_criticalRateText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)}";
+        //_criticalMultipleText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)}";
 
         // 장착한 장비에 따라 장비슬롯 업데이트
         foreach (var kvp in _equipSlotDict)
@@ -78,7 +99,8 @@ public class PlayerDetailPopup : PopupBase
     /// </summary>
     public override void Hide()
     {
-        SelectItemInfoUI.OnItemStatueChanged -= UIUpdate;
+        SelectItemInfoUI.OnItemStatueChanged -= Update_EquipSlots;
+        PlayerStats.OnPlayerStatChanged -= Update_StatTexts;
         gameObject.SetActive(false);
     }
 }

@@ -16,7 +16,7 @@ public class UpgradePanel : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        UpgradeManager.OnUpgradeChanged += UpdateTotalPowerTextUI;    // 업그레이드가 변경될 때, 총합 전투력 텍스트UI 업데이트 
+        PlayerStats.OnPlayerStatChanged += UpdateTotalPowerTextUI;    // 플레이어 스탯 변경되었을 때, 총합 전투력 텍스트UI 업데이트 
     }
 
     /// <summary>
@@ -39,14 +39,14 @@ public class UpgradePanel : MonoBehaviour
             statUpgradeSlot.Init(upgrade.ID);
         }
 
-        OnStatChangedArgs args = new OnStatChangedArgs() { TotalPower = UpgradeManager.TotalPower };
+        PlayerStatArgs args = new PlayerStatArgs() { TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()) };
         UpdateTotalPowerTextUI(args);
     }
 
     /// <summary>
     /// 총합 전투력 텍스트 업데이트
     /// </summary>
-    private void UpdateTotalPowerTextUI(OnStatChangedArgs args)
+    private void UpdateTotalPowerTextUI(PlayerStatArgs args)
     {
         _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalPower);
     }
@@ -56,6 +56,6 @@ public class UpgradePanel : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        UpgradeManager.OnUpgradeChanged -= UpdateTotalPowerTextUI;
+        PlayerStats.OnPlayerStatChanged -= UpdateTotalPowerTextUI;
     }
 }

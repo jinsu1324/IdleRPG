@@ -12,35 +12,33 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        UpgradeManager.OnUpgradeChanged += ShowToastCombatPower; // 스탯이 변경될 때, 총합공격력 토스트메시지 보여주기
+        PlayerStats.OnPlayerStatChanged += StartShow_ToastCombatPower;  // 플레이어 스탯 변경되었을 때, 전투력 토스트메시지 보여주기
     }
 
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
     /// </summary>
-    public void ShowToastCombatPower(OnStatChangedArgs args)
+    public void StartShow_ToastCombatPower(PlayerStatArgs args)
     {
         // 이미 코루틴 있으면 실행 중단
         if (_toastCombatPowerCoroutine != null) 
             StopCoroutine(_toastCombatPowerCoroutine);
 
         // 새로운 코루틴 시작
-        _toastCombatPowerCoroutine = StartCoroutine(ShowToastCombatPowerCoroutine());
+        _toastCombatPowerCoroutine = StartCoroutine(Show_ToastCombatPower(args));
     }
 
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주는 코루틴
     /// </summary>
-    private IEnumerator ShowToastCombatPowerCoroutine()
+    private IEnumerator Show_ToastCombatPower(PlayerStatArgs args)
     {
-        _toastCombatPower.gameObject.SetActive(false);
+        _toastCombatPower.Hide();
 
-        _toastCombatPower.Init();
-        _toastCombatPower.gameObject.SetActive(true);
-
+        _toastCombatPower.Init(args);
         yield return new WaitForSeconds(1f);
 
-        _toastCombatPower.gameObject.SetActive(false);
+        _toastCombatPower.Hide();
     }
 
     /// <summary>
@@ -48,6 +46,6 @@ public class ToastManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        UpgradeManager.OnUpgradeChanged -= ShowToastCombatPower;
+        PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
     }
 }

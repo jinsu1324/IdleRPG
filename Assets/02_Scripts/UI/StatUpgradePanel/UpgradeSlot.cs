@@ -32,14 +32,13 @@ public class UpgradeSlot : MonoBehaviour
 
         _UpgradeButton.Init(_id);   // 업그레이드 버튼 초기화
 
-        OnStatChangedArgs args = new OnStatChangedArgs();
-        UpdateUpgradeSlotUI(args);
+        UpdateUpgradeSlotUI();
     }
 
     /// <summary>
     /// 슬롯 UI 업데이트
     /// </summary>
-    private void UpdateUpgradeSlotUI(OnStatChangedArgs args)
+    private void UpdateUpgradeSlotUI()
     {
         // 이 슬롯의 업그레이드 ID에 맞게 스탯 가져오기
         Upgrade stat = UpgradeManager.GetUpgrade(_id);

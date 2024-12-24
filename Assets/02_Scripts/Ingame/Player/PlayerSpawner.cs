@@ -25,15 +25,14 @@ public class PlayerSpawner : MonoBehaviour
         PlayerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
         PlayerInstance.transform.position = _playerSpawnPos.position;
 
-        OnStatChangedArgs args = new OnStatChangedArgs()
+        PlayerStatArgs args = new PlayerStatArgs()
         {
-            UpgradeList = UpgradeManager.GetAllUpgrades(),
-            TotalPower = (int)PlayerStats.Instance.GetAllFinalStat(),
-            AttackPower = (int)PlayerStats.Instance.GetFinalStat(StatType.AttackPower),
-            AttackSpeed = (int)PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed),
-            MaxHp = (int)PlayerStats.Instance.GetFinalStat(StatType.MaxHp),
-            CriticalRate = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalRate),
-            CriticalMultiple = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)
+            TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()),
+            AttackPower = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackPower)),
+            AttackSpeed = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)),
+            MaxHp = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.MaxHp)),
+            CriticalRate = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)),
+            CriticalMultiple = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple))
         };
         PlayerInstance.Init(args); // 인스턴스 초기화
     }
@@ -43,15 +42,14 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     public static void RestorePlayerStats()
     {
-        OnStatChangedArgs args = new OnStatChangedArgs()
+        PlayerStatArgs args = new PlayerStatArgs()
         {
-            UpgradeList = UpgradeManager.GetAllUpgrades(),
-            TotalPower = (int)PlayerStats.Instance.GetAllFinalStat(),
-            AttackPower = (int)PlayerStats.Instance.GetFinalStat(StatType.AttackPower),
-            AttackSpeed = (int)PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed),
-            MaxHp = (int)PlayerStats.Instance.GetFinalStat(StatType.MaxHp),
-            CriticalRate = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalRate),
-            CriticalMultiple = (int)PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)
+            TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()),
+            AttackPower = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackPower)),
+            AttackSpeed = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)),
+            MaxHp = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.MaxHp)),
+            CriticalRate = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)),
+            CriticalMultiple = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple))
         };
         PlayerInstance.Init(args);
     }

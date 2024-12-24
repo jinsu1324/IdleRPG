@@ -19,11 +19,7 @@ public class ItemEnhanceManager
         if (EquipItemManager.IsEquipped(item))
         {
             // 플레이어 스탯에 아이템 스탯들 전부 추가
-            foreach (var kvp in item.GetStatDict())
-                PlayerStats.Instance.UpdateModifier(kvp.Key, kvp.Value, item);
-
-            // 스탯 보여주는 UI 업데이트
-            PlayerStats.Instance.AllStatUIUpdate();
+            PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
         }
     }
 }

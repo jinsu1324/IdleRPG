@@ -22,19 +22,19 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        UpgradeManager.OnUpgradeChanged += ChangeComponentsValue; // 스탯이 변경될 때, 컴포넌트들 값 변경
+        PlayerStats.OnPlayerStatChanged += ChangeComponentsValue;  // 플레이어 스탯 변경되었을 때, 플레이어 프리팹 컴포넌트들 값 변경
     }
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(OnStatChangedArgs statArgs)
+    public void Init(PlayerStatArgs args)
     {
-        int attackPower = statArgs.AttackPower;
-        int attackSpeed = statArgs.AttackSpeed;
-        int maxHp = statArgs.MaxHp;
-        int criticalRate = statArgs.CriticalRate;
-        int criticalMultiple = statArgs.CriticalMultiple;
+        int attackPower = args.AttackPower;
+        int attackSpeed = args.AttackSpeed;
+        int maxHp = args.MaxHp;
+        int criticalRate = args.CriticalRate;
+        int criticalMultiple = args.CriticalMultiple;
 
         Init_HPComponent(maxHp);
         Init_HPBar(maxHp);
@@ -93,7 +93,7 @@ public class Player : SerializedMonoBehaviour
     /// <summary>
     /// 컴포넌트들 수치 변겅
     /// </summary>
-    private void ChangeComponentsValue(OnStatChangedArgs args)
+    private void ChangeComponentsValue(PlayerStatArgs args)
     {
         _hpComponent.ChangeMaxHp(args.MaxHp);
         _attackComponentProjectile.ChangeAttackPower(args.AttackPower);
@@ -113,7 +113,8 @@ public class Player : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        UpgradeManager.OnUpgradeChanged -= ChangeComponentsValue;
+        PlayerStats.OnPlayerStatChanged -= ChangeComponentsValue;
+
 
         if (_hpComponent != null)
             _hpComponent.OnDead -= PlayerDeadTask;

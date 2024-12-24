@@ -13,29 +13,24 @@ public class ToastCombatPower : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init()
+    public void Init(PlayerStatArgs args)
     {
-        UpdateUI();
-    }
+        int totalPower = args.TotalPower;
+        int beforeTotalPower = args.BeforeTotalPower;
 
-    /// <summary>
-    /// UI 업데이트
-    /// </summary>
-    private void UpdateUI()
-    {
         // 수치 표시
-        _valueText.text = AlphabetNumConverter.Convert(UpgradeManager.TotalPower);
+        _valueText.text = AlphabetNumConverter.Convert(totalPower);
 
         // 화살표 방향 표시
-        int TotalCombatPower = UpgradeManager.TotalPower;
-        int beforeTotalCombatPower = UpgradeManager.BeforeTotalPower;
-        if (TotalCombatPower > beforeTotalCombatPower)
+        if (totalPower > beforeTotalPower)
             ArrowUp();
         else
             ArrowDown();
-        
+
         // 전투력 변경된 수치 표시
-        UpdateChangedValueText(beforeTotalCombatPower, TotalCombatPower);
+        UpdateChangedValueText(beforeTotalPower, totalPower);
+
+        Show();
     }
 
     /// <summary>
@@ -65,4 +60,19 @@ public class ToastCombatPower : MonoBehaviour
         _arrowDecrease.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// 켜기
+    /// </summary>
+    private void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 끄기
+    /// </summary>
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
 }

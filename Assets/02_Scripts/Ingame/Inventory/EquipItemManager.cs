@@ -30,12 +30,7 @@ public class EquipItemManager
 
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
-        foreach (var kvp in item.GetStatDict())
-            PlayerStats.Instance.UpdateModifier(kvp.Key, kvp.Value, item);
-
-
-        // 스탯 보여주는 UI 업데이트
-        PlayerStats.Instance.AllStatUIUpdate();
+        PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
     }
 
     /// <summary>
@@ -55,11 +50,7 @@ public class EquipItemManager
         Debug.Log($"{item.ItemType} 에서 {item.Name} 장착해제!");
 
         // 플레이어 스탯에 아이템 스탯들 전부 제거
-        foreach (var kvp in item.GetStatDict())
-            PlayerStats.Instance.RemoveModifier(kvp.Key, item);
-
-        // 스탯 보여주는 UI 업데이트
-        PlayerStats.Instance.AllStatUIUpdate();
+        PlayerStats.Instance.RemoveModifier(item.GetStatDict(), item);
     }
 
     /// <summary>

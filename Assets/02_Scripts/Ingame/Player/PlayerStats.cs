@@ -5,6 +5,17 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
+public struct PlayerStatArgs
+{
+    public int TotalPower;          // 총합 전투력
+    public int BeforeTotalPower;    // 이전 총합 전투력
+    public int AttackPower;         // 공격력
+    public int AttackSpeed;         // 공격속도
+    public int MaxHp;               // 최대 체력
+    public int CriticalRate;        // 크리티컬 확률
+    public int CriticalMultiple;    // 크리티컬 배율
+}
+
 public enum StatType
 {
     AttackPower,
@@ -16,6 +27,9 @@ public enum StatType
 
 public class PlayerStats : SingletonBase<PlayerStats>
 {
+    // 플레이어 스탯 변경되었을 때 이벤트
+    public static event Action<PlayerStatArgs> OnPlayerStatChanged; 
+
     // 스탯별로 StatModifier 리스트를 관리
     private Dictionary<StatType, List<StatModifier>> _statModifierDict = new Dictionary<StatType, List<StatModifier>>();    
 
@@ -29,6 +43,32 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
 
     /// <summary>
+    /// 스탯 업데이트 (값 갱신)
+    /// </summary>
+    public void UpdateModifier(Dictionary<StatType, int> statDict, object source)
+    {
+        // 이전 전투력 계산
+        float beforeTotalPower = (int)Mathf.Floor(GetAllFinalStat());
+
+        // 스탯들 전부 추가
+        foreach (var kvp in statDict)
+        {
+            StatType statType = kvp.Key;
+            int value = kvp.Value;
+
+            StatModifier modifier = _statModifierDict[statType].Find(modifier => modifier.Source == source);
+
+            if (modifier != null)
+                modifier.Value = value; // 이미 존재하면 그 값 갱신
+            else
+                AddModifier(statType, value, source);  // 기존 StatModifier 가 없으면 새로 추가
+        }
+        
+        // 스탯변경 이벤트 실행
+        OnPlayerStatChanged?.Invoke(CalculateStats(beforeTotalPower));
+    }
+
+    /// <summary>
     /// 스탯 추가
     /// </summary>
     public void AddModifier(StatType statType, float value, object source)
@@ -37,24 +77,23 @@ public class PlayerStats : SingletonBase<PlayerStats>
     }
 
     /// <summary>
-    /// 스탯 업데이트 (값 갱신)
-    /// </summary>
-    public void UpdateModifier(StatType statType, float newVelue, object source)
-    {
-        StatModifier modifier = _statModifierDict[statType].Find(modifier => modifier.Source == source);
-        
-        if (modifier != null)
-            modifier.Value = newVelue; // 이미 존재하면 그 값 갱신
-        else
-            AddModifier(statType, newVelue, source);  // 기존 StatModifier 가 없으면 새로 추가
-    }
-
-    /// <summary>
     /// 스탯제거
     /// </summary>
-    public void RemoveModifier(StatType statType, object source)
+    public void RemoveModifier(Dictionary<StatType, int> statDict, object source)
     {
-        _statModifierDict[statType].RemoveAll(modifier => modifier.Source == source); // 이 Source에 해당하는 Modifier 제거
+        // 이전 전투력 계산
+        float beforeTotalPower = (int)Mathf.Floor(GetAllFinalStat());
+
+        // 스탯들 전부 제거
+        foreach (var kvp in statDict)
+        {
+            StatType statType = kvp.Key;
+
+            _statModifierDict[statType].RemoveAll(modifier => modifier.Source == source); // 이 Source에 해당하는 Modifier 제거
+        }
+        
+        // 스탯변경 이벤트 실행
+        OnPlayerStatChanged?.Invoke(CalculateStats(beforeTotalPower));
     }
 
     /// <summary>
@@ -81,24 +120,22 @@ public class PlayerStats : SingletonBase<PlayerStats>
         return allFinalStatValues;
     }
 
-
-
-
-
-
-    //--------------------------------------------------------------
-    public TextMeshProUGUI _attackPowerText;
-    public TextMeshProUGUI _attackSpeedText;
-    public TextMeshProUGUI _maxHpText;
-    public TextMeshProUGUI _criticalRateText;
-    public TextMeshProUGUI _criticalMultipleText;
-
-    public void AllStatUIUpdate()
+    /// <summary>
+    /// 스탯 계산 해서 PlayerStatArgs 로 리턴
+    /// </summary>
+    public PlayerStatArgs CalculateStats(float beforeTotalPower)
     {
-        _attackPowerText.text = "AttackPower : " + _statModifierDict[StatType.AttackPower].Sum(modifier => modifier.Value).ToString();
-        _attackSpeedText.text = "AttackSpeed : " + _statModifierDict[StatType.AttackSpeed].Sum(modifier => modifier.Value).ToString();
-        _maxHpText.text = "MaxHp : " + _statModifierDict[StatType.MaxHp].Sum(modifier => modifier.Value).ToString();
-        _criticalRateText.text = "CriticalRate : " + _statModifierDict[StatType.CriticalRate].Sum(modifier => modifier.Value).ToString();
-        _criticalMultipleText.text = "CriticalMultiple : " + _statModifierDict[StatType.CriticalMultiple].Sum(modifier => modifier.Value).ToString();
+        PlayerStatArgs args = new PlayerStatArgs
+        {
+            BeforeTotalPower = (int)beforeTotalPower,
+            TotalPower = (int)Mathf.Floor(GetAllFinalStat()),
+            AttackPower = (int)GetFinalStat(StatType.AttackPower),
+            AttackSpeed = (int)GetFinalStat(StatType.AttackSpeed),
+            MaxHp = (int)GetFinalStat(StatType.MaxHp),
+            CriticalRate = (int)GetFinalStat(StatType.CriticalRate),
+            CriticalMultiple = (int)GetFinalStat(StatType.CriticalMultiple)
+        };
+
+        return args;
     }
 }

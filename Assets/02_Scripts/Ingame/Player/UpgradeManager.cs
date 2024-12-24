@@ -7,25 +7,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 업그레이드가 변경되었을 때 이벤트에 사용되는 구조체
-/// </summary>
-public struct OnStatChangedArgs
-{
-    public List<Upgrade> UpgradeList;   // 업그레이드 리스트
-    public int TotalPower;              // 총합 전투력
-    public int AttackPower;             // 공격력
-    public int AttackSpeed;             // 공격속도
-    public int MaxHp;                   // 최대 체력
-    public int CriticalRate;            // 크리티컬 확률
-    public int CriticalMultiple;        // 크리티컬 배율
-}
-
-/// <summary>
 /// 업그레이드 매니저
 /// </summary>
 public class UpgradeManager
 {
-    public static event Action<OnStatChangedArgs> OnUpgradeChanged; // 업그레이드가 변경되었을 때 이벤트
+    public static event Action OnUpgradeChanged; // 업그레이드가 변경되었을 때 이벤트
     public static int TotalPower { get; private set; }              // 총합 전투력
     public static int BeforeTotalPower { get; private set; }        // 이전 총합 전투력
 
@@ -143,19 +129,8 @@ public class UpgradeManager
             // 총합 전투력 업데이트
             UpdateTotalPower();
 
-            OnStatChangedArgs args = new OnStatChangedArgs()
-            {
-                UpgradeList = GetAllUpgrades(),
-                TotalPower = TotalPower,
-                AttackPower = GetUpgrade(UpgradeID.AttackPower.ToString()).Value,
-                AttackSpeed = GetUpgrade(UpgradeID.AttackSpeed.ToString()).Value,
-                MaxHp = GetUpgrade(UpgradeID.MaxHp.ToString()).Value,
-                CriticalRate = GetUpgrade(UpgradeID.CriticalRate.ToString()).Value,
-                CriticalMultiple = GetUpgrade(UpgradeID.CriticalMultiple.ToString()).Value
-            };
-
             // 업그레이드 변경 이벤트 호출
-            OnUpgradeChanged?.Invoke(args);
+            OnUpgradeChanged?.Invoke();
         }
         else
         {
