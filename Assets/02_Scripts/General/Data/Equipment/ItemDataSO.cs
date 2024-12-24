@@ -81,7 +81,7 @@ public class ItemDataSO : ScriptableObject
 [System.Serializable]
 public class UpgradeInfo
 {
-    public string Level;                            // 레벨
+    public string Level;                  // 레벨
     public List<ItemStat> ItemStatList;   // 가지고 있는 스탯들 리스트
 }
 

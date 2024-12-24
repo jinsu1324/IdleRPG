@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class EquipItemManager
 {
+    public static event Action<ItemType, Sprite> OnEquipItemChanged;  // 장착된 아이템이 변경되었을 때 이벤트
+
     // 장착한 아이템 딕셔너리
     private static Dictionary<ItemType, Item> _equipItemDict = new Dictionary<ItemType, Item>
     { 
@@ -29,6 +32,8 @@ public class EquipItemManager
         _equipItemDict[item.ItemType] = item;
         Debug.Log($"{item.ItemType} 에 {item.Name} 장착완료!");
 
+        // 장착된 아이템이 변경되었을 때 이벤트 실행
+        OnEquipItemChanged?.Invoke(item.ItemType, item.Icon);
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
         PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
@@ -49,6 +54,9 @@ public class EquipItemManager
         // 장착해제
         _equipItemDict[item.ItemType] = null;
         Debug.Log($"{item.ItemType} 에서 {item.Name} 장착해제!");
+
+        // 장착된 아이템이 변경되었을 때 이벤트 실행
+        OnEquipItemChanged?.Invoke(item.ItemType, null);
 
         // 플레이어 스탯에 아이템 스탯들 전부 제거
         PlayerStats.Instance.RemoveModifier(item.GetStatDict(), item);
