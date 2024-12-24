@@ -44,7 +44,7 @@ public class RewardView : MonoBehaviour
                 Item dropItem = dropItemList[i];
                 _rewardItemSlotList[i].Init(dropItem);
                 
-                yield return new WaitForSeconds(0.2f);
+                yield return new WaitForSecondsRealtime(0.2f);
             }
             else
             {
