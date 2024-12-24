@@ -11,9 +11,18 @@ public class ItemInven
     /// </summary>
     public static void AddItem(Item item)
     {
-        CheckAndMakeItemInvenDict(item);
+        TrySet_ItemInvenDict(item);
 
-        _itemInvenDict[item.ItemType].Add(item);    // 아이템 추가
+        // 가지고 있는 아이템이면 갯수만 추가
+        Item existItem = HasItemInInven(item);
+        if (existItem != null)
+        {
+            existItem.AddCount();
+            return;
+        }
+
+        // 아이템 추가
+        _itemInvenDict[item.ItemType].Add(item);
     }
 
     /// <summary>
@@ -21,7 +30,7 @@ public class ItemInven
     /// </summary>
     public static Item HasItemInInven(Item item)
     {
-        CheckAndMakeItemInvenDict(item);
+        TrySet_ItemInvenDict(item);
 
         Item existItem = _itemInvenDict[item.ItemType].Find(x => x.ID == item.ID);
 
@@ -39,7 +48,7 @@ public class ItemInven
     /// <summary>
     /// 딕셔너리 없으면 새로 만듦
     /// </summary>
-    private static void CheckAndMakeItemInvenDict(Item item)
+    private static void TrySet_ItemInvenDict(Item item)
     {
         if (_itemInvenDict.ContainsKey(item.ItemType) == false)
             _itemInvenDict[item.ItemType] = new List<Item>();

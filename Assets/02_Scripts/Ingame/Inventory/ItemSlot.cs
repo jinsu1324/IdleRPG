@@ -6,9 +6,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 아이템슬롯 UI표시 및 클릭
+/// </summary>
 public class ItemSlot : MonoBehaviour
 {
-    public static event Action<ItemSlot> OnSlotClickedAction;           // 슬롯 클릭되었을 때 이벤트
+    public static event Action<ItemSlot> OnSlotSelected;                // 슬롯이 선택되었을 때 이벤트
     public Item CurrentItem { get; private set; }                       // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;                     // 슬롯이 비어있는지 
 
@@ -36,19 +39,17 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        _slotClickButton.onClick.AddListener(OnSlotClicked);       // 슬롯 클릭 시 버튼 이벤트 연결
-
-        SelectItemInfo.OnItemInfoChanged -= Update_ItemSlotInfo;   // 중복구독 방지
-        SelectItemInfo.OnItemInfoChanged += Update_ItemSlotInfo;   // 아이템 정보가 바뀌면, 아이템슬롯 정보들 업데이트
+        _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
+        SelectItemInfoUI.OnItemStatueChanged += UpdateSlot;   // 아이템 상태가 바뀌면, 아이템슬롯 업데이트
     }
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init_ItemSlotInfo(Item item)
+    public void Init(Item item)
     {
         CurrentItem = item;
-        Update_ItemSlotInfo();
+        UpdateSlot();
 
         gameObject.SetActive(true);
     }
@@ -56,12 +57,10 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 아이템슬롯 정보들 업데이트
     /// </summary>
-    private void Update_ItemSlotInfo()
+    private void UpdateSlot()
     {
-        if (CurrentItem == null)
+        if (IsSlotEmpty)    // 슬롯 비었으면 업데이트 하지 않고 무시
             return;
-
-        Debug.Log($"아이템 슬롯 정보 업데이트! {CurrentItem.Name}");
 
         _itemIcon.sprite = CurrentItem.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(CurrentItem.Grade);
@@ -80,10 +79,10 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnSlotClicked()
     {
-        if (IsSlotEmpty == true)
+        if (IsSlotEmpty) // 슬롯이 비었으면 선택 안되게
             return;
 
-        OnSlotClickedAction?.Invoke(this);
+        OnSlotSelected?.Invoke(this);
     }
 
     /// <summary>
@@ -96,12 +95,20 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     public void Highlight_OFF() => _highlightGO.SetActive(false);
 
+    /// <summary>
+    /// 아이템 슬롯 비우고 끄기
+    /// </summary>
+    public void Clear()
+    {
+        CurrentItem = null;
+        _infoParentGO.SetActive(false);
+    }
 
     /// <summary>
-    /// 아이템 슬롯 꺼짐
+    /// OnDestroy
     /// </summary>
-    public void OFF_ItemSlotInfo()
+    private void OnDestroy()
     {
-        _infoParentGO.SetActive(false);
+        SelectItemInfoUI.OnItemStatueChanged -= UpdateSlot;
     }
 }

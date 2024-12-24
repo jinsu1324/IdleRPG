@@ -18,7 +18,7 @@ public class EquipSlot : MonoBehaviour
     /// <summary>
     /// ¿Â¬¯ΩΩ∑‘ ∫∏ø©¡÷±‚
     /// </summary>
-    public void Show_EquipSlotInfo(Item item)
+    public void Show(Item item)
     {
         _itemIcon.sprite = item.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);
@@ -30,7 +30,7 @@ public class EquipSlot : MonoBehaviour
     /// <summary>
     /// ¿Â¬¯ΩΩ∑‘ ≤Ù±‚
     /// </summary>
-    public void OFF_EquipSlotInfo()
+    public void Hide()
     {
         _infoParentGO.SetActive(false);
     }

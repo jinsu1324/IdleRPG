@@ -28,15 +28,12 @@ public class PlayerDetailPopup : PopupBase
     [Title("인벤토리 팝업", bold: false)]
     [SerializeField] private InvenPopup _invenPopup;                // 인벤토리 팝업
 
-
-
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
-        // 버튼들 누르면 아이템 타입에 맞는 팝업 켜지게
-        _weaponInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Weapon));
+        _weaponInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Weapon)); // 버튼 누르면 타입에 맞는 인벤토리 켜지게
         _armorInvenButton.onClick.AddListener(() => _invenPopup.Show(ItemType.Armor));
     }
 
@@ -45,22 +42,9 @@ public class PlayerDetailPopup : PopupBase
     /// </summary>
     public override void Show()
     {
+        SelectItemInfoUI.OnItemStatueChanged += UIUpdate;   // 아이템 상태가 바뀌면, 캐릭터 정보팝업 UI 업데이트
         UIUpdate();
-
-        SelectItemInfo.OnItemInfoChanged += UIUpdate;   // 
-
         gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// 팝업 끄기
-    /// </summary>
-    public override void Hide()
-    {
-        SelectItemInfo.OnItemInfoChanged -= UIUpdate;   //
-
-
-        gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -74,7 +58,7 @@ public class PlayerDetailPopup : PopupBase
         _criticalRateText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)}";
         _criticalMultipleText.text = $"{PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple)}";
 
-
+        // 장착한 장비에 따라 장비슬롯 업데이트
         foreach (var kvp in _equipSlotDict)
         {
             ItemType itemType = kvp.Key;
@@ -83,9 +67,18 @@ public class PlayerDetailPopup : PopupBase
             Item equipItem = EquipItemManager.GetEquipItem(itemType);
             
             if (equipItem != null)
-                equipSlot.Show_EquipSlotInfo(equipItem);
+                equipSlot.Show(equipItem);
             else
-                equipSlot.OFF_EquipSlotInfo();
+                equipSlot.Hide();
         }
+    }
+
+    /// <summary>
+    /// 팝업 끄기
+    /// </summary>
+    public override void Hide()
+    {
+        SelectItemInfoUI.OnItemStatueChanged -= UIUpdate;
+        gameObject.SetActive(false);
     }
 }
