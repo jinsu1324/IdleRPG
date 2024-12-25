@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7976521775591858013}
   - component: {fileID: 3330009390534601255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3589866305910012566}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helmet_ForestHelmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

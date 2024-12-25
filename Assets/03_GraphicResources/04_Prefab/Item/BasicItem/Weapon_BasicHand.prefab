@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3492256018240457121}
   - component: {fileID: 3987842863044537730}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2488506710207506661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_BasicHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8434664135721278320}
   - component: {fileID: 2772568612128338126}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}

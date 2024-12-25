@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985336685486172752}
   - component: {fileID: 7967526297901765212}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5867076975504805608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}

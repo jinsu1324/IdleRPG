@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2799193096171012128}
   - component: {fileID: 3492002633204549927}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemSpirite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4345012985424452741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armor_WizardRobe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

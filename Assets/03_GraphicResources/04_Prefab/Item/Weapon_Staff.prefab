@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2164937932146485761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Weapon_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1071998110888077644}
   - component: {fileID: 2738782656108016754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

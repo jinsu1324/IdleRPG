@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1784028517403392896}
   - component: {fileID: 6347583001726837452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ItemSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1883016982739443494}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helmet_KnightHelmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
