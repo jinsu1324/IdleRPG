@@ -13,8 +13,8 @@ public struct OnEquipItemChangedArgs
 
 public class EquipItemManager
 {
-    public static event Action<OnEquipItemChangedArgs> OnItemEquipped;      // 아이템이 장착되었을 때 이벤트
-    public static event Action<OnEquipItemChangedArgs> OnItemUnEquipped;    // 아이템이 해제되었을 때 이벤트
+    // 장착 아이템이 변경되었을 때 이벤트
+    public static event Action<OnEquipItemChangedArgs, bool> OnEquipItemChanged;      
 
     // 장착한 아이템 딕셔너리
     private static Dictionary<ItemType, Item> _equipItemDict = new Dictionary<ItemType, Item>
@@ -46,9 +46,9 @@ public class EquipItemManager
         // 장착
         _equipItemDict[item.ItemType] = item;
 
-        // 장착된 아이템이 변경되었을 때 이벤트 실행
+        // 장착 아이템이 변경되었을 때 이벤트 실행
         OnEquipItemChangedArgs args = new OnEquipItemChangedArgs() { ItemType = item.ItemType, Prefab = item.Prefab, AttackAnimType = item.AttackAnimType };
-        OnItemEquipped?.Invoke(args);
+        OnEquipItemChanged?.Invoke(args, true);
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
         PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
@@ -69,9 +69,9 @@ public class EquipItemManager
         // 장착해제
         _equipItemDict[item.ItemType] = null;
 
-        // 장착된 아이템이 변경되었을 때 이벤트 실행
+        // 장착 아이템이 변경되었을 때 이벤트 실행
         OnEquipItemChangedArgs args = new OnEquipItemChangedArgs() { ItemType = item.ItemType, Prefab = null, AttackAnimType = AttackAnimType.Hand.ToString() };
-        OnItemUnEquipped?.Invoke(args);
+        OnEquipItemChanged?.Invoke(args, false);
 
         // 플레이어 스탯에 아이템 스탯들 전부 제거
         PlayerStats.Instance.RemoveModifier(item.GetStatDict(), item);
