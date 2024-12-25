@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemType: Weapon
   Name: "\uC232\uC758 \uCE7C\uB0A0"
   Grade: Rare
-  ItemSprite: {fileID: 21300000, guid: d3404beae08505845bfedc0956c2eeb6, type: 3}
+  AttackAnimType: Melee
+  Prefab: {fileID: 4263184697863746418, guid: 488800ab125e4a24e8bb40575be38634, type: 3}
   Icon: {fileID: 21300000, guid: eb5d5b5e5acf4be43b48eb4bdf8bd192, type: 3}
   UpgradeInfoList:
   - Level: 1

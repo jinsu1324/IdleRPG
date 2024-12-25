@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemType: Weapon
   Name: "\uAC80"
   Grade: Normal
-  ItemSprite: {fileID: 21300000, guid: 66ae910b1d5f4154f9116f1395d5498b, type: 3}
+  AttackAnimType: Melee
+  Prefab: {fileID: 8909641260938750215, guid: 1775af1dd44743c42b9e522460167e0c, type: 3}
   Icon: {fileID: 21300000, guid: 4d73a79cab8dffb48bad6666e42ab312, type: 3}
   UpgradeInfoList:
   - Level: 1

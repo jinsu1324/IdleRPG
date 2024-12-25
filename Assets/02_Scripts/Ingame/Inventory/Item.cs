@@ -10,7 +10,8 @@ public class Item
     public ItemType ItemType { get; private set; }              // 아이템이 속한 아이템 타입
     public string Name { get; private set; }                    // 이름
     public string Grade { get; private set; }                   // 등급
-    public Sprite ItemSprite { get; private set; }              // 아이템 스프라이트
+    public string AttackAnimType { get; private set; }          // 공격 애니메이션 타입
+    public GameObject Prefab { get; private set; }              // 아이템 프리팹
     public Sprite Icon { get; private set; }                    // 아이콘
     public int Level { get; private set; }                      // 레벨
     public int Count { get; private set; }                      // 갯수
@@ -28,7 +29,8 @@ public class Item
         ItemType = (ItemType)Enum.Parse(typeof(ItemType), baseData.ItemType) ;
         Name = baseData.Name;
         Grade = baseData.Grade;
-        ItemSprite = baseData.ItemSprite;
+        AttackAnimType = baseData.AttackAnimType;
+        Prefab = baseData.Prefab;
         Icon = baseData.Icon;
         Level = level;
         Count = 1;

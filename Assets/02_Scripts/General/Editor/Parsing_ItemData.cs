@@ -70,6 +70,7 @@ public class Parsing_ItemData : Parsing_Base
                 itemDataSO.ItemType = row[1];
                 itemDataSO.Name = row[2];
                 itemDataSO.Grade = row[3];
+                itemDataSO.AttackAnimType = row[4];
                 itemDataSO.UpgradeInfoList = new List<UpgradeInfo>();
                 
                 itemDataSODict[id] = itemDataSO;
@@ -78,12 +79,12 @@ public class Parsing_ItemData : Parsing_Base
             // 업그레이드 인포 추가
             UpgradeInfo upgradeInfo = new UpgradeInfo()
             {
-                Level = row[4],
+                Level = row[5],
                 ItemStatList = new List<ItemStat>()
             };
 
             // 한 행에 있는 (한 레벨의) 스탯 정보들 모두 업그레이드 인포의 스탯리스트에 추가
-            for (int k = 5; k < row.Length; k += 2)
+            for (int k = 6; k < row.Length; k += 2)
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
@@ -137,6 +138,7 @@ public class Parsing_ItemData : Parsing_Base
             itemDataSO.ItemType = data.ItemType;
             itemDataSO.Name = data.Name;
             itemDataSO.Grade = data.Grade;
+            itemDataSO.AttackAnimType = data.AttackAnimType;
             itemDataSO.UpgradeInfoList = data.UpgradeInfoList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장

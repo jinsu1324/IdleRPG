@@ -4,9 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public struct OnEquipItemChangedArgs
+{
+    public ItemType ItemType;
+    public GameObject Prefab;
+    public string AttackAnimType;
+}
+
 public class EquipItemManager
 {
-    public static event Action<ItemType, Sprite> OnEquipItemChanged;  // 장착된 아이템이 변경되었을 때 이벤트
+    public static event Action<OnEquipItemChangedArgs> OnItemEquipped;      // 아이템이 장착되었을 때 이벤트
+    public static event Action<OnEquipItemChangedArgs> OnItemUnEquipped;    // 아이템이 해제되었을 때 이벤트
 
     // 장착한 아이템 딕셔너리
     private static Dictionary<ItemType, Item> _equipItemDict = new Dictionary<ItemType, Item>
@@ -28,12 +36,19 @@ public class EquipItemManager
             return;
         }
 
+        // 이미 슬롯에 다른 장착된 아이템이 있으면 먼저 장착해제
+        if (_equipItemDict.TryGetValue(item.ItemType, out Item equippedItem))
+        {
+            if (equippedItem != null)
+                UnEquip(equippedItem);
+        }
+
         // 장착
         _equipItemDict[item.ItemType] = item;
-        Debug.Log($"{item.ItemType} 에 {item.Name} 장착완료!");
 
         // 장착된 아이템이 변경되었을 때 이벤트 실행
-        OnEquipItemChanged?.Invoke(item.ItemType, item.ItemSprite);
+        OnEquipItemChangedArgs args = new OnEquipItemChangedArgs() { ItemType = item.ItemType, Prefab = item.Prefab, AttackAnimType = item.AttackAnimType };
+        OnItemEquipped?.Invoke(args);
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
         PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
@@ -53,10 +68,10 @@ public class EquipItemManager
 
         // 장착해제
         _equipItemDict[item.ItemType] = null;
-        Debug.Log($"{item.ItemType} 에서 {item.Name} 장착해제!");
 
         // 장착된 아이템이 변경되었을 때 이벤트 실행
-        OnEquipItemChanged?.Invoke(item.ItemType, null);
+        OnEquipItemChangedArgs args = new OnEquipItemChangedArgs() { ItemType = item.ItemType, Prefab = null, AttackAnimType = AttackAnimType.Hand.ToString() };
+        OnItemUnEquipped?.Invoke(args);
 
         // 플레이어 스탯에 아이템 스탯들 전부 제거
         PlayerStats.Instance.RemoveModifier(item.GetStatDict(), item);

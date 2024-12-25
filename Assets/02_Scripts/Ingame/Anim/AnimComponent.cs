@@ -33,6 +33,14 @@ public class AnimComponent : MonoBehaviour
     }
 
     /// <summary>
+    /// 공격 애니메이션 타입 변경
+    /// </summary>
+    public void Change_AttackAnimType(AttackAnimType attackAnimType)
+    {
+        _animator.SetInteger("AttackAnimType", (int)attackAnimType);
+    }
+
+    /// <summary>
     /// 이벤트 구독 해제 OnDisable
     /// </summary>
     private void OnDisable()

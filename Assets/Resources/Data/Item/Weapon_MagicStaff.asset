@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemType: Weapon
   Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
   Grade: Legendary
-  ItemSprite: {fileID: 21300000, guid: b0d8c4dad7f99d4478efdf18f6188d5d, type: 3}
+  AttackAnimType: Magic
+  Prefab: {fileID: 252690595569584609, guid: 4b8bc9b9da4cfc341a06c2a917cea2e8, type: 3}
   Icon: {fileID: 21300000, guid: 2d9552b4069e66f45895ea58c4856495, type: 3}
   UpgradeInfoList:
   - Level: 1

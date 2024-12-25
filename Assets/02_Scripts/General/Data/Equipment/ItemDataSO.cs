@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum AttackAnimType
+{
+    Hand = 0,
+    Melee = 1,
+    Magic = 2,
+}
+
 public enum ItemGrade
 {
     Normal,
@@ -40,7 +47,8 @@ public class ItemDataSO : ScriptableObject
     public string ItemType;
     public string Name;
     public string Grade;
-    public Sprite ItemSprite;
+    public string AttackAnimType;
+    public GameObject Prefab;
     public Sprite Icon;
     public List<UpgradeInfo> UpgradeInfoList;   // 업그레이드 정보들 리스트
 

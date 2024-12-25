@@ -1,39 +1,84 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EquipItemComponent : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer _helmet;    // 헬멧
-    [SerializeField] private SpriteRenderer _armor;     // 갑옷
-    [SerializeField] private SpriteRenderer _weapon;    // 무기
+    [SerializeField] private Transform _helmetSlot;    // 헬멧슬롯
+    [SerializeField] private Transform _armorSlot;     // 갑옷슬롯
+    [SerializeField] private Transform _weaponSlot;    // 무기슬롯
+
+    [SerializeField] private GameObject _basicHand;
+
+    private GameObject _equipHelmetPrefab;
+    private GameObject _equipArmorPrefab;
+    private GameObject _equipWeaponPrefab;
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
-        EquipItemManager.OnEquipItemChanged += ChangePlayerEquipItem;   // 장착된 아이템이 변경되었을 때, 플레이어 착용아이템 변경
+        EquipItemManager.OnItemEquipped += EquipPlayerItem;   // 아이템이 장착되었을 때, 플레이어 아이템 장착
+        EquipItemManager.OnItemUnEquipped += UnEquipPlayerItem;   // 아이템이 장착해제되었을 때, 플레이어 아이템 장착해제
     }
 
     /// <summary>
-    /// 플레이어 착용 아이템 변경
+    /// 플레이어 아이템 장착
     /// </summary>
-    public void ChangePlayerEquipItem(ItemType itemType, Sprite itemSprite)
+    public void EquipPlayerItem(OnEquipItemChangedArgs args)
     {
-        switch (itemType)
+        switch (args.ItemType)
         {
             case ItemType.Helmet:
-                _helmet.sprite = itemSprite;
+                if (_equipHelmetPrefab != null)
+                    Destroy(_equipHelmetPrefab);
+                _equipHelmetPrefab = Instantiate(args.Prefab, _helmetSlot);
                 break;
+
             case ItemType.Armor:
-                _armor.sprite = itemSprite;
+                if (_equipArmorPrefab != null)
+                    Destroy(_equipArmorPrefab);
+                _equipArmorPrefab = Instantiate(args.Prefab, _armorSlot);
                 break;
+
             case ItemType.Weapon:
-                _weapon.sprite = itemSprite;
+                if (_equipWeaponPrefab != null)
+                    Destroy(_equipWeaponPrefab);
+                _equipWeaponPrefab = Instantiate(args.Prefab, _weaponSlot);
+                _basicHand.SetActive(false);
+                GetComponent<AnimComponent>().
+                    Change_AttackAnimType((AttackAnimType)Enum.Parse(typeof(AttackAnimType), args.AttackAnimType));
                 break;
         }
+    }
 
+    /// <summary>
+    /// 플레이어 아이템 장착해제
+    /// </summary>
+    public void UnEquipPlayerItem(OnEquipItemChangedArgs args)
+    {
+        switch (args.ItemType)
+        {
+            case ItemType.Helmet:
+                if (_equipHelmetPrefab != null)
+                    Destroy(_equipHelmetPrefab);
+                break;
+
+            case ItemType.Armor:
+                if (_equipArmorPrefab != null)
+                    Destroy(_equipArmorPrefab);
+                break;
+
+            case ItemType.Weapon:
+                if (_equipWeaponPrefab != null)
+                    Destroy(_equipWeaponPrefab);
+                _basicHand.SetActive(true);
+                GetComponent<AnimComponent>().
+                    Change_AttackAnimType((AttackAnimType)Enum.Parse(typeof(AttackAnimType), args.AttackAnimType));
+                break;
+        }
     }
 
     /// <summary>
@@ -41,6 +86,8 @@ public class EquipItemComponent : MonoBehaviour
     /// </summary>
     private void OnDestroy()
     {
-        EquipItemManager.OnEquipItemChanged -= ChangePlayerEquipItem;
+        EquipItemManager.OnItemEquipped -= EquipPlayerItem;
+        EquipItemManager.OnItemUnEquipped -= UnEquipPlayerItem;
+
     }
 }

@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemType: Helmet
   Name: "\uBC14\uC774\uD0B9 \uD5EC\uBA67"
   Grade: Normal
-  ItemSprite: {fileID: 21300000, guid: 8bcd7b13f151118499620248f110b77b, type: 3}
+  AttackAnimType: 
+  Prefab: {fileID: 7299186910364413415, guid: dcba4b5a6e12c874a8b28f4d50e4894e, type: 3}
   Icon: {fileID: 21300000, guid: 68ae517979a404949a6b9f73b12adf1c, type: 3}
   UpgradeInfoList:
   - Level: 1
