@@ -40,6 +40,7 @@ public class ItemDataSO : ScriptableObject
     public string ItemType;
     public string Name;
     public string Grade;
+    public Sprite ItemSprite;
     public Sprite Icon;
     public List<UpgradeInfo> UpgradeInfoList;   // 업그레이드 정보들 리스트
 

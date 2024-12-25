@@ -33,7 +33,7 @@ public class EquipItemManager
         Debug.Log($"{item.ItemType} 에 {item.Name} 장착완료!");
 
         // 장착된 아이템이 변경되었을 때 이벤트 실행
-        OnEquipItemChanged?.Invoke(item.ItemType, item.Icon);
+        OnEquipItemChanged?.Invoke(item.ItemType, item.ItemSprite);
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
         PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);

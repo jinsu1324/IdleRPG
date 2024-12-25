@@ -16,7 +16,8 @@ MonoBehaviour:
   ItemType: Helmet
   Name: "\uC232\uC758 \uD22C\uAD6C"
   Grade: Rare
-  Icon: {fileID: 21300000, guid: 72ddf281fa097b448ad2b791a067c89a, type: 3}
+  ItemSprite: {fileID: 21300000, guid: 72ddf281fa097b448ad2b791a067c89a, type: 3}
+  Icon: {fileID: 21300000, guid: 5b413123e8117454a9b720702244cd14, type: 3}
   UpgradeInfoList:
   - Level: 1
     ItemStatList:
