@@ -43,6 +43,7 @@ public class EquipItemComponent : MonoBehaviour
 
             case ItemType.Weapon:
                 ChangeItem(args.Prefab, _weaponSlot, ref _equipWeapon, tryEquip);
+                ChangeBasicHand(tryEquip);
                 GetComponent<AnimComponent>().Change_AttackAnimType((AttackAnimType)Enum.Parse(typeof(AttackAnimType), args.AttackAnimType));
                 break;
         }
@@ -56,14 +57,15 @@ public class EquipItemComponent : MonoBehaviour
         TryDestroy_EquipItem(equipItem); // ÀåÂø ¾ÆÀÌÅÛÀÌ ÀÖÀ¸¸é Áö¿ì±â
 
         if (tryEquip) // ÀåÂøÀÌ¸é ÇÁ¸®ÆÕ½ºÆùÇÏ°í ¼Õ²ô±â
-        {
             Spawn_ItemPrefab(prefab, slot, ref equipItem);
-            BasicHandOFF();
-        }
-        else // ÀåÂø¾Æ´Ï¸é ¼ÕÄÑ±â
-        {
-            BasicHandOn();
-        }
+    }
+
+    /// <summary>
+    /// ±âº» ¼Õ ÄÑ±â / ²ô±â
+    /// </summary>
+    private void ChangeBasicHand(bool tryEquip)
+    {
+        _basicHand.gameObject.SetActive(!tryEquip);
     }
 
     /// <summary>
