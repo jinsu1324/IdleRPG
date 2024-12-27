@@ -9,7 +9,7 @@ public class BottomTab : MonoBehaviour
     public static event Action<BottomTab> OnOpenButtonClicked;   // 열기버튼 눌렀을 때 이벤트
     public static event Action OnCloseButtonClicked;             // 닫기버튼 눌렀을 때 이벤트
 
-    [SerializeField] private PopupBase _tabPopup;   // 이 탭 누르면 열릴 팝업
+    [SerializeField] private TabPopupBase _tabPopup;   // 이 탭 누르면 열릴 팝업
     [SerializeField] private Button _openButton;    // 열기 버튼
     [SerializeField] private Button _closeButton;   // 닫기 버튼
 

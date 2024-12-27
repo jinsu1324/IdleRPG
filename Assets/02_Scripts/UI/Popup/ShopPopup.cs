@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopPopup : PopupBase
+public class ShopPopup : TabPopupBase
 {
     public override void Hide()
     {

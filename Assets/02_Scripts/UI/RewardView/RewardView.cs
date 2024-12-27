@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// æ∆¿Ã≈€ »πµÊ ∫‰
+/// </summary>
 public class RewardView : MonoBehaviour
 {
     [SerializeField] private List<RewardItemSlot> _rewardItemSlotList;  // »πµÊ æ∆¿Ã≈€ ΩΩ∑‘ ∏ÆΩ∫∆Æ
@@ -22,8 +25,8 @@ public class RewardView : MonoBehaviour
     /// </summary>
     public void Show(List<Item> dropItemList)
     {
-        Change_ExitGuideTextGO(false);
         Change_ExitButtonInteractable(false);
+        Change_ExitGuideTextGO(false);
         gameObject.SetActive(true);
         StartCoroutine(Init_RewardItemSlotList(dropItemList));
     }

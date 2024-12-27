@@ -25,6 +25,9 @@ public enum StatType
     CriticalMultiple
 }
 
+/// <summary>
+/// 플레이어 스탯
+/// </summary>
 public class PlayerStats : SingletonBase<PlayerStats>
 {
     // 플레이어 스탯 변경되었을 때 이벤트
