@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 public class ItemDropMachine : MonoBehaviour
 {
     // È¹µæ Ä«¿îÆ®
-    [Title("ÃÖ´ë È¹µæ °¹¼ö", bold: false)]
+    [Title("È¹µæ °¹¼ö", bold: false)]
     [SerializeField] 
     [Range(1, 10)] 
     private int _maxDropCount;
@@ -33,7 +33,8 @@ public class ItemDropMachine : MonoBehaviour
     public void AcquireRandomItemButton()
     {
         // È¹µæ ¼ö ·£´ýÀ¸·Î °¡Á®¿À±â
-        int dropCount = RandomPickDropCount(_maxDropCount); 
+        //int dropCount = RandomPickDropCount(_maxDropCount); 
+        int dropCount = _maxDropCount; // ÀÏ´Ü Å×½ºÆ®¿ë ·£´ý¸»°í ÀÏÁ¤°¹¼ö·Î
 
         // È¹µæÇÑ ¾ÆÀÌÅÛµé ´ãÀ» º¯¼ö
         List<Item> dropItemList = new List<Item>(); 
