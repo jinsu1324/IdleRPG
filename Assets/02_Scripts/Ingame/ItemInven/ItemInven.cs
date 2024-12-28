@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ using UnityEngine;
 /// </summary>
 public class ItemInven
 {
+    // 가지고 있는 아이템이 변경되었을 때 이벤트
+    public static event Action OnItemInvenChanged;
+
     // 가지고 있는 아이템 인벤토리 딕셔너리 
     private static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>();   
 
@@ -16,17 +20,18 @@ public class ItemInven
     public static void AddItem(Item item)
     {
         TrySet_ItemInvenDict(item);
-
-        // 가지고 있는 아이템이면 갯수만 추가
-        Item existItem = HasItemInInven(item);
+        
+        Item existItem = HasItemInInven(item); // 가지고 있는 아이템이면 갯수만 추가
         if (existItem != null)
         {
             existItem.AddCount();
-            return;
+        }
+        else
+        {
+            _itemInvenDict[item.ItemType].Add(item); // 아니면 아이템 추가
         }
 
-        // 아이템 추가
-        _itemInvenDict[item.ItemType].Add(item);
+        OnItemInvenChanged?.Invoke(); // 가지고 있는 아이템이 변경되었을 때 이벤트 호출
     }
 
     /// <summary>
@@ -86,11 +91,29 @@ public class ItemInven
             return false;
         }
 
-        Item existItem = _itemInvenDict[itemType].Find(item => item.IsEnhanceable());
-
-        if (existItem != null)
+        if (_itemInvenDict[itemType].Exists(item => item.IsEnhanceable()))
             return true;
         else
             return false;
+    }
+
+
+    /// <summary>
+    /// 전체 인벤토리에 강화 가능한 아이템이 있는지?
+    /// </summary>
+    public static bool HasEnhanceableItemAllInven()
+    {
+        // 딕셔너리의 모든 타입(ItemType)과 해당 아이템 리스트를 탐색
+        foreach (var kvp in _itemInvenDict)
+        {
+            // 해당 타입(ItemType)의 리스트에 강화 가능한 아이템이 하나라도 있으면 true 반환
+            if (kvp.Value.Exists(item => item.IsEnhanceable()))
+            {
+                return true;
+            }
+        }
+
+        // 모든 타입을 확인했으나 강화 가능한 아이템이 없으면 false 반환
+        return false;
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 장착 슬롯
 /// </summary>
+[RequireComponent(typeof(ReddotComponent))]
 public class EquipSlot : MonoBehaviour
 {
     [Title("정보들 전체부모 GO", bold: false)]
@@ -50,6 +51,6 @@ public class EquipSlot : MonoBehaviour
     /// </summary>
     public void Update_ReddotComponent(ItemType itemType)
     {
-        _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableItem(itemType));
+        _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableItem(itemType)); // 강화가능한 아이템이 있는지?
     }
 }

@@ -13,19 +13,6 @@ public class ReddotComponent : MonoBehaviour
     /// </summary>
     public void UpdateReddot(Func<bool> condition)
     {
-        if (_reddot == null)
-        {
-            Debug.LogWarning($"[{gameObject.name}] RedDot GameObject가 설정되지 않았습니다.");
-            return;
-        }
-
-        if (condition == null)
-        {
-            Debug.LogWarning($"[{gameObject.name}] 활성화 조건이 설정되지 않았습니다.");
-            _reddot.SetActive(false);
-            return;
-        }
-
         _reddot.SetActive(condition.Invoke());
     }
 }
