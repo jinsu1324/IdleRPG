@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Plastic.Newtonsoft.Json;
@@ -58,7 +59,7 @@ public class Parsing_QuestData : Parsing_Base
 
             // 데이터 할당
             QuestData questData = new QuestData();
-            questData.QuestType = row[0];
+            questData.QuestType = (QuestType)Enum.Parse(typeof(QuestType), row[0]);
             questData.Desc = row[1];
             questData.TargetValue = int.Parse(row[2]);
             questData.RewardGold = int.Parse(row[3]);

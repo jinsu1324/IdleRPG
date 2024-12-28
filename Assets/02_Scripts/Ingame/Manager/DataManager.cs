@@ -17,7 +17,7 @@ public class DataManager : SingletonBase<DataManager>
     private Dictionary<string, ItemDataSO> _itemDataSODict;         // 아이템 데이터 딕셔너리
 
     [Title("퀘스트 데이터", Bold = false)]
-    [SerializeField] private QuestDatasSO _questDatasSO;            // 퀘스트 데이터
+    [SerializeField] public QuestDatasSO QuestDatasSO { get; private set; }            // 퀘스트 데이터
 
     // 데이터들 set 함수들
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
