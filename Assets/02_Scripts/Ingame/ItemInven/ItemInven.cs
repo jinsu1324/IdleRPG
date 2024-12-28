@@ -75,15 +75,22 @@ public class ItemInven
     }
 
 
-
-
-
-    // 임시 디버그 가지고 있는 아이템들 체크용!
-    public static void CheckCurrentItemInven(Item item)
+    /// <summary>
+    /// 해당 인벤토리에 강화 가능한 아이템이 있는지?
+    /// </summary>
+    public static bool HasEnhanceableItem(ItemType itemType)
     {
-        for (int i = 0; i < _itemInvenDict[item.ItemType].Count; i++)
+        if (_itemInvenDict.ContainsKey(itemType) == false)
         {
-            Debug.Log($"{item.ItemType} 인벤토리의 아이템 : {_itemInvenDict[item.ItemType][i].Name} {_itemInvenDict[item.ItemType][i].Count}");
+            Debug.Log("아직 아이템 인벤이 없어요.");
+            return false;
         }
+
+        Item existItem = _itemInvenDict[itemType].Find(item => item.IsEnhanceable());
+
+        if (existItem != null)
+            return true;
+        else
+            return false;
     }
 }

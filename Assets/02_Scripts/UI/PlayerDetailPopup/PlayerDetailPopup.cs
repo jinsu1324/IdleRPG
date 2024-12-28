@@ -74,7 +74,6 @@ public class PlayerDetailPopup : TabPopupBase
     /// </summary>
     private void Update_EquipSlots()
     {
-
         // 장착한 장비에 따라 장비슬롯 업데이트
         foreach (var kvp in _equipSlotDict)
         {
@@ -84,9 +83,9 @@ public class PlayerDetailPopup : TabPopupBase
             Item equipItem = EquipItemManager.GetEquipItem(itemType);
             
             if (equipItem != null)
-                equipSlot.Show(equipItem);
+                equipSlot.Show(equipItem, itemType);
             else
-                equipSlot.Hide();
+                equipSlot.Hide(itemType);
         }
     }
 
