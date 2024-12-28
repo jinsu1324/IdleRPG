@@ -11583,6 +11583,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3866ade52a4b8024d9e7891b6f8223c3, type: 2}
   - {fileID: 11400000, guid: 605bd0672ae173343ae13e91b9ff7ca9, type: 2}
   - {fileID: 11400000, guid: e3e7f13ecfe661c47aeff3767847a504, type: 2}
+  _questDatasSO: {fileID: 11400000, guid: ccd9425210f30f74d904013ace24381b, type: 2}
 --- !u!1 &598913213
 GameObject:
   m_ObjectHideFlags: 0

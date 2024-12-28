@@ -11,7 +11,6 @@ using UnityEditor;
 using UnityEngine;
 
 public class Parsing_GeneralData : OdinEditorWindow
-
 {
     // Google 스프레드시트의 고유 ID. URL에서 찾을 수 있음
     private readonly string _sheetId = "1vtg-eMmm15WSI_PVxF6kgvT839luUkL5D7g6Xsvsv1Q";
