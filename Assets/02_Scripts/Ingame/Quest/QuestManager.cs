@@ -13,21 +13,50 @@ public class QuestManager : SingletonBase<QuestManager>
     private void Start()
     {
         _questDataList = DataManager.Instance.QuestDatasSO.QuestDataList;
+        InitializeProgressDict();
+
         _currentQuest = new Quest(_questDataList[_currentIndex]); // 일단 가장 첫번째 걸로 현재 퀘스트 활성화
         CheckCompleted(_currentQuest);
     }
 
+    // 누적 진행 상황 초기화
+    private void InitializeProgressDict()
+    {
+        _questTypeProgressDict = new Dictionary<QuestType, int>();
+        foreach (QuestType type in Enum.GetValues(typeof(QuestType)))
+        {
+            _questTypeProgressDict[type] = 0;
+        }
+    }
 
     // 퀘스트 진행 상황 업데이트
     public void UpdateQuestProgress(QuestType questType, int amount)
     {
+        // 현재 퀘스트가 슬라임 처치일 경우, 누적하지 않고 활성화된 퀘스트에서만 진행
+        if (questType == QuestType.KillEnemy)
+        {
+            if (_currentQuest != null
+                && _currentQuest.QuestData.QuestType == QuestType.KillEnemy
+                && !_currentQuest.IsCompleted)
+            {
+                _currentQuest.CurrentValue += amount;
+
+                if (_currentQuest.CurrentValue >= _currentQuest.QuestData.TargetValue)
+                {
+                    CompleteQuest(_currentQuest);
+                }
+            }
+            return; // 슬라임 처치 조건은 누적하지 않음
+        }
+
+
         // 누적 진행 상황 업데이트
         if (_questTypeProgressDict.ContainsKey(questType))
         {
             _questTypeProgressDict[questType] += amount;
         }
 
-        // 현재 활성화된 퀘스트와 동일한 유형이라면
+        // 현재 활성화된 퀘스트와 동일한 유형이라면 활성화된 퀘스트도 동시에 업데이트
         if (_currentQuest != null 
             && _currentQuest.QuestData.QuestType == questType 
             && _currentQuest.IsCompleted == false)
@@ -57,6 +86,13 @@ public class QuestManager : SingletonBase<QuestManager>
     private void StartNextQuest()
     {
         _currentIndex++;
+        if (_currentIndex >= _questDataList.Count)
+        {
+            Debug.Log("모든 퀘스트 완료");
+            _currentQuest = null;
+            return;
+        }
+
         _currentQuest = new Quest(_questDataList[_currentIndex]);
 
         CheckCompleted(_currentQuest);
