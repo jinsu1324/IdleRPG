@@ -41,16 +41,16 @@ public class UpgradeSlot : MonoBehaviour
     private void UpdateUpgradeSlotUI()
     {
         // 이 슬롯의 업그레이드 ID에 맞게 스탯 가져오기
-        Upgrade stat = UpgradeManager.GetUpgrade(_id);
+        Upgrade upgrade = UpgradeManager.GetUpgrade(_id);
 
         // UI 요소들 업데이트
-        if (stat != null)
+        if (upgrade != null)
         {
-            _upgradeNameText.text = stat.Name;
-            _levelText.text = $"Lv.{stat.Level}";
-            _valueText.text = AlphabetNumConverter.Convert(stat.Value);
-            _costText.text = AlphabetNumConverter.Convert(stat.Cost);
-            _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(stat.ID.ToString());
+            _upgradeNameText.text = upgrade.Name;
+            _levelText.text = $"Lv.{upgrade.Level}";
+            _valueText.text = AlphabetNumConverter.Convert(upgrade.Value);
+            _costText.text = AlphabetNumConverter.Convert(upgrade.Cost);
+            _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(upgrade.ID.ToString());
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
     }

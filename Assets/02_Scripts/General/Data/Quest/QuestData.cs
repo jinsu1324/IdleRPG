@@ -5,7 +5,12 @@ using UnityEngine;
 public enum QuestType
 {
     KillEnemy,
-    CollectGold
+    CollectGold,
+    UpgradeAttackPower,
+    UpgradeAttackSpeed,
+    UpgradeMaxHp,
+    UpgradeCriticalRate,
+    UpgradeCriticalMultiple
 }
 
 [System.Serializable]

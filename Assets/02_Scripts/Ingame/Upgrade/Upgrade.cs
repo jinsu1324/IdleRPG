@@ -49,6 +49,8 @@ public class Upgrade : BaseData
         Cost += CostIncrease;
 
         UpdatePlayerStats();
+
+        UpgradeQuestUpdate();   // 업그레이드 관련 퀘스트 업데이트
     }
 
     /// <summary>
@@ -62,5 +64,30 @@ public class Upgrade : BaseData
         dict[statType] = Value;
 
         PlayerStats.Instance.UpdateModifier(dict, this); // 업그레이드 소스를 고유하게 설정
+    }
+
+    /// <summary>
+    /// 업그레이드 관련 퀘스트 업데이트
+    /// </summary>
+    private void UpgradeQuestUpdate()
+    {
+        switch ((UpgradeID)Enum.Parse(typeof(UpgradeID), ID))
+        {
+            case UpgradeID.AttackPower:
+                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackPower, 1);
+                break;
+            case UpgradeID.AttackSpeed:
+                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackSpeed, 1);
+                break;
+            case UpgradeID.MaxHp:
+                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeMaxHp, 1);
+                break;
+            case UpgradeID.CriticalRate:
+                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalRate, 1);
+                break;
+            case UpgradeID.CriticalMultiple:
+                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalMultiple, 1);
+                break;
+        }
     }
 }
