@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public class GoldManager
 {
-    private static int _currentGold = 100000;                   // 현재 골드
-    public static event Action<int> OnGoldChanged;              // 골드 변경 되었을 때 이벤트
+    private static int _currentGold;                   // 현재 골드
+    public static event Action<int> OnGoldChanged;     // 골드 변경 되었을 때 이벤트
 
     /// <summary>
     /// 골드 추가
@@ -18,6 +18,7 @@ public class GoldManager
     {
         _currentGold += amount;
         NotifyChanged();
+        QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, amount);
     }
 
     /// <summary>
@@ -29,6 +30,7 @@ public class GoldManager
         {
             _currentGold -= amount;
             NotifyChanged();
+            QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, -amount);
         }
         else
         {

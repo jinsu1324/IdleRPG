@@ -32,6 +32,7 @@ public class Quest
     public int GetRewardGem() => _rewardGem;  // 보상 가져오기
     public int GetCurrentValue() => _currentValue;  // 현재 값 가져오기
     public int SetCurrentValue(int amount) => _currentValue = amount;   // 현재 값 설정하기
+    public int AddCurrentValue(int amount) => _currentValue += amount;  // 현재 값 더하기
     public bool IsCompleted() // 완료 여부 가져오기
     {
         _isCompleted = _currentValue >= _targetValue;

@@ -46,7 +46,16 @@ public class DataManager : SingletonBase<DataManager>
         // 적 드랍 골드량 데이터 셋팅
         EnemyDropGoldManager enemyDropGoldManager = new EnemyDropGoldManager();
         enemyDropGoldManager.Init(EnemyDatasSO);
+    }
 
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
+        // 초기 골드와 젬 설정
+        GoldManager.AddGold(10000);
+        GemManager.AddGem(100);
     }
 
     /// <summary>

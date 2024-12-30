@@ -8,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public class GemManager : MonoBehaviour
 {
-    private static int _currentGem = 100;                   // 현재 젬
-    public static event Action<int> OnGemChanged;           // 젬 변경 되었을 때 이벤트
+    private static int _currentGem;                 // 현재 젬
+    public static event Action<int> OnGemChanged;   // 젬 변경 되었을 때 이벤트
 
     /// <summary>
     /// 젬 추가

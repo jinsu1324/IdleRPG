@@ -109,10 +109,7 @@ public class Enemy : SerializedMonoBehaviour
         StageManager.Instance.AddKillCount();   // 킬 카운트 증가
         EnemyDropGoldManager.AddGoldByEnemy(_enemyID); // 골드 추가
         FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
-
-
-
-        QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1);
+        QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 누적
 
         ReturnPool();   // 풀로 돌려보내기
     }

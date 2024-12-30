@@ -15,15 +15,15 @@ MonoBehaviour:
   QuestDataList:
   - QuestType: 0
     Desc: "\uC801 10\uB9C8\uB9AC \uCC98\uCE58"
-    TargetValue: 10
+    TargetValue: 5
     RewardGem: 100
   - QuestType: 0
     Desc: "\uC801 50\uB9C8\uB9AC \uCC98\uCE58"
-    TargetValue: 50
+    TargetValue: 10
     RewardGem: 200
   - QuestType: 1
     Desc: "\uACE8\uB4DC 200 \uC218\uC9D1"
-    TargetValue: 200
+    TargetValue: 5000
     RewardGem: 300
   - QuestType: 0
     Desc: "\uC801 100\uB9C8\uB9AC \uCC98\uCE58"

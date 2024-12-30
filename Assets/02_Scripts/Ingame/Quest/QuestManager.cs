@@ -56,16 +56,26 @@ public class QuestManager : SingletonBase<QuestManager>
     /// </summary>
     public void UpdateQuestProgress(QuestType questType, int amount)
     {
+        // 적 처치는 누적 X
+        if (questType == QuestType.KillEnemy)
+        {
+            // 파라미터 퀘스트타입이 = 현재 퀘스트타입과 동일하다면, 현재 퀘스트도 업데이트
+            if (_currentQuest.GetQuestType() == questType)
+            {
+                _currentQuest.AddCurrentValue(amount); // 진행값 더해주기
+                OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
+                CheckQuestComplete(_currentQuest); // 완료여부 체크
+                
+                return;
+            }
+        }
+
         // 누적 진행 상황 업데이트
         if (_questProgressDict.ContainsKey(questType))
             _questProgressDict[questType] += amount;
 
-        // 현재퀘스트가 없으면 그냥 리턴
-        if (_currentQuest == null)
-            return;
-
         // 파라미터 퀘스트타입이 = 현재 퀘스트타입과 동일하다면, 현재 퀘스트도 업데이트
-        if (_currentQuest.GetQuestType() == questType && _currentQuest.IsCompleted() == false)
+        if (_currentQuest.GetQuestType() == questType)
         {
             _currentQuest.SetCurrentValue(_questProgressDict[questType]); // 누적된 수치를 현재퀘스트 수치로
             OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
