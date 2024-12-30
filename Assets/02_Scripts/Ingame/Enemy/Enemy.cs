@@ -110,6 +110,10 @@ public class Enemy : SerializedMonoBehaviour
         EnemyDropGoldManager.AddGoldByEnemy(_enemyID); // 골드 추가
         FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
 
+
+
+        QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1);
+
         ReturnPool();   // 풀로 돌려보내기
     }
 

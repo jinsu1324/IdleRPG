@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,84 +6,95 @@ using UnityEngine;
 
 public class QuestManager : SingletonBase<QuestManager>
 {
-    private List<QuestData> _questDataList = new List<QuestData>();  // 모든 퀘스트 데이터 테이블
+    public static event Action<Quest> OnUpdateCurrentQuest;          // 현재 퀘스트 정보들 업데이트됐을때 이벤트
+    public static event Action<bool> OnCheckQuestCompleted;          // 퀘스트 완료여부 체크할때 이벤트
+    
+    [SerializeField] private QuestDatasSO _questDatasSO;             // 퀘스트 데이터
+
+    private List<QuestData> _questDataList = new List<QuestData>();  // 모든 퀘스트 데이터 리스트
     private Quest _currentQuest;                                     // 현재 활성화된 퀘스트
     private int _currentIndex = 0;                                   // 현재 퀘스트 인덱스
-    private Dictionary<QuestType, int> _questTypeProgressDict;       // 퀘스트 유형별 누적 진행 상황
+    private Dictionary<QuestType, int> _questProgressDict;           // 퀘스트 유형별 누적 진행 상황 딕셔너리
 
-    private void Start()
+    /// <summary>
+    /// Awake
+    /// </summary>
+    protected override void Awake()
     {
-        _questDataList = DataManager.Instance.QuestDatasSO.QuestDataList;
-        InitializeProgressDict();
+        base.Awake();
+
+        InitQuestDataList(); // 퀘스트 데이터 리스트 초기화
+        InitQuestProgressDict(); // 누적진행상황 딕셔너리 초기화
 
         _currentQuest = new Quest(_questDataList[_currentIndex]); // 일단 가장 첫번째 걸로 현재 퀘스트 활성화
-        CheckCompleted(_currentQuest);
+        OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
+        CheckQuestComplete(_currentQuest); // 완료여부 체크
     }
 
-    // 누적 진행 상황 초기화
-    private void InitializeProgressDict()
+    /// <summary>
+    /// 퀘스트 데이터 리스트 초기화
+    /// </summary>
+    private void InitQuestDataList()
     {
-        _questTypeProgressDict = new Dictionary<QuestType, int>();
-        foreach (QuestType type in Enum.GetValues(typeof(QuestType)))
+        _questDataList = _questDatasSO.QuestDataList;
+    }
+
+    /// <summary>
+    /// 누적진행상황 딕셔너리 초기화
+    /// </summary>
+    private void InitQuestProgressDict()
+    {
+        _questProgressDict = new Dictionary<QuestType, int>();
+        foreach (QuestType questType in Enum.GetValues(typeof(QuestType)))
         {
-            _questTypeProgressDict[type] = 0;
+            _questProgressDict[questType] = 0;
         }
     }
 
-    // 퀘스트 진행 상황 업데이트
+    /// <summary>
+    /// 퀘스트 진행상황 업데이트
+    /// </summary>
     public void UpdateQuestProgress(QuestType questType, int amount)
     {
-        // 현재 퀘스트가 슬라임 처치일 경우, 누적하지 않고 활성화된 퀘스트에서만 진행
-        if (questType == QuestType.KillEnemy)
-        {
-            if (_currentQuest != null
-                && _currentQuest.QuestData.QuestType == QuestType.KillEnemy
-                && !_currentQuest.IsCompleted)
-            {
-                _currentQuest.CurrentValue += amount;
-
-                if (_currentQuest.CurrentValue >= _currentQuest.QuestData.TargetValue)
-                {
-                    CompleteQuest(_currentQuest);
-                }
-            }
-            return; // 슬라임 처치 조건은 누적하지 않음
-        }
-
-
         // 누적 진행 상황 업데이트
-        if (_questTypeProgressDict.ContainsKey(questType))
-        {
-            _questTypeProgressDict[questType] += amount;
-        }
+        if (_questProgressDict.ContainsKey(questType))
+            _questProgressDict[questType] += amount;
 
-        // 현재 활성화된 퀘스트와 동일한 유형이라면 활성화된 퀘스트도 동시에 업데이트
-        if (_currentQuest != null 
-            && _currentQuest.QuestData.QuestType == questType 
-            && _currentQuest.IsCompleted == false)
-        {
-            _currentQuest.CurrentValue = _questTypeProgressDict[questType];
+        // 현재퀘스트가 없으면 그냥 리턴
+        if (_currentQuest == null)
+            return;
 
-            if (_currentQuest.CurrentValue >= _currentQuest.QuestData.TargetValue)
-            {
-                CompleteQuest(_currentQuest);
-            }
+        // 파라미터 퀘스트타입이 = 현재 퀘스트타입과 동일하다면, 현재 퀘스트도 업데이트
+        if (_currentQuest.GetQuestType() == questType && _currentQuest.IsCompleted() == false)
+        {
+            _currentQuest.SetCurrentValue(_questProgressDict[questType]); // 누적된 수치를 현재퀘스트 수치로
+            OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
+            CheckQuestComplete(_currentQuest); // 완료여부 체크
         }
     }
 
-    // 퀘스트 완료 처리
-    private void CompleteQuest(Quest quest)
+    /// <summary>
+    /// 퀘스트 완료 여부 확인
+    /// </summary>
+    private void CheckQuestComplete(Quest quest)
     {
-        quest.IsCompleted = true; // 완료 상태로 설정
-        Debug.Log($"퀘스트 완료: {quest.QuestData.Desc}");
-
-
-        Reward(quest);
-
-        StartNextQuest();
+        OnCheckQuestCompleted?.Invoke(quest.IsCompleted()); // 퀘스트 완료여부 체크할때 이벤트 실행
     }
 
-    // 다음 퀘스트 시작
+    /// <summary>
+    /// 퀘스트 완료
+    /// </summary>
+    public void CompleteCurrentQuest()
+    {
+        Debug.Log($"퀘스트 완료: {_currentQuest.GetDesc()}");
+        
+        Reward(_currentQuest); // 보상 지급
+        StartNextQuest(); // 다음 퀘스트로
+    }
+
+    /// <summary>
+    /// 다음 퀘스트 시작
+    /// </summary>
     private void StartNextQuest()
     {
         _currentIndex++;
@@ -92,51 +104,38 @@ public class QuestManager : SingletonBase<QuestManager>
             _currentQuest = null;
             return;
         }
-
-        _currentQuest = new Quest(_questDataList[_currentIndex]);
-
-        CheckCompleted(_currentQuest);
+        
+        _currentQuest = new Quest(_questDataList[_currentIndex]); // 다음 퀘스트로 현재퀘스트 설정
+        OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
+        CheckQuestComplete(_currentQuest); // 완료 여부 체크
     }
 
-    // 즉시 완료 여부 확인
-    private void CheckCompleted(Quest quest)
-    {
-        // 누적 값이랑 비교하고 이미 지났다면 즉시 완료
-        if (_questTypeProgressDict[quest.QuestData.QuestType] >= quest.CurrentValue)
-        {
-            CompleteQuest(quest);
-        }
-    }
-
-
-    // 보상 지급
+    /// <summary>
+    /// 보상 지급
+    /// </summary>
     private void Reward(Quest quest)
     {
-        Debug.Log($"보상지급 : {quest.QuestData.RewardGold}");
-        // 실제로는 연결하여 보상을 지급
+        GoldManager.AddCurrency(quest.GetRewardGold());
+
+        Debug.Log($"보상지급 : {quest.GetRewardGold()}");
     }
 
+    /// <summary>
+    /// 현재 퀘스트 가져오기
+    /// </summary>
+    public Quest GetCurrentQuest()
+    {
+        return _currentQuest;
+    }
+
+    /// <summary>
+    /// 퀘스트 진행상태 누적값 가져오기
+    /// </summary>
+    public int GetQuestProgressAmount(QuestType questType)
+    {
+        if (_questProgressDict.TryGetValue(questType, out int amount))
+            return amount;
+        else
+            return 0;
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
