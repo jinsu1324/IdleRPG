@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Quest
   m_EditorClassIdentifier: 
   QuestDataList:
-  - QuestType: KillEnemy
+  - QuestType: 0
     Desc: "\uC801 10\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 10
-    RewardGold: 100
-  - QuestType: KillEnemy
+    RewardGem: 100
+  - QuestType: 0
     Desc: "\uC801 50\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 50
-    RewardGold: 200
-  - QuestType: CollectGold
+    RewardGem: 200
+  - QuestType: 1
     Desc: "\uACE8\uB4DC 200 \uC218\uC9D1"
     TargetValue: 200
-    RewardGold: 300
-  - QuestType: KillEnemy
+    RewardGem: 300
+  - QuestType: 0
     Desc: "\uC801 100\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 100
-    RewardGold: 500
+    RewardGem: 500

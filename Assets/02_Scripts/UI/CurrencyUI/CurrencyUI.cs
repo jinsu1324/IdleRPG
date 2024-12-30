@@ -6,13 +6,15 @@ using UnityEngine;
 public class CurrencyUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _goldText;     // 현재 골드 텍스트
+    [SerializeField] private TextMeshProUGUI _gemText;      // 현재 젬 텍스트
 
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        GoldManager.OnGoldChanged += UpdateCurrencyUI;  // 재화가 변경될 때, 재화UI 업데이트
+        GoldManager.OnGoldChanged += UpdateGoldUI;  // 골드가 변경될 때, 골드 UI 업데이트
+        GemManager.OnGemChanged += UpdateGemUI; // 젬이 변경될 때, 젬 UI 업데이트
     }
 
     /// <summary>
@@ -20,15 +22,24 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void Start()
     {
-        UpdateCurrencyUI(GoldManager.GetCurrencyCount());
+        UpdateGoldUI(GoldManager.GetGold());
+        UpdateGemUI(GemManager.GetGem());
     }
 
     /// <summary>
-    /// UI 업데이트
+    /// 골드UI 업데이트
     /// </summary>
-    public void UpdateCurrencyUI(int amout)
+    public void UpdateGoldUI(int amount)
     {
-        _goldText.text = AlphabetNumConverter.Convert(amout);
+        _goldText.text = AlphabetNumConverter.Convert(amount);
+    }
+
+    /// <summary>
+    /// 젬UI 업데이트
+    /// </summary>
+    public void UpdateGemUI(int amount)
+    {
+        _gemText.text = AlphabetNumConverter.Convert(amount);
     }
 
     /// <summary>
@@ -36,6 +47,7 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        GoldManager.OnGoldChanged -= UpdateCurrencyUI;
+        GoldManager.OnGoldChanged -= UpdateGoldUI;
+        GemManager.OnGemChanged -= UpdateGemUI;
     }
 }

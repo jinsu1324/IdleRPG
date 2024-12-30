@@ -31,7 +31,7 @@ public class EnemyDropGoldManager
     public static void AddGoldByEnemy(EnemyID enemyID)
     {
         int gold = _enemyDropGoldDict[enemyID];
-        GoldManager.AddCurrency(gold);
+        GoldManager.AddGold(gold);
     }
 
 }

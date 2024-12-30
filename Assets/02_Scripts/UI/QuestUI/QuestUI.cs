@@ -34,7 +34,7 @@ public class QuestUI : MonoBehaviour
         _descText.text = quest.GetDesc();
         _currentValueText.text = $"{quest.GetCurrentValue()}";
         _targetValueText.text = $"{quest.GetTargetValue()}";
-        _rewardText.text = $"{quest.GetRewardGold()}";
+        _rewardText.text = $"{quest.GetRewardGem()}";
     }
 
     /// <summary>

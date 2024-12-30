@@ -14,5 +14,5 @@ public class QuestData
     public QuestType QuestType;
     public string Desc;
     public int TargetValue;
-    public int RewardGold;
+    public int RewardGem;
 }

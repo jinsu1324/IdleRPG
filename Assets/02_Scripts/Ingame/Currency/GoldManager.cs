@@ -14,7 +14,7 @@ public class GoldManager
     /// <summary>
     /// 골드 추가
     /// </summary>
-    public static void AddCurrency(int amount)
+    public static void AddGold(int amount)
     {
         _currentGold += amount;
         NotifyChanged();
@@ -23,7 +23,7 @@ public class GoldManager
     /// <summary>
     /// 골드 감소
     /// </summary>
-    public static void ReduceCurrency(int amount)
+    public static void ReduceGold(int amount)
     {
         if (_currentGold >= amount)
         {
@@ -32,14 +32,14 @@ public class GoldManager
         }
         else
         {
-            Debug.LogWarning("골드가 부족합니다!");
+            Debug.LogWarning("감소할 골드가 부족합니다!");
         }
     }
 
     /// <summary>
     /// 골드 가져오기
     /// </summary>
-    public static int GetCurrencyCount()
+    public static int GetGold()
     {
         return _currentGold;
     }
@@ -47,7 +47,7 @@ public class GoldManager
     /// <summary>
     /// 골드 충분한지 체크
     /// </summary>
-    public static bool HasEnoughCurrency(int cost)
+    public static bool HasEnoughGold(int cost)
     {
         return _currentGold >= cost;
     }

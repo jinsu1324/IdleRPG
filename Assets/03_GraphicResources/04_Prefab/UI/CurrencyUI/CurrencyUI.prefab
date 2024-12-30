@@ -474,6 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goldText: {fileID: 3457645768496244162}
+  _gemText: {fileID: 908899229398865320}
 --- !u!1 &7625591915704189722
 GameObject:
   m_ObjectHideFlags: 0

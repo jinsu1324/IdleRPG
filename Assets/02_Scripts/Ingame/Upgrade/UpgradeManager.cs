@@ -104,7 +104,7 @@ public class UpgradeManager
     {
         Upgrade upgrade = GetUpgrade(id); // id 에 맞는 업그레이드 가져오기
 
-        if (upgrade != null && GoldManager.HasEnoughCurrency(upgrade.Cost)) // 업그레이드가 있고 + 자금이 된다면
+        if (upgrade != null && GoldManager.HasEnoughGold(upgrade.Cost)) // 업그레이드가 있고 + 자금이 된다면
         {
             UpgradeLevelUp(id); // 그 업그레이드 레벨업
             return true;
@@ -121,7 +121,7 @@ public class UpgradeManager
         if (_upgradeDict.TryGetValue(id.ToString(), out var upgrade))
         {
             // 골드 감소
-            GoldManager.ReduceCurrency(upgrade.Cost);
+            GoldManager.ReduceGold(upgrade.Cost);
 
             // 업그레이드 레벨업
             upgrade.LevelUp();

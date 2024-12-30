@@ -115,9 +115,9 @@ public class QuestManager : SingletonBase<QuestManager>
     /// </summary>
     private void Reward(Quest quest)
     {
-        GoldManager.AddCurrency(quest.GetRewardGold());
+        GemManager.AddGem(quest.GetRewardGem());
 
-        Debug.Log($"보상지급 : {quest.GetRewardGold()}");
+        Debug.Log($"보상지급 : {quest.GetRewardGem()}");
     }
 
     /// <summary>
