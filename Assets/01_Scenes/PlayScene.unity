@@ -41281,6 +41281,7 @@ MonoBehaviour:
   _descText: {fileID: 2003499902}
   _currentValueText: {fileID: 391562158}
   _targetValueText: {fileID: 1054449184}
+  _slashText: {fileID: 183032824}
   _rewardText: {fileID: 820643550}
   _completeButton: {fileID: 1710126208}
 --- !u!1 &1826919468

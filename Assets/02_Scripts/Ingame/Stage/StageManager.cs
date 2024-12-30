@@ -27,6 +27,7 @@ public class StageManager : SingletonBase<StageManager>
     private int _currentStage = 1;                                  // 현재 스테이지
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
+    private int _stageLevelingCount = 1;                            // 스테이지를 레벨로 환산한 카운트
 
     /// <summary>
     /// Start
@@ -60,8 +61,6 @@ public class StageManager : SingletonBase<StageManager>
 
         ResetTargetCount(args); // 목표 + 죽인 적 숫자 리셋
         OnStageChanged?.Invoke(args);  // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
-
-        //Debug.Log($"{_currentChapter}-{_currentStage} 시작!");
     }
     
     /// <summary>
@@ -101,6 +100,8 @@ public class StageManager : SingletonBase<StageManager>
     private void StageLevelUp()
     {
         _currentStage++;
+        _stageLevelingCount++;
+        QuestManager.Instance.UpdateQuestProgress(QuestType.ReachStage, 1);
 
         if (_currentStage > 5)
         {

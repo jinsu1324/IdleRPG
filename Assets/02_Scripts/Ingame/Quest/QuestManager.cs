@@ -44,11 +44,17 @@ public class QuestManager : SingletonBase<QuestManager>
     /// </summary>
     private void InitQuestProgressDict()
     {
-        _questProgressDict = new Dictionary<QuestType, int>();
-        foreach (QuestType questType in Enum.GetValues(typeof(QuestType)))
+        _questProgressDict = new Dictionary<QuestType, int>()
         {
-            _questProgressDict[questType] = 0;
-        }
+            { QuestType.KillEnemy, 0 },
+            { QuestType.CollectGold, 0},
+            { QuestType.UpgradeAttackPower, 1},
+            { QuestType.UpgradeAttackSpeed, 1},
+            { QuestType.UpgradeMaxHp, 1},
+            { QuestType.UpgradeCriticalRate, 1},
+            { QuestType.UpgradeCriticalMultiple, 1},
+            { QuestType.ReachStage, 1}
+        };
     }
 
     /// <summary>

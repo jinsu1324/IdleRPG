@@ -15,35 +15,35 @@ MonoBehaviour:
   DataList:
   - ID: AttackPower
     Name: "\uACF5\uACA9\uB825"
-    Level: 0
+    Level: 1
     Value: 10
     ValueIncrease: 1
     Cost: 10
     CostIncrease: 10
   - ID: AttackSpeed
     Name: "\uACF5\uACA9\uC18D\uB3C4"
-    Level: 0
+    Level: 1
     Value: 1
     ValueIncrease: 1
     Cost: 10
     CostIncrease: 10
   - ID: MaxHp
     Name: "\uCCB4\uB825"
-    Level: 0
+    Level: 1
     Value: 1000
     ValueIncrease: 25
     Cost: 15
     CostIncrease: 15
   - ID: CriticalRate
     Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
-    Level: 0
+    Level: 1
     Value: 50
     ValueIncrease: 1
     Cost: 15
     CostIncrease: 15
   - ID: CriticalMultiple
     Name: "\uCE58\uBA85\uD0C0 \uBC30\uC728"
-    Level: 0
+    Level: 1
     Value: 200
     ValueIncrease: 10
     Cost: 20

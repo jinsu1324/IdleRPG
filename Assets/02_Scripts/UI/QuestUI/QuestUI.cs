@@ -9,6 +9,7 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _descText;         // 퀘스트 설명 텍스트
     [SerializeField] private TextMeshProUGUI _currentValueText; // 현재 값 텍스트
     [SerializeField] private TextMeshProUGUI _targetValueText;  // 타겟 값 텍스트
+    [SerializeField] private TextMeshProUGUI _slashText;        // / 텍스트
     [SerializeField] private TextMeshProUGUI _rewardText;       // 보상 값 텍스트
     [SerializeField] private Button _completeButton;            // 완료 버튼
 
@@ -31,10 +32,24 @@ public class QuestUI : MonoBehaviour
     /// </summary>
     private void UpdateQuestUI(Quest quest)
     {
+        // 스테이지 도달 퀘스트면 상세수치는 가리기
+        if (quest.GetQuestType() == QuestType.ReachStage)
+        {
+            _currentValueText.gameObject.SetActive(false);
+            _slashText.gameObject.SetActive(false);
+            _targetValueText.gameObject.SetActive(false);
+        }
+        else
+        {
+            _currentValueText.gameObject.SetActive(true);
+            _slashText.gameObject.SetActive(true);
+            _targetValueText.gameObject.SetActive(true);
+        }
+
         _descText.text = quest.GetDesc();
+        _rewardText.text = $"{quest.GetRewardGem()}";
         _currentValueText.text = $"{quest.GetCurrentValue()}";
         _targetValueText.text = $"{quest.GetTargetValue()}";
-        _rewardText.text = $"{quest.GetRewardGem()}";
     }
 
     /// <summary>

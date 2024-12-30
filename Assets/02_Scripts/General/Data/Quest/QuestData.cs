@@ -10,7 +10,8 @@ public enum QuestType
     UpgradeAttackSpeed,
     UpgradeMaxHp,
     UpgradeCriticalRate,
-    UpgradeCriticalMultiple
+    UpgradeCriticalMultiple,
+    ReachStage
 }
 
 [System.Serializable]

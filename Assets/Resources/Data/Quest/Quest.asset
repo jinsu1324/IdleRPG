@@ -21,6 +21,10 @@ MonoBehaviour:
     Desc: "\uC801 10\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 10
     RewardGem: 200
+  - QuestType: 7
+    Desc: "\uC2A4\uD14C\uC774\uC9C0 1-3 \uB3C4\uB2EC"
+    TargetValue: 3
+    RewardGem: 500
   - QuestType: 1
     Desc: "\uACE8\uB4DC 5000 \uC218\uC9D1"
     TargetValue: 5000
