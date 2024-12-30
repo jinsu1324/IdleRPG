@@ -5,12 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public enum EnemyState
-{
-    Move,
-    Attack,
-}
-
 public class Enemy : SerializedMonoBehaviour
 {
     private ObjectPool<Enemy> _pool;                            // 자신을 반환할 풀 참조
@@ -109,7 +103,7 @@ public class Enemy : SerializedMonoBehaviour
         StageManager.Instance.AddKillCount();   // 킬 카운트 증가
         EnemyDropGoldManager.AddGoldByEnemy(_enemyID); // 골드 추가
         FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
-        QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 누적
+        QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 업데이트
 
         ReturnPool();   // 풀로 돌려보내기
     }
