@@ -49,7 +49,7 @@ public class PlayerDetailPopup : TabPopupBase
         PlayerStats.OnPlayerStatChanged += Update_StatTexts;    // 플레이어 스탯이 바뀌면, 스탯텍스트 업데이트
 
 
-        PlayerStatArgs args = PlayerStats.Instance.CalculateStats(0);
+        PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs(0);
         Update_StatTexts(args);
         
         Update_EquipSlots();

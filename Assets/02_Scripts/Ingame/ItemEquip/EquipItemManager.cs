@@ -54,7 +54,7 @@ public class EquipItemManager
         OnEquipItemChanged?.Invoke(args, true);
 
         // 플레이어 스탯에 아이템 스탯들 전부 추가
-        PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
+        PlayerStats.UpdateStatModifier(item.GetStatDict(), item);
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class EquipItemManager
         OnEquipItemChanged?.Invoke(args, false);
 
         // 플레이어 스탯에 아이템 스탯들 전부 제거
-        PlayerStats.Instance.RemoveModifier(item.GetStatDict(), item);
+        PlayerStats.RemoveStatModifier(item.GetStatDict(), item);
     }
 
     /// <summary>

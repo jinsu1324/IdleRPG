@@ -21,20 +21,12 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     private void SpawnPlayer()
     {
-        // 플레이어 인스턴스 생성
+        // 플레이어 인스턴스 생성 및 위치설정
         PlayerInstance = Instantiate(_playerPrefab, _playerSpawnPos);
         PlayerInstance.transform.position = _playerSpawnPos.position;
 
-        PlayerStatArgs args = new PlayerStatArgs()
-        {
-            TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()),
-            AttackPower = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackPower)),
-            AttackSpeed = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)),
-            MaxHp = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.MaxHp)),
-            CriticalRate = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)),
-            CriticalMultiple = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple))
-        };
-        PlayerInstance.Init(args); // 인스턴스 초기화
+        // 생성된 플레이어 인스턴스 초기화
+        InitialPlayer();
     }
 
     /// <summary>
@@ -42,15 +34,19 @@ public class PlayerSpawner : MonoBehaviour
     /// </summary>
     public static void RestorePlayerStats()
     {
-        PlayerStatArgs args = new PlayerStatArgs()
-        {
-            TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()),
-            AttackPower = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackPower)),
-            AttackSpeed = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.AttackSpeed)),
-            MaxHp = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.MaxHp)),
-            CriticalRate = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalRate)),
-            CriticalMultiple = (int)Mathf.Floor(PlayerStats.Instance.GetFinalStat(StatType.CriticalMultiple))
-        };
-        PlayerInstance.Init(args);
+        // 생성된 플레이어 인스턴스 초기화
+        InitialPlayer();
+    }
+
+    /// <summary>
+    /// 플레이어 스탯 가져와서 초기화
+    /// </summary>
+    public static void InitialPlayer()
+    {
+        // 이전 전투력 계산
+        int beforeTotalPower = PlayerStats.GetAllStatValue();
+
+        // 플레이어 인스턴스 초기화
+        PlayerInstance.Init(PlayerStats.GetCurrentPlayerStatArgs(beforeTotalPower));
     }
 }

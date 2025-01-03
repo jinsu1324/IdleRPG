@@ -63,7 +63,7 @@ public class Upgrade : BaseData
         Dictionary<StatType, int> dict = new Dictionary<StatType, int>();
         dict[statType] = Value;
 
-        PlayerStats.Instance.UpdateModifier(dict, this); // 업그레이드 소스를 고유하게 설정
+        PlayerStats.UpdateStatModifier(dict, this); // 업그레이드 소스를 고유하게 설정
     }
 
     /// <summary>

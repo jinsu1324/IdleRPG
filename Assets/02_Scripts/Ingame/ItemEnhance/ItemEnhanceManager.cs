@@ -19,7 +19,7 @@ public class ItemEnhanceManager
         if (EquipItemManager.IsEquipped(item))
         {
             // 플레이어 스탯에 아이템 스탯들 전부 추가
-            PlayerStats.Instance.UpdateModifier(item.GetStatDict(), item);
+            PlayerStats.UpdateStatModifier(item.GetStatDict(), item);
         }
     }
 }

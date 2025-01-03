@@ -39,7 +39,7 @@ public class UpgradePanel : MonoBehaviour
             statUpgradeSlot.Init(upgrade.ID);
         }
 
-        PlayerStatArgs args = new PlayerStatArgs() { TotalPower = (int)Mathf.Floor(PlayerStats.Instance.GetAllFinalStat()) };
+        PlayerStatArgs args = new PlayerStatArgs() { TotalPower = (int)Mathf.Floor(PlayerStats.GetAllStatValue()) };
         UpdateTotalPowerTextUI(args);
     }
 

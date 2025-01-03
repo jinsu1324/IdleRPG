@@ -595,8 +595,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _userId: sfjk1324
   _userData:
-    UserName: truso
-    TotalCoin: 300
+    UserName: jinsu
+    TotalCoin: 3000
     CurrentLevel: 16
     HighScore: 100000
 --- !u!4 &756633972

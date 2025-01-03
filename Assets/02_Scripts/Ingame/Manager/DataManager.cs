@@ -36,7 +36,7 @@ public class DataManager : SingletonBase<DataManager>
 
 
         // 플레이어 스탯 모디파이어 딕셔너리를 먼저 초기화
-        PlayerStats.Instance.InitStatModifierDict(); 
+        //PlayerStats.Instance.InitStatModifierDict(); 
 
 
         // 스타팅 업그레이드 데이터 셋팅
