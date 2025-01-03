@@ -17,29 +17,15 @@ public class Player : SerializedMonoBehaviour
     private AnimComponent _animComponent;                           // 애님 컴포넌트
     private BlinkOnHit _blinkOnHit;                                 // 데미지 받았을 때 스프라이트 깜빡여주는 컴포넌트
     private EquipItemComponent _equipItemComponent;                 // 장착 아이템 컴포넌트
-
-    /// <summary>
-    /// OnEnable
-    /// </summary>
-    private void OnEnable()
-    {
-        PlayerStats.OnPlayerStatChanged += ChangeComponentsValue;  // 플레이어 스탯 변경되었을 때, 플레이어 프리팹 컴포넌트들 값 변경
-    }
-
+    
     /// <summary>
     /// 초기화
     /// </summary>
     public void Init(PlayerStatArgs args)
     {
-        int attackPower = args.AttackPower;
-        int attackSpeed = args.AttackSpeed;
-        int maxHp = args.MaxHp;
-        int criticalRate = args.CriticalRate;
-        int criticalMultiple = args.CriticalMultiple;
-
-        Init_HPComponent(maxHp);
-        Init_HPBar(maxHp);
-        Init_AttackComponentProjectile(attackPower, attackSpeed, criticalRate, criticalMultiple);
+        Init_HPComponent(args.MaxHp);
+        Init_HPBar(args.MaxHp);
+        Init_AttackComponentProjectile(args.AttackPower, args.AttackSpeed, args.CriticalRate, args.CriticalMultiple);
         Init_AnimComponent();
         Init_BlinkOnHit();
         Init_EquipItemComponent();
@@ -52,8 +38,12 @@ public class Player : SerializedMonoBehaviour
     {
         _hpComponent = GetComponent<HPComponent>();
         _hpComponent.Init(maxHp); // HP 컴포넌트 초기화
+
         _hpComponent.OnDead -= PlayerDeadTask;  // 이벤트 중복방지 (플레이어 리셋할때는 OnDisable이 안되기 때문)
         _hpComponent.OnDead += PlayerDeadTask;  // 죽었을 때, 플레이어에서 처리해야할 것들 처리
+
+        PlayerStats.OnPlayerStatChanged -= _hpComponent.ChangeMaxHp; // 이벤트 중복방지 (플레이어 리셋할때는 OnDisable이 안되기 때문)
+        PlayerStats.OnPlayerStatChanged += _hpComponent.ChangeMaxHp; // 플레이어 스탯 변경되었을 때, 최대체력 변경
     }
 
     /// <summary>
@@ -72,6 +62,13 @@ public class Player : SerializedMonoBehaviour
     {
         _attackComponentProjectile = GetComponent<AttackComponentProjectile>();
         _attackComponentProjectile.Init(attackPower, attackSpeed, criticalRate, criticalMultiple);
+
+        // 플레이어 스탯 변경되었을 때, 공격력 공격속도 변경
+        PlayerStats.OnPlayerStatChanged -= _attackComponentProjectile.ChangeAttackPower; 
+        PlayerStats.OnPlayerStatChanged += _attackComponentProjectile.ChangeAttackPower;
+
+        PlayerStats.OnPlayerStatChanged -= _attackComponentProjectile.ChangeAttackSpeed;
+        PlayerStats.OnPlayerStatChanged += _attackComponentProjectile.ChangeAttackSpeed;
     }
 
     /// <summary>
@@ -101,16 +98,6 @@ public class Player : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// 컴포넌트들 수치 변겅
-    /// </summary>
-    private void ChangeComponentsValue(PlayerStatArgs args)
-    {
-        _hpComponent.ChangeMaxHp(args.MaxHp);
-        _attackComponentProjectile.ChangeAttackPower(args.AttackPower);
-        _attackComponentProjectile.ChangeAttackSpeed(args.AttackSpeed);
-    }
-
-    /// <summary>
     /// 플레이어 죽었을 때 처리할 것들
     /// </summary>
     private void PlayerDeadTask()
@@ -119,14 +106,20 @@ public class Player : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// OnDisable
+    /// OnDisable 이벤트 구독 해제
     /// </summary>
     private void OnDisable()
     {
-        PlayerStats.OnPlayerStatChanged -= ChangeComponentsValue;
-
-
         if (_hpComponent != null)
+        {
             _hpComponent.OnDead -= PlayerDeadTask;
+            PlayerStats.OnPlayerStatChanged -= _hpComponent.ChangeMaxHp;
+        }
+
+        if (_attackComponentProjectile != null)
+        {
+            PlayerStats.OnPlayerStatChanged -= _attackComponentProjectile.ChangeAttackPower;
+            PlayerStats.OnPlayerStatChanged -= _attackComponentProjectile.ChangeAttackSpeed;
+        }
     }
 }

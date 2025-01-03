@@ -52,9 +52,9 @@ public class HPComponent : MonoBehaviour, IDamagable
     /// <summary>
     /// 최대체력 변경
     /// </summary>
-    public void ChangeMaxHp(int value)
+    public void ChangeMaxHp(PlayerStatArgs args)
     {
-        MaxtHp = value;
+        MaxtHp = args.MaxHp;
     }
 
     /// <summary>

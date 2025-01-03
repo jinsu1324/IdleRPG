@@ -89,22 +89,6 @@ public class EquipItemComponent : MonoBehaviour
     }
 
     /// <summary>
-    /// 손 켜기
-    /// </summary>
-    private void BasicHandOn()
-    {
-        _basicHand.gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// 손 끄기
-    /// </summary>
-    private void BasicHandOFF()
-    {
-        _basicHand.gameObject.SetActive(false);
-    }
-
-    /// <summary>
     /// OnDestroy
     /// </summary>
     private void OnDestroy()

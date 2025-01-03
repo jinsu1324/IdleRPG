@@ -71,17 +71,17 @@ public abstract class AttackComponentBase : MonoBehaviour
     /// <summary>
     /// 공격력 변경
     /// </summary>
-    public void ChangeAttackPower(int value)
+    public void ChangeAttackPower(PlayerStatArgs args)
     {
-        _attackPower = value;
+        _attackPower = args.AttackPower;
     }
 
     /// <summary>
     /// 공격속도 변경
     /// </summary>
-    public void ChangeAttackSpeed(int value)
+    public void ChangeAttackSpeed(PlayerStatArgs args)
     {
-        _attackSpeed = value;
+        _attackSpeed = args.AttackSpeed;
         _attackCooldown = 1f / _attackSpeed;
     }
 
