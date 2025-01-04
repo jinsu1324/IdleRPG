@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Enemy : SerializedMonoBehaviour
+public class Enemy : ObjectPoolObject
 {
-    private ObjectPool<Enemy> _pool;                            // 자신을 반환할 풀 참조
     private EnemyID _enemyID;                                   // ID
     private HPComponent _hpComponent;                           // HP 컴포넌트
     private HPBar _hpBar;                                       // HP 바
@@ -19,9 +18,8 @@ public class Enemy : SerializedMonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(ObjectPool<Enemy> pool, EnemyData enemyData, int statPercentage)
+    public void Init(EnemyData enemyData, int statPercentage)
     {
-        _pool = pool;
         _enemyID = (EnemyID)Enum.Parse(typeof(EnemyID), enemyData.ID);
 
         // 스탯 셋팅
@@ -105,7 +103,7 @@ public class Enemy : SerializedMonoBehaviour
         FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
         QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 업데이트
 
-        ReturnPool();   // 풀로 돌려보내기
+        ReturnPool(); // 풀로 돌려보내기
     }
 
     /// <summary>
@@ -113,7 +111,7 @@ public class Enemy : SerializedMonoBehaviour
     /// </summary>
     public void ReturnPool()
     {
-        _pool.ReturnObject(this);
+        BackTrans();
     }
 
     /// <summary>

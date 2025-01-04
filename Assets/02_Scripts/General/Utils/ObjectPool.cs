@@ -2,57 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+public class ObjectPool : MonoBehaviour
 {
-    private Queue<T> _pool;         // 오브젝트를 저장할 큐
-    private T _prefab;              // 생성할 프리팹
-    private Transform _parent;      // 풀의 정리를 위한 부모 객체
+    // 오브젝트 풀에 생성할 프리팹
+    [SerializeField]
+    private ObjectPoolObject _prefab;
 
-    /// <summary>
-    /// 생성자
-    /// </summary>
-    public ObjectPool(T prefab, int initialCount, Transform parent = null)
+
+    // 한번에 생성할 갯수
+    [SerializeField]
+    private int _count = 10;
+
+
+    protected void Awake()
     {
-        _prefab = prefab;
-        _parent = parent;
-        _pool = new Queue<T>();
+        CreateObjs();
+    }
 
-        // 초기 오브젝트 생성
-        for (int i = 0; i < initialCount; i++)
+
+    // 오브젝트 생성
+    private void CreateObjs()
+    {
+        for (int i = 0; i < _count; i++)
         {
-            AddObjectToPool();
+            ObjectPoolObject obj = Instantiate(_prefab, transform);
+
+            obj.gameObject.SetActive(false);
+
+            obj.Setting(transform);
         }
     }
 
-    /// <summary>
-    /// 풀에 오브젝트 추가
-    /// </summary>
-    private void AddObjectToPool()
+    // 오브젝트 사용할때 가져오기
+    public GameObject GetObj()
     {
-        T obj = GameObject.Instantiate(_prefab, _parent);
-        obj.gameObject.SetActive(false);
-        _pool.Enqueue(obj);
-    }
+        if (transform.childCount <= 0)
+            CreateObjs();
 
-    /// <summary>
-    /// 오브젝트 가져오기
-    /// </summary>
-    public T GetObject()
-    {
-        if (_pool.Count == 0)
-            AddObjectToPool();
+        int count = 0;
 
-        T obj = _pool.Dequeue();
-        obj.gameObject.SetActive(true);
-        return obj;
-    }
+        GameObject returnObj = transform.GetChild(count).gameObject;
 
-    /// <summary>
-    /// 오브젝트 반환
-    /// </summary>
-    public void ReturnObject(T obj)
-    {
-        obj.gameObject.SetActive(false);
-        _pool.Enqueue(obj);
+        while (returnObj.activeInHierarchy) // -----> 첫번째 자식이 켜져있어서 true면, count를 올려줘서 다시 다음자식을 받아와봄
+        {
+            if (++count >= transform.childCount)
+                CreateObjs();
+
+            returnObj = transform.GetChild(count).gameObject;
+        }
+
+        //returnObj.transform.localScale = Vector3.one;
+
+        returnObj.GetComponent<ObjectPoolObject>().Spawn();
+
+        return returnObj;
     }
 }

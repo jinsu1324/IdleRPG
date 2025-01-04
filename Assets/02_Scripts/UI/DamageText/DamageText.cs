@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DamageText : MonoBehaviour
+public class DamageText : ObjectPoolObject
 {
     [SerializeField] private TextMeshProUGUI _text; // 텍스트
-    private ObjectPool<DamageText> _pool;           // 반환할 풀
 
     /// <summary>
     /// 텍스트 설정
     /// </summary>
-    public void SetText(string text, ObjectPool<DamageText> pool)
+    public void SetText(string text)
     {
         _text.text = text;
-        _pool = pool;
 
         Invoke("ReturnPool", 0.5f);
     }
@@ -24,6 +22,6 @@ public class DamageText : MonoBehaviour
     /// </summary>
     private void ReturnPool()
     {
-        _pool.ReturnObject(this);
+        BackTrans();
     }
 }
