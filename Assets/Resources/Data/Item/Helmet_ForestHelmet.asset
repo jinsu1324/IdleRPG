@@ -9,74 +9,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610534f5f25936f45bdc319be49e65ae, type: 3}
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
   m_Name: Helmet_ForestHelmet
   m_EditorClassIdentifier: 
   ID: Helmet_ForestHelmet
   ItemType: Helmet
   Name: "\uC232\uC758 \uD22C\uAD6C"
   Grade: Rare
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 250
+    - AbilityType: CriticalMultiple
+      AbilityValue: 7
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 260
+    - AbilityType: CriticalMultiple
+      AbilityValue: 8
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 270
+    - AbilityType: CriticalMultiple
+      AbilityValue: 9
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 280
+    - AbilityType: CriticalMultiple
+      AbilityValue: 10
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 290
+    - AbilityType: CriticalMultiple
+      AbilityValue: 11
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 300
+    - AbilityType: CriticalMultiple
+      AbilityValue: 12
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 310
+    - AbilityType: CriticalMultiple
+      AbilityValue: 13
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 320
+    - AbilityType: CriticalMultiple
+      AbilityValue: 14
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 330
+    - AbilityType: CriticalMultiple
+      AbilityValue: 15
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 340
+    - AbilityType: CriticalMultiple
+      AbilityValue: 16
   AttackAnimType: 
   Prefab: {fileID: 7589804328962073218, guid: e333744e9a1e28b4c8b15d55e48d2d86, type: 3}
   Icon: {fileID: 21300000, guid: 5b413123e8117454a9b720702244cd14, type: 3}
-  UpgradeInfoList:
-  - Level: 1
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 250
-    - StatType: CriticalMultiple
-      StatValue: 7
-  - Level: 2
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 260
-    - StatType: CriticalMultiple
-      StatValue: 8
-  - Level: 3
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 270
-    - StatType: CriticalMultiple
-      StatValue: 9
-  - Level: 4
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 280
-    - StatType: CriticalMultiple
-      StatValue: 10
-  - Level: 5
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 290
-    - StatType: CriticalMultiple
-      StatValue: 11
-  - Level: 6
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 300
-    - StatType: CriticalMultiple
-      StatValue: 12
-  - Level: 7
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 310
-    - StatType: CriticalMultiple
-      StatValue: 13
-  - Level: 8
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 320
-    - StatType: CriticalMultiple
-      StatValue: 14
-  - Level: 9
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 330
-    - StatType: CriticalMultiple
-      StatValue: 15
-  - Level: 10
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 340
-    - StatType: CriticalMultiple
-      StatValue: 16

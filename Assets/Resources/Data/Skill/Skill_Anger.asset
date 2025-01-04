@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67524b3f2cbcd6a45bcfc98c23cb027f, type: 3}
+  m_Name: Skill_Anger
+  m_EditorClassIdentifier: 
+  ID: Skill_Anger
+  ItemType: Skill
+  Name: "\uBD84\uB178"
+  Grade: Normal
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 1
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 2
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 3
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 4
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 5
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 6
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 7
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 8
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 9
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: AttackSpeedBuff
+      AbilityValue: 10
+  Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 1 \uC99D\uAC00\uD569\uB2C8\uB2E4."

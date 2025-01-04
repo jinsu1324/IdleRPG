@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67524b3f2cbcd6a45bcfc98c23cb027f, type: 3}
+  m_Name: Skill_Meteor
+  m_EditorClassIdentifier: 
+  ID: Skill_Meteor
+  ItemType: Skill
+  Name: "\uBA54\uD14C\uC624"
+  Grade: Normal
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3000
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3100
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3200
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3300
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3400
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3500
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3600
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3700
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3800
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 3900
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+  Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
+    \uACF5\uACA9\uB825\uC758 3000%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."

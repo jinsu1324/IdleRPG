@@ -9,94 +9,94 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610534f5f25936f45bdc319be49e65ae, type: 3}
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
   m_Name: Weapon_MagicStaff
   m_EditorClassIdentifier: 
   ID: Weapon_MagicStaff
   ItemType: Weapon
   Name: "\uB9E4\uC9C1 \uC2A4\uD0DC\uD504"
   Grade: Legendary
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 400
+    - AbilityType: AttackSpeed
+      AbilityValue: 1
+    - AbilityType: CriticalRate
+      AbilityValue: 15
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 410
+    - AbilityType: AttackSpeed
+      AbilityValue: 2
+    - AbilityType: CriticalRate
+      AbilityValue: 16
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 420
+    - AbilityType: AttackSpeed
+      AbilityValue: 3
+    - AbilityType: CriticalRate
+      AbilityValue: 17
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 430
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+    - AbilityType: CriticalRate
+      AbilityValue: 18
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 440
+    - AbilityType: AttackSpeed
+      AbilityValue: 5
+    - AbilityType: CriticalRate
+      AbilityValue: 19
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 450
+    - AbilityType: AttackSpeed
+      AbilityValue: 6
+    - AbilityType: CriticalRate
+      AbilityValue: 20
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 460
+    - AbilityType: AttackSpeed
+      AbilityValue: 7
+    - AbilityType: CriticalRate
+      AbilityValue: 21
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 470
+    - AbilityType: AttackSpeed
+      AbilityValue: 8
+    - AbilityType: CriticalRate
+      AbilityValue: 22
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 480
+    - AbilityType: AttackSpeed
+      AbilityValue: 9
+    - AbilityType: CriticalRate
+      AbilityValue: 23
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: AttackPower
+      AbilityValue: 490
+    - AbilityType: AttackSpeed
+      AbilityValue: 10
+    - AbilityType: CriticalRate
+      AbilityValue: 24
   AttackAnimType: Magic
   Prefab: {fileID: 252690595569584609, guid: 4b8bc9b9da4cfc341a06c2a917cea2e8, type: 3}
   Icon: {fileID: 21300000, guid: 2d9552b4069e66f45895ea58c4856495, type: 3}
-  UpgradeInfoList:
-  - Level: 1
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 400
-    - StatType: AttackSpeed
-      StatValue: 1
-    - StatType: CriticalRate
-      StatValue: 15
-  - Level: 2
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 410
-    - StatType: AttackSpeed
-      StatValue: 2
-    - StatType: CriticalRate
-      StatValue: 16
-  - Level: 3
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 420
-    - StatType: AttackSpeed
-      StatValue: 3
-    - StatType: CriticalRate
-      StatValue: 17
-  - Level: 4
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 430
-    - StatType: AttackSpeed
-      StatValue: 4
-    - StatType: CriticalRate
-      StatValue: 18
-  - Level: 5
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 440
-    - StatType: AttackSpeed
-      StatValue: 5
-    - StatType: CriticalRate
-      StatValue: 19
-  - Level: 6
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 450
-    - StatType: AttackSpeed
-      StatValue: 6
-    - StatType: CriticalRate
-      StatValue: 20
-  - Level: 7
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 460
-    - StatType: AttackSpeed
-      StatValue: 7
-    - StatType: CriticalRate
-      StatValue: 21
-  - Level: 8
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 470
-    - StatType: AttackSpeed
-      StatValue: 8
-    - StatType: CriticalRate
-      StatValue: 22
-  - Level: 9
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 480
-    - StatType: AttackSpeed
-      StatValue: 9
-    - StatType: CriticalRate
-      StatValue: 23
-  - Level: 10
-    ItemStatList:
-    - StatType: AttackPower
-      StatValue: 490
-    - StatType: AttackSpeed
-      StatValue: 10
-    - StatType: CriticalRate
-      StatValue: 24

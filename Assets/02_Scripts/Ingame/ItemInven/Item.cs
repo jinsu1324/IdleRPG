@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Item
 {
-    private readonly ItemDataSO _baseData;                      // 아이템 데이터
+    private readonly GearDataSO _baseData;                      // 아이템 데이터
     public string ID { get; private set; }                      // ID
     public ItemType ItemType { get; private set; }              // 아이템이 속한 아이템 타입
     public string Name { get; private set; }                    // 이름
@@ -22,7 +22,7 @@ public class Item
     /// <summary>
     /// 생성자
     /// </summary>
-    public Item(ItemDataSO baseData, int level)
+    public Item(GearDataSO baseData, int level)
     {
         _baseData = baseData;
         ID = baseData.ID;
@@ -35,7 +35,7 @@ public class Item
         Level = level;
         Count = 1;
         EnhanceableCount = 10;
-        _statDict = new Dictionary<StatType, int>(_baseData.GetStatDictByLevel(level));
+        _statDict = new Dictionary<StatType, int>(_baseData.GetAbilityDict_ByLevel(level));
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class Item
     public void ItemLevelUp()
     {
         Level++;    // 레벨업
-        _statDict = new Dictionary<StatType, int>(_baseData.GetStatDictByLevel(Level));  // 레벨에 맞는 새로운 스탯들 적용
+        _statDict = new Dictionary<StatType, int>(_baseData.GetAbilityDict_ByLevel(Level));  // 레벨에 맞는 새로운 스탯들 적용
     }
 
     /// <summary>

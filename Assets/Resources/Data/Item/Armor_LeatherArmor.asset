@@ -9,74 +9,74 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610534f5f25936f45bdc319be49e65ae, type: 3}
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
   m_Name: Armor_LeatherArmor
   m_EditorClassIdentifier: 
   ID: Armor_LeatherArmor
   ItemType: Armor
   Name: "\uAC00\uC8FD \uAC11\uC637"
   Grade: Normal
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 150
+    - AbilityType: CriticalRate
+      AbilityValue: 3
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 160
+    - AbilityType: CriticalRate
+      AbilityValue: 4
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 170
+    - AbilityType: CriticalRate
+      AbilityValue: 5
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 180
+    - AbilityType: CriticalRate
+      AbilityValue: 6
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 190
+    - AbilityType: CriticalRate
+      AbilityValue: 7
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 200
+    - AbilityType: CriticalRate
+      AbilityValue: 8
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 210
+    - AbilityType: CriticalRate
+      AbilityValue: 9
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 220
+    - AbilityType: CriticalRate
+      AbilityValue: 10
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 230
+    - AbilityType: CriticalRate
+      AbilityValue: 11
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: MaxHp
+      AbilityValue: 240
+    - AbilityType: CriticalRate
+      AbilityValue: 12
   AttackAnimType: 
   Prefab: {fileID: 2410885265547448605, guid: 9df616020a2a78b4ea321db548c63746, type: 3}
   Icon: {fileID: 21300000, guid: 912229e3a279670429265127de1301cf, type: 3}
-  UpgradeInfoList:
-  - Level: 1
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 150
-    - StatType: CriticalRate
-      StatValue: 3
-  - Level: 2
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 160
-    - StatType: CriticalRate
-      StatValue: 4
-  - Level: 3
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 170
-    - StatType: CriticalRate
-      StatValue: 5
-  - Level: 4
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 180
-    - StatType: CriticalRate
-      StatValue: 6
-  - Level: 5
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 190
-    - StatType: CriticalRate
-      StatValue: 7
-  - Level: 6
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 200
-    - StatType: CriticalRate
-      StatValue: 8
-  - Level: 7
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 210
-    - StatType: CriticalRate
-      StatValue: 9
-  - Level: 8
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 220
-    - StatType: CriticalRate
-      StatValue: 10
-  - Level: 9
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 230
-    - StatType: CriticalRate
-      StatValue: 11
-  - Level: 10
-    ItemStatList:
-    - StatType: MaxHp
-      StatValue: 240
-    - StatType: CriticalRate
-      StatValue: 12

@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67524b3f2cbcd6a45bcfc98c23cb027f, type: 3}
+  m_Name: Skill_Thunder
+  m_EditorClassIdentifier: 
+  ID: Skill_Thunder
+  ItemType: Skill
+  Name: "\uC36C\uB354\uBCFC\uD2B8"
+  Grade: Legendary
+  ItemLevelInfoList:
+  - Level: 1
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2000
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 2
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2100
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 3
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2200
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 4
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2300
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 5
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2400
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 6
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2500
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 7
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2600
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 8
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2700
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 9
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2800
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  - Level: 10
+    ItemAbilityList:
+    - AbilityType: AttackPowerPercentage
+      AbilityValue: 2900
+    - AbilityType: Range
+      AbilityValue: 3
+    - AbilityType: AttackSpeed
+      AbilityValue: 4
+  Desc: "\uBC88\uAC1C\uB97C \uBB34\uC791\uC704 \uC801\uC5D0\uAC8C 4\uBC88 \uB0B4\uB9AC\uCCD0
+    \uAC01\uAC01 \uACF5\uACA9\uB825\uC758 2000%\uC758 \uBC94\uC704\uD53C\uD574\uB97C
+    \uC90D\uB2C8\uB2E4."

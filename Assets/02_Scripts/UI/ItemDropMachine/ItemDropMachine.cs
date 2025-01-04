@@ -68,10 +68,10 @@ public class ItemDropMachine : MonoBehaviour
     private Item RandomPickItem()
     {
         // 같은 아이템타입의 아이템데이터는 모두 가져오기
-        List<ItemDataSO> itemDataSOList =  DataManager.Instance.GetAllItemDataSO_ByItemType(_itemType);  
+        List<GearDataSO> itemDataSOList =  DataManager.Instance.GetAllGearDataSO(_itemType);  
 
         // 그 아이템데이터들 중에서 하나 랜덤 픽
-        ItemDataSO itemDataSO = itemDataSOList[RandomPickItemIndex(itemDataSOList.Count)];
+        GearDataSO itemDataSO = itemDataSOList[RandomPickItemIndex(itemDataSOList.Count)];
 
         // 랜덤픽된 데이터로 아이템 만들기
         Item item = new Item(itemDataSO, 1);
