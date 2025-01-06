@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class ItemSlot : MonoBehaviour
 {
-    public static event Action<ItemSlot> OnSlotSelected;                // 슬롯이 선택되었을 때 이벤트
+    public static event Action<IItem> OnSlotSelected;                   // 슬롯이 선택되었을 때 이벤트
     public IItem CurrentItem { get; private set; }                      // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;                     // 슬롯이 비어있는지 
 
@@ -40,6 +40,11 @@ public class ItemSlot : MonoBehaviour
     private void OnEnable()
     {
         SelectItemInfoUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
+
+        EquipSkillManager.OnEquipSwapFinished += UpdateItemSlot;
+
+
+
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
 
@@ -49,6 +54,10 @@ public class ItemSlot : MonoBehaviour
     private void OnDisable()
     {
         SelectItemInfoUI.OnSelectItemInfoChanged -= UpdateItemSlot;
+
+        EquipSkillManager.OnEquipSwapFinished -= UpdateItemSlot;
+
+
         _slotClickButton.onClick.RemoveAllListeners();
     }
 
@@ -96,7 +105,7 @@ public class ItemSlot : MonoBehaviour
         if (IsSlotEmpty) // 슬롯이 비었으면 선택 안되게
             return;
 
-        OnSlotSelected?.Invoke(this);
+        OnSlotSelected?.Invoke(CurrentItem);
     }
 
     /// <summary>

@@ -16,6 +16,9 @@ public class SelectItemInfoUI : MonoBehaviour
     public static event Action OnSelectItemInfoUIOFF;                   // 선택 아이템 정보 UI 가 꺼졌을 때 이벤트
     public IItem CurrentItem { get; private set; }                      // 현재 아이템
 
+    [Title("마스터 GO", bold: false)]
+    [SerializeField] private GameObject _masterGO;                      // 마스터 GO
+
     [Title("정보들", bold: false)]
     [SerializeField] private Image _itemIcon;                           // 아이템 아이콘
     [SerializeField] private Image _gradeFrame;                         // 등급 프레임
@@ -52,6 +55,9 @@ public class SelectItemInfoUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+        ItemSlot.OnSlotSelected += Show; // 아이템 슬롯 선택되었을 때, 선택된 아이템 정보 UI 켜기
+        EquipSlot.OnClickEquipSlotDetailButton += Show;
+
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
         _enhanceButton.onClick.AddListener(OnClick_EnhanceButton);  // 강화버튼 핸들러 등록
@@ -63,6 +69,10 @@ public class SelectItemInfoUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
+        ItemSlot.OnSlotSelected -= Show;
+        EquipSlot.OnClickEquipSlotDetailButton -= Show;
+
+
         _equipButton.onClick.RemoveAllListeners();
         _unEquipButton.onClick.RemoveAllListeners();
         _enhanceButton.onClick.RemoveAllListeners();
@@ -72,13 +82,13 @@ public class SelectItemInfoUI : MonoBehaviour
     /// <summary>
     /// 보여주기
     /// </summary>
-    public void Show(ItemSlot selectSlot)
+    public void Show(IItem item)
     {
-        CurrentItem = selectSlot.CurrentItem;
+        CurrentItem = item;
 
         UpdateUI();
 
-        gameObject.SetActive(true);
+        _masterGO.SetActive(true);
     }
 
     /// <summary>
@@ -90,7 +100,7 @@ public class SelectItemInfoUI : MonoBehaviour
 
         OnSelectItemInfoUIOFF?.Invoke();
 
-        gameObject.SetActive(false);
+        _masterGO.SetActive(false);
     }
 
     /// <summary>

@@ -20,7 +20,6 @@ public class GearInvenPopup : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        ItemSlot.OnSlotSelected += TurnOn_SelectItemInfoUI; // 아이템 슬롯 선택되었을 때, 선택된 아이템 정보 UI 켜기
         _exitButton.onClick.AddListener(Hide);  // 나가기 버튼 누르면 팝업끄기
     }
 
@@ -29,7 +28,6 @@ public class GearInvenPopup : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        ItemSlot.OnSlotSelected -= TurnOn_SelectItemInfoUI;
         _exitButton.onClick.RemoveAllListeners();
     }
 
@@ -52,13 +50,5 @@ public class GearInvenPopup : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// 선택된 아이템 정보 UI 켜기
-    /// </summary>
-    private void TurnOn_SelectItemInfoUI(ItemSlot selectSlot)
-    {
-        _selectItemInfoUI.Show(selectSlot);
     }
 }
