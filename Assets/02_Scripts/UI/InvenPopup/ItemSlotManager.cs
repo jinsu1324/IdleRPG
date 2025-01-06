@@ -16,6 +16,7 @@ public class ItemSlotManager : MonoBehaviour
     private void OnEnable()
     {
         ItemSlot.OnSlotSelected += TurnON_SelectSlotHighlight; // 슬롯이 선택되었을 때, 선택된 슬롯 하이라이트 켜기
+        SelectItemInfoUI.OnSelectItemInfoUIOFF += TryClear_SelectItemSlot; // 선택 아이템 정보 UI 가 꺼졌을 때, 선택된 슬롯 하이라이트도 끄기
     }
 
     /// <summary>
@@ -24,6 +25,7 @@ public class ItemSlotManager : MonoBehaviour
     private void OnDisable()
     {
         ItemSlot.OnSlotSelected -= TurnON_SelectSlotHighlight;
+        SelectItemInfoUI.OnSelectItemInfoUIOFF -= TryClear_SelectItemSlot;
     }
 
     /// <summary>

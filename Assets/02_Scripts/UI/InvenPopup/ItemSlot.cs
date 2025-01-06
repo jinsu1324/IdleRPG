@@ -39,7 +39,7 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        SelectItemInfoUI.SelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
+        SelectItemInfoUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
 
@@ -48,7 +48,7 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        SelectItemInfoUI.SelectItemInfoChanged -= UpdateItemSlot;
+        SelectItemInfoUI.OnSelectItemInfoChanged -= UpdateItemSlot;
         _slotClickButton.onClick.RemoveAllListeners();
     }
 

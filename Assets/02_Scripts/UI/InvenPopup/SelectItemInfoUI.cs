@@ -12,8 +12,8 @@ using UnityEngine.UI;
 /// </summary>
 public class SelectItemInfoUI : MonoBehaviour
 {
-    public static event Action SelectItemInfoChanged;                   // 선택 아이템 정보가 바뀌었을 때 이벤트
-
+    public static event Action OnSelectItemInfoChanged;                 // 선택 아이템 정보가 바뀌었을 때 이벤트
+    public static event Action OnSelectItemInfoUIOFF;                   // 선택 아이템 정보 UI 가 꺼졌을 때 이벤트
     public IItem CurrentItem { get; private set; }                      // 현재 아이템
 
     [Title("정보들", bold: false)]
@@ -55,7 +55,7 @@ public class SelectItemInfoUI : MonoBehaviour
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
         _enhanceButton.onClick.AddListener(OnClick_EnhanceButton);  // 강화버튼 핸들러 등록
-        _exitButton.onClick.AddListener(() => gameObject.SetActive(false)); // 나가기 버튼 핸들러 등록
+        _exitButton.onClick.AddListener(Hide);  // 나가기 버튼 핸들러 등록
     }
 
     /// <summary>
@@ -87,6 +87,8 @@ public class SelectItemInfoUI : MonoBehaviour
     public void Hide()
     {
         CurrentItem = null;
+
+        OnSelectItemInfoUIOFF?.Invoke();
 
         gameObject.SetActive(false);
     }
@@ -294,6 +296,6 @@ public class SelectItemInfoUI : MonoBehaviour
     /// </summary>
     private void NotifySelectItemInfoChanged()
     {
-        SelectItemInfoChanged?.Invoke();
+        OnSelectItemInfoChanged?.Invoke();
     }
 }
