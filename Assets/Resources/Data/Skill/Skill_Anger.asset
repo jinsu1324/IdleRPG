@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemType: Skill
   Name: "\uBD84\uB178"
   Grade: Normal
+  Icon: {fileID: 21300000, guid: f04258f9c0a756748b5a85752bef9ab1, type: 3}
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:

@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     public static event Action<ItemSlot> OnSlotSelected;                // 슬롯이 선택되었을 때 이벤트
-    public Item CurrentItem { get; private set; }                       // 현재 슬롯 아이템
+    public IItem CurrentItem { get; private set; }                      // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;                     // 슬롯이 비어있는지 
 
     [Title("아이템 정보들 전체부모 GO", bold: false)]
@@ -35,21 +35,30 @@ public class ItemSlot : MonoBehaviour
     [SerializeField] private Button _slotClickButton;                   // 슬롯 클릭 버튼
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
+        SelectItemInfoUI.SelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
-        SelectItemInfoUI.OnItemStatueChanged += UpdateSlot;   // 아이템 상태가 바뀌면, 아이템슬롯 업데이트
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        SelectItemInfoUI.SelectItemInfoChanged -= UpdateItemSlot;
+        _slotClickButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(Item item)
+    public void Init(IItem item)
     {
         CurrentItem = item;
-        UpdateSlot();
+        UpdateItemSlot();
 
         gameObject.SetActive(true);
     }
@@ -57,7 +66,7 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 아이템슬롯 정보들 업데이트
     /// </summary>
-    private void UpdateSlot()
+    public void UpdateItemSlot()
     {
         if (IsSlotEmpty)    // 슬롯 비었으면 업데이트 하지 않고 무시
             return;
@@ -69,7 +78,12 @@ public class ItemSlot : MonoBehaviour
         _enhanceableCountText.text = $"{CurrentItem.EnhanceableCount}";
         _countSlider.value = (float)CurrentItem.Count / (float)CurrentItem.EnhanceableCount;
         _enhanceableArrowGO.gameObject.SetActive(CurrentItem.IsEnhanceable());
-        _equipGO.SetActive(EquipItemManager.IsEquipped(CurrentItem));
+
+        if (CurrentItem is Gear gear)
+            _equipGO.SetActive(EquipGearManager.IsEquippedGear(gear));
+
+        if (CurrentItem is Skill skill)
+            _equipGO.SetActive(EquipSkillManager.IsEquippedSkill(skill));
 
         _infoParentGO.SetActive(true);
     }
@@ -102,13 +116,5 @@ public class ItemSlot : MonoBehaviour
     {
         CurrentItem = null;
         _infoParentGO.SetActive(false);
-    }
-
-    /// <summary>
-    /// OnDestroy
-    /// </summary>
-    private void OnDestroy()
-    {
-        SelectItemInfoUI.OnItemStatueChanged -= UpdateSlot;
     }
 }

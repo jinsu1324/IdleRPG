@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemType: Skill
   Name: "\uC36C\uB354\uBCFC\uD2B8"
   Grade: Legendary
+  Icon: {fileID: 21300000, guid: 244629f189792fb4cb7b03b09f118560, type: 3}
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:

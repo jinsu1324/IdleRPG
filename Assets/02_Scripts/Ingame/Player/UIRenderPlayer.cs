@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class UIRenderPlayer : MonoBehaviour
 {
-    private EquipItemComponent _equipItemComponent;                 // 장착 아이템 컴포넌트
+    private EquipGearComponent _equipGearComponent;                 // 장착 장비 컴포넌트
     private AnimComponent _animComponent;                           // 애님 컴포넌트
 
     /// <summary>
@@ -16,7 +16,7 @@ public class UIRenderPlayer : MonoBehaviour
     private void Start()
     {
         Init_AnimComponent();
-        Init_EquipItemComponent();
+        Init_EquipGearComponent();
     }
 
     /// <summary>
@@ -29,10 +29,10 @@ public class UIRenderPlayer : MonoBehaviour
     }
 
     /// <summary>
-    /// EquipItemComponent 초기화
+    /// EquipGearComponent 초기화
     /// </summary>
-    private void Init_EquipItemComponent()
+    private void Init_EquipGearComponent()
     {
-        _equipItemComponent = GetComponent<EquipItemComponent>();
+        _equipGearComponent = GetComponent<EquipGearComponent>();
     }
 }

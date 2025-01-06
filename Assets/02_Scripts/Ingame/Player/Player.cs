@@ -16,7 +16,7 @@ public class Player : SerializedMonoBehaviour
     private AttackComponentProjectile _attackComponentProjectile;   // 어택 컴포넌트 프로젝타일 발사타입
     private AnimComponent _animComponent;                           // 애님 컴포넌트
     private BlinkOnHit _blinkOnHit;                                 // 데미지 받았을 때 스프라이트 깜빡여주는 컴포넌트
-    private EquipItemComponent _equipItemComponent;                 // 장착 아이템 컴포넌트
+    private EquipGearComponent _equipGearComponent;                 // 장착 장비 컴포넌트
     
     /// <summary>
     /// 초기화
@@ -28,7 +28,7 @@ public class Player : SerializedMonoBehaviour
         Init_AttackComponentProjectile(args.AttackPower, args.AttackSpeed, args.CriticalRate, args.CriticalMultiple);
         Init_AnimComponent();
         Init_BlinkOnHit();
-        Init_EquipItemComponent();
+        Init_EquipGearComponent();
     }
 
     /// <summary>
@@ -90,11 +90,11 @@ public class Player : SerializedMonoBehaviour
     }
 
     /// <summary>
-    /// EquipItemComponent 초기화
+    /// EquipGearComponent 초기화
     /// </summary>
-    private void Init_EquipItemComponent()
+    private void Init_EquipGearComponent()
     {
-        _equipItemComponent = GetComponent<EquipItemComponent>();
+        _equipGearComponent = GetComponent<EquipGearComponent>();
     }
 
     /// <summary>

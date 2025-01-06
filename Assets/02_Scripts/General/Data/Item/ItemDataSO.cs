@@ -34,37 +34,8 @@ public class ItemDataSO : ScriptableObject
     public string ItemType;
     public string Name;
     public string Grade;
+    public Sprite Icon;
     public List<ItemLevelInfo> ItemLevelInfoList;
-
-    /// <summary>
-    /// 원하는 레벨에 맞는 어빌리티들 딕셔너리로 가져오기
-    /// </summary>
-    public Dictionary<StatType, int> GetAbilityDict_ByLevel(int level)
-    {
-        // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-        Dictionary<StatType, int> statDict = new Dictionary<StatType, int>();
-
-        // level에 맞는 itemLevelInfo 찾기
-        ItemLevelInfo itemLevelInfo = ItemLevelInfoList.Find(x => x.Level == level.ToString());
-
-        // 없으면 그냥 리턴
-        if (itemLevelInfo == null)
-        {
-            Debug.Log($"{level}에 해당하는 upgradeInfo를 찾지 못했습니다.");
-            return statDict;
-        }
-
-        // 해당 레벨의 itemAbility들을 딕셔너리에 넣기
-        foreach (ItemAbility itemAbility in itemLevelInfo.ItemAbilityList)
-        {
-            StatType statType = (StatType)Enum.Parse(typeof(StatType), itemAbility.AbilityType);
-            int value = int.Parse(itemAbility.AbilityValue);
-
-            statDict.Add(statType, value);
-        }
-
-        return statDict;
-    }
 }
 
 /// <summary>

@@ -7,8 +7,9 @@ using UnityEngine.UI;
 
 public enum BottomTabType
 {
-    PlayerDetail,
-    Shop
+    Gear,
+    Shop,
+    Skill
 }
 
 [RequireComponent(typeof(ReddotComponent))]
@@ -18,20 +19,35 @@ public class BottomTab : MonoBehaviour
     public static event Action OnCloseButtonClicked;             // 닫기버튼 눌렀을 때 이벤트
 
     [SerializeField] private BottomTabType _bottomTabType;       // 하단탭 타입
-    [SerializeField] private TabPopupBase _tabPopup;             // 이 탭 누르면 열릴 팝업
+    [SerializeField] private BottomTabPopupBase _tabPopup;       // 이 탭 누르면 열릴 팝업
     [SerializeField] private Button _openButton;                 // 열기 버튼
     [SerializeField] private Button _closeButton;                // 닫기 버튼
 
     [Title("레드닷 컴포넌트", bold: false)]
-    [SerializeField] private ReddotComponent _reddotComponent;   // 레드닷 컴포넌트
+    [SerializeField] private ReddotComponent _reddotComponent;  // 레드닷 컴포넌트
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
+        ItemInven.OnItemInvenChanged += UpdateReddotComponent; // 가지고 있는 아이템이 변경되었을 때, 하단탭 레드닷 컴포넌트 업데이트
+
         _openButton.onClick.AddListener(OpenTabPopup);
         _closeButton.onClick.AddListener(CloseTabPopup);
+
+        UpdateReddotComponent(); // 레드닷 컴포넌트 업데이트
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        ItemInven.OnItemInvenChanged -= UpdateReddotComponent;
+
+        _openButton.onClick.RemoveAllListeners();
+        _closeButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>
@@ -59,18 +75,21 @@ public class BottomTab : MonoBehaviour
     }
 
     /// <summary>
-    /// 하단탭 타입 가져오기
+    /// 레드닷 컴포넌트 업데이트
     /// </summary>
-    public BottomTabType GetBottomTabType()
+    public void UpdateReddotComponent()
     {
-        return _bottomTabType;
-    }
-
-    /// <summary>
-    /// 레드닷 조건 설정
-    /// </summary>
-    public void SetReddotCondition(Func<bool> condition)
-    {
-        _reddotComponent.UpdateReddot(condition);
+        switch (_bottomTabType)
+        {
+            case BottomTabType.Gear: 
+                _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableGear()); // 강화가능한 장비 있는지 확인
+                break;
+            case BottomTabType.Skill:
+                _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableSkill()); // 강화가능한 스킬 있는지 확인
+                break;
+            case BottomTabType.Shop:
+                _reddotComponent.Hide();
+                break;
+        }
     }
 }

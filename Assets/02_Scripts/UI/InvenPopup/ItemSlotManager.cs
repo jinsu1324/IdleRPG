@@ -11,11 +11,19 @@ public class ItemSlotManager : MonoBehaviour
     private ItemSlot _selectItemSlot;                                   // 선택된 아이템 슬롯
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
         ItemSlot.OnSlotSelected += TurnON_SelectSlotHighlight; // 슬롯이 선택되었을 때, 선택된 슬롯 하이라이트 켜기
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        ItemSlot.OnSlotSelected -= TurnON_SelectSlotHighlight;
     }
 
     /// <summary>
@@ -25,7 +33,7 @@ public class ItemSlotManager : MonoBehaviour
     {
         TryClear_SelectItemSlot();
 
-        List<Item> itemInven = ItemInven.GetItemInvenByItemType(itemType); // 아이템타입에 맞는 아이템 인벤토리 가져옴
+        List<IItem> itemInven = ItemInven.GetItemInvenByItemType(itemType); // 아이템타입에 맞는 아이템 인벤토리 가져옴
 
         for (int i = 0; i < _ItemSlotList.Count; i++)
         {
@@ -73,10 +81,11 @@ public class ItemSlotManager : MonoBehaviour
     }
 
     /// <summary>
-    /// OnDestroy
+    /// 아이템 슬롯 리스트 업데이트
     /// </summary>
-    private void OnDestroy()
+    public void UpdateItemSlotList()
     {
-        ItemSlot.OnSlotSelected -= TurnON_SelectSlotHighlight;
+        foreach (ItemSlot itemSlot in _ItemSlotList)
+            itemSlot.UpdateItemSlot();
     }
 }
