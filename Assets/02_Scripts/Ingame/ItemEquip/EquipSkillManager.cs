@@ -43,7 +43,8 @@ public class EquipSkillManager
 
         OnEquipSwapFinished?.Invoke();
 
-        
+        OnEquipSkillChanged?.Invoke();
+
         _swapTargetSkill = null;
     }
 
@@ -89,8 +90,16 @@ public class EquipSkillManager
     {
         int slotIndex = Array.FindIndex(_equipSkillArr, s => s == skill); // 스킬을 찾음
 
+        if (slotIndex == -1)
+        {
+            Debug.Log("스킬 Index를 찾을 수 없습니다");
+            return;
+        }
+
         if (slotIndex >= 0) // 조건 존재한다는 뜻 (존재안하면 -1 반환)
         {
+            Debug.Log($"장착해제에서 찾아낸 Index {slotIndex}");
+
             // 장착 해제
             _equipSkillArr[slotIndex] = null;
 
@@ -134,5 +143,13 @@ public class EquipSkillManager
             return null;
 
         return _equipSkillArr; 
+    }
+
+    /// <summary>
+    /// 슬롯 인덱스에 장착되어있는 스킬 가져오기
+    /// </summary>
+    public static Skill GetEquipSkillByIndex(int slotIndex)
+    {
+        return _equipSkillArr[slotIndex];
     }
 }

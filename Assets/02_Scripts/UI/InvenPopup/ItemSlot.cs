@@ -34,6 +34,9 @@ public class ItemSlot : MonoBehaviour
     [Title("슬롯 클릭 버튼", bold: false)]
     [SerializeField] private Button _slotClickButton;                   // 슬롯 클릭 버튼
 
+    private Action<RectTransform> _moveHilightImageAction;
+
+
     /// <summary>
     /// OnEnable
     /// </summary>
@@ -64,12 +67,15 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(IItem item)
+    public void Init(IItem item, Action<RectTransform> moveHighlight)
     {
         CurrentItem = item;
         UpdateItemSlot();
 
         gameObject.SetActive(true);
+
+
+        _moveHilightImageAction = moveHighlight;
     }
 
     /// <summary>
@@ -106,17 +112,9 @@ public class ItemSlot : MonoBehaviour
             return;
 
         OnSlotSelected?.Invoke(CurrentItem);
+
+        _moveHilightImageAction?.Invoke(_gradeFrame.GetComponent<RectTransform>());
     }
-
-    /// <summary>
-    /// 하이라이트 ON
-    /// </summary>
-    public void Highlight_ON() => _highlightGO.SetActive(true);
-
-    /// <summary>
-    /// 하이라이트 OFF
-    /// </summary>
-    public void Highlight_OFF() => _highlightGO.SetActive(false);
 
     /// <summary>
     /// 아이템 슬롯 비우고 끄기

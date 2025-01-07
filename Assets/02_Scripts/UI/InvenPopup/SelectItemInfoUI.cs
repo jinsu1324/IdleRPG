@@ -13,7 +13,6 @@ using UnityEngine.UI;
 public class SelectItemInfoUI : MonoBehaviour
 {
     public static event Action OnSelectItemInfoChanged;                 // 선택 아이템 정보가 바뀌었을 때 이벤트
-    public static event Action OnSelectItemInfoUIOFF;                   // 선택 아이템 정보 UI 가 꺼졌을 때 이벤트
     public IItem CurrentItem { get; private set; }                      // 현재 아이템
 
     [Title("마스터 GO", bold: false)]
@@ -56,7 +55,7 @@ public class SelectItemInfoUI : MonoBehaviour
     private void OnEnable()
     {
         ItemSlot.OnSlotSelected += Show; // 아이템 슬롯 선택되었을 때, 선택된 아이템 정보 UI 켜기
-        EquipSlot.OnClickEquipSlotDetailButton += Show;
+        EquipSlotSkill.OnClickEquipSlotDetailButton += Show;
 
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
@@ -70,7 +69,7 @@ public class SelectItemInfoUI : MonoBehaviour
     private void OnDisable()
     {
         ItemSlot.OnSlotSelected -= Show;
-        EquipSlot.OnClickEquipSlotDetailButton -= Show;
+        EquipSlotSkill.OnClickEquipSlotDetailButton -= Show;
 
 
         _equipButton.onClick.RemoveAllListeners();
@@ -97,8 +96,6 @@ public class SelectItemInfoUI : MonoBehaviour
     public void Hide()
     {
         CurrentItem = null;
-
-        OnSelectItemInfoUIOFF?.Invoke();
 
         _masterGO.SetActive(false);
     }

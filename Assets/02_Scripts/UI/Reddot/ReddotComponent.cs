@@ -13,7 +13,6 @@ public class ReddotComponent : MonoBehaviour
     /// </summary>
     public void UpdateReddot(Func<bool> condition)
     {
-        Debug.Log(condition);
         _reddot.SetActive(condition.Invoke());
     }
 
