@@ -34,8 +34,7 @@ public class ItemSlot : MonoBehaviour
     [Title("슬롯 클릭 버튼", bold: false)]
     [SerializeField] private Button _slotClickButton;                   // 슬롯 클릭 버튼
 
-    private Action<RectTransform> _moveHilightImageAction;
-
+    private Action<RectTransform> _moveHilightImageAction;              // 하이라이트 이미지 움직이기 함수 저장할 변수     
 
     /// <summary>
     /// OnEnable
@@ -43,10 +42,7 @@ public class ItemSlot : MonoBehaviour
     private void OnEnable()
     {
         SelectItemInfoUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
-
-        EquipSkillManager.OnEquipSwapFinished += UpdateItemSlot;
-
-
+        EquipSkillManager.OnEquipSwapFinished += UpdateItemSlot; // 장착 스킬 교체가 끝났을 때, 아이템슬롯 업데이트
 
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
@@ -57,9 +53,7 @@ public class ItemSlot : MonoBehaviour
     private void OnDisable()
     {
         SelectItemInfoUI.OnSelectItemInfoChanged -= UpdateItemSlot;
-
         EquipSkillManager.OnEquipSwapFinished -= UpdateItemSlot;
-
 
         _slotClickButton.onClick.RemoveAllListeners();
     }
@@ -70,12 +64,10 @@ public class ItemSlot : MonoBehaviour
     public void Init(IItem item, Action<RectTransform> moveHighlight)
     {
         CurrentItem = item;
+        _moveHilightImageAction = moveHighlight;
         UpdateItemSlot();
 
         gameObject.SetActive(true);
-
-
-        _moveHilightImageAction = moveHighlight;
     }
 
     /// <summary>
@@ -112,7 +104,6 @@ public class ItemSlot : MonoBehaviour
             return;
 
         OnSlotSelected?.Invoke(CurrentItem);
-
         _moveHilightImageAction?.Invoke(_gradeFrame.GetComponent<RectTransform>());
     }
 

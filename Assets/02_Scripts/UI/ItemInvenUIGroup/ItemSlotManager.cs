@@ -44,9 +44,9 @@ public class ItemSlotManager : MonoBehaviour
     /// </summary>
     public void SnapHighlightImage(RectTransform targetRect)
     {
-        _highlightImage.gameObject.SetActive(true);
         _highlightImage.SetParent(targetRect);
         _highlightImage.position = targetRect.position;
+        _highlightImage.gameObject.SetActive(true);
     }
 
     /// <summary>

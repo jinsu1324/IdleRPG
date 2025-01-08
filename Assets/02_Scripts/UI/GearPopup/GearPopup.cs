@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class GearPopup : BottomTabPopupBase
 {
     [Title("ÀåÂø ½½·Ôµé", bold: false)]
-    [SerializeField] private EquipSlotGear[] _equipSlotGearArr;
+    [SerializeField] private EquipSlotGear[] _equipSlotGearArr;     // ÀåÂø ½½·Ôµé
 
     [Title("½ºÅÈ ÅØ½ºÆ®", bold : false)]
     [SerializeField] private TextMeshProUGUI _attackPowerText;      // °ø°Ý·Â ÅØ½ºÆ®
@@ -43,9 +43,9 @@ public class GearPopup : BottomTabPopupBase
     public override void Show()
     {
         PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs(0);
-        Update_StatTexts(args);
-
-        Update_EquipSlots();
+        Update_StatTexts(args); // ½ºÅÈ ÅØ½ºÆ® ¾÷µ¥ÀÌÆ®
+        
+        Update_EquipSlots(); // ÀåÂø ½½·Ô ¾÷µ¥ÀÌÆ®
 
         gameObject.SetActive(true);
     }
@@ -76,7 +76,6 @@ public class GearPopup : BottomTabPopupBase
     private void Update_EquipSlots()
     {
         foreach (EquipSlotGear equipSlotGear in _equipSlotGearArr)
-            equipSlotGear.UpdateEquipSlotGear();
-
+            equipSlotGear.UpdateSlot();
     }
 }

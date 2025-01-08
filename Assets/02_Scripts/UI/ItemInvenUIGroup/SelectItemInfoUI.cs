@@ -48,19 +48,18 @@ public class SelectItemInfoUI : MonoBehaviour
     [SerializeField] private GameObject _abilityGO;                     // 어빌리티 GO
     [SerializeField] private List<ItemAbilityInfo> _abilityInfoList;    // 어빌리티 인포 리스트
 
-
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
         ItemSlot.OnSlotSelected += Show; // 아이템 슬롯 선택되었을 때, 선택된 아이템 정보 UI 켜기
-        EquipSlotSkill.OnClickEquipSlotDetailButton += Show;
+        EquipSlotSkill.OnClickDetailButton += Show; // 스킬 장착슬롯 디테일버튼 클릭했을 때 (슬롯클릭), 선택된 아이템 정보 UI 켜기
 
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
         _enhanceButton.onClick.AddListener(OnClick_EnhanceButton);  // 강화버튼 핸들러 등록
-        _exitButton.onClick.AddListener(Hide);  // 나가기 버튼 핸들러 등록
+        _exitButton.onClick.AddListener(Hide);                      // 나가기 버튼 핸들러 등록
     }
 
     /// <summary>
@@ -69,8 +68,7 @@ public class SelectItemInfoUI : MonoBehaviour
     private void OnDisable()
     {
         ItemSlot.OnSlotSelected -= Show;
-        EquipSlotSkill.OnClickEquipSlotDetailButton -= Show;
-
+        EquipSlotSkill.OnClickDetailButton -= Show;
 
         _equipButton.onClick.RemoveAllListeners();
         _unEquipButton.onClick.RemoveAllListeners();
@@ -84,9 +82,7 @@ public class SelectItemInfoUI : MonoBehaviour
     public void Show(IItem item)
     {
         CurrentItem = item;
-
         UpdateUI();
-
         _masterGO.SetActive(true);
     }
 
@@ -96,7 +92,6 @@ public class SelectItemInfoUI : MonoBehaviour
     public void Hide()
     {
         CurrentItem = null;
-
         _masterGO.SetActive(false);
     }
 
@@ -118,33 +113,53 @@ public class SelectItemInfoUI : MonoBehaviour
         _countSlider.value = (float)CurrentItem.Count / (float)CurrentItem.EnhanceableCount;
         _enhanceableArrowGO.gameObject.SetActive(CurrentItem.IsEnhanceable());
 
+        // 장비 아이템이면, 장비에 따라 버튼과 정보UI 업데이트
+        if (CurrentItem is Gear gear) 
+            Update_ButtonsAndInfoUI_ByGear(gear);
+
+        // 스킬 아이템이면, 스킬에 따라 버튼과 정보UI 업데이트
+        if (CurrentItem is Skill skill) 
+            Update_ButtonsAndInfoUI_BySkill(skill);
+    }
+
+    /// <summary>
+    /// 장비에 따라 버튼과 정보UI 업데이트
+    /// </summary>
+    private void Update_ButtonsAndInfoUI_ByGear(Gear gear)
+    {
+        // 강화 버튼 업데이트
         Update_EnhanceButton();
 
-        // 장비 아이템이면
-        if (CurrentItem is Gear gear) 
-        {
-            // 장착 관련 버튼들 On Off
-            bool isEquipped = EquipGearManager.IsEquippedGear(gear);
-            Update_EquipButtonsGroup(isEquipped);
-            
-            Update_AbilityInfo(gear);    // 어빌리티 정보 켜기
-            Hide_DescText(); // 상세설명 끄기
+        // 장착버튼들 ON/OFF
+        bool isEquipped = EquipGearManager.IsEquippedGear(gear);
+        Update_EquipButtonsGroup(isEquipped);
 
-            _equipGO.SetActive(isEquipped);
-        }
+        // 장착 아이콘 ON/OFF
+        EquipIconONOFF(isEquipped);
 
-        // 스킬 아이템이면
-        if (CurrentItem is Skill skill) 
-        {
-            // 장착 관련 버튼들 On Off
-            bool isEquipped = EquipSkillManager.IsEquippedSkill(skill);
-            Update_EquipButtonsGroup(isEquipped);
+        // 어빌리티 정보 켜기, 상세설명 끄기
+        Update_AbilityInfo(gear);
+        Hide_DescText();
+    }
 
-            Update_DescText(skill); // 상세설명 켜기  
-            Hide_AbilityInfo();  // 어빌리티 정보 끄기
-            
-            _equipGO.SetActive(isEquipped);
-        }
+    /// <summary>
+    /// 스킬에 따라 버튼과 정보UI 업데이트
+    /// </summary>
+    private void Update_ButtonsAndInfoUI_BySkill(Skill skill)
+    {
+        // 강화 버튼 업데이트
+        Update_EnhanceButton();
+
+        // 장착버튼들 ON/OFF
+        bool isEquipped = EquipSkillManager.IsEquippedSkill(skill);
+        Update_EquipButtonsGroup(isEquipped);
+
+        // 장착 아이콘 ON/OFF
+        EquipIconONOFF(isEquipped);
+
+        // 상세설명 켜기, 어빌리티 정보 끄기
+        Update_DescText(skill);
+        Hide_AbilityInfo();
     }
 
     /// <summary>
@@ -191,7 +206,6 @@ public class SelectItemInfoUI : MonoBehaviour
     {
         _descText.text = skill.Desc;
         _descText.gameObject.SetActive(true);
-
         _descGO.SetActive(true);
     }
 
@@ -201,7 +215,6 @@ public class SelectItemInfoUI : MonoBehaviour
     private void Hide_DescText()
     {
         _descGO.SetActive(false);
-
         _descText.gameObject.SetActive(false);
     }
 
@@ -234,17 +247,13 @@ public class SelectItemInfoUI : MonoBehaviour
         if (CurrentItem is Gear gear)
         {
             EquipGearManager.EquipGear(gear);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
+            UpdateUIAndNotify();
         }
 
         if (CurrentItem is Skill skill)
         {
             EquipSkillManager.EquipSkill(skill);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
-
-            Hide();
+            UpdateUIAndNotify(true);
         }
     }
 
@@ -259,17 +268,13 @@ public class SelectItemInfoUI : MonoBehaviour
         if (CurrentItem is Gear gear)
         {
             EquipGearManager.UnEquipGear(gear);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
+            UpdateUIAndNotify();
         }
 
         if (CurrentItem is Skill skill)
         {
             EquipSkillManager.UnEquipSkill(skill);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
-
-            Hide();
+            UpdateUIAndNotify(true);
         }
     }
 
@@ -284,25 +289,41 @@ public class SelectItemInfoUI : MonoBehaviour
         if (CurrentItem is Gear gear)
         {
             ItemInven.Enhance(gear);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
+            UpdateUIAndNotify();
         }
 
         if (CurrentItem is Skill skill)
         {
             ItemInven.Enhance(skill);
-            UpdateUI();
-            NotifySelectItemInfoChanged();
-
-            Hide();
+            UpdateUIAndNotify(true);
         }
     }
 
     /// <summary>
-    /// 선택 아이템 정보 바뀌었을때의 이벤트 실행
+    /// UI업데이트 및 이벤트 알림
     /// </summary>
-    private void NotifySelectItemInfoChanged()
+    private void UpdateUIAndNotify(bool isHideMasterUI = false)
+    {
+        UpdateUI(); // UI 업데이트
+        Notify_SelectItemInfoChanged(); // 선택된 아이템정보 갱신이벤트 알림
+
+        if (isHideMasterUI)
+            Hide(); // 전체 UI 숨기기
+    }
+
+    /// <summary>
+    /// 선택된 아이템정보 갱신되었을때 이벤트 알림
+    /// </summary>
+    private void Notify_SelectItemInfoChanged()
     {
         OnSelectItemInfoChanged?.Invoke();
+    }
+
+    /// <summary>
+    /// '장착중' 아이콘 ON/OFF
+    /// </summary>
+    private void EquipIconONOFF(bool isEquipped)
+    {
+        _equipGO.SetActive(isEquipped);
     }
 }

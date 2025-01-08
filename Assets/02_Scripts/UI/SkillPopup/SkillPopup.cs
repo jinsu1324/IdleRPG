@@ -2,23 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 스킬 팝업
+/// </summary>
 public class SkillPopup : BottomTabPopupBase
 {
-    [SerializeField] EquipSlotSkill[] _equipSlotArr = new EquipSlotSkill[3];  // 장착 슬롯 배열 (3 : 장착가능한 스킬 갯수)
-    [SerializeField] ItemSlotManager _itemSlotManager;              // 아이템 슬롯 매니저
-    [SerializeField] SelectItemInfoUI _selectItemInfoUI;            // 선택된 아이템 정보 UI
-    
-    private ItemType _itemType = ItemType.Skill;                    // 스킬팝업의 아이템타입 설정
-
+    [SerializeField] EquipSlotSkill[] _equipSlotArr = new EquipSlotSkill[3];    // 장착 슬롯 배열 (3 : 장착가능한 스킬 갯수)
+    [SerializeField] ItemSlotManager _itemSlotManager;                          // 아이템 슬롯 매니저
+    [SerializeField] SelectItemInfoUI _selectItemInfoUI;                        // 선택된 아이템 정보 UI
+    private ItemType _itemType = ItemType.Skill;                                // 스킬팝업의 아이템타입 설정
    
     /// <summary>
     /// 팝업 켜기
     /// </summary>
     public override void Show()
     {
-        _itemSlotManager.Init(_itemType);
-        _selectItemInfoUI.Hide();
-        Update_EquipSlots();
+        _itemSlotManager.Init(_itemType); // 아이템슬롯 초기화
+        _selectItemInfoUI.Hide(); // 아이테 디테일 UI(여기서는 팝업) 은 끄고시작 
+        Update_EquipSlots(); // 장착슬롯 업데이트
 
         gameObject.SetActive(true);
     }
@@ -43,7 +44,7 @@ public class SkillPopup : BottomTabPopupBase
         if (equipSkillArr == null)
         {
             for (int i = 0; i < _equipSlotArr.Length; i++)
-                _equipSlotArr[i].ShowEmptyGO();
+                _equipSlotArr[i].ShowEmpty();
 
             return;
         }
@@ -56,12 +57,11 @@ public class SkillPopup : BottomTabPopupBase
 
             if (skill == null)
             {
-                equipSlotSkill.ShowEmptyGO();
+                equipSlotSkill.ShowEmpty();
                 continue;
             }
 
-            equipSlotSkill.ShowInfoGO(skill);
+            equipSlotSkill.ShowInfo(skill);
         }
     }
-
 }
