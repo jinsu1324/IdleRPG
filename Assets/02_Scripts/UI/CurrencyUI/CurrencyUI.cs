@@ -18,6 +18,15 @@ public class CurrencyUI : MonoBehaviour
     }
 
     /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        GoldManager.OnGoldChanged -= UpdateGoldUI;
+        GemManager.OnGemChanged -= UpdateGemUI;
+    }
+
+    /// <summary>
     /// Start
     /// </summary>
     private void Start()
@@ -40,14 +49,5 @@ public class CurrencyUI : MonoBehaviour
     public void UpdateGemUI(int amount)
     {
         _gemText.text = AlphabetNumConverter.Convert(amount);
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        GoldManager.OnGoldChanged -= UpdateGoldUI;
-        GemManager.OnGemChanged -= UpdateGemUI;
     }
 }

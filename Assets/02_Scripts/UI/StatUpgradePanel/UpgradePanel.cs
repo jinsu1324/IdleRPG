@@ -20,6 +20,14 @@ public class UpgradePanel : MonoBehaviour
     }
 
     /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        PlayerStats.OnPlayerStatChanged -= UpdateTotalPowerTextUI;
+    }
+
+    /// <summary>
     /// Start
     /// </summary>
     private void Start()
@@ -49,13 +57,5 @@ public class UpgradePanel : MonoBehaviour
     private void UpdateTotalPowerTextUI(PlayerStatArgs args)
     {
         _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalPower);
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        PlayerStats.OnPlayerStatChanged -= UpdateTotalPowerTextUI;
     }
 }

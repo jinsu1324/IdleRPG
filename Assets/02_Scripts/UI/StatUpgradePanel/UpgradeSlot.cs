@@ -24,6 +24,14 @@ public class UpgradeSlot : MonoBehaviour
     }
 
     /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        UpgradeManager.OnUpgradeChanged -= UpdateUpgradeSlotUI;
+    }
+
+    /// <summary>
     /// √ ±‚»≠
     /// </summary>
     public void Init(string id)
@@ -53,13 +61,5 @@ public class UpgradeSlot : MonoBehaviour
             _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(upgrade.ID.ToString());
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        UpgradeManager.OnUpgradeChanged -= UpdateUpgradeSlotUI;
     }
 }

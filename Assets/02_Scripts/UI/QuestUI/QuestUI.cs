@@ -14,15 +14,32 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Button _completeButton;            // 완료 버튼
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
         QuestManager.OnUpdateCurrentQuest += UpdateQuestUI; // 현재 퀘스트 정보들 업데이트됐을때, 퀘스트UI 정보들 업데이트
         QuestManager.OnCheckQuestCompleted += CompleteButtonONOFF; // 퀘스트 완료여부 체크할때, 완료버튼 On / Off
 
         _completeButton.onClick.AddListener(QuestManager.Instance.CompleteCurrentQuest); // 완료버튼 누르면 퀘스트 완료되게 
+    }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        QuestManager.OnUpdateCurrentQuest -= UpdateQuestUI;
+        QuestManager.OnCheckQuestCompleted -= CompleteButtonONOFF;
+
+        _completeButton.onClick.RemoveAllListeners();
+    }
+
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
         Quest currentQuest = QuestManager.Instance.GetCurrentQuest();
         UpdateQuestUI(currentQuest);
     }
@@ -50,15 +67,6 @@ public class QuestUI : MonoBehaviour
         _rewardText.text = $"{quest.GetRewardGem()}";
         _currentValueText.text = $"{quest.GetCurrentValue()}";
         _targetValueText.text = $"{quest.GetTargetValue()}";
-    }
-
-    /// <summary>
-    /// 구독해제 OnDestroy
-    /// </summary>
-    private void OnDestroy()
-    {
-        QuestManager.OnUpdateCurrentQuest -= UpdateQuestUI;
-        QuestManager.OnCheckQuestCompleted -= CompleteButtonONOFF;
     }
 
     /// <summary>

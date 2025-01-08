@@ -13,11 +13,19 @@ public class RewardView : MonoBehaviour
     [SerializeField] private GameObject _exitGuideTextGO;               // 탭하여 계속하기 텍스트 GO
 
     /// <summary>
-    /// Start
+    /// OnEnable
     /// </summary>
-    private void Start()
+    private void OnEnable()
     {
         _exitButton.onClick.AddListener(Hide);  // 나가기버튼(딤드) 누르면 꺼지게
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        _exitButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>

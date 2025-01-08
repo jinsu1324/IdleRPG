@@ -17,17 +17,24 @@ public class StageInfoUI : MonoBehaviour
     [SerializeField] private GameObject _infiniteAnimIcon;       // 무한반복 애니메이션 아이콘
     [SerializeField] private Button _challangeButton;            // 도전 버튼
 
-    // 도전버튼 누르면
-    // 모드를 일반모드로 바꾸고
-    // 스테이지를 레벨업한다음에
-    // 원래대로 다시 시작
-
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
         StageManager.OnStageChanged += UpdateStageInfoUI;   // 스테이지 변경될 때, 스테이지 정보 UI 업데이트
+
+        _challangeButton.onClick.AddListener(StageManager.Instance.ChallangeRestartGame);
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        StageManager.OnStageChanged -= UpdateStageInfoUI;
+
+        _challangeButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>
@@ -46,8 +53,6 @@ public class StageInfoUI : MonoBehaviour
         // Todo 임시데이터
         OnStageChangedArgs args = new OnStageChangedArgs() { CurrentChapter = 1, CurrentStage = 1 };
         UpdateStageInfoUI(args);
-
-        RegisterListener_ChallangeButton(); // 도전버튼에 리스너 등록
     }
 
     /// <summary>
@@ -71,22 +76,5 @@ public class StageInfoUI : MonoBehaviour
     {
         _infiniteAnimIcon.gameObject.SetActive(StageManager.Instance.IsInfiniteStage());
         _challangeButton.gameObject.SetActive(StageManager.Instance.IsInfiniteStage());
-    }
-
-    /// <summary>
-    /// 도전버튼에 리스너 등록
-    /// </summary>
-    private void RegisterListener_ChallangeButton()
-    {
-        _challangeButton.onClick.RemoveAllListeners();
-        _challangeButton.onClick.AddListener(StageManager.Instance.ChallangeRestartGame);
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        StageManager.OnStageChanged -= UpdateStageInfoUI;
     }
 }

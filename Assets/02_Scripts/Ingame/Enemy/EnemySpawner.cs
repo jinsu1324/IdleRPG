@@ -22,6 +22,14 @@ public class EnemySpawner : SerializedMonoBehaviour
     }
 
     /// <summary>
+    /// OnDisable 구독해제
+    /// </summary>
+    private void OnDisable()
+    {
+        StageManager.OnStageChanged -= SpawnEnemies;
+    }
+
+    /// <summary>
     /// 에너미 타입에 맞는 에너미 스폰
     /// </summary>
     public void SpawnEnemies(OnStageChangedArgs args)
@@ -39,13 +47,5 @@ public class EnemySpawner : SerializedMonoBehaviour
             enemy.transform.position = _spawnPosList[i].position;
             enemy.Init(enemyData, statPercentage);
         }
-    }
-
-    /// <summary>
-    /// OnDisable 구독해제
-    /// </summary>
-    private void OnDisable()
-    {
-        StageManager.OnStageChanged -= SpawnEnemies;
     }
 }

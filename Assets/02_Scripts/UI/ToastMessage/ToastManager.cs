@@ -16,6 +16,14 @@ public class ToastManager : MonoBehaviour
     }
 
     /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
+    }
+
+    /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
     /// </summary>
     public void StartShow_ToastCombatPower(PlayerStatArgs args)
@@ -39,13 +47,5 @@ public class ToastManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         _toastCombatPower.Hide();
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    private void OnDisable()
-    {
-        PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
     }
 }
