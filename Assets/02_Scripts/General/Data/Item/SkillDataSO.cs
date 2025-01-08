@@ -8,9 +8,9 @@ using UnityEngine;
 /// </summary>
 public enum SkillAbilityType
 {
-    AttackPowerPercentage,
-    AttackSpeed,
-    AttackSpeedBuff,
+    AttackPercentage,
+    Delay,
+    AddAttackSpeed,
     Range,
 }
 

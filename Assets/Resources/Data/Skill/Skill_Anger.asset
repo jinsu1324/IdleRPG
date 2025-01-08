@@ -20,42 +20,42 @@ MonoBehaviour:
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 1
   - Level: 2
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 2
   - Level: 3
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 3
   - Level: 4
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 4
   - Level: 5
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 5
   - Level: 6
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 6
   - Level: 7
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 7
   - Level: 8
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 8
   - Level: 9
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 9
   - Level: 10
     ItemAbilityList:
-    - AbilityType: AttackSpeedBuff
+    - AbilityType: AddAttackSpeed
       AbilityValue: 10
   Desc: "10\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 1 \uC99D\uAC00\uD569\uB2C8\uB2E4."

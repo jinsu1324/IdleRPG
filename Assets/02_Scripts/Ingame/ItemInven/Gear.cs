@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 장비 아이템
+/// </summary>
 public class Gear : IItem
 {
+    // IItem 상속
     public string ID { get; private set; }              // ID
     public ItemType ItemType { get; private set; }      // 아이템 타입
     public string Name { get; private set; }            // 이름
@@ -14,7 +18,7 @@ public class Gear : IItem
     public int EnhanceableCount { get; private set; }   // 강화 가능 갯수
     public Sprite Icon { get; private set; }            // 아이콘
 
-
+    // Gear 고유
     public GearDataSO GearDataSO { get; private set; }  // 장비 데이터
     public string AttackAnimType { get; private set; }  // 공격 애니메이션 타입
     public GameObject Prefab { get; private set; }      // 아이템 프리팹

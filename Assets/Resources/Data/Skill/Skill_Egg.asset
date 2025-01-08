@@ -20,63 +20,63 @@ MonoBehaviour:
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1200
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 2
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1300
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 3
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1400
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 4
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1500
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 5
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1600
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 6
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1700
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 7
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1800
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 8
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 1900
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 9
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 2000
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   - Level: 10
     ItemAbilityList:
-    - AbilityType: AttackPowerPercentage
+    - AbilityType: AttackPercentage
       AbilityValue: 2100
-    - AbilityType: AttackSpeed
+    - AbilityType: Delay
       AbilityValue: 4
   Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
     \uACF5\uACA9\uB825\uC758 1200% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
