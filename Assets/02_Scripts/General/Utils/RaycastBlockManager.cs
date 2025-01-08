@@ -14,6 +14,9 @@ public class RaycastBlockManager : MonoBehaviour
     [Title("터치 가능하게 할 CanvasGroup들", bold: false)]
     [SerializeField] private CanvasGroup[] _enableTargetArr;    // 터치 가능하게 할 타겟 CanvasGroup 배열
 
+    [Title("화면 전체 막을 딤드 이미지", bold: false)]
+    [SerializeField] private GameObject _allScreenDimdImage;    // 화면 전체 막을 딤드 이미지
+
     /// <summary>
     /// OnEnable
     /// </summary>
@@ -39,6 +42,7 @@ public class RaycastBlockManager : MonoBehaviour
     {
         ParentRaycastOFF(); // 부모 끄기
         TargetsRaycastON(); // 타겟들만 켜기
+        DimdON(); // 딤드 켜기
     }
 
     /// <summary>
@@ -48,6 +52,7 @@ public class RaycastBlockManager : MonoBehaviour
     {
         ParentRacastON();   // 부모 켜기
         TargetsRaycastON(); // 타겟들 켜기
+        DimdOFF(); // 딤드 끄기
     }
 
     /// <summary>
@@ -79,5 +84,21 @@ public class RaycastBlockManager : MonoBehaviour
     {
         _disableParent.blocksRaycasts = true; // 해당 CanvasGroup 아래 모든 UI 요소 터치 가능
         _disableParent.interactable = true; // 상호작용 가능
+    }
+
+    /// <summary>
+    /// 화면 전체 막을 딤드이미지 켜기
+    /// </summary>
+    private void DimdON()
+    {
+        _allScreenDimdImage.SetActive(true);
+    }
+
+    /// <summary>
+    /// 화면 전체 막을 딤드이미지 끄기
+    /// </summary>
+    private void DimdOFF()
+    {
+        _allScreenDimdImage.SetActive(false);
     }
 }
