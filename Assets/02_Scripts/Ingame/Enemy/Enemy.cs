@@ -103,6 +103,8 @@ public class Enemy : ObjectPoolObj
         FieldTargetManager.RemoveFieldEnemyList(_hpComponent); // 필드타겟 리스트에서 삭제
         QuestManager.Instance.UpdateQuestProgress(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 업데이트
 
+        CurrencyIconMover.Instance.MoveCurrency(CurrencyType.Gold, transform.position); // 골드 이동 애니메이션
+
         ReturnPool(); // 풀로 돌려보내기
     }
 

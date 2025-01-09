@@ -6433,6 +6433,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554095423}
   m_CullTransparentMesh: 1
+--- !u!224 &560808460 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3629660960706804191, guid: 81aba0ff37d65a94e89f4b54787fc4c2, type: 3}
+  m_PrefabInstance: {fileID: 2039605447028456282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &566726814
 GameObject:
   m_ObjectHideFlags: 0
@@ -13218,6 +13223,66 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760216038}
   m_CullTransparentMesh: 1
+--- !u!1 &766961749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 766961750}
+  - component: {fileID: 766961751}
+  m_Layer: 0
+  m_Name: '@CurrencyIconMover'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &766961750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766961749}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &766961751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766961749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d2ace61b4aff94fa4f74d9a53dbb45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _spawnCanvas: {fileID: 699284810}
+  _mainCamera: {fileID: 519420031}
+  _uiCamera: {fileID: 70367104}
+  _goldIconPrefab: {fileID: 1930687562814900013, guid: 5a2d316a4cbb2a440a1ddb6033490651, type: 3}
+  _gemIconPrefab: {fileID: 2599160919047486280, guid: d4ecaf1c8e0b05446b4d8c4ecb1a7428, type: 3}
+  _goldDestination: {fileID: 2009652874}
+  _gemDestination: {fileID: 560808460}
 --- !u!1 &768748684
 GameObject:
   m_ObjectHideFlags: 0
@@ -30681,6 +30746,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 662196498}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &2009652874 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4721037402996667526, guid: 81aba0ff37d65a94e89f4b54787fc4c2, type: 3}
+  m_PrefabInstance: {fileID: 2039605447028456282}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2016537556
 GameObject:
   m_ObjectHideFlags: 0
@@ -58131,6 +58201,7 @@ SceneRoots:
   - {fileID: 865284025}
   - {fileID: 249265621}
   - {fileID: 248398879}
+  - {fileID: 766961750}
   - {fileID: 521399664}
   - {fileID: 1912893504}
   - {fileID: 678096031}
