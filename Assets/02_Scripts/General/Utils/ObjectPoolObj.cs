@@ -9,7 +9,7 @@ using UnityEngine;
 public class ObjectPoolObj : SerializedMonoBehaviour
 {
     private Transform _parent; // 하이어라키에서 들어가있을 부모
-    private Vector3 _originalLocalScale; // 원래 로컬스케일 저장 (부모가 바꼈을때 스케일 원래보존용)
+    private Vector3 _originalLocalScale; // 원래 로컬스케일 저장 (만약 부모가 바꼈을때 스케일 원래보존용)
     private Vector3 _originalPos;
 
     /// <summary>
@@ -46,9 +46,8 @@ public class ObjectPoolObj : SerializedMonoBehaviour
         // 내 부모의, 자식 리스트에서 맨 첫번째 위치로 이동
         transform.SetAsFirstSibling();
 
-        // 스케일도 원래 스케일대로 리셋
+        // 스케일과 포지션도 원래대로 리셋
         transform.localScale = _originalLocalScale;
-
         transform.localPosition = _originalPos;
     }
 

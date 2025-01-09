@@ -307,7 +307,7 @@ public class SelectItemInfoUI : MonoBehaviour
         UpdateUI(); // UI 업데이트
         Notify_SelectItemInfoChanged(); // 선택된 아이템정보 갱신이벤트 알림
 
-        FXManager.Instance.SpawnFX_NewParent(FXName.UIFX_UpgradeItem, _itemIcon.transform); // 이펙트 보여주기
+        FXManager.Instance.SpawnFX(FXName.UIFX_UpgradeItem, _itemIcon.transform); // 이펙트 보여주기
 
         if (isHideMasterUI)
             Hide(); // 전체 UI 숨기기
