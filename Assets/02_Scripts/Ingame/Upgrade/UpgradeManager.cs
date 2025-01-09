@@ -11,7 +11,7 @@ using UnityEngine.UI;
 /// </summary>
 public class UpgradeManager
 {
-    public static event Action OnUpgradeChanged; // 업그레이드가 변경되었을 때 이벤트
+    public static event Action OnUpgradeLevelUp;                    // 업그레이드 레벨업 했을 때 이벤트
     public static int TotalPower { get; private set; }              // 총합 전투력
     public static int BeforeTotalPower { get; private set; }        // 이전 총합 전투력
 
@@ -130,7 +130,10 @@ public class UpgradeManager
             UpdateTotalPower();
 
             // 업그레이드 변경 이벤트 호출
-            OnUpgradeChanged?.Invoke();
+            OnUpgradeLevelUp?.Invoke();
+
+            // 필드에 있는 플레이어 위치에 이펙트 재생
+            FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerSpawner.GetPlayerInstancePos());
         }
         else
         {

@@ -45,6 +45,9 @@ public class HPComponent : MonoBehaviour, IDamagable
 
         DamageTextManager.Instance.ShowDamageText(atk, transform.position, isCritical); // 데미지 텍스트 띄우기
 
+        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, transform.position);    // 이펙트 띄우기
+
+
         if (CurrentHp <= 0)
             Die();
     }
@@ -64,6 +67,8 @@ public class HPComponent : MonoBehaviour, IDamagable
     {
         if (IsDead) 
             return;
+
+        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform.position);    // 이펙트 띄우기
 
         IsDead = true;
         OnDead?.Invoke();

@@ -49,4 +49,12 @@ public class PlayerSpawner : MonoBehaviour
         // 플레이어 인스턴스 초기화
         PlayerInstance.Init(PlayerStats.GetCurrentPlayerStatArgs(beforeTotalPower));
     }
+
+    /// <summary>
+    /// 생성한(필드에 있는) 플레이어 인스턴스 위치 가져오기 
+    /// </summary>
+    public static Vector3 GetPlayerInstancePos()
+    {
+        return PlayerInstance.transform.position;
+    }
 }

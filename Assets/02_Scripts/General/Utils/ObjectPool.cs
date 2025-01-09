@@ -57,4 +57,13 @@ public class ObjectPool : MonoBehaviour
 
         return returnObj;
     }
+
+
+    /// <summary>
+    /// 프리팹 이름 가져오기
+    /// </summary>
+    public string GetPrefabName()
+    {
+        return _prefab.name;
+    }
 }

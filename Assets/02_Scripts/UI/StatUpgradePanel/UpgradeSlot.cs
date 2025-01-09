@@ -20,7 +20,7 @@ public class UpgradeSlot : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        UpgradeManager.OnUpgradeChanged += UpdateUpgradeSlotUI;   // 업그레이드가 변경될 때, 업그레이드 슬롯 UI 업데이트 
+        UpgradeManager.OnUpgradeLevelUp += UpdateUpgradeSlotUI;   // 업그레이드 레벨업 할때, 업그레이드 슬롯 UI 업데이트 
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class UpgradeSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        UpgradeManager.OnUpgradeChanged -= UpdateUpgradeSlotUI;
+        UpgradeManager.OnUpgradeLevelUp -= UpdateUpgradeSlotUI;
     }
 
     /// <summary>
