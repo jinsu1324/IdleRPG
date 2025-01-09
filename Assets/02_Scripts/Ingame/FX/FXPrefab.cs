@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 이펙트 프리팹에 붙여서 콜백함수 받아줄 클래스
+/// </summary>
 public class FXPrefab : ObjectPoolObj
 {
     /// <summary>

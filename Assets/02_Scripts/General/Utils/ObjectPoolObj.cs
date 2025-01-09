@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트 풀링 사용할 오브젝트
+/// </summary>
 public class ObjectPoolObj : SerializedMonoBehaviour
 {
     private Transform _parent; // 하이어라키에서 들어가있을 부모

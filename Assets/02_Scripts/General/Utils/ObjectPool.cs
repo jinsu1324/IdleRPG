@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 오브젝트 풀링
+/// </summary>
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private ObjectPoolObj _prefab;  // 오브젝트 풀에 생성할 프리팹
