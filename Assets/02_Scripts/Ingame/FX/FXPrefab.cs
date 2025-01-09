@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FXPrefab : ObjectPoolObject
+public class FXPrefab : ObjectPoolObj
 {
     /// <summary>
     /// 파티클 끝났을 때 콜백함수 (Particle Stop Action - Callback)

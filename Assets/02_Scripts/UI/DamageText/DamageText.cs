@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DamageText : ObjectPoolObject
+public class DamageText : ObjectPoolObj
 {
     [SerializeField] private TextMeshProUGUI _text; // ≈ÿΩ∫∆Æ
 

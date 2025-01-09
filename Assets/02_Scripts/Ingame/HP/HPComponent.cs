@@ -45,7 +45,7 @@ public class HPComponent : MonoBehaviour, IDamagable
 
         DamageTextManager.Instance.ShowDamageText(atk, transform.position, isCritical); // µ¥¹ÌÁö ÅØ½ºÆ® ¶ç¿ì±â
 
-        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, transform.position);    // ÀÌÆåÆ® ¶ç¿ì±â
+        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, transform);    // ÀÌÆåÆ® ¶ç¿ì±â
 
 
         if (CurrentHp <= 0)
@@ -68,7 +68,7 @@ public class HPComponent : MonoBehaviour, IDamagable
         if (IsDead) 
             return;
 
-        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform.position);    // ÀÌÆåÆ® ¶ç¿ì±â
+        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform);    // ÀÌÆåÆ® ¶ç¿ì±â
 
         IsDead = true;
         OnDead?.Invoke();

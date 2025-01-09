@@ -51,10 +51,10 @@ public class PlayerSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 생성한(필드에 있는) 플레이어 인스턴스 위치 가져오기 
+    /// 생성한(필드에 있는) 플레이어 인스턴스 위치(Transform) 가져오기 
     /// </summary>
-    public static Vector3 GetPlayerInstancePos()
+    public static Transform GetPlayerInstancePos()
     {
-        return PlayerInstance.transform.position;
+        return PlayerInstance.transform;
     }
 }

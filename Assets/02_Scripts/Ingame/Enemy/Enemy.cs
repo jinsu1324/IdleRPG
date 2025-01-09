@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Enemy : ObjectPoolObject
+public class Enemy : ObjectPoolObj
 {
     private EnemyID _enemyID;                                   // ID
     private HPComponent _hpComponent;                           // HP ÄÄÆ÷³ÍÆ®
