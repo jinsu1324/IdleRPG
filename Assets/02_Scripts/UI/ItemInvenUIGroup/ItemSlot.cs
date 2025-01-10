@@ -11,28 +11,30 @@ using UnityEngine.UI;
 /// </summary>
 public class ItemSlot : MonoBehaviour
 {
-    public static event Action<IItem> OnSlotSelected;                   // 슬롯이 선택되었을 때 이벤트
-    public IItem CurrentItem { get; private set; }                      // 현재 슬롯 아이템
+    public static event Action<Item> OnSlotSelected;                    // 슬롯이 선택되었을 때 이벤트
+    public Item CurrentItem { get; private set; }                       // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;                     // 슬롯이 비어있는지 
 
     [Title("아이템 정보들 전체부모 GO", bold: false)]
     [SerializeField] private GameObject _infoParentGO;                  // 아이템 정보들 전체부모 GO
 
-    [Title("아이템 정보들", bold: false)]
+    [Title("아이템 기본정보", bold: false)]
     [SerializeField] private Image _itemIcon;                           // 아이템 아이콘
     [SerializeField] private Image _gradeFrame;                         // 등급 프레임
-    [SerializeField] private TextMeshProUGUI _levelText;                // 아이템 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _countText;                // 아이템 갯수 텍스트
+
+    [Title("슬롯 클릭 관련", bold: false)]
+    [SerializeField] private GameObject _highlightGO;                   // 슬롯 선택했을 때 하이라이트
+    [SerializeField] private Button _slotClickButton;                   // 슬롯 클릭 버튼
+
+    [Title("강화 관련", bold: false)]
+    [SerializeField] private TextMeshProUGUI _levelText;                // 아이템 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _enhanceableCountText;     // 강화 가능한 아이템 갯수 텍스트
     [SerializeField] private Slider _countSlider;                       // 갯수 표시 슬라이더
-
-    [Title("아이템 선택 및 장착, 강화화살표 GO", bold: false)]
-    [SerializeField] private GameObject _highlightGO;                   // 슬롯 선택했을 때 하이라이트
-    [SerializeField] private GameObject _equipGO;                       // 장착되었을 때 아이콘 게임오브젝트
     [SerializeField] private GameObject _enhanceableArrowGO;            // 강화 가능할 때 화살표 게임오브젝트
 
-    [Title("슬롯 클릭 버튼", bold: false)]
-    [SerializeField] private Button _slotClickButton;                   // 슬롯 클릭 버튼
+    [Title("장착 관련", bold: false)]
+    [SerializeField] private GameObject _equipGO;                       // 장착되었을 때 아이콘 게임오브젝트
 
     private Action<RectTransform> _moveHilightImageAction;              // 하이라이트 이미지 움직이기 함수 저장할 변수     
 
@@ -41,7 +43,7 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        SelectItemInfoUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
+        //ItemDetailUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
         EquipSkillManager.OnEquipSwapFinished += UpdateItemSlot; // 장착 스킬 교체가 끝났을 때, 아이템슬롯 업데이트
 
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
@@ -52,7 +54,7 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        SelectItemInfoUI.OnSelectItemInfoChanged -= UpdateItemSlot;
+        //ItemDetailUI.OnSelectItemInfoChanged -= UpdateItemSlot;
         EquipSkillManager.OnEquipSwapFinished -= UpdateItemSlot;
 
         _slotClickButton.onClick.RemoveAllListeners();
@@ -61,7 +63,7 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(IItem item, Action<RectTransform> moveHighlight)
+    public void Init(Item item, Action<RectTransform> moveHighlight)
     {
         CurrentItem = item;
         _moveHilightImageAction = moveHighlight;
@@ -78,19 +80,22 @@ public class ItemSlot : MonoBehaviour
         if (IsSlotEmpty)    // 슬롯 비었으면 업데이트 하지 않고 무시
             return;
 
+        // 아이템 기본정보 업데이트
         _itemIcon.sprite = CurrentItem.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(CurrentItem.Grade);
-        _levelText.text = $"Lv.{CurrentItem.Level}";
         _countText.text = $"{CurrentItem.Count}";
-        _enhanceableCountText.text = $"{CurrentItem.EnhanceableCount}";
-        _countSlider.value = (float)CurrentItem.Count / (float)CurrentItem.EnhanceableCount;
-        _enhanceableArrowGO.gameObject.SetActive(CurrentItem.IsEnhanceable());
 
-        if (CurrentItem is Gear gear)
-            _equipGO.SetActive(EquipGearManager.IsEquippedGear(gear));
 
-        if (CurrentItem is Skill skill)
-            _equipGO.SetActive(EquipSkillManager.IsEquippedSkill(skill));
+        // 강화가능한 아이템이면 강화관련 정보들도 업데이트
+        if (CurrentItem is IEnhanceableItem enhanceableItem)
+        {
+            _levelText.text = $"Lv.{enhanceableItem.Level}"; ;
+            _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
+            _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
+            _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
+        }
+
+        _equipGO.SetActive(EquipItemManager.IsEquipped(CurrentItem));
 
         _infoParentGO.SetActive(true);
     }

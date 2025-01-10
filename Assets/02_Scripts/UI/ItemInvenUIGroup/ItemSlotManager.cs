@@ -20,7 +20,7 @@ public class ItemSlotManager : MonoBehaviour
     /// </summary>
     public void Init(ItemType itemType)
     {
-        List<IItem> itemInven = ItemInven.GetItemInvenByItemType(itemType); // 아이템타입에 맞는 아이템 인벤토리 가져옴
+        List<Item> itemInven = ItemInven.GetItemInven(itemType); // 아이템타입에 맞는 아이템 인벤토리 가져옴
 
         for (int i = 0; i < _ItemSlotList.Count; i++)
         {
@@ -30,7 +30,7 @@ public class ItemSlotManager : MonoBehaviour
                 continue;
             }
 
-            if (i < itemInven.Count)
+            if (i < itemInven.Count) // 인벤속 아이템 갯수만큼만 초기화, 나머지는 끄기
                 _ItemSlotList[i].Init(itemInven[i], SnapHighlightImage);
             else
                 _ItemSlotList[i].Clear();

@@ -31,7 +31,7 @@ public class RewardView : MonoBehaviour
     /// <summary>
     /// 켜기
     /// </summary>
-    public void Show(List<IItem> dropItemList)
+    public void Show(List<Item> dropItemList)
     {
         Change_ExitButtonInteractable(false);
         Change_ExitGuideTextGO(false);
@@ -42,7 +42,7 @@ public class RewardView : MonoBehaviour
     /// <summary>
     /// 획득 아이템 슬롯 리스트 초기화
     /// </summary>
-    private IEnumerator Init_RewardItemSlotList(List<IItem> dropItemList)
+    private IEnumerator Init_RewardItemSlotList(List<Item> dropItemList)
     {
         // 일단 다 끄기
         foreach (RewardItemSlot rewardItemSlot in _rewardItemSlotList)
@@ -52,7 +52,7 @@ public class RewardView : MonoBehaviour
         {
             if (i < dropItemList.Count)  // 드롭 카운트만큼만 rewardItemSlot 초기화
             {
-                IItem dropItem = dropItemList[i];
+                Item dropItem = dropItemList[i];
                 _rewardItemSlotList[i].Init(dropItem);
                 
                 yield return new WaitForSecondsRealtime(0.1f);

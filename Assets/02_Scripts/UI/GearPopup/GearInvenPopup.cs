@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GearInvenPopup : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _titleText;                // 팝업 타이틀 텍스트
-    [SerializeField] private SelectItemInfoUI _selectItemInfoUI;        // 선택된 아이템 정보 UI
+    [SerializeField] private ItemDetailUI_Gear _itemDetailUI_Gear;        // 선택된 아이템 정보 UI
     [SerializeField] private ItemSlotManager _itemSlotManager;          // 아이템 슬롯들 매니저
     [SerializeField] private Button _exitButton;                        // 나가기 버튼
 
@@ -39,7 +39,7 @@ public class GearInvenPopup : MonoBehaviour
         _titleText.text = itemType.ToString();
 
         _itemSlotManager.Init(itemType);    // 아이템 슬롯들 초기화
-        _selectItemInfoUI.Hide();           // 선택 아이템 정보 UI는 끄고 시작
+        _itemDetailUI_Gear.Hide();           // 선택 아이템 정보 UI는 끄고 시작
 
         gameObject.SetActive(true);
     }

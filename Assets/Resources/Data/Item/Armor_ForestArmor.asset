@@ -16,6 +16,8 @@ MonoBehaviour:
   ItemType: Armor
   Name: "\uC232\uC758 \uAC11\uC637"
   Grade: Rare
+  Desc: "\uC232\uC5D0\uC11C \uB0B4\uB824\uC628 \uACE0\uB300\uC758 \uAC11\uC637\uC785\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 5d77c98a7b86d1649b7f681960564f24, type: 3}
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:
@@ -79,4 +81,3 @@ MonoBehaviour:
       AbilityValue: 16
   AttackAnimType: 
   Prefab: {fileID: 6765735204406009822, guid: c5ff3bd418417e04393fd25754e88c4c, type: 3}
-  Icon: {fileID: 21300000, guid: 5d77c98a7b86d1649b7f681960564f24, type: 3}

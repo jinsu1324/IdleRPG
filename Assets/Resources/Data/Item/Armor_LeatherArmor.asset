@@ -16,6 +16,8 @@ MonoBehaviour:
   ItemType: Armor
   Name: "\uAC00\uC8FD \uAC11\uC637"
   Grade: Normal
+  Desc: "\uAC00\uC8FD\uC73C\uB85C\uB41C \uAC00\uBCBC\uC6B4 \uC637\uC785\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 912229e3a279670429265127de1301cf, type: 3}
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:
@@ -79,4 +81,3 @@ MonoBehaviour:
       AbilityValue: 12
   AttackAnimType: 
   Prefab: {fileID: 2410885265547448605, guid: 9df616020a2a78b4ea321db548c63746, type: 3}
-  Icon: {fileID: 21300000, guid: 912229e3a279670429265127de1301cf, type: 3}

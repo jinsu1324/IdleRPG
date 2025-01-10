@@ -73,7 +73,8 @@ public class Parsing_GearData : Parsing_Base
                 gearDataSO.ItemType = row[1];
                 gearDataSO.Name = row[2];
                 gearDataSO.Grade = row[3];
-                gearDataSO.AttackAnimType = row[4];
+                gearDataSO.Desc = row[4];
+                gearDataSO.AttackAnimType = row[5];
                 gearDataSO.ItemLevelInfoList = new List<ItemLevelInfo>();
                 
                 gearDataSODict[id] = gearDataSO;
@@ -82,12 +83,12 @@ public class Parsing_GearData : Parsing_Base
             // 아이템 레벨별 정보
             ItemLevelInfo itemLevelInfo = new ItemLevelInfo()
             {
-                Level = row[5],
+                Level = row[6],
                 ItemAbilityList = new List<ItemAbility>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
-            for (int k = 6; k < row.Length; k += 2)
+            for (int k = 7; k < row.Length; k += 2)
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
@@ -141,6 +142,7 @@ public class Parsing_GearData : Parsing_Base
             gearDataSO.ItemType = data.ItemType;
             gearDataSO.Name = data.Name;
             gearDataSO.Grade = data.Grade;
+            gearDataSO.Desc = data.Desc;
             gearDataSO.AttackAnimType = data.AttackAnimType;
             gearDataSO.ItemLevelInfoList = data.ItemLevelInfoList;
 

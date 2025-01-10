@@ -26,7 +26,7 @@ public class EquipGearComponent : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        EquipGearManager.OnEquipGearChanged += ChangePlayerGear_ByItemType;   // 아이템이 장착되었을 때, 플레이어도 아이템 장착
+        EquipItemManager.OnEquipGearChanged += ChangePlayerGear_ByItemType;   // 아이템이 장착되었을 때, 플레이어도 아이템 장착
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class EquipGearComponent : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        EquipGearManager.OnEquipGearChanged -= ChangePlayerGear_ByItemType;
+        EquipItemManager.OnEquipGearChanged -= ChangePlayerGear_ByItemType;
     }
 
     /// <summary>

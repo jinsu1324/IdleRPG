@@ -34,6 +34,7 @@ public class ItemDataSO : ScriptableObject
     public string ItemType;
     public string Name;
     public string Grade;
+    public string Desc;
     public Sprite Icon;
     public List<ItemLevelInfo> ItemLevelInfoList;
 }

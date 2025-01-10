@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class GearPopup : BottomTabPopupBase
 {
     [Title("장착 슬롯들", bold: false)]
-    [SerializeField] private EquipSlotGear[] _equipSlotGearArr;     // 장착 슬롯들
+    [SerializeField] private EquipSlot_Gear[] _equipSlotGearArr;     // 장착 슬롯들
 
     [Title("스탯 텍스트", bold : false)]
     [SerializeField] private TextMeshProUGUI _attackPowerText;      // 공격력 텍스트
@@ -21,12 +21,16 @@ public class GearPopup : BottomTabPopupBase
     [SerializeField] private TextMeshProUGUI _criticalRateText;     // 치명타 확률 텍스트
     [SerializeField] private TextMeshProUGUI _criticalMultipleText; // 치명타 배율 텍스트
 
+    [Title("장비 인벤토리 팝업", bold: false)]
+    [SerializeField] private GearInvenPopup _gearInvenPopup;        // 기어 인벤팝업
+
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
         PlayerStats.OnPlayerStatChanged += Update_StatTexts;    // 플레이어 스탯이 바뀌면, 스탯텍스트 업데이트
+        EquipSlot_Gear.OnClickGearInvenOpenButton += _gearInvenPopup.Show;
     }
 
     /// <summary>
@@ -35,6 +39,7 @@ public class GearPopup : BottomTabPopupBase
     private void OnDisable()
     {
         PlayerStats.OnPlayerStatChanged -= Update_StatTexts;
+        EquipSlot_Gear.OnClickGearInvenOpenButton -= _gearInvenPopup.Show;
     }
 
     /// <summary>
@@ -75,7 +80,7 @@ public class GearPopup : BottomTabPopupBase
     /// </summary>
     private void Update_EquipSlots()
     {
-        foreach (EquipSlotGear equipSlotGear in _equipSlotGearArr)
+        foreach (EquipSlot_Gear equipSlotGear in _equipSlotGearArr)
             equipSlotGear.UpdateSlot();
     }
 }

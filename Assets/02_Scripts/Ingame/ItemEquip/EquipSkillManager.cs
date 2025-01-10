@@ -13,23 +13,23 @@ public class EquipSkillManager
     public static event Action OnEquipSwapStarted;  // 장착스킬 교체를 시작할 때 이벤트
     public static event Action OnEquipSwapFinished; // 장착스킬 교체가 끝났을 때 이벤트
 
-    private static Skill[] _equipSkillArr;          // 장착한 스킬 배열
+    private static SkillItem[] _equipSkillArr;      // 장착한 스킬 배열
     private static int _maxCount = 3;               // 스킬 장착 최대 갯수
 
-    private static Skill _swapTargetSkill;          // 교체할 목표 스킬
+    private static SkillItem _swapTargetSkill;          // 교체할 목표 스킬
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
     /// </summary>
     static EquipSkillManager()
     {
-        _equipSkillArr = new Skill[_maxCount];
+        _equipSkillArr = new SkillItem[_maxCount];
     }
     
     /// <summary>
     /// 스킬 장착
     /// </summary>
-    public static void EquipSkill(Skill skill, int slotIndex = -1)
+    public static void EquipSkill(SkillItem skill, int slotIndex = -1)
     {
         // 이미 장착된 스킬이면 그냥 리턴
         if (IsEquippedSkill(skill))
@@ -56,7 +56,7 @@ public class EquipSkillManager
     /// <summary>
     /// 스킬 장착 해제
     /// </summary>
-    public static void UnEquipSkill(Skill skill)
+    public static void UnEquipSkill(SkillItem skill)
     {
         // 해당 스킬이 어느 인덱스에 장착되어있는지 찾음
         int equippedIndex = FindEquippedSkillIndex(skill); 
@@ -79,7 +79,7 @@ public class EquipSkillManager
     public static void SwapSkill(int slotIndex)
     {
         // 기존 스킬 장착 해제
-        Skill oldSkill = GetEquippedSkill(slotIndex);
+        SkillItem oldSkill = GetEquippedSkill(slotIndex);
         UnEquipSkill(oldSkill);
 
         // 새로운 스킬 장착
@@ -93,7 +93,7 @@ public class EquipSkillManager
     /// <summary>
     /// 장착한 스킬 베열 가져오기
     /// </summary>
-    public static Skill[] GetEquippedSkillArr()
+    public static SkillItem[] GetEquippedSkillArr()
     {
         if (_equipSkillArr.All(s => s == null)) // 모든 슬롯이 비어있다면 null 반환
             return null;
@@ -104,7 +104,7 @@ public class EquipSkillManager
     /// <summary>
     /// 해당 슬롯에 장착되어있는 스킬 가져오기
     /// </summary>
-    public static Skill GetEquippedSkill(int slotIndex)
+    public static SkillItem GetEquippedSkill(int slotIndex)
     {
         return _equipSkillArr[slotIndex];
     }
@@ -112,7 +112,7 @@ public class EquipSkillManager
     /// <summary>
     /// 해당 스킬이 어느 슬롯에 장착되어있는지 찾기
     /// </summary>
-    private static int FindEquippedSkillIndex(Skill skill)
+    private static int FindEquippedSkillIndex(SkillItem skill)
     {
         return Array.FindIndex(_equipSkillArr, s => s == skill);
     }
@@ -120,7 +120,7 @@ public class EquipSkillManager
     /// <summary>
     /// 장착한 스킬인지?
     /// </summary>
-    public static bool IsEquippedSkill(Skill skill)
+    public static bool IsEquippedSkill(SkillItem skill)
     {
         return _equipSkillArr.Contains(skill);
     }

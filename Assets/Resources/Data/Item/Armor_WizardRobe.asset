@@ -16,6 +16,8 @@ MonoBehaviour:
   ItemType: Armor
   Name: "\uB9C8\uBC95\uC0AC\uC758 \uB85C\uBE0C"
   Grade: Legendary
+  Desc: "\uB300\uB9C8\uBC95\uC0AC\uC758 \uB85C\uBE0C\uC785\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 61566d5ebb00d10418d20cb010275231, type: 3}
   ItemLevelInfoList:
   - Level: 1
     ItemAbilityList:
@@ -79,4 +81,3 @@ MonoBehaviour:
       AbilityValue: 19
   AttackAnimType: 
   Prefab: {fileID: 4966302771244954350, guid: 1d341370199743944b44e645cfb70cec, type: 3}
-  Icon: {fileID: 21300000, guid: 61566d5ebb00d10418d20cb010275231, type: 3}

@@ -32,18 +32,13 @@ public class ItemDropMachine : MonoBehaviour
     /// </summary>
     public void AcquireRandomItemButton()
     {
-        // 획득 수 랜덤으로 가져오기
-        //int dropCount = RandomPickDropCount(_maxDropCount); 
-        int dropCount = _maxDropCount; // 일단 테스트용 랜덤말고 일정갯수로
-
         // 획득한 아이템들 담을 변수
-        List<IItem> dropItemList = new List<IItem>(); 
+        List<Item> dropItemList = new List<Item>(); 
 
-
-        for (int i = 0; i < dropCount; i++)
+        for (int i = 0; i < _maxDropCount; i++)
         {
             // 아이템 랜덤으로 가져오기
-            IItem item = RandomPickItem(); 
+            Item item = RandomPickItem(); 
 
             // 인벤토리에 추가
             ItemInven.AddItem(item);
@@ -56,12 +51,10 @@ public class ItemDropMachine : MonoBehaviour
         _rewardView.Show(dropItemList); 
     }
 
-    
-
     /// <summary>
     /// 장비 랜덤으로 픽
     /// </summary>
-    private IItem RandomPickItem()
+    private Item RandomPickItem()
     {
         switch (_itemType)
         {
@@ -79,7 +72,10 @@ public class ItemDropMachine : MonoBehaviour
         return null;
     }
 
-    private IItem MakeGear(ItemType itemType)
+    /// <summary>
+    /// 장비 인스턴스 생성
+    /// </summary>
+    private Item MakeGear(ItemType itemType)
     {
         // 같은 아이템타입의 아이템데이터는 모두 가져오기
         List<GearDataSO> gearDataSOList = DataManager.Instance.GetAllGearDataSO(itemType);
@@ -87,13 +83,16 @@ public class ItemDropMachine : MonoBehaviour
         // 그 아이템데이터들 중에서 하나 랜덤 픽
         GearDataSO gearDataSO = gearDataSOList[RandomPickItemIndex(gearDataSOList.Count)];
 
-        Gear gear = new Gear();
-        gear.Init(gearDataSO, 1);
+        GearItem gearItem = new GearItem();
+        gearItem.Init(gearDataSO, 1);
 
-        return gear;
+        return gearItem;
     }
 
-    private Skill MakeSkill(ItemType itemType)
+    /// <summary>
+    /// 스킬아이템 인스턴스 생성
+    /// </summary>
+    private SkillItem MakeSkill(ItemType itemType)
     {
         // 같은 아이템타입의 아이템데이터는 모두 가져오기
         List<SkillDataSO> skillDataSOList = DataManager.Instance.GetAllSkillDataSO(itemType);
@@ -101,14 +100,11 @@ public class ItemDropMachine : MonoBehaviour
         // 그 아이템데이터들 중에서 하나 랜덤 픽
         SkillDataSO skillDataSO = skillDataSOList[RandomPickItemIndex(skillDataSOList.Count)];
 
-        Skill skill = new Skill();
-        skill.Init(skillDataSO, 1);
+        SkillItem skillItem = new SkillItem();
+        skillItem.Init(skillDataSO, 1);
 
-        return skill;
+        return skillItem;
     }
-
-
-
 
     /// <summary>
     /// 아이템 갯수 중 랜덤으로 픽
@@ -117,14 +113,5 @@ public class ItemDropMachine : MonoBehaviour
     {
         int index = Random.Range(0, maxCount);
         return index;
-    }
-
-    /// <summary>
-    /// 획득 숫자 랜덤으로 픽
-    /// </summary>
-    private int RandomPickDropCount(int maxCount)
-    {
-        int dropCount = Random.Range(1, 5 + 1);
-        return dropCount;
     }
 }

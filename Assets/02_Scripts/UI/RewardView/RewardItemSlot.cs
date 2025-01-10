@@ -12,7 +12,7 @@ public class RewardItemSlot : MonoBehaviour
     /// <summary>
     /// √ ±‚»≠
     /// </summary>
-    public void Init(IItem item)
+    public void Init(Item item)
     {
         _itemIcon.sprite = item.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);

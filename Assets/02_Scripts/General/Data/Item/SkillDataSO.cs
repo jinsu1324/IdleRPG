@@ -20,8 +20,6 @@ public enum SkillAbilityType
 [System.Serializable]
 public class SkillDataSO : ItemDataSO
 {
-    public string Desc;
-
     /// <summary>
     /// 원하는 레벨에 맞는 어빌리티들 딕셔너리로 가져오기
     /// </summary>
