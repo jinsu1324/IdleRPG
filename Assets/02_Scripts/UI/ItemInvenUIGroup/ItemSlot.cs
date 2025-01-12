@@ -45,6 +45,7 @@ public class ItemSlot : MonoBehaviour
     {
         EquipGearManager.OnEquipGear += UpdateSlot;  // 장비 장착할때 -> 아이템슬롯 업데이트
         EquipGearManager.OnUnEquipGear += UpdateSlot;  // 장비 해제할때 -> 아이템슬롯 업데이트
+        ItemEnhanceManager.OnItemEnhance += UpdateSlot; // 아이템 강화할때 -> 아이템슬롯 업데이트
 
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
@@ -56,6 +57,7 @@ public class ItemSlot : MonoBehaviour
     {
         EquipGearManager.OnEquipGear -= UpdateSlot;
         EquipGearManager.OnUnEquipGear -= UpdateSlot;
+        ItemEnhanceManager.OnItemEnhance -= UpdateSlot;
 
         _slotClickButton.onClick.RemoveAllListeners();
     }

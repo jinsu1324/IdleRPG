@@ -31,12 +31,13 @@ public class BottomTab : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        ItemInven.OnItemInvenChanged += UpdateReddotComponent; // 가지고 있는 아이템이 변경되었을 때, 하단탭 레드닷 컴포넌트 업데이트
+        ItemInven.OnAddItem += Update_ReddotComponent; // 아이템 추가되었을 때 -> 하단탭 레드닷 컴포넌트 업데이트
+        ItemEnhanceManager.OnItemEnhance += Update_ReddotComponent; // 아이템 강화할때 -> 하단탭 레드닷 컴포넌트 업데이트
 
         _openButton.onClick.AddListener(OpenTabPopup);
         _closeButton.onClick.AddListener(CloseTabPopup);
 
-        UpdateReddotComponent(); // 레드닷 컴포넌트 업데이트
+        Update_ReddotComponent(); // 레드닷 컴포넌트 업데이트
     }
 
     /// <summary>
@@ -44,7 +45,8 @@ public class BottomTab : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        ItemInven.OnItemInvenChanged -= UpdateReddotComponent;
+        ItemInven.OnAddItem -= Update_ReddotComponent;
+        ItemEnhanceManager.OnItemEnhance -= Update_ReddotComponent;
 
         _openButton.onClick.RemoveAllListeners();
         _closeButton.onClick.RemoveAllListeners();
@@ -77,7 +79,7 @@ public class BottomTab : MonoBehaviour
     /// <summary>
     /// 레드닷 컴포넌트 업데이트
     /// </summary>
-    public void UpdateReddotComponent()
+    public void Update_ReddotComponent(Item item = null)
     {
         switch (_bottomTabType)
         {

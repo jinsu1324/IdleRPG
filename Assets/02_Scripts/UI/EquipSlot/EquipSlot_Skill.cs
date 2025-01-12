@@ -21,7 +21,7 @@ public class EquipSlot_Skill : EquipSlot
     /// <summary>
     /// OnEnable
     /// </summary>
-    protected override void OnEnable()
+    protected void OnEnable()
     {
         //EquipSkillManager.OnEquipSwapStarted += SwapGuides_ON;  // 장착스킬 교체 시작되었을 때, 교체가이드 켜기
         //EquipSkillManager.OnEquipSwapStarted += DetailButton_OFF; // 장착스킬 교체 시작되었을 때, 슬롯아이템 디테일버튼은 끄기
@@ -35,7 +35,7 @@ public class EquipSlot_Skill : EquipSlot
     /// <summary>
     /// OnDisable
     /// </summary>
-    protected override void OnDisable()
+    protected void OnDisable()
     {
         //EquipSkillManager.OnEquipSwapStarted -= SwapGuides_ON;
         //EquipSkillManager.OnEquipSwapStarted -= DetailButton_OFF;
@@ -46,29 +46,7 @@ public class EquipSlot_Skill : EquipSlot
         //_detailButton.onClick.RemoveAllListeners();
     }
 
-    /// <summary>
-    /// 정보 보여주기
-    /// </summary>
-    public override void ShowSlot(Item item)
-    {
-        base.ShowSlot(item);
-
-        //SwapGuides_OFF(); // 교체가이드 끄기
-        //DetailButton_ON(); // 디테일버튼 켜기
-        //Check_EnhanceableArrow(); // 강화가능 화살표 On / Off 여부 체크
-    }
-
-    /// <summary>
-    /// 빈슬롯 보여주기
-    /// </summary>
-    public override void EmptySlot()
-    {
-        base.EmptySlot();
-
-        //SwapGuides_OFF(); // 교체가이드 끄기
-        //DetailButton_OFF(); // 디테일버튼 끄기
-        //Check_EnhanceableArrow(); // 강화가능 화살표 On / Off 여부 체크
-    }
+    
 
     /// <summary>
     /// 슬롯 업데이트
@@ -86,7 +64,7 @@ public class EquipSlot_Skill : EquipSlot
         }
 
         // 있으면 해당스킬 정보 보여주기
-        ShowSlot(equippedSkill);
+        UpdateSlot(equippedSkill);
     }
 
     ///// <summary>

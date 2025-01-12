@@ -26,8 +26,8 @@ public class EquipGearComponent : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        EquipGearManager.OnEquipGear += EquipPlayer; // 장비 장착할때, 플레이어도 그 장비 장착
-        EquipGearManager.OnUnEquipGear += UnEquipPlayer; // 장비 해제할때, 플레이어도 그 장비 해제
+        EquipGearManager.OnEquipGear += EquipPlayer; // 장비 장착할때 -> 플레이어도 그 장비 장착
+        EquipGearManager.OnUnEquipGear += UnEquipPlayer; // 장비 해제할때 -> 플레이어도 그 장비 해제
     }
 
     /// <summary>

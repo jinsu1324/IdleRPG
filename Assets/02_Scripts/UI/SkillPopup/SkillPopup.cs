@@ -78,7 +78,7 @@ public class SkillPopup : BottomTabPopupBase
                 continue;
             }
 
-            equipSlotSkill.ShowSlot(skill);
+            equipSlotSkill.UpdateSlot(skill);
         }
     }
 }

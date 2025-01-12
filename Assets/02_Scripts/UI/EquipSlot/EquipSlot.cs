@@ -23,19 +23,9 @@ public abstract class EquipSlot : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _levelText;    // 아이템 레벨 텍스트
 
     /// <summary>
-    /// OnEnable
+    /// 슬롯 보여주기(+업데이트)
     /// </summary>
-    protected abstract void OnEnable();
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    protected abstract void OnDisable();
-
-    /// <summary>
-    /// 슬롯 보여주기
-    /// </summary>
-    public virtual void ShowSlot(Item item)
+    public void UpdateSlot(Item item)
     {
         CurrentItem = item;
         _itemIcon.sprite = item.Icon;
@@ -48,11 +38,11 @@ public abstract class EquipSlot : MonoBehaviour
 
         InfoGO_ON();
     }
-
+    
     /// <summary>
     /// 슬롯 비우기
     /// </summary>
-    public virtual void EmptySlot()
+    public void EmptySlot()
     {
         CurrentItem = null;
         InfoGO_OFF();

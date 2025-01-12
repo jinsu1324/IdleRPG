@@ -32,6 +32,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
     {
         EquipGearManager.OnEquipGear += UpdateUI; // 장비 장착할때 -> 장비아이템 상세정보 UI 업데이트
         EquipGearManager.OnUnEquipGear += UpdateUI; // 장비 해제할때 -> 장비아이템 상세정보 UI 업데이트
+        ItemEnhanceManager.OnItemEnhance += UpdateUI; // 아이템 강화할때 -> 장비아이템 상세정보 UI 업데이트
 
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
@@ -45,6 +46,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
     {
         EquipGearManager.OnEquipGear -= UpdateUI;
         EquipGearManager.OnUnEquipGear -= UpdateUI;
+        ItemEnhanceManager.OnItemEnhance -= UpdateUI;
 
         _equipButton.onClick.RemoveAllListeners();
         _unEquipButton.onClick.RemoveAllListeners();
@@ -138,6 +140,5 @@ public class ItemDetailUI_Gear : ItemDetailUI
             return;
 
         ItemEnhanceManager.Enhance(CurrentItem);
-        //UpdateUI();
     }
 }

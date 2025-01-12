@@ -16,20 +16,24 @@ public class EquipSlot_Gear : EquipSlot
     /// <summary>
     /// OnEnable
     /// </summary>
-    protected override void OnEnable()
+    private void OnEnable()
     {
-        EquipGearManager.OnEquipGear += UpdateSlot; // 장비 장착할때 -> 장비장착슬롯 업데이트
-        EquipGearManager.OnUnEquipGear += UpdateSlot; // 장비 해제할때 -> 장비장착슬롯 업데이트
+        EquipGearManager.OnEquipGear += Update_EquipSlotGear; // 장비 장착할때 -> 장비장착슬롯 업데이트
+        EquipGearManager.OnUnEquipGear += Update_EquipSlotGear; // 장비 해제할때 -> 장비장착슬롯 업데이트
+        ItemEnhanceManager.OnItemEnhance += Update_EquipSlotGear; // 아이템 강화할때 -> 장비장착슬롯 업데이트
+
         _gearInvenButton.onClick.AddListener(Notify_OnClickGearInvenButton); // 장비인벤버튼 누르면 -> 이벤트 노티
     }
 
     /// <summary>
     /// OnDisable
     /// </summary>
-    protected override void OnDisable()
+    private void OnDisable()
     {
-        EquipGearManager.OnEquipGear -= UpdateSlot;
-        EquipGearManager.OnUnEquipGear -= UpdateSlot;
+        EquipGearManager.OnEquipGear -= Update_EquipSlotGear;
+        EquipGearManager.OnUnEquipGear -= Update_EquipSlotGear;
+        ItemEnhanceManager.OnItemEnhance -= Update_EquipSlotGear;
+
         _gearInvenButton.onClick.RemoveAllListeners();
     }
 
@@ -45,7 +49,7 @@ public class EquipSlot_Gear : EquipSlot
     /// <summary>
     /// 슬롯 업데이트
     /// </summary>
-    private void UpdateSlot(Item item)
+    private void Update_EquipSlotGear(Item item)
     {
         // 이 슬롯하고 아이템타입이 다르면 무시
         if (_slotItemType != item.ItemType) 
@@ -63,9 +67,9 @@ public class EquipSlot_Gear : EquipSlot
         // 장착한 아이템 가져오기
         Item equippedItem = EquipGearManager.GetEquippedItem(_slotItemType);
 
-        // 장착한 아이템 있으면 슬롯 보여주고, 없으면 비우기
+        // 장착한 아이템 있으면 슬롯 보여주고(+업데이트), 없으면 비우기
         if (equippedItem != null)
-            ShowSlot(equippedItem);
+            UpdateSlot(equippedItem);
         else
             EmptySlot();
     }

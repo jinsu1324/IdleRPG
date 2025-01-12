@@ -9,7 +9,7 @@ using UnityEngine;
 /// </summary>
 public class ItemInven
 {
-    public static event Action OnItemInvenChanged;                      // 가지고 있는 아이템이 변경되었을 때 이벤트
+    public static event Action<Item> OnAddItem;                         // 아이템 추가되었을 때 이벤트
     
     private static Dictionary<ItemType, List<Item>> _itemInvenDict;     // 가지고 있는 아이템 인벤토리 딕셔너리 
 
@@ -34,14 +34,24 @@ public class ItemInven
     {
         Item existItem = HasItemInInven(item); 
         
-        if (existItem != null) // 가지고 있는 아이템이면 갯수만 추가
+        if (existItem != null) 
         {
+            // 가지고 있는 아이템이면 갯수만 추가
             existItem.AddCount();
+
+            // 아이템추가 이벤트 노티
+            OnAddItem?.Invoke(existItem); 
         }
         else
         {
-            _itemInvenDict[item.ItemType].Add(item); // 아니면 아이템 추가
+            // 아니면 아이템 추가
+            _itemInvenDict[item.ItemType].Add(item);
+
+            // 아이템추가 이벤트 노티
+            OnAddItem?.Invoke(item); 
         }
+
+        
     }
 
     /// <summary>
