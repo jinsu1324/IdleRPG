@@ -46,6 +46,7 @@ public class ItemSlot : MonoBehaviour
         EquipGearManager.OnEquipGear += UpdateSlot;  // 장비 장착할때 -> 아이템슬롯 업데이트
         EquipGearManager.OnUnEquipGear += UpdateSlot;  // 장비 해제할때 -> 아이템슬롯 업데이트
         ItemEnhanceManager.OnItemEnhance += UpdateSlot; // 아이템 강화할때 -> 아이템슬롯 업데이트
+        EquipSkillManager.OnEquipSkillChanged += UpdateSlot; // 장착스킬 바뀌었을때 -> 아이템슬롯 업데이트
 
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
@@ -58,6 +59,7 @@ public class ItemSlot : MonoBehaviour
         EquipGearManager.OnEquipGear -= UpdateSlot;
         EquipGearManager.OnUnEquipGear -= UpdateSlot;
         ItemEnhanceManager.OnItemEnhance -= UpdateSlot;
+        EquipSkillManager.OnEquipSkillChanged -= UpdateSlot;
 
         _slotClickButton.onClick.RemoveAllListeners();
     }
@@ -98,10 +100,11 @@ public class ItemSlot : MonoBehaviour
             _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
         }
 
+        // 장착중 아이콘 업데이트
         if (CurrentItem is GearItem gearItem)
-        {
             _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
-        }
+        if (CurrentItem is SkillItem skillItem)
+            _equipGO.SetActive(EquipSkillManager.IsEquipped(skillItem));
         
 
         _infoParentGO.SetActive(true);

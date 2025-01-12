@@ -46,7 +46,7 @@ public abstract class ItemDetailUI : MonoBehaviour
     /// <summary>
     /// °¨Ãß±â
     /// </summary>
-    public virtual void Hide()
+    public virtual void Hide(Item item = null)
     {
         CurrentItem = null;
         gameObject.SetActive(false);

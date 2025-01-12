@@ -18,9 +18,9 @@ public class EquipSlot_Gear : EquipSlot
     /// </summary>
     private void OnEnable()
     {
-        EquipGearManager.OnEquipGear += Update_EquipSlotGear; // 장비 장착할때 -> 장비장착슬롯 업데이트
-        EquipGearManager.OnUnEquipGear += Update_EquipSlotGear; // 장비 해제할때 -> 장비장착슬롯 업데이트
-        ItemEnhanceManager.OnItemEnhance += Update_EquipSlotGear; // 아이템 강화할때 -> 장비장착슬롯 업데이트
+        EquipGearManager.OnEquipGear += TryUpdate_EquipSlotGear; // 장비 장착할때 -> 장비장착슬롯 업데이트 시도
+        EquipGearManager.OnUnEquipGear += TryUpdate_EquipSlotGear; // 장비 해제할때 -> 장비장착슬롯 업데이트 시도
+        ItemEnhanceManager.OnItemEnhance += TryUpdate_EquipSlotGear; // 아이템 강화할때 -> 장비장착슬롯 업데이트 시도
 
         _gearInvenButton.onClick.AddListener(Notify_OnClickGearInvenButton); // 장비인벤버튼 누르면 -> 이벤트 노티
     }
@@ -30,9 +30,9 @@ public class EquipSlot_Gear : EquipSlot
     /// </summary>
     private void OnDisable()
     {
-        EquipGearManager.OnEquipGear -= Update_EquipSlotGear;
-        EquipGearManager.OnUnEquipGear -= Update_EquipSlotGear;
-        ItemEnhanceManager.OnItemEnhance -= Update_EquipSlotGear;
+        EquipGearManager.OnEquipGear -= TryUpdate_EquipSlotGear;
+        EquipGearManager.OnUnEquipGear -= TryUpdate_EquipSlotGear;
+        ItemEnhanceManager.OnItemEnhance -= TryUpdate_EquipSlotGear;
 
         _gearInvenButton.onClick.RemoveAllListeners();
     }
@@ -42,36 +42,38 @@ public class EquipSlot_Gear : EquipSlot
     /// </summary>
     public void Init()
     {
-        Choice_ShowAndEmpty_ByEquipped();
-        Update_ReddotComponent();
+        Update_EquipSlotGear();
     }
 
     /// <summary>
-    /// 슬롯 업데이트
+    /// 장비장착슬롯 업데이트 시도
     /// </summary>
-    private void Update_EquipSlotGear(Item item)
+    private void TryUpdate_EquipSlotGear(Item item)
     {
         // 이 슬롯하고 아이템타입이 다르면 무시
         if (_slotItemType != item.ItemType) 
             return;
 
-        Choice_ShowAndEmpty_ByEquipped();
-        Update_ReddotComponent();
+        Update_EquipSlotGear();
+        
     }
 
     /// <summary>
-    /// 장비 장착여부에 따라, 보여주기 vs 안보여주기 선택
+    /// 장비장착슬롯 업데이트
     /// </summary>
-    private void Choice_ShowAndEmpty_ByEquipped()
+    private void Update_EquipSlotGear()
     {
-        // 장착한 아이템 가져오기
-        Item equippedItem = EquipGearManager.GetEquippedItem(_slotItemType);
+        // 장착한 장비 가져오기
+        Item equipGear = EquipGearManager.GetEquippedItem(_slotItemType);
 
-        // 장착한 아이템 있으면 슬롯 보여주고(+업데이트), 없으면 비우기
-        if (equippedItem != null)
-            UpdateSlot(equippedItem);
+        // 장착한 장비 있으면 슬롯 보여주고(+업데이트), 없으면 비우기
+        if (equipGear != null)
+            UpdateSlot(equipGear);
         else
             EmptySlot();
+
+        // 레드닷 업데이트
+        Update_ReddotComponent();
     }
 
     /// <summary>

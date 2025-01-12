@@ -30,7 +30,8 @@ public class GearPopup : BottomTabPopupBase
     private void OnEnable()
     {
         EquipSlot_Gear.OnClickGearInvenButton += _gearInvenPopup.Show;  // 장비인벤버튼 눌렀을때 -> 장비인벤팝업 열기
-        PlayerStats.OnPlayerStatChanged += Update_StatTexts;    // 플레이어 스탯이 바뀌면, 스탯텍스트 업데이트
+        PlayerStats.OnPlayerStatChanged += Update_StatTexts;    // 플레이어 스탯이 바뀌면 -> 스탯텍스트 업데이트
+        EquipGearManager.OnEquipGear += _gearInvenPopup.Hide; // 장비 장착할때 -> 장비인벤팝업 닫기
     }
 
     /// <summary>
@@ -40,6 +41,7 @@ public class GearPopup : BottomTabPopupBase
     {
         EquipSlot_Gear.OnClickGearInvenButton -= _gearInvenPopup.Show;
         PlayerStats.OnPlayerStatChanged -= Update_StatTexts;
+        EquipGearManager.OnEquipGear -= _gearInvenPopup.Hide;
     }
 
     /// <summary>
@@ -50,7 +52,7 @@ public class GearPopup : BottomTabPopupBase
         PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs(0);
         Update_StatTexts(args); // 스탯 텍스트 업데이트
         
-        Update_GearEquipSlots(); // 장비장착슬롯 업데이트
+        Init_GearEquipSlots(); // 장비장착슬롯 업데이트
 
         gameObject.SetActive(true);
     }
@@ -64,6 +66,15 @@ public class GearPopup : BottomTabPopupBase
     }
 
     /// <summary>
+    /// 장비슬롯들 초기화
+    /// </summary>
+    private void Init_GearEquipSlots()
+    {
+        foreach (EquipSlot_Gear equipSlotGear in _equipSlotGearArr)
+            equipSlotGear.Init();
+    }
+
+    /// <summary>
     /// 스탯텍스트 업데이트
     /// </summary>
     private void Update_StatTexts(PlayerStatArgs args)
@@ -73,14 +84,5 @@ public class GearPopup : BottomTabPopupBase
         _maxHpText.text = $"{args.MaxHp}";
         _criticalRateText.text = $"{args.CriticalRate}";
         _criticalMultipleText.text = $"{args.CriticalMultiple}";
-    }
-
-    /// <summary>
-    /// 장비슬롯들 초기화
-    /// </summary>
-    private void Update_GearEquipSlots()
-    {
-        foreach (EquipSlot_Gear equipSlotGear in _equipSlotGearArr)
-            equipSlotGear.Init();
     }
 }

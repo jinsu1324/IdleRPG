@@ -34,7 +34,7 @@ public class ItemDetailUI_Skill : ItemDetailUI
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
         _enhanceButton.onClick.AddListener(OnClick_EnhanceButton);  // 강화버튼 핸들러 등록
-        _exitButton.onClick.AddListener(Hide);                      // 나가기 버튼 핸들러 등록
+        _exitButton.onClick.AddListener(() => Hide());                      // 나가기 버튼 핸들러 등록
     }
 
     /// <summary>
@@ -53,8 +53,10 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
+        // 기본정보 업데이트
         base.UpdateUI(item);
 
+        // 강화관련정보 업데이트
         if (item is IEnhanceableItem enhanceableItem)
         {
             _levelText.text = $"Lv.{enhanceableItem.Level}";
@@ -65,7 +67,8 @@ public class ItemDetailUI_Skill : ItemDetailUI
             _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
         }
 
-        bool isEquipped = EquipGearManager.IsEquipped(item);
+        // 장착관련정보 + 버튼들 업데이트
+        bool isEquipped = EquipSkillManager.IsEquipped(item);
         _equipButton.gameObject.SetActive(!isEquipped);
         _unEquipButton.gameObject.SetActive(isEquipped);
         _equipIcon.SetActive(isEquipped);
@@ -76,11 +79,10 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     public void OnClick_EquipButton()
     {
-        //if (CurrentItem == null)
-        //    return;
+        if (CurrentItem == null)
+            return;
 
-        //EquipGearManager.Equip(CurrentItem, 0); // 스킬은 장착슬롯을 고르는게 필요할듯
-        //UpdateUI();
+        EquipSkillManager.Equip(CurrentItem);
     }
 
     /// <summary>
@@ -88,11 +90,10 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     public void OnClick_UnEquipButton()
     {
-        //if (CurrentItem == null)
-        //    return;
+        if (CurrentItem == null)
+            return;
 
-        //EquipGearManager.UnEquipGear(CurrentItem);
-        //UpdateUI();
+        EquipSkillManager.UnEquip(CurrentItem);
     }
 
     /// <summary>
@@ -100,10 +101,9 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     public void OnClick_EnhanceButton()
     {
-        //if (CurrentItem == null)
-        //    return;
+        if (CurrentItem == null)
+            return;
 
-        //ItemEnhanceManager.Enhance(CurrentItem);
-        //UpdateUI();
+        // Todo
     }
 }

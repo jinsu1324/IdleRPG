@@ -17,7 +17,8 @@ public class SkillPopup : BottomTabPopupBase
     /// </summary>
     private void OnEnable()
     {
-        ItemSlot.OnSlotSelected += _itemDetailUI_Skill.Show; // 아이템 슬롯 선택되었을 때, 스킬 아이템 상세정보UI 열기
+        ItemSlot.OnSlotSelected += _itemDetailUI_Skill.Show; // 아이템 슬롯 선택되었을 때 -> 스킬 아이템 상세정보UI 열기
+        EquipSkillManager.OnEquipSkillChanged += _itemDetailUI_Skill.Hide;  // 장착스킬 바뀌었을 때 -> 스킬 아이템 상세정보UI 닫기
     }
 
     /// <summary>
@@ -26,7 +27,7 @@ public class SkillPopup : BottomTabPopupBase
     private void OnDisable()
     {
         ItemSlot.OnSlotSelected -= _itemDetailUI_Skill.Show;
-
+        EquipSkillManager.OnEquipSkillChanged -= _itemDetailUI_Skill.Hide;
     }
 
     /// <summary>
@@ -36,7 +37,7 @@ public class SkillPopup : BottomTabPopupBase
     {
         _itemSlotManager.Init(_itemType); // 아이템슬롯 초기화
         _itemDetailUI_Skill.Hide(); // 아이테 디테일 UI(여기서는 팝업) 은 끄고시작 
-        Update_EquipSlots(); // 장착슬롯 업데이트
+        Init_SkillEquipSlots(); // 장착슬롯 업데이트
 
         gameObject.SetActive(true);
     }
@@ -50,35 +51,11 @@ public class SkillPopup : BottomTabPopupBase
     }
 
     /// <summary>
-    /// 장착슬롯 업데이트
+    /// 스킬장착슬롯들 초기화
     /// </summary>
-    private void Update_EquipSlots()
+    private void Init_SkillEquipSlots()
     {
-        // 장착 스킬 배열 가져오기
-        SkillItem[] equipSkillArr = EquipSkillManager.GetEquippedSkillArr();
-
-        // 장착스킬 아무것도 없으면, 슬롯 다 끄고 리턴
-        if (equipSkillArr == null)
-        {
-            for (int i = 0; i < _equipSlotArr.Length; i++)
-                _equipSlotArr[i].EmptySlot();
-
-            return;
-        }
-
-        // 장착한 스킬 갯수에 맞게 장착슬롯 업데이트
-        for (int i = 0; i < _equipSlotArr.Length; i++)
-        {
-            EquipSlot_Skill equipSlotSkill = _equipSlotArr[i];
-            SkillItem skill = equipSkillArr[i];
-
-            if (skill == null)
-            {
-                equipSlotSkill.EmptySlot();
-                continue;
-            }
-
-            equipSlotSkill.UpdateSlot(skill);
-        }
+        foreach (EquipSlot_Skill equipSlotSkill in _equipSlotArr)
+            equipSlotSkill.Init();
     }
 }

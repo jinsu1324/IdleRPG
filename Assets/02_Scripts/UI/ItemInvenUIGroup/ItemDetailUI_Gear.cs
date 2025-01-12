@@ -58,9 +58,10 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
+        // 기본정보 업데이트
         base.UpdateUI(item);
 
-        // 강화 관련 UI 업데이트
+        // 강화관련정보 업데이트
         if (item is IEnhanceableItem enhanceableItem)
         {
             _levelText.text = $"Lv.{enhanceableItem.Level}";
@@ -74,7 +75,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
         // 어빌리티 정보 업데이트
         Update_AbilityInfo(item);
 
-        // 장착관련 정보 + 버튼들 UI업데이트
+        // 장착관련정보 + 버튼들 업데이트
         bool isEquipped = EquipGearManager.IsEquipped(item);
         _equipButton.gameObject.SetActive(!isEquipped);
         _unEquipButton.gameObject.SetActive(isEquipped);

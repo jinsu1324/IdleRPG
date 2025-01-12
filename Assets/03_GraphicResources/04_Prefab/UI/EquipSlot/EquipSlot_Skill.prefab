@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3829501977737691219
 RectTransform:
   m_ObjectHideFlags: 0
@@ -423,6 +423,7 @@ GameObject:
   - component: {fileID: 6489777719594154099}
   - component: {fileID: 408007080696113643}
   - component: {fileID: 2609294972816884705}
+  - component: {fileID: 1863405876361504290}
   m_Layer: 5
   m_Name: EquipSlot_Skill
   m_TagString: Untagged
@@ -468,12 +469,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotItemType: 3
-  _slotIndex: 0
-  _emptyGO: {fileID: 2801723632470211205}
   _infoGO: {fileID: 380913763710051114}
   _itemIcon: {fileID: 8484647628172891808}
   _gradeFrame: {fileID: 3298927036369340661}
   _levelText: {fileID: 7803419535702486155}
+  _slotIndex: 0
+  _reddotComponent: {fileID: 1863405876361504290}
 --- !u!225 &2609294972816884705
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -486,6 +487,19 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1863405876361504290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824038181201768155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb7b742a91975a41a45c7d03def55a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reddot: {fileID: 4126735257844143755}
 --- !u!1 &2385652205656902384
 GameObject:
   m_ObjectHideFlags: 0
