@@ -43,8 +43,8 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        //ItemDetailUI.OnSelectItemInfoChanged += UpdateItemSlot; // 선택 아이템 정보가 바뀌었을때, 아이템슬롯 업데이트
-        EquipSkillManager.OnEquipSwapFinished += UpdateItemSlot; // 장착 스킬 교체가 끝났을 때, 아이템슬롯 업데이트
+        EquipGearManager.OnEquipGear += UpdateSlot;  // 장비 장착할때 -> 아이템슬롯 업데이트
+        EquipGearManager.OnUnEquipGear += UpdateSlot;  // 장비 해제할때 -> 아이템슬롯 업데이트
 
         _slotClickButton.onClick.AddListener(OnSlotClicked);  // 슬롯 클릭 시 버튼 이벤트 연결
     }
@@ -54,8 +54,8 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        //ItemDetailUI.OnSelectItemInfoChanged -= UpdateItemSlot;
-        EquipSkillManager.OnEquipSwapFinished -= UpdateItemSlot;
+        EquipGearManager.OnEquipGear -= UpdateSlot;
+        EquipGearManager.OnUnEquipGear -= UpdateSlot;
 
         _slotClickButton.onClick.RemoveAllListeners();
     }
@@ -67,7 +67,7 @@ public class ItemSlot : MonoBehaviour
     {
         CurrentItem = item;
         _moveHilightImageAction = moveHighlight;
-        UpdateItemSlot();
+        UpdateSlot(CurrentItem);
 
         gameObject.SetActive(true);
     }
@@ -75,9 +75,10 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 아이템슬롯 정보들 업데이트
     /// </summary>
-    public void UpdateItemSlot()
+    public void UpdateSlot(Item item)
     {
-        if (IsSlotEmpty)    // 슬롯 비었으면 업데이트 하지 않고 무시
+        // 슬롯 비었으면 업데이트 하지 않고 무시
+        if (IsSlotEmpty)    
             return;
 
         // 아이템 기본정보 업데이트
@@ -95,7 +96,11 @@ public class ItemSlot : MonoBehaviour
             _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
         }
 
-        _equipGO.SetActive(EquipItemManager.IsEquipped(CurrentItem));
+        if (CurrentItem is GearItem gearItem)
+        {
+            _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
+        }
+        
 
         _infoParentGO.SetActive(true);
     }

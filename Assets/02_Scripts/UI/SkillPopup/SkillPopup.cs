@@ -7,18 +7,35 @@ using UnityEngine;
 /// </summary>
 public class SkillPopup : BottomTabPopupBase
 {
-    [SerializeField] EquipSlot_Skill[] _equipSlotArr = new EquipSlot_Skill[3];    // 장착 슬롯 배열 (3 : 장착가능한 스킬 갯수)
-    [SerializeField] ItemSlotManager _itemSlotManager;                          // 아이템 슬롯 매니저
-    [SerializeField] ItemDetailUI _selectItemInfoUI;                        // 선택된 아이템 정보 UI
-    private ItemType _itemType = ItemType.Skill;                                // 스킬팝업의 아이템타입 설정
-   
+    [SerializeField] EquipSlot_Skill[] _equipSlotArr = new EquipSlot_Skill[3];      // 장착 슬롯 배열 (3 : 장착가능한 스킬 갯수)
+    [SerializeField] ItemSlotManager _itemSlotManager;                              // 아이템 슬롯 매니저
+    [SerializeField] ItemDetailUI_Skill _itemDetailUI_Skill;                        // 스킬아이템 상세정보 UI
+    private ItemType _itemType = ItemType.Skill;                                    // 스킬팝업의 아이템타입 설정
+    
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable()
+    {
+        ItemSlot.OnSlotSelected += _itemDetailUI_Skill.Show; // 아이템 슬롯 선택되었을 때, 스킬 아이템 상세정보UI 열기
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        ItemSlot.OnSlotSelected -= _itemDetailUI_Skill.Show;
+
+    }
+
     /// <summary>
     /// 팝업 켜기
     /// </summary>
     public override void Show()
     {
         _itemSlotManager.Init(_itemType); // 아이템슬롯 초기화
-        _selectItemInfoUI.Hide(); // 아이테 디테일 UI(여기서는 팝업) 은 끄고시작 
+        _itemDetailUI_Skill.Hide(); // 아이테 디테일 UI(여기서는 팝업) 은 끄고시작 
         Update_EquipSlots(); // 장착슬롯 업데이트
 
         gameObject.SetActive(true);
@@ -44,7 +61,7 @@ public class SkillPopup : BottomTabPopupBase
         if (equipSkillArr == null)
         {
             for (int i = 0; i < _equipSlotArr.Length; i++)
-                _equipSlotArr[i].ShowEmpty();
+                _equipSlotArr[i].EmptySlot();
 
             return;
         }
@@ -57,11 +74,11 @@ public class SkillPopup : BottomTabPopupBase
 
             if (skill == null)
             {
-                equipSlotSkill.ShowEmpty();
+                equipSlotSkill.EmptySlot();
                 continue;
             }
 
-            equipSlotSkill.ShowInfo(skill);
+            equipSlotSkill.ShowSlot(skill);
         }
     }
 }

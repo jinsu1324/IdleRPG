@@ -60,10 +60,6 @@ public class GearItem : Item, IEnhanceableItem
     /// </summary>
     public Dictionary<StatType, int> GetAbilityDict() => AbilityDict;
 
-    public override T GetItemData<T>()
-    {
-        throw new NotImplementedException();
-    }
 
     public override void UseItem()
     {

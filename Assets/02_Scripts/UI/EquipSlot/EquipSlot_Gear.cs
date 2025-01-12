@@ -8,22 +8,19 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ReddotComponent))]
 public class EquipSlot_Gear : EquipSlot
 {
-    public static event Action<ItemType> OnClickGearInvenOpenButton;
+    public static event Action<ItemType> OnClickGearInvenButton;    // 장비인벤버튼 눌렀을 때 이벤트
 
-    [Title("장비 장착슬롯 관련", bold: false)]
-    [SerializeField] private Button _invenOpenButton;           // 인벤토리 오픈 버튼
-    [SerializeField] private ReddotComponent _reddotComponent;  // 레드닷 컴포넌트
-
+    [SerializeField] private Button _gearInvenButton;               // 장비인벤버튼
+    [SerializeField] private ReddotComponent _reddotComponent;      // 레드닷 컴포넌트
 
     /// <summary>
     /// OnEnable
     /// </summary>
     protected override void OnEnable()
     {
-        ItemInven.OnItemInvenChanged += UpdateReddotComponent; // 가지고 있는 아이템이 변경되었을 때, 장비장착슬롯 레드닷 업데이트
-        EquipItemManager.OnEquipGearChanged += TryUpdate_EquipSlotGear; // 장착한 장비가 변경되었을 때, 장비장착슬롯 업데이트 시도
-
-        _invenOpenButton.onClick.AddListener(Notify_OnClickGearInvenOpenButton);   
+        EquipGearManager.OnEquipGear += UpdateSlot; // 장비 장착할때 -> 장비장착슬롯 업데이트
+        EquipGearManager.OnUnEquipGear += UpdateSlot; // 장비 해제할때 -> 장비장착슬롯 업데이트
+        _gearInvenButton.onClick.AddListener(Notify_OnClickGearInvenButton); // 장비인벤버튼 누르면 -> 이벤트 노티
     }
 
     /// <summary>
@@ -31,60 +28,60 @@ public class EquipSlot_Gear : EquipSlot
     /// </summary>
     protected override void OnDisable()
     {
-        ItemInven.OnItemInvenChanged -= UpdateReddotComponent;
-        EquipItemManager.OnEquipGearChanged -= TryUpdate_EquipSlotGear;
-
-        _invenOpenButton.onClick.RemoveAllListeners();
+        EquipGearManager.OnEquipGear -= UpdateSlot;
+        EquipGearManager.OnUnEquipGear -= UpdateSlot;
+        _gearInvenButton.onClick.RemoveAllListeners();
     }
 
     /// <summary>
-    /// 장비 장착 슬롯 업데이트 시도
+    /// 초기화
     /// </summary>
-    private void TryUpdate_EquipSlotGear(OnEquipGearChangedArgs args)
+    public void Init()
     {
-        if (IsSameSlotItemType(args.ItemType) == false) 
-            return;
-
-        UpdateSlot();
-    }
-
-    /// <summary>
-    /// 장착 or 해제중인 아이템의 아이템타입이, 현재 슬롯의 아이템타입과 같은지?
-    /// </summary>
-    private bool IsSameSlotItemType(ItemType itemType)
-    {
-        return _slotItemType == itemType;
+        Choice_ShowAndEmpty_ByEquipped();
+        Update_ReddotComponent();
     }
 
     /// <summary>
     /// 슬롯 업데이트
     /// </summary>
-    public void UpdateSlot()
+    private void UpdateSlot(Item item)
+    {
+        // 이 슬롯하고 아이템타입이 다르면 무시
+        if (_slotItemType != item.ItemType) 
+            return;
+
+        Choice_ShowAndEmpty_ByEquipped();
+        Update_ReddotComponent();
+    }
+
+    /// <summary>
+    /// 장비 장착여부에 따라, 보여주기 vs 안보여주기 선택
+    /// </summary>
+    private void Choice_ShowAndEmpty_ByEquipped()
     {
         // 장착한 아이템 가져오기
-        Item equippedItem = EquipItemManager.GetEquippedItem(_slotItemType, _slotIndex);
+        Item equippedItem = EquipGearManager.GetEquippedItem(_slotItemType);
 
-        // 장착한 장비 있으면 정보 보여주고, 없으면 빈슬롯 보여주기
+        // 장착한 아이템 있으면 슬롯 보여주고, 없으면 비우기
         if (equippedItem != null)
-            ShowInfo(equippedItem);
+            ShowSlot(equippedItem);
         else
-            ShowEmpty();
-
-        UpdateReddotComponent(); // 레드닷 업데이트
+            EmptySlot();
     }
 
-
-    private void Notify_OnClickGearInvenOpenButton()
+    /// <summary>
+    /// 장비인벤버튼 클릭 이벤트 노티
+    /// </summary>
+    private void Notify_OnClickGearInvenButton()
     {
-        OnClickGearInvenOpenButton?.Invoke(_slotItemType);
+        OnClickGearInvenButton?.Invoke(_slotItemType);
     }
-
-    
 
     /// <summary>
     /// 레드닷 컴포넌트 업데이트 (인벤토리에 강화가능한 아이템이 있는지?)
     /// </summary>
-    public void UpdateReddotComponent()
+    public void Update_ReddotComponent()
     {
         _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableItem(_slotItemType));
     }

@@ -36,18 +36,23 @@ public enum StatType
 /// </summary>
 public class PlayerStats
 {
-    // 플레이어 스탯 변경되었을 때 이벤트
-    public static event Action<PlayerStatArgs> OnPlayerStatChanged;
+    public static event Action<PlayerStatArgs> OnPlayerStatChanged; // 플레이어 스탯 변경되었을 때 이벤트
+    private static Dictionary<StatType, List<StatModifier>> _statModifierDict; // 스탯별로 StatModifier 리스트를 관리
 
-    // 스탯별로 StatModifier 리스트를 관리
-    private static Dictionary<StatType, List<StatModifier>> _statModifierDict = new Dictionary<StatType, List<StatModifier>>()
-    { 
-        { StatType.AttackPower, new List<StatModifier>()},
-        { StatType.AttackSpeed, new List<StatModifier>()},
-        { StatType.MaxHp, new List<StatModifier>()},
-        { StatType.CriticalRate, new List<StatModifier>()},
-        { StatType.CriticalMultiple, new List<StatModifier>()},
-    };
+    /// <summary>
+    /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
+    /// </summary>
+    static PlayerStats()
+    {
+        _statModifierDict = new Dictionary<StatType, List<StatModifier>>()
+        {
+            { StatType.AttackPower, new List<StatModifier>()},
+            { StatType.AttackSpeed, new List<StatModifier>()},
+            { StatType.MaxHp, new List<StatModifier>()},
+            { StatType.CriticalRate, new List<StatModifier>()},
+            { StatType.CriticalMultiple, new List<StatModifier>()},
+        };
+    }
 
     /// <summary>
     /// 스탯 모디파이어 업데이트

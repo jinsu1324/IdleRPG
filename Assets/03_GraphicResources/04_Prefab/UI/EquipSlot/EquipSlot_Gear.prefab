@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3411185180279099555}
   - component: {fileID: 1807086392758787758}
   m_Layer: 5
-  m_Name: InvenOpenButton
+  m_Name: GearInvenButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,14 +608,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotItemType: 0
-  _slotIndex: 0
   _emptyGO: {fileID: 2390001581077473608}
   _infoGO: {fileID: 5129193883304422683}
   _itemIcon: {fileID: 86314151872795454}
   _gradeFrame: {fileID: 1041724372387803506}
   _levelText: {fileID: 2621397135658317315}
-  _gearInvenPopup: {fileID: 0}
-  _invenOpenButton: {fileID: 1807086392758787758}
+  _gearInvenButton: {fileID: 1807086392758787758}
   _reddotComponent: {fileID: 7508720166918563117}
 --- !u!114 &7508720166918563117
 MonoBehaviour:

@@ -11,23 +11,16 @@ using UnityEngine.UI;
 /// </summary>
 public abstract class EquipSlot : MonoBehaviour
 {
-    public Item CurrentItem { get; private set; }       // 이 장착슬롯에 들어가있는 아이템
+    public Item CurrentItem { get; private set; }           // 이 장착슬롯에 들어가있는 아이템
 
     [Title("장착슬롯의 아이템타입", bold: false)]
     [SerializeField] protected ItemType _slotItemType;      // 장착슬롯의 아이템타입
 
-    [Title("장착슬롯 인덱스", bold: false)]
-    [SerializeField] protected int _slotIndex;              // 슬롯 인덱스
-
-
-    [Title("On / Off GO", bold: false)]
-    [SerializeField] private GameObject _emptyGO;        // 빈슬롯 GO
-    [SerializeField] private GameObject _infoGO;         // 정보들 GO
-
     [Title("정보들", bold: false)]
-    [SerializeField] private Image _itemIcon;            // 아이템 아이콘
-    [SerializeField] private Image _gradeFrame;          // 등급 프레임
-    [SerializeField] private TextMeshProUGUI _levelText; // 아이템 레벨 텍스트
+    [SerializeField] private GameObject _infoGO;            // 정보들 GO
+    [SerializeField] private Image _itemIcon;               // 아이템 아이콘
+    [SerializeField] private Image _gradeFrame;             // 등급 프레임
+    [SerializeField] private TextMeshProUGUI _levelText;    // 아이템 레벨 텍스트
 
     /// <summary>
     /// OnEnable
@@ -40,9 +33,9 @@ public abstract class EquipSlot : MonoBehaviour
     protected abstract void OnDisable();
 
     /// <summary>
-    /// 정보 보여주기
+    /// 슬롯 보여주기
     /// </summary>
-    public virtual void ShowInfo(Item item)
+    public virtual void ShowSlot(Item item)
     {
         CurrentItem = item;
         _itemIcon.sprite = item.Icon;
@@ -51,36 +44,33 @@ public abstract class EquipSlot : MonoBehaviour
         if (item is IEnhanceableItem enhancableItem)
             _levelText.text = $"Lv.{enhancableItem.Level}";
         else
-            _levelText.text = $"-";
+            _levelText.text = $"";
 
-        InfoON_EmptyOFF();
+        InfoGO_ON();
     }
 
     /// <summary>
-    /// 빈슬롯 보여주기
+    /// 슬롯 비우기
     /// </summary>
-    public virtual void ShowEmpty()
+    public virtual void EmptySlot()
     {
         CurrentItem = null;
-
-        EmptyON_InfoOFF();
+        InfoGO_OFF();
     }
 
     /// <summary>
-    /// 정보 켜고, 빈슬롯 끄기
+    /// 정보GO 켜기
     /// </summary>
-    private void InfoON_EmptyOFF()
+    private void InfoGO_ON()
     {
-        _emptyGO.SetActive(false);
         _infoGO.SetActive(true);
     }
 
     /// <summary>
-    /// 빈슬롯 켜고, 정보 끄기
+    /// 정보GO 끄기
     /// </summary>
-    private void EmptyON_InfoOFF()
+    private void InfoGO_OFF()
     {
-        _emptyGO.SetActive(true);
         _infoGO.SetActive(false);
     }
 }

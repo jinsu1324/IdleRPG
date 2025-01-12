@@ -4,33 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 소비아이템 상세정보 UI
+/// </summary>
 public class ItemDetailUI_Consume : ItemDetailUI
 {
     [Title("나가기 버튼", bold: false)]
-    [SerializeField] private Button _exitButton;                        // 나가기 버튼
+    [SerializeField] private Button _exitButton;    // 나가기 버튼
 
+    /// <summary>
+    /// OnEnable
+    /// </summary>
     protected override void OnEnable()
     {
-        ItemSlot.OnSlotSelected += Show; // 아이템 슬롯 선택되었을 때, 선택된 아이템 정보 UI 켜기
 
     }
 
+    /// <summary>
+    /// OnDisable
+    /// </summary>
     protected override void OnDisable()
     {
-        ItemSlot.OnSlotSelected -= Show;
 
-
-    }
-
-    public override void Show(Item item)
-    {
-        base.Show(item);
-
-
-    }
-
-    public override void Hide()
-    {
-        base.Hide();
     }
 }

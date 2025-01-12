@@ -60,6 +60,14 @@ public class DataManager : SingletonBase<DataManager>
     }
 
     /// <summary>
+    /// 특정 장비 데이터 가져오기
+    /// </summary>
+    public GearDataSO GetGearDataSO(string id)
+    {
+        return _gearDataSOList.Find(x => x.ID == id);
+    }
+
+    /// <summary>
     /// 모든 스킬데이터 리스트 가져오기
     /// </summary>
     public List<SkillDataSO> GetAllSkillDataSO(ItemType itemType)

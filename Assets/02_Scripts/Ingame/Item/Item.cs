@@ -18,11 +18,6 @@ public abstract class Item
     public void AddCount() => Count++;
 
     /// <summary>
-    /// 아이템 데이터 가져오기
-    /// </summary>
-    public abstract T GetItemData<T>() where T : Item;
-
-    /// <summary>
     /// 아이템 사용
     /// </summary>
     public abstract void UseItem();

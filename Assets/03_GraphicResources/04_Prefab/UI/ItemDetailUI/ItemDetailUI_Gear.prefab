@@ -3132,7 +3132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cfa5a1a17724064aa39f886c6a9b2b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiRoot: {fileID: 393841472717427667}
   _itemIcon: {fileID: 6656075268841408478}
   _gradeFrame: {fileID: 7933366204968781685}
   _nameText: {fileID: 7667735001182535542}
@@ -3143,7 +3142,7 @@ MonoBehaviour:
   _enhanceableCountText: {fileID: 3854450072177814856}
   _countSlider: {fileID: 1624756084874632558}
   _equipIcon: {fileID: 1455211843873995500}
-  _enhanceableArrowGO: {fileID: 860345792937037069}
+  _enhanceableArrowIcon: {fileID: 860345792937037069}
   _equipButton: {fileID: 2282291380349169600}
   _unEquipButton: {fileID: 4743900730979648740}
   _enhanceButton: {fileID: 1492155894013676037}

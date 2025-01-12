@@ -22,15 +22,15 @@ public class GearPopup : BottomTabPopupBase
     [SerializeField] private TextMeshProUGUI _criticalMultipleText; // 치명타 배율 텍스트
 
     [Title("장비 인벤토리 팝업", bold: false)]
-    [SerializeField] private GearInvenPopup _gearInvenPopup;        // 기어 인벤팝업
+    [SerializeField] private GearInvenPopup _gearInvenPopup;        // 장비 인벤토리 팝업
 
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
+        EquipSlot_Gear.OnClickGearInvenButton += _gearInvenPopup.Show;  // 장비인벤버튼 눌렀을때 -> 장비인벤팝업 열기
         PlayerStats.OnPlayerStatChanged += Update_StatTexts;    // 플레이어 스탯이 바뀌면, 스탯텍스트 업데이트
-        EquipSlot_Gear.OnClickGearInvenOpenButton += _gearInvenPopup.Show;
     }
 
     /// <summary>
@@ -38,8 +38,8 @@ public class GearPopup : BottomTabPopupBase
     /// </summary>
     private void OnDisable()
     {
+        EquipSlot_Gear.OnClickGearInvenButton -= _gearInvenPopup.Show;
         PlayerStats.OnPlayerStatChanged -= Update_StatTexts;
-        EquipSlot_Gear.OnClickGearInvenOpenButton -= _gearInvenPopup.Show;
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class GearPopup : BottomTabPopupBase
         PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs(0);
         Update_StatTexts(args); // 스탯 텍스트 업데이트
         
-        Update_EquipSlots(); // 장착 슬롯 업데이트
+        Update_GearEquipSlots(); // 장비장착슬롯 업데이트
 
         gameObject.SetActive(true);
     }
@@ -76,11 +76,11 @@ public class GearPopup : BottomTabPopupBase
     }
 
     /// <summary>
-    /// 장착한 장비에 따라 장비슬롯 업데이트
+    /// 장비슬롯들 초기화
     /// </summary>
-    private void Update_EquipSlots()
+    private void Update_GearEquipSlots()
     {
         foreach (EquipSlot_Gear equipSlotGear in _equipSlotGearArr)
-            equipSlotGear.UpdateSlot();
+            equipSlotGear.Init();
     }
 }

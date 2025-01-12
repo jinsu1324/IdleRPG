@@ -56,11 +56,6 @@ public class SkillItem : Item, IEnhanceableItem
     /// </summary>
     public bool CanEquip() => true;
 
-    public override T GetItemData<T>()
-    {
-        throw new NotImplementedException();
-    }
-
     public override void UseItem()
     {
         throw new NotImplementedException();
