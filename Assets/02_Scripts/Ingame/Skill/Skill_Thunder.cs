@@ -2,28 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Thunder : SkillItem, IActiveSkill
+public class Skill_Thunder : SkillItem
 {
-    public float CurrentTime { get; set; }
-    public float Delay { get; set; }
-
-    public bool CheckCoolTime()
+    public override void ExecuteSkill()
     {
-        CurrentTime += Time.deltaTime;
-
-        if (CurrentTime > Delay)
-        {
-            CurrentTime %= Delay;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void ExecuteSkill()
-    {
-        Debug.Log("SkillThunder!!");
+        Debug.Log("Skill_Thunder!!");
     }
 }

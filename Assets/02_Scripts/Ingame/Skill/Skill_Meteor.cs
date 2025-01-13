@@ -2,30 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Meteor : SkillItem, IActiveSkill
+public class Skill_Meteor : SkillItem
 {
     public float AttackPercentage { get; set; }
     public float Range { get; set; }
-    public float Delay { get; set; }
-    public float CurrentTime { get; set; }
 
-    public bool CheckCoolTime()
+    public override void ExecuteSkill()
     {
-        CurrentTime += Time.deltaTime;
-
-        if (CurrentTime > Delay)
-        {
-            CurrentTime %= Delay;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public void ExecuteSkill()
-    {
-        Debug.Log("SkillMeteor!!");
+        Debug.Log("Skill_Meteor!!");
     }
 }

@@ -1374,7 +1374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 16.000008}
+  m_AnchoredPosition: {x: 0, y: 16}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &115097994
@@ -24450,6 +24450,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1403012780}
   m_CullTransparentMesh: 1
+--- !u!1 &1409308943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1409308945}
+  - component: {fileID: 1409308944}
+  m_Layer: 0
+  m_Name: EquipSkillCaster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1409308944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409308943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4beda28d12eca8343bdca7d963f31162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1409308945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409308943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.240978, y: -0.845989, z: 457.81592}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1428542387
 GameObject:
   m_ObjectHideFlags: 0
@@ -40768,7 +40812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -32.000015}
+  m_AnchoredPosition: {x: 0, y: -32}
   m_SizeDelta: {x: 64, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &4176434367064025631
@@ -58154,6 +58198,7 @@ SceneRoots:
   - {fileID: 521399664}
   - {fileID: 1912893504}
   - {fileID: 678096031}
+  - {fileID: 1409308945}
   - {fileID: 1569924137}
   - {fileID: 519420032}
   - {fileID: 70367107}

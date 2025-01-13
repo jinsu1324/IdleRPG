@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IActiveSkill
+public interface ISkill
 {
     float CurrentTime { get; }      // 딜레이 체크할 시간
     float Delay { get; }            // 딜레이

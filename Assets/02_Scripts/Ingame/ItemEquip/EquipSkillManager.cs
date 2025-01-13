@@ -135,4 +135,18 @@ public class EquipSkillManager
     {
         return _equipSkillArr[slotIndex];
     }
+
+
+    /// <summary>
+    /// 장착한 스킬들 ISkill 배열을 반환 (인덱스 동일 유지)
+    /// </summary>
+    public static ISkill[] GetEquipISkill()
+    {
+        if (_equipSkillArr.All(s => s == null)) // 모든 슬롯이 비어있다면(null) null 반환
+            return null;
+
+        return _equipSkillArr.
+            Select(item => item as ISkill). // ISkill로 변환 (실패 시 null)
+            ToArray();  // 배열로 반환
+    }
 }
