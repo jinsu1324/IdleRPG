@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// 스킬 아이템
 /// </summary>
-public class SkillItem : Item, IEnhanceableItem
+public abstract class SkillItem : Item, IEnhanceableItem
 {
     public SkillDataSO SkillDataSO { get; private set; }    // 스킬 데이터
     public Dictionary<SkillAbilityType, int> AbilityDict { get; private set; }  // 제공하는 어빌리티들 딕셔너리
@@ -50,14 +50,4 @@ public class SkillItem : Item, IEnhanceableItem
     /// 강화 가능한지?
     /// </summary>
     public bool CanEnhance() => Count >= EnhanceableCount;
-
-    /// <summary>
-    /// 장착 가능한지?
-    /// </summary>
-    public bool CanEquip() => true;
-
-    public override void UseItem()
-    {
-        throw new NotImplementedException();
-    }
 }

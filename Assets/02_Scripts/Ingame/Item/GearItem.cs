@@ -59,10 +59,4 @@ public class GearItem : Item, IEnhanceableItem
     /// ¾îºô¸®Æ¼ µñ¼Å³Ê¸® °¡Á®¿À±â
     /// </summary>
     public Dictionary<StatType, int> GetAbilityDict() => AbilityDict;
-
-
-    public override void UseItem()
-    {
-        throw new NotImplementedException();
-    }
 }

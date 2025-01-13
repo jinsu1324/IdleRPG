@@ -99,8 +99,9 @@ public class ItemDropMachine : MonoBehaviour
 
         // 그 아이템데이터들 중에서 하나 랜덤 픽
         SkillDataSO skillDataSO = skillDataSOList[RandomPickItemIndex(skillDataSOList.Count)];
-
-        SkillItem skillItem = new SkillItem();
+        string id = skillDataSO.ID;
+        
+        SkillItem skillItem = SkillFactory.CreateSkill(id);
         skillItem.Init(skillDataSO, 1);
 
         return skillItem;

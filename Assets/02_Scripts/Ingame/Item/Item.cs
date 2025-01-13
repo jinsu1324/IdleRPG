@@ -16,9 +16,4 @@ public abstract class Item
     /// 아이템 갯수 추가
     /// </summary>
     public void AddCount() => Count++;
-
-    /// <summary>
-    /// 아이템 사용
-    /// </summary>
-    public abstract void UseItem();
 }

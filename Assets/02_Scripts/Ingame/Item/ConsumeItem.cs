@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class ConsumeItem : Item
 {
-    public override void UseItem()
-    {
-        throw new System.NotImplementedException();
-    }
+    
 }
