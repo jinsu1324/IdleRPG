@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillAnger : SkillItem, IActiveSkill
+public class Skill_Egg : SkillItem, IActiveSkill
 {
     public float CurrentTime { get; set; }
     public float Delay { get; set; }
@@ -24,6 +24,6 @@ public class SkillAnger : SkillItem, IActiveSkill
 
     public void ExecuteSkill()
     {
-        Debug.Log("SkillAnger!!");
+        Debug.Log("SkillThunder!!");
     }
 }
