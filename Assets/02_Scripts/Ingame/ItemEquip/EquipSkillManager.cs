@@ -9,22 +9,14 @@ using UnityEngine;
 /// </summary>
 public class EquipSkillManager
 {
-    public static event Action<Item> OnEquipSkillChanged; // 장착스킬 바뀌었을때 이벤트
+    public static event Action<Item> OnEquipSkillChanged;   // 장착스킬 바뀌었을때 이벤트
+    public static event Action OnSkillSwapStarted;          // 장착스킬교체 시작할 때 이벤트
+    public static event Action OnSkillSwapFinished;         // 장착스킬교체 끝났을 때 이벤트
 
-    private static Item[] _equipSkillArr;           // 장착한 스킬 배열
-    private static int _maxCount = 3;               // 스킬 장착 최대 갯수
+    private static Item[] _equipSkillArr;                   // 장착한 스킬 배열
+    private static int _maxCount = 3;                       // 스킬 장착 최대 갯수
 
-
-
-    public static event Action OnEquipSwapStarted;  // 장착스킬 교체를 시작할 때 이벤트
-    public static event Action OnEquipSwapFinished; // 장착스킬 교체가 끝났을 때 이벤트
-    private static Item _swapTargetSkill;          // 교체할 목표 스킬
-
-
-
-
-
-
+    private static Item _swapTargetItem;                    // 스왑 타겟 아이템
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -46,8 +38,8 @@ public class EquipSkillManager
         // 이미 최대로 장착했으면 교체시작
         if (IsEquipMax())
         {
-            _swapTargetSkill = item;
-            //OnEquipSwapStarted?.Invoke();
+            _swapTargetItem = item;
+            OnSkillSwapStarted?.Invoke(); // 스왑 시작 알림
 
             return;
         }
@@ -61,8 +53,6 @@ public class EquipSkillManager
 
         // 장착스킬 바뀌었을때 이벤트 노티
         OnEquipSkillChanged?.Invoke(item);
-
-        Debug.Log($"장착된 스킬 : {slotIndex} 번째슬롯 - {item.Name}");
     }
 
     /// <summary>
@@ -83,40 +73,17 @@ public class EquipSkillManager
         // 장착스킬 바뀌었을때 이벤트 노티
         OnEquipSkillChanged?.Invoke(item);
     }
-    
-
-
-
-
-
-
-
 
     /// <summary>
     /// 스킬 교체
     /// </summary>
-    public static void Swap(int slotIndex)
+    public static void Swap(Item equipSlotItem)
     {
-        // 기존 스킬 장착 해제
-        Item oldSkill = GetEquipSkill(slotIndex);
-        UnEquip(oldSkill);
+        UnEquip(equipSlotItem); // 장착슬롯꺼 먼저 해제
+        Equip(_swapTargetItem); // 새로운 아이템 장착
 
-        // 새로운 스킬 장착
-        Equip(_swapTargetSkill, slotIndex);
-        _swapTargetSkill = null;
-
-        //OnEquipSwapFinished?.Invoke();
-        //OnEquipSkillChanged?.Invoke();
+        OnSkillSwapFinished?.Invoke();
     }
-
-
-
-
-
-
-
-
-
 
     /// <summary>
     /// 장착한 아이템인지?

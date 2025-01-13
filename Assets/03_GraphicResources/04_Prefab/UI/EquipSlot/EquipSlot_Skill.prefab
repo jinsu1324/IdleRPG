@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3582436354843894815}
   - component: {fileID: 6699396239296141643}
   m_Layer: 5
-  m_Name: DetailButton
+  m_Name: ItemDetailButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,8 +422,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6489777719594154099}
   - component: {fileID: 408007080696113643}
-  - component: {fileID: 2609294972816884705}
   - component: {fileID: 1863405876361504290}
+  - component: {fileID: 2609294972816884705}
   m_Layer: 5
   m_Name: EquipSlot_Skill
   m_TagString: Untagged
@@ -446,9 +446,9 @@ RectTransform:
   - {fileID: 2632695672898601023}
   - {fileID: 7223963184290709989}
   - {fileID: 8293669080950584650}
-  - {fileID: 2213047058824042203}
-  - {fileID: 3195294600669387859}
   - {fileID: 3829501977737691219}
+  - {fileID: 3195294600669387859}
+  - {fileID: 2213047058824042203}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -475,18 +475,9 @@ MonoBehaviour:
   _levelText: {fileID: 7803419535702486155}
   _slotIndex: 0
   _reddotComponent: {fileID: 1863405876361504290}
---- !u!225 &2609294972816884705
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824038181201768155}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  _itemDetailButton: {fileID: 6699396239296141643}
+  _swapButton: {fileID: 5930339618784112195}
+  _swapGuideArrow: {fileID: 6094830079336725644}
 --- !u!114 &1863405876361504290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +491,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reddot: {fileID: 4126735257844143755}
+--- !u!225 &2609294972816884705
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824038181201768155}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2385652205656902384
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -881,7 +884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2213047058824042203}
   m_Layer: 5
-  m_Name: SwapGuide
+  m_Name: SwapGuideArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,7 +923,7 @@ GameObject:
   - component: {fileID: 8303142783089106790}
   - component: {fileID: 6919226322169430936}
   m_Layer: 5
-  m_Name: Arrow
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

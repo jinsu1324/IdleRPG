@@ -22,21 +22,11 @@ public abstract class ItemDetailUI : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _gradeText;    // 등급 텍스트
     [SerializeField] protected TextMeshProUGUI _countText;    // 갯수 텍스트
     [SerializeField] protected TextMeshProUGUI _descText;     // 상세설명 텍스트
-
-    /// <summary>
-    /// OnEnable
-    /// </summary>
-    protected abstract void OnEnable();
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    protected abstract void OnDisable();
-
+    
     /// <summary>
     /// 보여주기
     /// </summary>
-    public virtual void Show(Item item)
+    public void Show(Item item)
     {
         CurrentItem = item;
         UpdateUI(CurrentItem);
@@ -46,7 +36,16 @@ public abstract class ItemDetailUI : MonoBehaviour
     /// <summary>
     /// 감추기
     /// </summary>
-    public virtual void Hide(Item item = null)
+    public void Hide(Item item = null)
+    {
+        CurrentItem = null;
+        gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 감추기 (오버로딩용)
+    /// </summary>
+    public void Hide()
     {
         CurrentItem = null;
         gameObject.SetActive(false);

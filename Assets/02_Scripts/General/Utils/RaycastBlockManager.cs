@@ -22,8 +22,8 @@ public class RaycastBlockManager : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        EquipSkillManager.OnEquipSwapStarted += SetRaycastEnable_TargetsOnly;   // 장착스킬 교체 시작되었을 때, 타겟만 레이캐스트 가능하게 셋팅
-        EquipSkillManager.OnEquipSwapFinished += ResetRaycast; // 장착스킬 교체 끝났을 때, 레이캐스트 리셋
+        EquipSkillManager.OnSkillSwapStarted += SetRaycastEnable_TargetsOnly; // 장착스킬교체 시작할 때, 타겟만 레이캐스트 가능하게
+        EquipSkillManager.OnSkillSwapFinished += ResetRaycast; // 장착스킬교체 끝났을 때, 레이캐스트 리셋
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public class RaycastBlockManager : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        EquipSkillManager.OnEquipSwapStarted -= SetRaycastEnable_TargetsOnly;
-        EquipSkillManager.OnEquipSwapFinished -= ResetRaycast;
+        EquipSkillManager.OnSkillSwapStarted -= SetRaycastEnable_TargetsOnly;
+        EquipSkillManager.OnSkillSwapFinished -= ResetRaycast;
     }
 
     /// <summary>

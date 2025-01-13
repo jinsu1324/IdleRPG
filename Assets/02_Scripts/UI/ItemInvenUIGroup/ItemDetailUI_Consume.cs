@@ -12,19 +12,4 @@ public class ItemDetailUI_Consume : ItemDetailUI
     [Title("나가기 버튼", bold: false)]
     [SerializeField] private Button _exitButton;    // 나가기 버튼
 
-    /// <summary>
-    /// OnEnable
-    /// </summary>
-    protected override void OnEnable()
-    {
-
-    }
-
-    /// <summary>
-    /// OnDisable
-    /// </summary>
-    protected override void OnDisable()
-    {
-
-    }
 }

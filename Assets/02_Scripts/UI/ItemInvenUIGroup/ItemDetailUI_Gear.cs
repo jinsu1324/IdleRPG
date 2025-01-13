@@ -28,7 +28,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// <summary>
     /// OnEnable
     /// </summary>
-    protected override void OnEnable()
+    private void OnEnable()
     {
         EquipGearManager.OnEquipGear += UpdateUI; // 장비 장착할때 -> 장비아이템 상세정보 UI 업데이트
         EquipGearManager.OnUnEquipGear += UpdateUI; // 장비 해제할때 -> 장비아이템 상세정보 UI 업데이트
@@ -42,7 +42,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// <summary>
     /// OnDisable
     /// </summary>
-    protected override void OnDisable()
+    private void OnDisable()
     {
         EquipGearManager.OnEquipGear -= UpdateUI;
         EquipGearManager.OnUnEquipGear -= UpdateUI;

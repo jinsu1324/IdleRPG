@@ -29,18 +29,18 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// <summary>
     /// OnEnable
     /// </summary>
-    protected override void OnEnable()
+    private void OnEnable()
     {
         _equipButton.onClick.AddListener(OnClick_EquipButton);      // 장착버튼 핸들러 등록
         _unEquipButton.onClick.AddListener(OnClick_UnEquipButton);  // 장착해제버튼 핸들러 등록
         _enhanceButton.onClick.AddListener(OnClick_EnhanceButton);  // 강화버튼 핸들러 등록
-        _exitButton.onClick.AddListener(() => Hide());                      // 나가기 버튼 핸들러 등록
+        _exitButton.onClick.AddListener(() => Hide());              // 나가기 버튼 핸들러 등록
     }
 
     /// <summary>
     /// OnDisable
     /// </summary>
-    protected override void OnDisable()
+    private void OnDisable()
     {
         _equipButton.onClick.RemoveAllListeners();
         _unEquipButton.onClick.RemoveAllListeners();
@@ -104,6 +104,6 @@ public class ItemDetailUI_Skill : ItemDetailUI
         if (CurrentItem == null)
             return;
 
-        // Todo
+        ItemEnhanceManager.Enhance(CurrentItem);
     }
 }

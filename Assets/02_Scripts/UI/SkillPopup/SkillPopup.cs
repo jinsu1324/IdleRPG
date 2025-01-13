@@ -18,7 +18,10 @@ public class SkillPopup : BottomTabPopupBase
     private void OnEnable()
     {
         ItemSlot.OnSlotSelected += _itemDetailUI_Skill.Show; // 아이템 슬롯 선택되었을 때 -> 스킬 아이템 상세정보UI 열기
+        EquipSlot_Skill.OnClickItemDetailButton += _itemDetailUI_Skill.Show; // 스킬장착슬롯 아이템 디테일버튼 눌렀을때 -> 스킬 아이템 상세정보UI 열기
         EquipSkillManager.OnEquipSkillChanged += _itemDetailUI_Skill.Hide;  // 장착스킬 바뀌었을 때 -> 스킬 아이템 상세정보UI 닫기
+        ItemEnhanceManager.OnItemEnhance += _itemDetailUI_Skill.Hide;  // 아이템 강화할때 -> 스킬 아이템 상세정보UI 닫기
+        EquipSkillManager.OnSkillSwapStarted += _itemDetailUI_Skill.Hide; // 장착스킬교체 시작할 때 -> 스킬 아이템 상세정보UI 닫기
     }
 
     /// <summary>
@@ -27,7 +30,10 @@ public class SkillPopup : BottomTabPopupBase
     private void OnDisable()
     {
         ItemSlot.OnSlotSelected -= _itemDetailUI_Skill.Show;
+        EquipSlot_Skill.OnClickItemDetailButton -= _itemDetailUI_Skill.Show;
         EquipSkillManager.OnEquipSkillChanged -= _itemDetailUI_Skill.Hide;
+        ItemEnhanceManager.OnItemEnhance -= _itemDetailUI_Skill.Hide;
+        EquipSkillManager.OnSkillSwapStarted -= _itemDetailUI_Skill.Hide;
     }
 
     /// <summary>

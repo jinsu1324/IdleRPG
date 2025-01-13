@@ -130,4 +130,20 @@ public class ItemInven
         else
             return false;
     }
+
+    /// <summary>
+    /// 이 아이템이 강화가능한지?
+    /// </summary>
+    public static bool CanEnhanceable_ThisItem(Item item)
+    {
+        Item existItem = HasItemInInven(item);
+
+        if (existItem == null)
+            return false;
+
+        if (existItem is IEnhanceableItem enhanceableItem)
+            return enhanceableItem.CanEnhance(); 
+
+        return false;
+    }
 }
