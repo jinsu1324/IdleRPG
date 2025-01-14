@@ -4,6 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 에너미 코어
+/// </summary>
 public class Enemy : ObjectPoolObj
 {
     private EnemyID _enemyID;   // ID

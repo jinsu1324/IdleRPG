@@ -15,8 +15,7 @@ public class AttackComponent_Player : AttackComponent
     /// </summary>
     private void OnEnable()
     {
-        PlayerStats.OnPlayerStatChanged += Update_AttackPower;   // 플레이어스탯 바뀔때 -> 공격력 업데이트
-        PlayerStats.OnPlayerStatChanged += Update_AttackSpeed;   // 플레이어스탯 바뀔때 -> 공격속도 업데이트
+        PlayerStats.OnPlayerStatChanged += Update_AttackGroup;   // 플레이어스탯 바뀔때 -> 공격력 관련 수치들 업데이트
     }
 
     /// <summary>
@@ -24,22 +23,19 @@ public class AttackComponent_Player : AttackComponent
     /// </summary>
     private void OnDisable()
     {
-        PlayerStats.OnPlayerStatChanged -= Update_AttackPower;
-        PlayerStats.OnPlayerStatChanged -= Update_AttackSpeed;
+        PlayerStats.OnPlayerStatChanged -= Update_AttackGroup;
     }
 
-
+    /// <summary>
+    /// 초기화
+    /// </summary>
     public override void Init(int attackPower, int attackSpeed)
     {
         base.Init(attackPower, attackSpeed);
 
-        _criticalRate = ((float)PlayerStats.GetStatValue(StatType.CriticalRate) / 100.0f);
-        _criticalMultiple = ((float)PlayerStats.GetStatValue(StatType.CriticalMultiple) / 100.0f);
+        _criticalRate = (float)PlayerStats.GetStatValue(StatType.CriticalRate) / 100.0f;
+        _criticalMultiple = (float)PlayerStats.GetStatValue(StatType.CriticalMultiple) / 100.0f;
     }
-
-
-
-
 
     /// <summary>
     /// Update
@@ -55,8 +51,7 @@ public class AttackComponent_Player : AttackComponent
     /// </summary>
     protected override void Attack()
     {
-        int finalDamage = CalculateDamage();
-        SpawnProjectile(finalDamage);  // 프로젝타일 생성
+        SpawnProjectile(CalculateFinalDamage());  // 프로젝타일 생성
     }
 
     /// <summary>
@@ -69,26 +64,21 @@ public class AttackComponent_Player : AttackComponent
     }
 
     /// <summary>
-    /// 공격력 변경
+    /// 공격력 관련 수치들 업데이트
     /// </summary>
-    public void Update_AttackPower(PlayerStatArgs args)
+    public void Update_AttackGroup(PlayerStatArgs args)
     {
         _attackPower = args.AttackPower;
-    }
-
-    /// <summary>
-    /// 공격속도 변경
-    /// </summary>
-    public void Update_AttackSpeed(PlayerStatArgs args)
-    {
         _attackSpeed = args.AttackSpeed;
         _attackCooldown = 1f / _attackSpeed;
+        _criticalRate = (float)args.CriticalRate / 100.0f;
+        _criticalMultiple = (float)args.CriticalMultiple / 100.0f;
     }
 
     /// <summary>
     /// 치명타를 계산하여 최종 데미지를 반환
     /// </summary>
-    protected int CalculateDamage()
+    protected int CalculateFinalDamage()
     {
         bool isCritical = Random.value <= _criticalRate;    // 치명타 여부 결정
 
