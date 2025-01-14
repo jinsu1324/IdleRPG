@@ -18,86 +18,86 @@ MonoBehaviour:
   Grade: Legendary
   Desc: "\uC804\uC124\uC801\uC778 \uB9C8\uBC95\uC0AC\uC758 \uC2A4\uD0DC\uD504\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 2d9552b4069e66f45895ea58c4856495, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 400
-    - AbilityType: AttackSpeed
-      AbilityValue: 1
-    - AbilityType: CriticalRate
-      AbilityValue: 15
+    AttributeList:
+    - Type: AttackPower
+      Value: 400
+    - Type: AttackSpeed
+      Value: 1
+    - Type: CriticalRate
+      Value: 15
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 410
-    - AbilityType: AttackSpeed
-      AbilityValue: 2
-    - AbilityType: CriticalRate
-      AbilityValue: 16
+    AttributeList:
+    - Type: AttackPower
+      Value: 410
+    - Type: AttackSpeed
+      Value: 2
+    - Type: CriticalRate
+      Value: 16
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 420
-    - AbilityType: AttackSpeed
-      AbilityValue: 3
-    - AbilityType: CriticalRate
-      AbilityValue: 17
+    AttributeList:
+    - Type: AttackPower
+      Value: 420
+    - Type: AttackSpeed
+      Value: 3
+    - Type: CriticalRate
+      Value: 17
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 430
-    - AbilityType: AttackSpeed
-      AbilityValue: 4
-    - AbilityType: CriticalRate
-      AbilityValue: 18
+    AttributeList:
+    - Type: AttackPower
+      Value: 430
+    - Type: AttackSpeed
+      Value: 4
+    - Type: CriticalRate
+      Value: 18
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 440
-    - AbilityType: AttackSpeed
-      AbilityValue: 5
-    - AbilityType: CriticalRate
-      AbilityValue: 19
+    AttributeList:
+    - Type: AttackPower
+      Value: 440
+    - Type: AttackSpeed
+      Value: 5
+    - Type: CriticalRate
+      Value: 19
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 450
-    - AbilityType: AttackSpeed
-      AbilityValue: 6
-    - AbilityType: CriticalRate
-      AbilityValue: 20
+    AttributeList:
+    - Type: AttackPower
+      Value: 450
+    - Type: AttackSpeed
+      Value: 6
+    - Type: CriticalRate
+      Value: 20
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 460
-    - AbilityType: AttackSpeed
-      AbilityValue: 7
-    - AbilityType: CriticalRate
-      AbilityValue: 21
+    AttributeList:
+    - Type: AttackPower
+      Value: 460
+    - Type: AttackSpeed
+      Value: 7
+    - Type: CriticalRate
+      Value: 21
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 470
-    - AbilityType: AttackSpeed
-      AbilityValue: 8
-    - AbilityType: CriticalRate
-      AbilityValue: 22
+    AttributeList:
+    - Type: AttackPower
+      Value: 470
+    - Type: AttackSpeed
+      Value: 8
+    - Type: CriticalRate
+      Value: 22
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 480
-    - AbilityType: AttackSpeed
-      AbilityValue: 9
-    - AbilityType: CriticalRate
-      AbilityValue: 23
+    AttributeList:
+    - Type: AttackPower
+      Value: 480
+    - Type: AttackSpeed
+      Value: 9
+    - Type: CriticalRate
+      Value: 23
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 490
-    - AbilityType: AttackSpeed
-      AbilityValue: 10
-    - AbilityType: CriticalRate
-      AbilityValue: 24
+    AttributeList:
+    - Type: AttackPower
+      Value: 490
+    - Type: AttackSpeed
+      Value: 10
+    - Type: CriticalRate
+      Value: 24
   AttackAnimType: Magic
   Prefab: {fileID: 252690595569584609, guid: 4b8bc9b9da4cfc341a06c2a917cea2e8, type: 3}

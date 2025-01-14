@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class ItemDetailUI_Skill : ItemDetailUI
 {
     [Title("스킬아이템 상세정보 UI", bold: false)]
+    [SerializeField] protected TextMeshProUGUI _descText;               // 상세설명 텍스트
     [SerializeField] private TextMeshProUGUI _levelText;                // 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _enhanceableCountText;     // 강화 가능한 아이템 갯수 텍스트
     [SerializeField] private Slider _countSlider;                       // 갯수 표시 슬라이더
@@ -55,6 +56,10 @@ public class ItemDetailUI_Skill : ItemDetailUI
     {
         // 기본정보 업데이트
         base.UpdateUI(item);
+
+        // 상세설명 업데이트
+        if (item is SkillItem skillItem)
+            _descText.text = skillItem.GetDynamicDesc();
 
         // 강화관련정보 업데이트
         if (item is IEnhanceableItem enhanceableItem)

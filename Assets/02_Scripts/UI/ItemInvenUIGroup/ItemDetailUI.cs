@@ -21,7 +21,6 @@ public abstract class ItemDetailUI : MonoBehaviour
     [SerializeField] protected TextMeshProUGUI _nameText;     // 이름 텍스트
     [SerializeField] protected TextMeshProUGUI _gradeText;    // 등급 텍스트
     [SerializeField] protected TextMeshProUGUI _countText;    // 갯수 텍스트
-    [SerializeField] protected TextMeshProUGUI _descText;     // 상세설명 텍스트
     
     /// <summary>
     /// 보여주기
@@ -62,6 +61,5 @@ public abstract class ItemDetailUI : MonoBehaviour
         _nameText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
         _gradeText.text = $"{item.Grade}";
         _gradeText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
-        _descText.text = item.Desc;
     }
 }

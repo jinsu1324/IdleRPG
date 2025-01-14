@@ -75,16 +75,16 @@ public class Parsing_GearData : Parsing_Base
                 gearDataSO.Grade = row[3];
                 gearDataSO.Desc = row[4];
                 gearDataSO.AttackAnimType = row[5];
-                gearDataSO.ItemLevelInfoList = new List<ItemLevelInfo>();
+                gearDataSO.LevelAttributesList = new List<LevelAttributes>();
                 
                 gearDataSODict[id] = gearDataSO;
             }
 
             // 아이템 레벨별 정보
-            ItemLevelInfo itemLevelInfo = new ItemLevelInfo()
+            LevelAttributes itemLevelInfo = new LevelAttributes()
             {
                 Level = row[6],
-                ItemAbilityList = new List<ItemAbility>()
+                AttributeList = new List<Attribute>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
@@ -92,17 +92,17 @@ public class Parsing_GearData : Parsing_Base
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    ItemAbility itemAbility = new ItemAbility()
+                    Attribute itemAbility = new Attribute()
                     {
-                        AbilityType = row[k],
-                        AbilityValue = row[k + 1]
+                        Type = row[k],
+                        Value = row[k + 1]
                     };
-                    itemLevelInfo.ItemAbilityList.Add(itemAbility);
+                    itemLevelInfo.AttributeList.Add(itemAbility);
                 }
             }
 
             // gearData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            gearDataSO.ItemLevelInfoList.Add(itemLevelInfo);
+            gearDataSO.LevelAttributesList.Add(itemLevelInfo);
         }
 
         // 스크립터블 오브젝트로 저장
@@ -144,7 +144,7 @@ public class Parsing_GearData : Parsing_Base
             gearDataSO.Grade = data.Grade;
             gearDataSO.Desc = data.Desc;
             gearDataSO.AttackAnimType = data.AttackAnimType;
-            gearDataSO.ItemLevelInfoList = data.ItemLevelInfoList;
+            gearDataSO.LevelAttributesList = data.LevelAttributesList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
             if (AssetDatabase.Contains(gearDataSO) == false) 

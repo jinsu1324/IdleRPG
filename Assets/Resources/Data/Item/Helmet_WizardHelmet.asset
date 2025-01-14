@@ -18,66 +18,66 @@ MonoBehaviour:
   Grade: Legendary
   Desc: "\uB9C8\uBC95\uC0AC\uC758 \uBAA8\uC790\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 3742245748bb6244e84bd3ef3cf490dd, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 400
-    - AbilityType: CriticalMultiple
-      AbilityValue: 10
+    AttributeList:
+    - Type: MaxHp
+      Value: 400
+    - Type: CriticalMultiple
+      Value: 10
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 410
-    - AbilityType: CriticalMultiple
-      AbilityValue: 11
+    AttributeList:
+    - Type: MaxHp
+      Value: 410
+    - Type: CriticalMultiple
+      Value: 11
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 420
-    - AbilityType: CriticalMultiple
-      AbilityValue: 12
+    AttributeList:
+    - Type: MaxHp
+      Value: 420
+    - Type: CriticalMultiple
+      Value: 12
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 430
-    - AbilityType: CriticalMultiple
-      AbilityValue: 13
+    AttributeList:
+    - Type: MaxHp
+      Value: 430
+    - Type: CriticalMultiple
+      Value: 13
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 440
-    - AbilityType: CriticalMultiple
-      AbilityValue: 14
+    AttributeList:
+    - Type: MaxHp
+      Value: 440
+    - Type: CriticalMultiple
+      Value: 14
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 450
-    - AbilityType: CriticalMultiple
-      AbilityValue: 15
+    AttributeList:
+    - Type: MaxHp
+      Value: 450
+    - Type: CriticalMultiple
+      Value: 15
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 460
-    - AbilityType: CriticalMultiple
-      AbilityValue: 16
+    AttributeList:
+    - Type: MaxHp
+      Value: 460
+    - Type: CriticalMultiple
+      Value: 16
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 470
-    - AbilityType: CriticalMultiple
-      AbilityValue: 17
+    AttributeList:
+    - Type: MaxHp
+      Value: 470
+    - Type: CriticalMultiple
+      Value: 17
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 480
-    - AbilityType: CriticalMultiple
-      AbilityValue: 18
+    AttributeList:
+    - Type: MaxHp
+      Value: 480
+    - Type: CriticalMultiple
+      Value: 18
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 490
-    - AbilityType: CriticalMultiple
-      AbilityValue: 19
+    AttributeList:
+    - Type: MaxHp
+      Value: 490
+    - Type: CriticalMultiple
+      Value: 19
   AttackAnimType: 
   Prefab: {fileID: 3479573790953390025, guid: 7aa049e51f9501048a30b61f2d018354, type: 3}

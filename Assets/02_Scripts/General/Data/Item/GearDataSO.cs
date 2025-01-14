@@ -19,36 +19,36 @@ public enum AttackAnimType
 [System.Serializable]
 public class GearDataSO : ItemDataSO
 {
-    public string AttackAnimType;
-    public GameObject Prefab;
+    public string AttackAnimType;   // 공격 애니메이션 타입
+    public GameObject Prefab;       // 아이템 프리팹
 
     /// <summary>
-    /// 원하는 레벨에 맞는 어빌리티들 딕셔너리로 가져오기
+    /// 레벨에 맞는 속성들을 딕셔너리로 가져오기
     /// </summary>
-    public Dictionary<StatType, int> GetAbilityDict_ByLevel(int level)
+    public Dictionary<StatType, int> GetAttributeDict_ByLevel(int level)
     {
         // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-        Dictionary<StatType, int> abilityDict = new Dictionary<StatType, int>();
+        Dictionary<StatType, int> attributeDict = new Dictionary<StatType, int>();
 
-        // level에 맞는 itemLevelInfo 찾기
-        ItemLevelInfo itemLevelInfo = ItemLevelInfoList.Find(x => x.Level == level.ToString());
+        // level에 맞는 levelAttributes 찾기
+        LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
 
         // 없으면 그냥 리턴
-        if (itemLevelInfo == null)
+        if (levelAttributes == null)
         {
-            Debug.Log($"{level}에 해당하는 ItemLevelInfo를 찾지 못했습니다.");
-            return abilityDict;
+            Debug.Log($"{level}이 맞는 levelAttributes를 찾지 못했습니다.");
+            return attributeDict;
         }
 
-        // 해당 레벨의 itemAbility들을 딕셔너리에 넣기
-        foreach (ItemAbility itemAbility in itemLevelInfo.ItemAbilityList)
+        // 해당 레벨에 존재하는 속성(attribute)들을 딕셔너리에 넣고 반환
+        foreach (Attribute attribute in levelAttributes.AttributeList)
         {
-            StatType statType = (StatType)Enum.Parse(typeof(StatType), itemAbility.AbilityType);
-            int value = int.Parse(itemAbility.AbilityValue);
+            StatType statType = (StatType)Enum.Parse(typeof(StatType), attribute.Type);
+            int value = int.Parse(attribute.Value);
 
-            abilityDict.Add(statType, value);
+            attributeDict.Add(statType, value);
         }
 
-        return abilityDict;
+        return attributeDict;
     }
 }

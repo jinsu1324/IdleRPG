@@ -36,25 +36,25 @@ public class ItemDataSO : ScriptableObject
     public string Grade;
     public string Desc;
     public Sprite Icon;
-    public List<ItemLevelInfo> ItemLevelInfoList;
+    public List<LevelAttributes> LevelAttributesList;
 }
 
 /// <summary>
-/// 아이템 레벨과 그에맞는 정보들(어빌리티 등)
+/// 레벨별 속성들
 /// </summary>
 [System.Serializable]
-public class ItemLevelInfo
+public class LevelAttributes
 {
-    public string Level;                        // 레벨
-    public List<ItemAbility> ItemAbilityList;   // 가지고 있는 어빌리티들 리스트
+    public string Level;                    // 레벨
+    public List<Attribute> AttributeList;   // 가지고 있는 속성들 리스트
 }
 
 /// <summary>
-/// 아이템 어빌리티
+/// 상세 속성
 /// </summary>
 [System.Serializable]
-public class ItemAbility
+public class Attribute
 {
-    public string AbilityType;
-    public string AbilityValue;
+    public string Type;
+    public string Value;
 }

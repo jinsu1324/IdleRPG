@@ -69,16 +69,16 @@ public class Parsing_SkillData : Parsing_Base
                 skillDataSO.Name = row[2];
                 skillDataSO.Grade = row[3];
                 skillDataSO.Desc = row[4];
-                skillDataSO.ItemLevelInfoList = new List<ItemLevelInfo>();
+                skillDataSO.LevelAttributesList = new List<LevelAttributes>();
 
                 gearDataSODict[id] = skillDataSO;
             }
 
             // 아이템 레벨별 정보
-            ItemLevelInfo itemLevelInfo = new ItemLevelInfo()
+            LevelAttributes itemLevelInfo = new LevelAttributes()
             {
                 Level = row[5],
-                ItemAbilityList = new List<ItemAbility>()
+                AttributeList = new List<Attribute>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
@@ -86,17 +86,17 @@ public class Parsing_SkillData : Parsing_Base
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    ItemAbility itemAbility = new ItemAbility()
+                    Attribute itemAbility = new Attribute()
                     {
-                        AbilityType = row[k],
-                        AbilityValue = row[k + 1]
+                        Type = row[k],
+                        Value = row[k + 1]
                     };
-                    itemLevelInfo.ItemAbilityList.Add(itemAbility);
+                    itemLevelInfo.AttributeList.Add(itemAbility);
                 }
             }
 
             // gearData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            skillDataSO.ItemLevelInfoList.Add(itemLevelInfo);
+            skillDataSO.LevelAttributesList.Add(itemLevelInfo);
         }
 
         // 스크립터블 오브젝트로 저장
@@ -137,7 +137,7 @@ public class Parsing_SkillData : Parsing_Base
             skillDataSO.Name = data.Name;
             skillDataSO.Grade = data.Grade;
             skillDataSO.Desc = data.Desc;
-            skillDataSO.ItemLevelInfoList = data.ItemLevelInfoList;
+            skillDataSO.LevelAttributesList = data.LevelAttributesList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
             if (AssetDatabase.Contains(skillDataSO) == false)

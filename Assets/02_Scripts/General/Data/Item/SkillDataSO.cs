@@ -4,49 +4,67 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 스킬 어빌리티 타입
+/// 스킬에 있는 속성 타입
 /// </summary>
-public enum SkillAbilityType
+public enum SkillAttributeType
 {
     AttackPercentage,
     Delay,
-    AddAttackSpeed,
     Range,
+    SplashRadius,
+    AddAttackSpeed,
+    Duration,
+    ProjectileCount
 }
 
 /// <summary>
-/// 스킬 아이템 스크립터블 오브젝트
+/// 스킬 스크립터블 오브젝트 (+스킬아이템)
 /// </summary>
 [System.Serializable]
 public class SkillDataSO : ItemDataSO
 {
     /// <summary>
-    /// 원하는 레벨에 맞는 어빌리티들 딕셔너리로 가져오기
+    /// 레벨에 맞는 속성들을 딕셔너리로 가져오기
     /// </summary>
-    public Dictionary<SkillAbilityType, int> GetAbilityDict_ByLevel(int level)
+    public Dictionary<SkillAttributeType, int> GetAttributeDict_ByLevel(int level)
     {
         // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-        Dictionary<SkillAbilityType, int> abilityDict = new Dictionary<SkillAbilityType, int>();
+        Dictionary<SkillAttributeType, int> attributeDict = new Dictionary<SkillAttributeType, int>();
 
-        // level에 맞는 itemLevelInfo 찾기
-        ItemLevelInfo itemLevelInfo = ItemLevelInfoList.Find(x => x.Level == level.ToString());
+        // level에 맞는 levelAttributes 찾기
+        LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
 
         // 없으면 그냥 리턴
-        if (itemLevelInfo == null)
+        if (levelAttributes == null)
         {
-            Debug.Log($"{level}에 해당하는 ItemLevelInfo를 찾지 못했습니다.");
-            return abilityDict;
+            Debug.Log($"{level}이 맞는 levelAttributes를 찾지 못했습니다.");
+            return attributeDict;
         }
 
-        // 해당 레벨의 itemAbility들을 딕셔너리에 넣기
-        foreach (ItemAbility itemAbility in itemLevelInfo.ItemAbilityList)
+        // 해당 레벨에 존재하는 속성(attribute)들을 딕셔너리에 넣고 반환
+        foreach (Attribute attribute in levelAttributes.AttributeList)
         {
-            SkillAbilityType statType = (SkillAbilityType)Enum.Parse(typeof(SkillAbilityType), itemAbility.AbilityType);
-            int value = int.Parse(itemAbility.AbilityValue);
+            SkillAttributeType statType = (SkillAttributeType)Enum.Parse(typeof(SkillAttributeType), attribute.Type);
+            int value = int.Parse(attribute.Value);
 
-            abilityDict.Add(statType, value);
+            attributeDict.Add(statType, value);
         }
 
-        return abilityDict;
+        return attributeDict;
+    }
+
+    /// <summary>
+    /// 특정 속성의 값을 반환
+    /// </summary>
+    public string GetAttributeValue(SkillAttributeType skillAttributeType, int level)
+    {
+        // level에 맞는 levelAttributes 찾기
+        LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
+
+        // 속성중에서 타입이름이 같은 속성을 찾기
+        Attribute attribute = levelAttributes.AttributeList.Find(x => x.Type == skillAttributeType.ToString());
+
+        // 그 속성의 값을 반환
+        return attribute.Value;
     }
 }

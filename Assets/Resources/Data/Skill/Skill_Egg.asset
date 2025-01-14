@@ -16,67 +16,107 @@ MonoBehaviour:
   ItemType: Skill
   Name: "\uB2EC\uAC40\uD22C\uCC99"
   Grade: Rare
-  Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 5\uAC1C \uB358\uC838 \uAC01\uAC01
-    \uACF5\uACA9\uB825\uC758 1200% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 {0}\uAC1C \uB358\uC838 \uAC01\uAC01
+    \uACF5\uACA9\uB825\uC758 {1}% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 55556b917e83fc341823b563c982ac54, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1200
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1200
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1300
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1300
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1400
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1400
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1500
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1500
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1600
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1600
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1700
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1700
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1800
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1800
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 1900
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 1900
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 2000
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 2000
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 2100
-    - AbilityType: Delay
-      AbilityValue: 4
+    AttributeList:
+    - Type: Delay
+      Value: 4
+    - Type: AttackPercentage
+      Value: 2100
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 5

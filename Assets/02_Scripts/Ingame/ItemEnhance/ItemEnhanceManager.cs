@@ -33,7 +33,7 @@ public class ItemEnhanceManager
                 if (EquipGearManager.IsEquipped(gearItem))
                 {
                     // 플레이어 스탯 업데이트
-                    PlayerStats.UpdateStatModifier(gearItem.GetAbilityDict(), item);
+                    PlayerStats.UpdateStatModifier(gearItem.GetAttributeDict(), item);
                 }
             }
         }

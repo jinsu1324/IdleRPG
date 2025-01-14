@@ -45,7 +45,7 @@ public class EquipGearManager
 
         // 플레이어 스탯 업데이트
         if (item is GearItem gearItem)
-            PlayerStats.UpdateStatModifier(gearItem.GetAbilityDict(), item);
+            PlayerStats.UpdateStatModifier(gearItem.GetAttributeDict(), item);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class EquipGearManager
 
         // 플레이어에서 스탯 제거
         if (item is GearItem gearItem)
-            PlayerStats.RemoveStatModifier(gearItem.GetAbilityDict(), item);
+            PlayerStats.RemoveStatModifier(gearItem.GetAttributeDict(), item);
 
         // 해제 이벤트 노티
         OnUnEquipGear?.Invoke(item);

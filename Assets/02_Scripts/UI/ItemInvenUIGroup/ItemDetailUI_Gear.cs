@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class ItemDetailUI_Gear : ItemDetailUI
 {
     [Title("장비아이템 정보들", bold: false)]
+    [SerializeField] protected TextMeshProUGUI _descText;               // 상세설명 텍스트
     [SerializeField] private TextMeshProUGUI _levelText;                // 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _enhanceableCountText;     // 강화 가능한 아이템 갯수 텍스트
     [SerializeField] private Slider _countSlider;                       // 갯수 표시 슬라이더
@@ -61,6 +62,9 @@ public class ItemDetailUI_Gear : ItemDetailUI
         // 기본정보 업데이트
         base.UpdateUI(item);
 
+        // 상세설명 업데이트
+        _descText.text = item.Desc;
+
         // 강화관련정보 업데이트
         if (item is IEnhanceableItem enhanceableItem)
         {
@@ -93,7 +97,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
             int index = 0;
 
             // 스탯 Dictionary 순회
-            foreach (var kvp in gearItem.GetAbilityDict())
+            foreach (var kvp in gearItem.GetAttributeDict())
             {
                 StatType statType = kvp.Key;
                 int value = kvp.Value;

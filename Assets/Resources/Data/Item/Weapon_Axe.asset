@@ -18,86 +18,86 @@ MonoBehaviour:
   Grade: Normal
   Desc: "\uBB34\uC11C\uC6B4 \uB3C4\uB07C\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: a0f831080a416a34fb9c80626f6550e0, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 170
-    - AbilityType: AttackSpeed
-      AbilityValue: 1
-    - AbilityType: CriticalRate
-      AbilityValue: 2
+    AttributeList:
+    - Type: AttackPower
+      Value: 170
+    - Type: AttackSpeed
+      Value: 1
+    - Type: CriticalRate
+      Value: 2
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 180
-    - AbilityType: AttackSpeed
-      AbilityValue: 2
-    - AbilityType: CriticalRate
-      AbilityValue: 3
+    AttributeList:
+    - Type: AttackPower
+      Value: 180
+    - Type: AttackSpeed
+      Value: 2
+    - Type: CriticalRate
+      Value: 3
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 190
-    - AbilityType: AttackSpeed
-      AbilityValue: 3
-    - AbilityType: CriticalRate
-      AbilityValue: 4
+    AttributeList:
+    - Type: AttackPower
+      Value: 190
+    - Type: AttackSpeed
+      Value: 3
+    - Type: CriticalRate
+      Value: 4
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 200
-    - AbilityType: AttackSpeed
-      AbilityValue: 4
-    - AbilityType: CriticalRate
-      AbilityValue: 5
+    AttributeList:
+    - Type: AttackPower
+      Value: 200
+    - Type: AttackSpeed
+      Value: 4
+    - Type: CriticalRate
+      Value: 5
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 210
-    - AbilityType: AttackSpeed
-      AbilityValue: 5
-    - AbilityType: CriticalRate
-      AbilityValue: 6
+    AttributeList:
+    - Type: AttackPower
+      Value: 210
+    - Type: AttackSpeed
+      Value: 5
+    - Type: CriticalRate
+      Value: 6
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 220
-    - AbilityType: AttackSpeed
-      AbilityValue: 6
-    - AbilityType: CriticalRate
-      AbilityValue: 7
+    AttributeList:
+    - Type: AttackPower
+      Value: 220
+    - Type: AttackSpeed
+      Value: 6
+    - Type: CriticalRate
+      Value: 7
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 230
-    - AbilityType: AttackSpeed
-      AbilityValue: 7
-    - AbilityType: CriticalRate
-      AbilityValue: 8
+    AttributeList:
+    - Type: AttackPower
+      Value: 230
+    - Type: AttackSpeed
+      Value: 7
+    - Type: CriticalRate
+      Value: 8
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 240
-    - AbilityType: AttackSpeed
-      AbilityValue: 8
-    - AbilityType: CriticalRate
-      AbilityValue: 9
+    AttributeList:
+    - Type: AttackPower
+      Value: 240
+    - Type: AttackSpeed
+      Value: 8
+    - Type: CriticalRate
+      Value: 9
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 250
-    - AbilityType: AttackSpeed
-      AbilityValue: 9
-    - AbilityType: CriticalRate
-      AbilityValue: 10
+    AttributeList:
+    - Type: AttackPower
+      Value: 250
+    - Type: AttackSpeed
+      Value: 9
+    - Type: CriticalRate
+      Value: 10
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: AttackPower
-      AbilityValue: 260
-    - AbilityType: AttackSpeed
-      AbilityValue: 10
-    - AbilityType: CriticalRate
-      AbilityValue: 11
+    AttributeList:
+    - Type: AttackPower
+      Value: 260
+    - Type: AttackSpeed
+      Value: 10
+    - Type: CriticalRate
+      Value: 11
   AttackAnimType: Melee
   Prefab: {fileID: 7084774728181233583, guid: 5120fe3923aca734d9eba8167c7a2b25, type: 3}

@@ -17,86 +17,106 @@ MonoBehaviour:
   Name: "\uBA54\uD14C\uC624"
   Grade: Normal
   Desc: "\uBA54\uD14C\uC624\uB97C \uBB34\uC791\uC704 \uC9C0\uC810\uC5D0 \uB5A8\uC5B4\uB728\uB824
-    \uACF5\uACA9\uB825\uC758 3000%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    \uACF5\uACA9\uB825\uC758 {0}%\uC758 \uBC94\uC704\uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 5fa1f45211f60ec4788d50a585068295, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3000
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3000
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3100
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3100
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3200
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3200
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3300
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3300
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3400
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3400
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3500
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3500
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3600
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3600
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3700
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3700
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3800
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3800
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: AttackPercentage
-      AbilityValue: 3900
-    - AbilityType: Range
-      AbilityValue: 3
-    - AbilityType: Delay
-      AbilityValue: 5
+    AttributeList:
+    - Type: Delay
+      Value: 5
+    - Type: AttackPercentage
+      Value: 3900
+    - Type: Range
+      Value: 3
+    - Type: SplashRadius
+      Value: 3

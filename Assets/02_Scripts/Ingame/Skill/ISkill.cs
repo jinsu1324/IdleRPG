@@ -5,7 +5,6 @@ using UnityEngine;
 public interface ISkill
 {
     float CurrentTime { get; }      // 딜레이 체크할 시간
-    float Delay { get; }            // 딜레이
 
     /// <summary>
     /// 쿨타임 체크

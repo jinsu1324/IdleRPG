@@ -18,66 +18,66 @@ MonoBehaviour:
   Grade: Legendary
   Desc: "\uB300\uB9C8\uBC95\uC0AC\uC758 \uB85C\uBE0C\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 61566d5ebb00d10418d20cb010275231, type: 3}
-  ItemLevelInfoList:
+  LevelAttributesList:
   - Level: 1
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 400
-    - AbilityType: CriticalRate
-      AbilityValue: 10
+    AttributeList:
+    - Type: MaxHp
+      Value: 400
+    - Type: CriticalRate
+      Value: 10
   - Level: 2
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 410
-    - AbilityType: CriticalRate
-      AbilityValue: 11
+    AttributeList:
+    - Type: MaxHp
+      Value: 410
+    - Type: CriticalRate
+      Value: 11
   - Level: 3
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 420
-    - AbilityType: CriticalRate
-      AbilityValue: 12
+    AttributeList:
+    - Type: MaxHp
+      Value: 420
+    - Type: CriticalRate
+      Value: 12
   - Level: 4
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 430
-    - AbilityType: CriticalRate
-      AbilityValue: 13
+    AttributeList:
+    - Type: MaxHp
+      Value: 430
+    - Type: CriticalRate
+      Value: 13
   - Level: 5
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 440
-    - AbilityType: CriticalRate
-      AbilityValue: 14
+    AttributeList:
+    - Type: MaxHp
+      Value: 440
+    - Type: CriticalRate
+      Value: 14
   - Level: 6
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 450
-    - AbilityType: CriticalRate
-      AbilityValue: 15
+    AttributeList:
+    - Type: MaxHp
+      Value: 450
+    - Type: CriticalRate
+      Value: 15
   - Level: 7
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 460
-    - AbilityType: CriticalRate
-      AbilityValue: 16
+    AttributeList:
+    - Type: MaxHp
+      Value: 460
+    - Type: CriticalRate
+      Value: 16
   - Level: 8
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 470
-    - AbilityType: CriticalRate
-      AbilityValue: 17
+    AttributeList:
+    - Type: MaxHp
+      Value: 470
+    - Type: CriticalRate
+      Value: 17
   - Level: 9
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 480
-    - AbilityType: CriticalRate
-      AbilityValue: 18
+    AttributeList:
+    - Type: MaxHp
+      Value: 480
+    - Type: CriticalRate
+      Value: 18
   - Level: 10
-    ItemAbilityList:
-    - AbilityType: MaxHp
-      AbilityValue: 490
-    - AbilityType: CriticalRate
-      AbilityValue: 19
+    AttributeList:
+    - Type: MaxHp
+      Value: 490
+    - Type: CriticalRate
+      Value: 19
   AttackAnimType: 
   Prefab: {fileID: 4966302771244954350, guid: 1d341370199743944b44e645cfb70cec, type: 3}
