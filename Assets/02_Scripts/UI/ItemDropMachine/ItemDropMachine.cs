@@ -95,6 +95,7 @@ public class ItemDropMachine : MonoBehaviour
     private SkillItem MakeSkill(ItemType itemType)
     {
         // 같은 아이템타입의 아이템데이터는 모두 가져오기
+
         List<SkillDataSO> skillDataSOList = DataManager.Instance.GetAllSkillDataSO(itemType);
 
         // 그 아이템데이터들 중에서 하나 랜덤 픽

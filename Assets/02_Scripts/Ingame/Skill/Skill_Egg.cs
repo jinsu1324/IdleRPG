@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class Skill_Egg : SkillItem
 {
-    public float Delay { get; private set; }                                        // 딜레이 (스킬쿨타임)
-    public float AttackPercentage { get; private set; }
-    public float Range { get; private set; }
-    public float ProjectileCount { get; private set; }
-
-
-
-
-
+    public float Delay { get; private set; }                // 딜레이 (스킬쿨타임)
+    public float AttackPercentage { get; private set; }     // 공격 퍼센티지
+    public float Range { get; private set; }                // 사거리
+    public float ProjectileCount { get; private set; }      // 투사체 갯수
 
     /// <summary>
     /// 초기화
@@ -20,7 +15,6 @@ public class Skill_Egg : SkillItem
     public override void Init(SkillDataSO skillDataSO, int level)
     {
         base.Init(skillDataSO, level);
-
         UpdateAttributeValue(skillDataSO, level);
     }
 
@@ -30,7 +24,6 @@ public class Skill_Egg : SkillItem
     public override void ItemLevelUp()
     {
         base.ItemLevelUp();
-
         UpdateAttributeValue(SkillDataSO, Level);
     }
 
@@ -44,8 +37,6 @@ public class Skill_Egg : SkillItem
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
         ProjectileCount = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.ProjectileCount, Level));
     }
-
-
 
     /// <summary>
     /// 쿨타임 계산

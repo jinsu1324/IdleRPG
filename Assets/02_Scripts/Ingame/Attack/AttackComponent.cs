@@ -9,7 +9,7 @@ public struct OnAttackedArgs
     public int AttackSpeed;
 }
 
-public abstract class AttackComponentBase : MonoBehaviour
+public abstract class AttackComponent : MonoBehaviour
 {
     public event Action<OnAttackedArgs> OnAttacked;     // 공격 했을 때 이벤트
 
@@ -20,20 +20,14 @@ public abstract class AttackComponentBase : MonoBehaviour
     protected float _attackCooldown;                    // 공격 쿨타임
     protected float _time;                              // 쿨타임 시간 계산
 
-    protected float _criticalRate;                      // 치명타 확률
-    protected float _criticalMultiple;                  // 치명타 피해 배율
-    protected bool _isCritical;                         // 치명타 공격인지
-
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int attackPower, int attackSpeed, int criticalRate = 0, int criticalMultiple = 0)
+    public virtual void Init(int attackPower, int attackSpeed)
     {
         _attackPower = attackPower;
         _attackSpeed = attackSpeed;
         _attackCooldown = 1f / _attackSpeed;
-        _criticalRate = ((float)criticalRate / 100.0f);
-        _criticalMultiple = ((float)criticalMultiple / 100.0f);
     }
 
     /// <summary>
@@ -60,7 +54,7 @@ public abstract class AttackComponentBase : MonoBehaviour
         OnAttackedArgs args = new OnAttackedArgs() { AttackSpeed = _attackSpeed };
         OnAttacked?.Invoke(args); // 공격 애니메이션 재생
 
-        Invoke("Attack", FrameToSecond(AttackTiming()));  // 공격모션에 타이밍에 맞게 실제 공격
+        Invoke("Attack", FrameToSecond.Convert(AttackTiming()));  // 공격모션에 타이밍에 맞게 실제 공격
     }
 
     /// <summary>
@@ -69,54 +63,10 @@ public abstract class AttackComponentBase : MonoBehaviour
     protected abstract void Attack();
 
     /// <summary>
-    /// 공격력 변경
-    /// </summary>
-    public void ChangeAttackPower(PlayerStatArgs args)
-    {
-        _attackPower = args.AttackPower;
-    }
-
-    /// <summary>
-    /// 공격속도 변경
-    /// </summary>
-    public void ChangeAttackSpeed(PlayerStatArgs args)
-    {
-        _attackSpeed = args.AttackSpeed;
-        _attackCooldown = 1f / _attackSpeed;
-    }
-
-    /// <summary>
-    /// 프레임을 초로 바꿔주는 함수
-    /// </summary>
-    protected float FrameToSecond(float frame)
-    {
-        return frame / 60.0f;
-    }
-
-    /// <summary>
     /// 공격타이밍을 계산해서 반환해주는 함수
     /// </summary>
     protected float AttackTiming()
     {
         return _attackMotionFrame / _attackSpeed;
-    }
-
-    /// <summary>
-    /// 치명타를 계산하여 최종 데미지를 반환
-    /// </summary>
-    protected int CalculateDamage()
-    {
-        bool isCritical = Random.value <= _criticalRate;    // 치명타 여부 결정
-
-        if (isCritical)
-        {
-            _isCritical = true;
-            return (int)(_attackPower * _criticalMultiple); // 치명타 피해 적용
-        }
-        else
-        {
-            _isCritical = false;
-            return _attackPower;
-        }
     }
 }

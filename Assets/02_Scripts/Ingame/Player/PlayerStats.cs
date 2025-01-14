@@ -38,6 +38,7 @@ public class PlayerStats
 {
     public static event Action<PlayerStatArgs> OnPlayerStatChanged; // 플레이어 스탯 변경되었을 때 이벤트
     private static Dictionary<StatType, List<StatModifier>> _statModifierDict; // 스탯별로 StatModifier 리스트를 관리
+    public static int BeforeCombatPower { get; private set; }
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -60,7 +61,7 @@ public class PlayerStats
     public static void UpdateStatModifier(Dictionary<StatType, int> itemStatDict, object source)
     {
         // 이전 전투력 계산
-        int beforeTotalPower = GetAllStatValue();
+        BeforeCombatPower = GetAllStatValue();
 
         // 아이템 스탯들 전부 플레이어 스탯에 추가
         foreach (var kvp in itemStatDict)
@@ -79,7 +80,7 @@ public class PlayerStats
         }
         
         // 스탯변경 이벤트 실행
-        OnPlayerStatChanged?.Invoke(GetCurrentPlayerStatArgs(beforeTotalPower));
+        OnPlayerStatChanged?.Invoke(GetCurrentPlayerStatArgs());
     }
 
     /// <summary>
@@ -96,7 +97,7 @@ public class PlayerStats
     public static void RemoveStatModifier(Dictionary<StatType, int> itemStatDict, object source)
     {
         // 이전 전투력 계산
-        int beforeTotalPower = GetAllStatValue();
+        BeforeCombatPower = GetAllStatValue();
 
         // 해당 아이템(source)의 스탯들을, 플레이어 스탯에서 제거
         foreach (var kvp in itemStatDict)
@@ -107,7 +108,7 @@ public class PlayerStats
         }
         
         // 스탯변경 이벤트 실행
-        OnPlayerStatChanged?.Invoke(GetCurrentPlayerStatArgs(beforeTotalPower));
+        OnPlayerStatChanged?.Invoke(GetCurrentPlayerStatArgs());
     }
 
     /// <summary>
@@ -136,11 +137,11 @@ public class PlayerStats
     /// <summary>
     /// 현재 스탯들 계산해서 PlayerStatArgs 로 리턴
     /// </summary>
-    public static PlayerStatArgs GetCurrentPlayerStatArgs(int beforeTotalPower)
+    public static PlayerStatArgs GetCurrentPlayerStatArgs()
     {
         PlayerStatArgs args = new PlayerStatArgs
         {
-            BeforeTotalPower = beforeTotalPower,
+            BeforeTotalPower = BeforeCombatPower,
             TotalPower = GetAllStatValue(),
             AttackPower = GetStatValue(StatType.AttackPower),
             AttackSpeed = GetStatValue(StatType.AttackSpeed),

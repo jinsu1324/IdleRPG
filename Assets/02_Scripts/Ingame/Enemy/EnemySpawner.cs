@@ -18,7 +18,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        StageManager.OnStageChanged += SpawnEnemies;    // 스테이지 변경될 때, 적들 스폰
+        StageManager.OnStageChanged += SpawnEnemies;    // 스테이지 변경될 때 -> 적들 스폰
     }
 
     /// <summary>

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackComponentCollision : AttackComponentBase
+public class AttackComponent_Enemy : AttackComponent
 {
     private IDamagable _target;     // 공격 타겟
     private bool _canAttackInRange; // 공격가능한 범위에 들어왔는지
@@ -75,6 +75,6 @@ public class AttackComponentCollision : AttackComponentBase
             return;
         }
 
-        _target.TakeDamage(_attackPower, _isCritical); // 데미지 전달   
+        _target.TakeDamage(_attackPower, false); // 데미지 전달   
     }
 }

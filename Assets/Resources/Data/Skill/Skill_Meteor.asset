@@ -23,9 +23,9 @@ MonoBehaviour:
   - Level: 1
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3000
+      Value: 300
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -33,9 +33,9 @@ MonoBehaviour:
   - Level: 2
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3100
+      Value: 310
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -43,9 +43,9 @@ MonoBehaviour:
   - Level: 3
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3200
+      Value: 320
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -53,9 +53,9 @@ MonoBehaviour:
   - Level: 4
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3300
+      Value: 330
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -63,9 +63,9 @@ MonoBehaviour:
   - Level: 5
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3400
+      Value: 340
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -73,9 +73,9 @@ MonoBehaviour:
   - Level: 6
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3500
+      Value: 350
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -83,9 +83,9 @@ MonoBehaviour:
   - Level: 7
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3600
+      Value: 360
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -93,9 +93,9 @@ MonoBehaviour:
   - Level: 8
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3700
+      Value: 370
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -103,9 +103,9 @@ MonoBehaviour:
   - Level: 9
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3800
+      Value: 380
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -113,10 +113,11 @@ MonoBehaviour:
   - Level: 10
     AttributeList:
     - Type: Delay
-      Value: 5
+      Value: 2
     - Type: AttackPercentage
-      Value: 3900
+      Value: 390
     - Type: Range
       Value: 3
     - Type: SplashRadius
       Value: 3
+  SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}

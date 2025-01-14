@@ -1374,7 +1374,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 16.000008}
+  m_AnchoredPosition: {x: 0, y: 16}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &115097994
@@ -40738,6 +40738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14925c6a8a0ffc54db42bddf454448e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 555591239378047143}
 --- !u!224 &3626407643173275168
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40812,7 +40813,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -32.000015}
+  m_AnchoredPosition: {x: 0, y: -32}
   m_SizeDelta: {x: 64, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &4176434367064025631
@@ -40824,10 +40825,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1568431813819807309}
-  - component: {fileID: 6660619113882282421}
   - component: {fileID: 3347804189285976760}
-  - component: {fileID: 6660619113882282420}
   - component: {fileID: 555591239378047143}
+  - component: {fileID: 6660619113882282420}
   m_Layer: 6
   m_Name: UIRenderPlayer
   m_TagString: Untagged
@@ -56024,18 +56024,6 @@ MonoBehaviour:
   _armorSlot: {fileID: 1851056603489676269}
   _weaponSlot: {fileID: 7450291454235492397}
   _basicHand: {fileID: 3173895111006009443}
---- !u!114 &6660619113882282421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176434367064025631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb427ab45361554b91be6ab5ec26908, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6775786208952907507
 GameObject:
   m_ObjectHideFlags: 0

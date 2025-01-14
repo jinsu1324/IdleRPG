@@ -5,72 +5,61 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 데미지 받았을때 필요한 것들 구조체
+/// </summary>
 public struct OnTakeDamagedArgs
 {
     public int CurrentHp;
     public int MaxHp;
 }
 
-
-public class HPComponent : MonoBehaviour, IDamagable
+/// <summary>
+/// HP컴포넌트 베이스
+/// </summary>
+public abstract class HPComponent : MonoBehaviour, IDamagable
 {
     public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
-    public Action OnDead;                           // 죽었을 때 이벤트
-    public int CurrentHp { get; private set; }      // 현재 체력 
-    public int MaxtHp { get; private set; }         // 최대 체력
+    public int CurrentHp { get; set; }              // 현재 체력 
+    public int MaxHp { get; set; }                  // 최대 체력
     public bool IsDead { get; private set; }        // 죽었는지
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int initHp)
+    public virtual void Init(int hp)
     {
         IsDead = false;
-        MaxtHp = initHp;
-        CurrentHp = MaxtHp;
+
+        MaxHp = hp;
+        CurrentHp = MaxHp;
     }
 
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public void TakeDamage(int atk, bool isCritical)
+    public virtual void TakeDamage(int atk, bool isCritical)
     {
+        // 죽었으면 그냥 무시
         if (IsDead) 
             return;
 
-        CurrentHp -= atk;
+        // 체력 닳기
+        CurrentHp -= atk;   
         
-        OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxtHp };
-        OnTakeDamaged?.Invoke(args); // 데미지 받았을때 이벤트 실행
-
-        DamageTextManager.Instance.ShowDamageText(atk, transform.position, isCritical); // 데미지 텍스트 띄우기
-
-        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, transform);    // 이펙트 띄우기
-
-
-        if (CurrentHp <= 0)
-            Die();
-    }
-
-    /// <summary>
-    /// 최대체력 변경
-    /// </summary>
-    public void ChangeMaxHp(PlayerStatArgs args)
-    {
-        MaxtHp = args.MaxHp;
+        // 이벤트 알림
+        OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxHp };
+        OnTakeDamaged?.Invoke(args);
     }
 
     /// <summary>
     /// 죽음
     /// </summary>
-    public void Die()
+    public virtual void Die()
     {
         if (IsDead) 
             return;
 
-        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform);    // 이펙트 띄우기
-
         IsDead = true;
-        OnDead?.Invoke();
     }
 }

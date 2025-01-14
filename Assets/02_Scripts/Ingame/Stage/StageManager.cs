@@ -60,7 +60,9 @@ public class StageManager : SingletonBase<StageManager>
         };
 
         ResetTargetCount(args); // 목표 + 죽인 적 숫자 리셋
-        OnStageChanged?.Invoke(args);  // 스테이지 변경 이벤트 실행 (적 스폰, UI 업데이트)
+        OnStageChanged?.Invoke(args);
+
+        PlayerResetService.PlayerReset(); // 플레이어 리셋
     }
     
     /// <summary>
@@ -68,27 +70,22 @@ public class StageManager : SingletonBase<StageManager>
     /// </summary>
     public void AddKillCount()
     {
-        if (_currentStageType == StageType.Normal)  // 일반모드면, 타겟 다잡으면 스테이지 레벨업
+        if (_currentStageType == StageType.Normal)  // 일반모드면, 
         {
             _killCount++;
             
-            if (_killCount >= _targetCount)
+            if (_killCount >= _targetCount) // 타겟 다잡으면 스테이지 레벨업
             {
                 StageLevelUp();
-                
-                PlayerSpawner.RestorePlayerStats(); // 플레이어 스탯 복구
-
                 StageBuildAndStart();
             }
         }
-        else if (_currentStageType == StageType.Infinite) // 무한모드면, 타겟 다잡아도 계속 도르마무
+        else if (_currentStageType == StageType.Infinite) // 무한모드면, 
         {
             _killCount++;
             
-            if (_killCount >= _targetCount)
+            if (_killCount >= _targetCount) // 타겟 다잡아도 계속 도르마무
             {
-                PlayerSpawner.RestorePlayerStats();  // 플레이어 스탯 복구
-
                 StageBuildAndStart();
             }
         }
@@ -165,7 +162,7 @@ public class StageManager : SingletonBase<StageManager>
     public void DefeatRestartGame()
     {
         SetStageType_Infinite();    // 무한모드로 변경
-        StartRestartGameCoroutine();    // 게임 재시작 코루틴 시작
+        StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
 
     /// <summary>
@@ -174,14 +171,6 @@ public class StageManager : SingletonBase<StageManager>
     public void ChallangeRestartGame()
     {
         SetStageType_Normal();  // 일반모드로 변경
-        StartRestartGameCoroutine(); // 게임 재시작 코루틴 시작
-    }
-
-    /// <summary>
-    /// 게임재시작 코루틴
-    /// </summary>
-    private void StartRestartGameCoroutine()
-    {
         StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
 
@@ -209,9 +198,6 @@ public class StageManager : SingletonBase<StageManager>
     {
         // 필드 정리: 모든 몬스터 제거
         FieldTargetManager.ClearAllFieldTarget();
-
-        // 플레이어 스탯 복구
-        PlayerSpawner.RestorePlayerStats();
 
         if (_currentStageType == StageType.Infinite) // 무한모드면 이전스테이지로
             StageLevelDown();

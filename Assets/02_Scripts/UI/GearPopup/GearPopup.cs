@@ -49,7 +49,7 @@ public class GearPopup : BottomTabPopupBase
     /// </summary>
     public override void Show()
     {
-        PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs(0);
+        PlayerStatArgs args = PlayerStats.GetCurrentPlayerStatArgs();
         Update_StatTexts(args); // 스탯 텍스트 업데이트
         
         Init_GearEquipSlots(); // 장비장착슬롯 업데이트

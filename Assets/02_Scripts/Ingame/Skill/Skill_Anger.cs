@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class Skill_Anger : SkillItem
 {
-    public float Delay { get; private set; }                                        // 딜레이 (스킬쿨타임)
-    public float AddAttackSpeed { get; private set; }
-    public float Duration { get; private set; }
-
-
-
-
-
+    public float Delay { get; private set; }            // 딜레이 (스킬쿨타임)
+    public float AddAttackSpeed { get; private set; }   // 공격속도 추가량              
+    public float Duration { get; private set; }         // 스킬지속시간
 
     /// <summary>
     /// 초기화
@@ -19,7 +14,6 @@ public class Skill_Anger : SkillItem
     public override void Init(SkillDataSO skillDataSO, int level)
     {
         base.Init(skillDataSO, level);
-
         UpdateAttributeValue(skillDataSO, level);
     }
 
@@ -29,7 +23,6 @@ public class Skill_Anger : SkillItem
     public override void ItemLevelUp()
     {
         base.ItemLevelUp();
-
         UpdateAttributeValue(SkillDataSO, Level);
     }
 
@@ -42,8 +35,6 @@ public class Skill_Anger : SkillItem
         AddAttackSpeed = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.AddAttackSpeed, Level));
         Duration = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Duration, Level));
     }
-
-
 
     /// <summary>
     /// 쿨타임 계산

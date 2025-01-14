@@ -3,27 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class HPBar : MonoBehaviour
+public abstract class HPBar : MonoBehaviour
 {
-    [SerializeField] private Slider _hpSlider;  // HP 슬라이더
-    private bool _isInit;                       // 초기화 되었는지 플래그
+    [SerializeField] protected Slider _hpSlider;  // HP 슬라이더
 
     /// <summary>
-    /// 초기화
+    /// OnEnable
     /// </summary>
-    public void Init(int initHp)
+    protected virtual void OnEnable()
     {
-        _isInit = false;
+        GetComponent<HPComponent>().OnTakeDamaged += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트
+        ResetHpBar();
+    }
 
-        HPComponent hpComponent = GetComponentInParent<HPComponent>();
-        if (hpComponent != null)
-            hpComponent.OnTakeDamaged += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트
-
-        OnTakeDamagedArgs initArgs = new OnTakeDamagedArgs() { CurrentHp = initHp, MaxHp = initHp };
-        UpdateHPSlider(initArgs);  // 초기체력 값으로 HP슬라이더 업데이트
-        
-        _isInit = true; // 초기화 완료
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    protected virtual void OnDisable()
+    {
+        GetComponent<HPComponent>().OnTakeDamaged -= UpdateHPSlider;
     }
 
     /// <summary>
@@ -35,15 +33,10 @@ public class HPBar : MonoBehaviour
     }
 
     /// <summary>
-    /// 이벤트 구독 해제 OnDisable
+    /// HP바 리셋
     /// </summary>
-    private void OnDisable()
+    protected void ResetHpBar()
     {
-        if (_isInit == false) // 초기화 안된상태면 리턴 (오브젝트 풀링 때문)
-            return;
-
-        HPComponent hpComponent = GetComponentInParent<HPComponent>();
-        if (hpComponent != null)
-            hpComponent.OnTakeDamaged -= UpdateHPSlider;
+        _hpSlider.value = 1;
     }
 }

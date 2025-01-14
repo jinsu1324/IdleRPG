@@ -23,9 +23,9 @@ MonoBehaviour:
   - Level: 1
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1200
+      Value: 120
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -33,9 +33,9 @@ MonoBehaviour:
   - Level: 2
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1300
+      Value: 130
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -43,9 +43,9 @@ MonoBehaviour:
   - Level: 3
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1400
+      Value: 140
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -53,9 +53,9 @@ MonoBehaviour:
   - Level: 4
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1500
+      Value: 150
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -63,9 +63,9 @@ MonoBehaviour:
   - Level: 5
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1600
+      Value: 160
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -73,9 +73,9 @@ MonoBehaviour:
   - Level: 6
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1700
+      Value: 170
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -83,9 +83,9 @@ MonoBehaviour:
   - Level: 7
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1800
+      Value: 180
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -93,9 +93,9 @@ MonoBehaviour:
   - Level: 8
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 1900
+      Value: 190
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -103,9 +103,9 @@ MonoBehaviour:
   - Level: 9
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 2000
+      Value: 200
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -113,10 +113,11 @@ MonoBehaviour:
   - Level: 10
     AttributeList:
     - Type: Delay
-      Value: 4
+      Value: 2
     - Type: AttackPercentage
-      Value: 2100
+      Value: 210
     - Type: Range
       Value: 3
     - Type: ProjectileCount
       Value: 5
+  SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}
