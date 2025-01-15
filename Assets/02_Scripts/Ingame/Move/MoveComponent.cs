@@ -26,12 +26,12 @@ public class MoveComponent : MonoBehaviour
 {
     private MoveDir _moveDir = MoveDir.Left;   // 움직일 방향
     private MoveState _moveState;              // 움직임 상태
-    private int _moveSpeed;                    // 이동속도
+    private float _moveSpeed;                  // 이동속도
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int moveSpeed)
+    public void Init(float moveSpeed)
     {
         _moveSpeed = moveSpeed;
         _moveState = MoveState.Move;

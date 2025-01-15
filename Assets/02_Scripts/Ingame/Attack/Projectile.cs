@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private float _speed = 10f;         // 투사체 속도
-    private int _attackPower;           // 공격력
+    private float _attackPower;         // 공격력
     private IDamagable _target;         // 타겟
     private Vector3 _spawnPos;          // 투사체 생성 위치
     private bool _isCritical;
@@ -14,7 +14,7 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(int attackPower, Vector3 spawnPos, bool isCritical)
+    public void Init(float attackPower, Vector3 spawnPos, bool isCritical)
     {
         _attackPower = attackPower;
         _spawnPos = spawnPos;

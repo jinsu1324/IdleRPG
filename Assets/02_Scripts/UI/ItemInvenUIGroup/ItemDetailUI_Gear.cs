@@ -100,7 +100,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
             foreach (var kvp in gearItem.GetAttributeDict())
             {
                 StatType statType = kvp.Key;
-                int value = kvp.Value;
+                float value = kvp.Value;
 
                 _abilityInfoList[index].Show(statType, value);
                 index++;

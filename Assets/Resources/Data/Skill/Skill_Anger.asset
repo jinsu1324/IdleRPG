@@ -32,7 +32,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 2
+      Value: 1.1
     - Type: Duration
       Value: 3
   - Level: 3
@@ -40,7 +40,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 3
+      Value: 1.2
     - Type: Duration
       Value: 3
   - Level: 4
@@ -48,7 +48,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 4
+      Value: 1.3
     - Type: Duration
       Value: 3
   - Level: 5
@@ -56,7 +56,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 5
+      Value: 1.4
     - Type: Duration
       Value: 3
   - Level: 6
@@ -64,7 +64,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 6
+      Value: 1.5
     - Type: Duration
       Value: 3
   - Level: 7
@@ -72,7 +72,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 7
+      Value: 1.6
     - Type: Duration
       Value: 3
   - Level: 8
@@ -80,7 +80,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 8
+      Value: 1.7
     - Type: Duration
       Value: 3
   - Level: 9
@@ -88,7 +88,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 9
+      Value: 1.8
     - Type: Duration
       Value: 3
   - Level: 10
@@ -96,7 +96,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 5
     - Type: AddAttackSpeed
-      Value: 10
+      Value: 1.9
     - Type: Duration
       Value: 3
   SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}

@@ -56,8 +56,8 @@ public class UpgradeSlot : MonoBehaviour
         {
             _upgradeNameText.text = upgrade.Name;
             _levelText.text = $"Lv.{upgrade.Level}";
-            _valueText.text = AlphabetNumConverter.Convert(upgrade.Value);
-            _costText.text = AlphabetNumConverter.Convert(upgrade.Cost);
+            _valueText.text = $"{upgrade.Value}";
+            _costText.text = $"{upgrade.Cost}";
             _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(upgrade.ID.ToString());
             //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
         }

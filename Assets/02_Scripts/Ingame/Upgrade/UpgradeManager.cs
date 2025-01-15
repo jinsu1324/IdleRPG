@@ -12,8 +12,8 @@ using UnityEngine.UI;
 public class UpgradeManager
 {
     public static event Action OnUpgradeLevelUp;                    // 업그레이드 레벨업 했을 때 이벤트
-    public static int TotalPower { get; private set; }              // 총합 전투력
-    public static int BeforeTotalPower { get; private set; }        // 이전 총합 전투력
+    public static float TotalPower { get; private set; }            // 총합 전투력
+    public static float BeforeTotalPower { get; private set; }      // 이전 총합 전투력
 
     private static Dictionary<string, Upgrade> _upgradeDict;        // 업그레이드들 딕셔너리
 
@@ -148,10 +148,10 @@ public class UpgradeManager
     {
         BeforeTotalPower = TotalPower;
 
-        List<int> statValueList = GetAllUpgrades().Select(stat => stat.Value).ToList();
+        List<float> statValueList = GetAllUpgrades().Select(stat => stat.Value).ToList();
 
         TotalPower = 0;
-        foreach (int value in statValueList)
+        foreach (float value in statValueList)
             TotalPower += value;
     }
 }

@@ -9,5 +9,5 @@ public class StageData : BaseData
     public int Stage;
     public string AppearEnemy;
     public int Count;
-    public int StatPercentage;
+    public float StatPercentage;
 }

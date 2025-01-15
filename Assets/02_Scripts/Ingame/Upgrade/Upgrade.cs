@@ -18,15 +18,15 @@ public class Upgrade : BaseData
 {
     public string Name;            // 이름 
     public int Level;              // 레벨
-    public int Value;              // 실제 업그레이드 값
-    public int ValueIncrease;      // 레벨 오르면 증가하는 값
+    public float Value;            // 실제 업그레이드 값
+    public float ValueIncrease;    // 레벨 오르면 증가하는 값
     public int Cost;               // 업그레이드 비용
     public int CostIncrease;       // 레벨 오르면 증가하는 업그레이드 비용
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(string id, string name, int level, int value, int valueIncrease, int cost, int costIncrease)
+    public void Init(string id, string name, int level, float value, float valueIncrease, int cost, int costIncrease)
     {
         ID = id;
         Name = name;
@@ -60,10 +60,10 @@ public class Upgrade : BaseData
     {
         StatType statType = (StatType)Enum.Parse(typeof(StatType), ID);
 
-        Dictionary<StatType, int> dict = new Dictionary<StatType, int>();
+        Dictionary<StatType, float> dict = new Dictionary<StatType, float>();
         dict[statType] = Value;
 
-        PlayerStats.UpdateStatModifier(dict, this); // 업그레이드 소스를 고유하게 설정
+        PlayerStats.UpdateStatModifier(dict, this); // 플레이어 스탯에 적용
     }
 
     /// <summary>

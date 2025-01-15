@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SkillProjectile_Meteor : MonoBehaviour
 {
-    private int _attackPower;
+    private float _attackPower;
 
     public void SetAtk(float attackPercentage)
     {
-        float calculateAttackPercentage = attackPercentage / 100.0f;
-        _attackPower = (int)Mathf.Floor(PlayerStats.GetStatValue(StatType.AttackPower) * calculateAttackPercentage);
+        _attackPower = PlayerStats.GetStatValue(StatType.AttackPower) * attackPercentage;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

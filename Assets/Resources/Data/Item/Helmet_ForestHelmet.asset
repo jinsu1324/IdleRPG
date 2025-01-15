@@ -24,60 +24,60 @@ MonoBehaviour:
     - Type: MaxHp
       Value: 250
     - Type: CriticalMultiple
-      Value: 7
+      Value: 0.5
   - Level: 2
     AttributeList:
     - Type: MaxHp
       Value: 260
     - Type: CriticalMultiple
-      Value: 8
+      Value: 0.6
   - Level: 3
     AttributeList:
     - Type: MaxHp
       Value: 270
     - Type: CriticalMultiple
-      Value: 9
+      Value: 0.7
   - Level: 4
     AttributeList:
     - Type: MaxHp
       Value: 280
     - Type: CriticalMultiple
-      Value: 10
+      Value: 0.8
   - Level: 5
     AttributeList:
     - Type: MaxHp
       Value: 290
     - Type: CriticalMultiple
-      Value: 11
+      Value: 0.9
   - Level: 6
     AttributeList:
     - Type: MaxHp
       Value: 300
     - Type: CriticalMultiple
-      Value: 12
+      Value: 0.10
   - Level: 7
     AttributeList:
     - Type: MaxHp
       Value: 310
     - Type: CriticalMultiple
-      Value: 13
+      Value: 0.11
   - Level: 8
     AttributeList:
     - Type: MaxHp
       Value: 320
     - Type: CriticalMultiple
-      Value: 14
+      Value: 0.12
   - Level: 9
     AttributeList:
     - Type: MaxHp
       Value: 330
     - Type: CriticalMultiple
-      Value: 15
+      Value: 0.13
   - Level: 10
     AttributeList:
     - Type: MaxHp
       Value: 340
     - Type: CriticalMultiple
-      Value: 16
+      Value: 0.14
   AttackAnimType: 
   Prefab: {fileID: 7589804328962073218, guid: e333744e9a1e28b4c8b15d55e48d2d86, type: 3}

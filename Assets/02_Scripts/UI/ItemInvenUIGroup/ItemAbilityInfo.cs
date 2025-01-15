@@ -11,7 +11,7 @@ public class ItemAbilityInfo : MonoBehaviour
     /// <summary>
     /// 보여주기
     /// </summary>
-    public void Show(StatType statType, int value)
+    public void Show(StatType statType, float value)
     {
         _abilityNameText.text = statType.ToString();
         _abilityValueText.text = value.ToString();

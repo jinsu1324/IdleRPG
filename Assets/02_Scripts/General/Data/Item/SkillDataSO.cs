@@ -28,10 +28,10 @@ public class SkillDataSO : ItemDataSO
     /// <summary>
     /// 레벨에 맞는 속성들을 딕셔너리로 가져오기
     /// </summary>
-    public Dictionary<SkillAttributeType, int> GetAttributeDict_ByLevel(int level)
+    public Dictionary<SkillAttributeType, float> GetAttributeDict_ByLevel(int level)
     {
         // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-        Dictionary<SkillAttributeType, int> attributeDict = new Dictionary<SkillAttributeType, int>();
+        Dictionary<SkillAttributeType, float> attributeDict = new Dictionary<SkillAttributeType, float>();
 
         // level에 맞는 levelAttributes 찾기
         LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
@@ -47,7 +47,7 @@ public class SkillDataSO : ItemDataSO
         foreach (Attribute attribute in levelAttributes.AttributeList)
         {
             SkillAttributeType statType = (SkillAttributeType)Enum.Parse(typeof(SkillAttributeType), attribute.Type);
-            int value = int.Parse(attribute.Value);
+            float value = float.Parse(attribute.Value);
 
             attributeDict.Add(statType, value);
         }

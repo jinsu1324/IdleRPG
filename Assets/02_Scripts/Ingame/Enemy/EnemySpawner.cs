@@ -36,7 +36,7 @@ public class EnemySpawner : SerializedMonoBehaviour
     {
         EnemyID enemyID = args.EnemyID;
         int count = args.Count;
-        int statPercentage = args.StatPercantage;
+        float statPercentage = args.StatPercantage;
 
         ObjectPool pool = _enemyPoolDict[enemyID];
         EnemyData enemyData = DataManager.Instance.EnemyDatasSO.GetDataByID(enemyID.ToString());

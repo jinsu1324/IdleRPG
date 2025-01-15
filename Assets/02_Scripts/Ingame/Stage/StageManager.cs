@@ -5,11 +5,11 @@ using UnityEngine;
 
 public struct OnStageChangedArgs
 {
-    public int CurrentChapter;  // 현재 챕터
-    public int CurrentStage;    // 현재 스테이지
-    public EnemyID EnemyID;     // 등장하는 적 ID
-    public int Count;           // 등장하는 적 수
-    public int StatPercantage;  // 등장적 스탯 퍼센티지
+    public int CurrentChapter;      // 현재 챕터
+    public int CurrentStage;        // 현재 스테이지
+    public EnemyID EnemyID;         // 등장하는 적 ID
+    public int Count;               // 등장하는 적 수
+    public float StatPercantage;    // 등장적 스탯 퍼센티지
 }
 
 public enum StageType
@@ -48,7 +48,7 @@ public class StageManager : SingletonBase<StageManager>
         // 데이터에서 필요한 정보들 할당
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), stageData.AppearEnemy);
         int targetCount = stageData.Count;
-        int statPercentage = stageData.StatPercentage;
+        float statPercentage = stageData.StatPercentage;
         
         OnStageChangedArgs args = new OnStageChangedArgs() 
         { 

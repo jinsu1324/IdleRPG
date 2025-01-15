@@ -40,7 +40,7 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     public void UpdateGoldUI(int amount)
     {
-        _goldText.text = AlphabetNumConverter.Convert(amount);
+        _goldText.text = $"{amount}";
     }
 
     /// <summary>
@@ -48,6 +48,6 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     public void UpdateGemUI(int amount)
     {
-        _gemText.text = AlphabetNumConverter.Convert(amount);
+        _gemText.text = $"{amount}";
     }
 }

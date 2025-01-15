@@ -24,80 +24,80 @@ MonoBehaviour:
     - Type: AttackPower
       Value: 400
     - Type: AttackSpeed
-      Value: 1
+      Value: 0.1
     - Type: CriticalRate
-      Value: 15
+      Value: 0.15
   - Level: 2
     AttributeList:
     - Type: AttackPower
       Value: 410
     - Type: AttackSpeed
-      Value: 2
+      Value: 0.2
     - Type: CriticalRate
-      Value: 16
+      Value: 0.16
   - Level: 3
     AttributeList:
     - Type: AttackPower
       Value: 420
     - Type: AttackSpeed
-      Value: 3
+      Value: 0.3
     - Type: CriticalRate
-      Value: 17
+      Value: 0.17
   - Level: 4
     AttributeList:
     - Type: AttackPower
       Value: 430
     - Type: AttackSpeed
-      Value: 4
+      Value: 0.4
     - Type: CriticalRate
-      Value: 18
+      Value: 0.18
   - Level: 5
     AttributeList:
     - Type: AttackPower
       Value: 440
     - Type: AttackSpeed
-      Value: 5
+      Value: 0.5
     - Type: CriticalRate
-      Value: 19
+      Value: 0.19
   - Level: 6
     AttributeList:
     - Type: AttackPower
       Value: 450
     - Type: AttackSpeed
-      Value: 6
+      Value: 0.6
     - Type: CriticalRate
-      Value: 20
+      Value: 0.20
   - Level: 7
     AttributeList:
     - Type: AttackPower
       Value: 460
     - Type: AttackSpeed
-      Value: 7
+      Value: 0.7
     - Type: CriticalRate
-      Value: 21
+      Value: 0.21
   - Level: 8
     AttributeList:
     - Type: AttackPower
       Value: 470
     - Type: AttackSpeed
-      Value: 8
+      Value: 0.8
     - Type: CriticalRate
-      Value: 22
+      Value: 0.22
   - Level: 9
     AttributeList:
     - Type: AttackPower
       Value: 480
     - Type: AttackSpeed
-      Value: 9
+      Value: 0.9
     - Type: CriticalRate
-      Value: 23
+      Value: 0.23
   - Level: 10
     AttributeList:
     - Type: AttackPower
       Value: 490
     - Type: AttackSpeed
-      Value: 10
+      Value: 1.0
     - Type: CriticalRate
-      Value: 24
+      Value: 0.24
   AttackAnimType: Magic
   Prefab: {fileID: 252690595569584609, guid: 4b8bc9b9da4cfc341a06c2a917cea2e8, type: 3}

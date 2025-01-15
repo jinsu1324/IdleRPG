@@ -30,15 +30,15 @@ public class Enemy : ObjectPoolObj
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(EnemyData enemyData, int statPercentage)
+    public void Init(EnemyData enemyData, float statPercentage)
     {
         _enemyID = (EnemyID)Enum.Parse(typeof(EnemyID), enemyData.ID);
 
         // 스탯 셋팅
-        int maxHp = (enemyData.MaxHp * statPercentage) / 100;
-        int attackPower = (enemyData.AttackPower * statPercentage) / 100;
-        int attackSpeed = enemyData.AttackSpeed;
-        int moveSpeed = enemyData.MoveSpeed;
+        float maxHp = enemyData.MaxHp * statPercentage;
+        float attackPower = enemyData.AttackPower * statPercentage;
+        float attackSpeed = enemyData.AttackSpeed;
+        float moveSpeed = enemyData.MoveSpeed;
 
         GetComponent<HPComponent_Enemy>().Init(maxHp); // HP 컴포넌트 초기값 설정
         GetComponent<AttackComponent_Enemy>().Init(attackPower, attackSpeed); // 공격 컴포넌트 초기값 설정

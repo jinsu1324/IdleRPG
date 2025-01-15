@@ -24,80 +24,80 @@ MonoBehaviour:
     - Type: AttackPower
       Value: 150
     - Type: AttackSpeed
-      Value: 1
+      Value: 0.1
     - Type: CriticalRate
-      Value: 5
+      Value: 0.05
   - Level: 2
     AttributeList:
     - Type: AttackPower
       Value: 160
     - Type: AttackSpeed
-      Value: 2
+      Value: 0.2
     - Type: CriticalRate
-      Value: 6
+      Value: 0.06
   - Level: 3
     AttributeList:
     - Type: AttackPower
       Value: 170
     - Type: AttackSpeed
-      Value: 3
+      Value: 0.3
     - Type: CriticalRate
-      Value: 7
+      Value: 0.07
   - Level: 4
     AttributeList:
     - Type: AttackPower
       Value: 180
     - Type: AttackSpeed
-      Value: 4
+      Value: 0.4
     - Type: CriticalRate
-      Value: 8
+      Value: 0.08
   - Level: 5
     AttributeList:
     - Type: AttackPower
       Value: 190
     - Type: AttackSpeed
-      Value: 5
+      Value: 0.5
     - Type: CriticalRate
-      Value: 9
+      Value: 0.09
   - Level: 6
     AttributeList:
     - Type: AttackPower
       Value: 200
     - Type: AttackSpeed
-      Value: 6
+      Value: 0.6
     - Type: CriticalRate
-      Value: 10
+      Value: 0.10
   - Level: 7
     AttributeList:
     - Type: AttackPower
       Value: 210
     - Type: AttackSpeed
-      Value: 7
+      Value: 0.7
     - Type: CriticalRate
-      Value: 11
+      Value: 0.11
   - Level: 8
     AttributeList:
     - Type: AttackPower
       Value: 220
     - Type: AttackSpeed
-      Value: 8
+      Value: 0.8
     - Type: CriticalRate
-      Value: 12
+      Value: 0.12
   - Level: 9
     AttributeList:
     - Type: AttackPower
       Value: 230
     - Type: AttackSpeed
-      Value: 9
+      Value: 0.9
     - Type: CriticalRate
-      Value: 13
+      Value: 0.13
   - Level: 10
     AttributeList:
     - Type: AttackPower
       Value: 240
     - Type: AttackSpeed
-      Value: 10
+      Value: 1.0
     - Type: CriticalRate
-      Value: 14
+      Value: 0.14
   AttackAnimType: Melee
   Prefab: {fileID: 8909641260938750215, guid: 1775af1dd44743c42b9e522460167e0c, type: 3}

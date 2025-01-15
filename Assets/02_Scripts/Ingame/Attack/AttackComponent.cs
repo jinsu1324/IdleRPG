@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public struct OnAttackedArgs
 {
-    public int AttackSpeed;
+    public float AttackSpeed;
 }
 
 public abstract class AttackComponent : MonoBehaviour
@@ -15,15 +15,15 @@ public abstract class AttackComponent : MonoBehaviour
 
     [SerializeField] protected int _attackMotionFrame;  // 공격 모션 프레임
 
-    protected int _attackPower;                         // 공격력
-    protected int _attackSpeed;                         // 공격속도
+    protected float _attackPower;                       // 공격력
+    protected float _attackSpeed;                       // 공격속도
     protected float _attackCooldown;                    // 공격 쿨타임
     protected float _time;                              // 쿨타임 시간 계산
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public virtual void Init(int attackPower, int attackSpeed)
+    public virtual void Init(float attackPower, float attackSpeed)
     {
         _attackPower = attackPower;
         _attackSpeed = attackSpeed;
@@ -51,10 +51,12 @@ public abstract class AttackComponent : MonoBehaviour
     /// </summary>
     protected void StartAttackProcess()
     {
+        // 이벤트 노티
         OnAttackedArgs args = new OnAttackedArgs() { AttackSpeed = _attackSpeed };
-        OnAttacked?.Invoke(args); // 공격 애니메이션 재생
+        OnAttacked?.Invoke(args);
 
-        Invoke("Attack", FrameToSecond.Convert(AttackTiming()));  // 공격모션에 타이밍에 맞게 실제 공격
+        // 공격모션에 타이밍에 맞게 실제 공격
+        Invoke("Attack", FrameToSecond.Convert(AttackTiming()));  
     }
 
     /// <summary>
@@ -65,8 +67,5 @@ public abstract class AttackComponent : MonoBehaviour
     /// <summary>
     /// 공격타이밍을 계산해서 반환해주는 함수
     /// </summary>
-    protected float AttackTiming()
-    {
-        return _attackMotionFrame / _attackSpeed;
-    }
+    protected float AttackTiming() => _attackMotionFrame / _attackSpeed;
 }

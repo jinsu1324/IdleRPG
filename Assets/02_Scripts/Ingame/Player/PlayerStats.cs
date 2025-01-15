@@ -10,13 +10,13 @@ using UnityEngine;
 /// </summary>
 public struct PlayerStatArgs
 {
-    public int TotalPower;          // 총합 전투력
-    public int BeforeTotalPower;    // 이전 총합 전투력
-    public int AttackPower;         // 공격력
-    public int AttackSpeed;         // 공격속도
-    public int MaxHp;               // 최대 체력
-    public int CriticalRate;        // 크리티컬 확률
-    public int CriticalMultiple;    // 크리티컬 배율
+    public float TotalPower;          // 총합 전투력
+    public float BeforeTotalPower;    // 이전 총합 전투력
+    public float AttackPower;         // 공격력
+    public float AttackSpeed;         // 공격속도
+    public float MaxHp;               // 최대 체력
+    public float CriticalRate;        // 크리티컬 확률
+    public float CriticalMultiple;    // 크리티컬 배율
 }
 
 /// <summary>
@@ -38,7 +38,7 @@ public class PlayerStats
 {
     public static event Action<PlayerStatArgs> OnPlayerStatChanged; // 플레이어 스탯 변경되었을 때 이벤트
     private static Dictionary<StatType, List<StatModifier>> _statModifierDict; // 스탯별로 StatModifier 리스트를 관리
-    public static int BeforeCombatPower { get; private set; }
+    public static float BeforeCombatPower { get; private set; } // 이전전투력
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -58,7 +58,7 @@ public class PlayerStats
     /// <summary>
     /// 스탯 모디파이어 업데이트
     /// </summary>
-    public static void UpdateStatModifier(Dictionary<StatType, int> itemStatDict, object source)
+    public static void UpdateStatModifier(Dictionary<StatType, float> itemStatDict, object source)
     {
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
@@ -67,7 +67,7 @@ public class PlayerStats
         foreach (var kvp in itemStatDict)
         {
             StatType statType = kvp.Key;
-            int value = kvp.Value;
+            float value = kvp.Value;
 
             // 딕셔너리에 소스가 존재하는지 확인
             StatModifier foundStatModifier = FindSource_In_StatModifierDict(statType, source);
@@ -94,7 +94,7 @@ public class PlayerStats
     /// <summary>
     /// 스탯 모디파이어 제거
     /// </summary>
-    public static void RemoveStatModifier(Dictionary<StatType, int> itemStatDict, object source)
+    public static void RemoveStatModifier(Dictionary<StatType, float> itemStatDict, object source)
     {
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
@@ -114,16 +114,16 @@ public class PlayerStats
     /// <summary>
     /// 스탯 값 가져오기
     /// </summary>
-    public static int GetStatValue(StatType statType)
+    public static float GetStatValue(StatType statType)
     {
         float resultStatValue = _statModifierDict[statType].Sum(modifier => modifier.Value);
-        return (int)Mathf.Floor(resultStatValue); 
+        return resultStatValue; 
     }
 
     /// <summary>
     /// 전체 스탯 값 가져오기 (총 전투력 개념)
     /// </summary>
-    public static int GetAllStatValue()
+    public static float GetAllStatValue()
     {
         float resultStatValue = 0;
         StatType[] AllStatTypes = (StatType[])Enum.GetValues(typeof(StatType));
@@ -131,7 +131,7 @@ public class PlayerStats
         foreach (StatType statType in AllStatTypes)
             resultStatValue += GetStatValue(statType);
 
-        return (int)Mathf.Floor(resultStatValue);
+        return resultStatValue;
     }
 
     /// <summary>

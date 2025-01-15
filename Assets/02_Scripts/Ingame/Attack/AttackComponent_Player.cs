@@ -29,12 +29,12 @@ public class AttackComponent_Player : AttackComponent
     /// <summary>
     /// 초기화
     /// </summary>
-    public override void Init(int attackPower, int attackSpeed)
+    public override void Init(float attackPower, float attackSpeed)
     {
         base.Init(attackPower, attackSpeed);
 
-        _criticalRate = (float)PlayerStats.GetStatValue(StatType.CriticalRate) / 100.0f;
-        _criticalMultiple = (float)PlayerStats.GetStatValue(StatType.CriticalMultiple) / 100.0f;
+        _criticalRate = PlayerStats.GetStatValue(StatType.CriticalRate);
+        _criticalMultiple = PlayerStats.GetStatValue(StatType.CriticalMultiple);
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class AttackComponent_Player : AttackComponent
     /// <summary>
     /// 프로젝타일 생성
     /// </summary>
-    private void SpawnProjectile(int attackPower)
+    private void SpawnProjectile(float attackPower)
     {
         Projectile projectile = GameObject.Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity);
         projectile.Init(attackPower, _spawnPoint.position, _isCritical);
@@ -71,21 +71,21 @@ public class AttackComponent_Player : AttackComponent
         _attackPower = args.AttackPower;
         _attackSpeed = args.AttackSpeed;
         _attackCooldown = 1f / _attackSpeed;
-        _criticalRate = (float)args.CriticalRate / 100.0f;
-        _criticalMultiple = (float)args.CriticalMultiple / 100.0f;
+        _criticalRate = args.CriticalRate;
+        _criticalMultiple = args.CriticalMultiple;
     }
 
     /// <summary>
     /// 치명타를 계산하여 최종 데미지를 반환
     /// </summary>
-    protected int CalculateFinalDamage()
+    protected float CalculateFinalDamage()
     {
         bool isCritical = Random.value <= _criticalRate;    // 치명타 여부 결정
 
         if (isCritical)
         {
             _isCritical = true;
-            return (int)(_attackPower * _criticalMultiple); // 치명타 피해 적용
+            return _attackPower * _criticalMultiple; // 치명타 피해 적용
         }
         else
         {

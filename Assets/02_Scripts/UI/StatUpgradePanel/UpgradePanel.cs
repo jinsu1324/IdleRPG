@@ -47,7 +47,7 @@ public class UpgradePanel : MonoBehaviour
             statUpgradeSlot.Init(upgrade.ID);
         }
 
-        PlayerStatArgs args = new PlayerStatArgs() { TotalPower = (int)Mathf.Floor(PlayerStats.GetAllStatValue()) };
+        PlayerStatArgs args = new PlayerStatArgs() { TotalPower = PlayerStats.GetAllStatValue() };
         UpdateTotalPowerTextUI(args);
     }
 
@@ -56,6 +56,6 @@ public class UpgradePanel : MonoBehaviour
     /// </summary>
     private void UpdateTotalPowerTextUI(PlayerStatArgs args)
     {
-        _totalCombatPowerText.text = AlphabetNumConverter.Convert(args.TotalPower);
+        _totalCombatPowerText.text = $"{args.TotalPower}";
     }
 }

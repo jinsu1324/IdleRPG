@@ -10,8 +10,8 @@ using UnityEngine;
 /// </summary>
 public struct OnTakeDamagedArgs
 {
-    public int CurrentHp;
-    public int MaxHp;
+    public float CurrentHp;
+    public float MaxHp;
 }
 
 /// <summary>
@@ -20,14 +20,14 @@ public struct OnTakeDamagedArgs
 public abstract class HPComponent : MonoBehaviour, IDamagable
 {
     public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
-    public int CurrentHp { get; set; }              // 현재 체력 
-    public int MaxHp { get; set; }                  // 최대 체력
-    public bool IsDead { get; private set; }        // 죽었는지
-
+    public float CurrentHp { get; set; }            // 현재 체력 
+    public float MaxHp { get; set; }                // 최대 체력
+    public bool IsDead { get; set; }                // 죽었는지
+    
     /// <summary>
     /// 초기화
     /// </summary>
-    public virtual void Init(int hp)
+    public virtual void Init(float hp)
     {
         IsDead = false;
 
@@ -38,28 +38,43 @@ public abstract class HPComponent : MonoBehaviour, IDamagable
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public virtual void TakeDamage(int atk, bool isCritical)
+    public void TakeDamage(float atk, bool isCritical)
     {
         // 죽었으면 그냥 무시
-        if (IsDead) 
+        if (IsDead)
             return;
 
         // 체력 닳기
-        CurrentHp -= atk;   
+        CurrentHp -= atk;
         
         // 이벤트 알림
         OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxHp };
         OnTakeDamaged?.Invoke(args);
+
+        // 데미지 받았을때 태스크들 처리
+        TaskDamaged(atk, isCritical);
     }
+
+    /// <summary>
+    /// 데미지 받았을때 태스크들 처리
+    /// </summary>
+    protected abstract void TaskDamaged(float atk, bool isCritical);
 
     /// <summary>
     /// 죽음
     /// </summary>
-    public virtual void Die()
+    public void Die()
     {
         if (IsDead) 
             return;
 
         IsDead = true;
+
+        TaskDie();
     }
+
+    /// <summary>
+    /// 죽었을때 태스크들 처리
+    /// </summary>
+    protected abstract void TaskDie();
 }

@@ -25,7 +25,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 300
+      Value: 3
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -35,7 +35,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 310
+      Value: 3.1
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -45,7 +45,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 320
+      Value: 3.2
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -55,7 +55,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 330
+      Value: 3.3
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -65,7 +65,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 340
+      Value: 3.4
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -75,7 +75,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 350
+      Value: 3.5
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -85,7 +85,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 360
+      Value: 3.6
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -95,7 +95,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 370
+      Value: 3.7
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -105,7 +105,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 380
+      Value: 3.8
     - Type: Range
       Value: 3
     - Type: SplashRadius
@@ -115,7 +115,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 390
+      Value: 3.9
     - Type: Range
       Value: 3
     - Type: SplashRadius

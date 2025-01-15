@@ -25,10 +25,10 @@ public class GearDataSO : ItemDataSO
     /// <summary>
     /// 레벨에 맞는 속성들을 딕셔너리로 가져오기
     /// </summary>
-    public Dictionary<StatType, int> GetAttributeDict_ByLevel(int level)
+    public Dictionary<StatType, float> GetAttributeDict_ByLevel(int level)
     {
         // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-        Dictionary<StatType, int> attributeDict = new Dictionary<StatType, int>();
+        Dictionary<StatType, float> attributeDict = new Dictionary<StatType, float>();
 
         // level에 맞는 levelAttributes 찾기
         LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
@@ -44,7 +44,7 @@ public class GearDataSO : ItemDataSO
         foreach (Attribute attribute in levelAttributes.AttributeList)
         {
             StatType statType = (StatType)Enum.Parse(typeof(StatType), attribute.Type);
-            int value = int.Parse(attribute.Value);
+            float value = float.Parse(attribute.Value);
 
             attributeDict.Add(statType, value);
         }

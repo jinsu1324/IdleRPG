@@ -10,12 +10,13 @@ public class HPComponent_Player : HPComponent
     /// <summary>
     /// 초기화
     /// </summary>
-    public override void Init(int hp)
+    public override void Init(float hp)
     {
         base.Init(hp);
 
         PlayerStats.OnPlayerStatChanged += ChangeMaxHp; // 플레이어 스탯 변경되었을 때 -> 최대체력 변경
         PlayerResetService.OnReset += ResetHp;  // 플레이어 리셋할때, HP 리셋
+        PlayerResetService.OnReset += ResetIsDead;  // 플레이어 리셋할때, 죽었는지 bool값도 리셋
     }
 
     /// <summary>
@@ -25,26 +26,23 @@ public class HPComponent_Player : HPComponent
     {
         PlayerStats.OnPlayerStatChanged -= ChangeMaxHp;
         PlayerResetService.OnReset -= ResetHp;
-
+        PlayerResetService.OnReset -= ResetIsDead;
     }
 
     /// <summary>
-    /// 데미지 받음
+    /// 데미지 받았을때 태스크들 처리
     /// </summary>
-    public override void TakeDamage(int atk, bool isCritical)
+    protected override void TaskDamaged(float atk, bool isCritical)
     {
-        base.TakeDamage(atk, isCritical);
-        
         if (CurrentHp <= 0) // 데미지받음 태스크 다 처리 후 - 체력 다 떨어지면 죽음처리
             Die();
     }
 
     /// <summary>
-    /// 죽음
+    /// 죽었을때 태스크들 처리
     /// </summary>
-    public override void Die()
+    protected override void TaskDie()
     {
-        base.Die();
         OnDeadPlayer?.Invoke(); // 이벤트 알림
     }
 
@@ -62,5 +60,13 @@ public class HPComponent_Player : HPComponent
     private void ResetHp()
     {
         CurrentHp = MaxHp;
+    }
+
+    /// <summary>
+    /// 죽었음을 false로 리셋
+    /// </summary>
+    private void ResetIsDead()
+    {
+        IsDead = false;
     }
 }

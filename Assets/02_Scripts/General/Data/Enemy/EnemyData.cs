@@ -20,9 +20,9 @@ public enum EnemyID
 public class EnemyData : BaseData
 {
     public string Name;
-    public int MaxHp;
-    public int MoveSpeed;
-    public int AttackPower;
-    public int AttackSpeed;
+    public float MaxHp;
+    public float MoveSpeed;
+    public float AttackPower;
+    public float AttackSpeed;
     public int DropGold;
 }

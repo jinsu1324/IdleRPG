@@ -26,7 +26,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 200
+      Value: 2.0
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -38,7 +38,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 210
+      Value: 2.1
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -50,7 +50,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 220
+      Value: 2.2
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -62,7 +62,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 230
+      Value: 2.3
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -74,7 +74,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 240
+      Value: 2.4
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -86,7 +86,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 250
+      Value: 2.5
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -98,7 +98,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 260
+      Value: 2.6
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -110,7 +110,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 270
+      Value: 2.7
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -122,7 +122,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 280
+      Value: 2.8
     - Type: Range
       Value: 3
     - Type: ProjectileCount
@@ -134,7 +134,7 @@ MonoBehaviour:
     - Type: Delay
       Value: 2
     - Type: AttackPercentage
-      Value: 290
+      Value: 2.9
     - Type: Range
       Value: 3
     - Type: ProjectileCount

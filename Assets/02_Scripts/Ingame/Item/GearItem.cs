@@ -9,7 +9,7 @@ using UnityEngine;
 public class GearItem : Item, IEnhanceableItem
 {
     public GearDataSO GearDataSO { get; private set; }                      // 장비 데이터
-    public Dictionary<StatType, int> AttributeDict { get; private set; }    // 레벨에 맞는 속성들 딕셔너리
+    public Dictionary<StatType, float> AttributeDict { get; private set; }  // 레벨에 맞는 속성들 딕셔너리
     public string AttackAnimType { get; private set; }                      // 공격 애니메이션 타입
     public GameObject Prefab { get; private set; }                          // 아이템 프리팹
     public int Level { get; private set; }                                  // 레벨
@@ -28,7 +28,7 @@ public class GearItem : Item, IEnhanceableItem
         Desc = gearDataSO.Desc;
         Count = 1;
         Icon = gearDataSO.Icon;
-        AttributeDict = new Dictionary<StatType, int>(gearDataSO.GetAttributeDict_ByLevel(level));
+        AttributeDict = new Dictionary<StatType, float>(gearDataSO.GetAttributeDict_ByLevel(level));
         AttackAnimType = gearDataSO.AttackAnimType;
         Prefab = gearDataSO.Prefab;
         Level = level;
@@ -44,7 +44,7 @@ public class GearItem : Item, IEnhanceableItem
         Level++;    
 
         // 속성들 레벨에 맞게 최신화
-        AttributeDict = new Dictionary<StatType, int>(GearDataSO.GetAttributeDict_ByLevel(Level));  
+        AttributeDict = new Dictionary<StatType, float>(GearDataSO.GetAttributeDict_ByLevel(Level));  
     }
 
     /// <summary>
@@ -60,5 +60,5 @@ public class GearItem : Item, IEnhanceableItem
     /// <summary>
     /// 현재 이 아이템에 있는 속성들 딕셔너리 가져오기
     /// </summary>
-    public Dictionary<StatType, int> GetAttributeDict() => AttributeDict;
+    public Dictionary<StatType, float> GetAttributeDict() => AttributeDict;
 }

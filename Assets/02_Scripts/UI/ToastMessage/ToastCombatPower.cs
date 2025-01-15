@@ -15,11 +15,11 @@ public class ToastCombatPower : MonoBehaviour
     /// </summary>
     public void Init(PlayerStatArgs args)
     {
-        int totalPower = args.TotalPower;
-        int beforeTotalPower = args.BeforeTotalPower;
+        float totalPower = args.TotalPower;
+        float beforeTotalPower = args.BeforeTotalPower;
 
         // 수치 표시
-        _valueText.text = AlphabetNumConverter.Convert(totalPower);
+        _valueText.text = $"{totalPower}";
 
         // 화살표 방향 표시
         if (totalPower > beforeTotalPower)
@@ -36,10 +36,10 @@ public class ToastCombatPower : MonoBehaviour
     /// <summary>
     /// 전투력 바뀐 값 표시
     /// </summary>
-    private void UpdateChangedValueText(int before, int current)
+    private void UpdateChangedValueText(float before, float current)
     {
-        int changedValue = Mathf.Abs(current - before);
-        _changedValueText.text = AlphabetNumConverter.Convert(changedValue);
+        float changedValue = Mathf.Abs(current - before);
+        _changedValueText.text = $"{changedValue}";
     }
 
     /// <summary>
