@@ -10,6 +10,8 @@ public class Skill_Thunder : SkillItem
     public float ProjectileCount { get; private set; }      // 투사체 갯수
     public float SplashRadius { get; private set; }         // 공격 스플래시 범위
 
+    private float _skillAttackPower;                        // 스킬 공격력
+
     /// <summary>
     /// 초기화
     /// </summary>
@@ -38,6 +40,8 @@ public class Skill_Thunder : SkillItem
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
         ProjectileCount = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.ProjectileCount, Level));
         SplashRadius = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.SplashRadius, Level));
+
+        _skillAttackPower = PlayerStats.GetStatValue(StatType.AttackPower) * AttackPercentage;
     }
 
     /// <summary>

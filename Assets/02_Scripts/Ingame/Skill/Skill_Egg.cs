@@ -9,6 +9,8 @@ public class Skill_Egg : SkillItem
     public float Range { get; private set; }                // 사거리
     public float ProjectileCount { get; private set; }      // 투사체 갯수
 
+    private float _skillAttackPower;                        // 스킬 공격력
+
     /// <summary>
     /// 초기화
     /// </summary>
@@ -36,6 +38,8 @@ public class Skill_Egg : SkillItem
         AttackPercentage = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.AttackPercentage, Level));
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
         ProjectileCount = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.ProjectileCount, Level));
+
+        _skillAttackPower = PlayerStats.GetStatValue(StatType.AttackPower) * AttackPercentage;
     }
 
     /// <summary>

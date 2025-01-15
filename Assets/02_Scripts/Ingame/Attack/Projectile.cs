@@ -6,7 +6,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     private float _speed = 10f;         // 투사체 속도
-    private float _attackPower;         // 공격력
+    private float _finalDamage;         // 최종 공격력
     private IDamagable _target;         // 타겟
     private Vector3 _spawnPos;          // 투사체 생성 위치
     private bool _isCritical;
@@ -14,11 +14,11 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(float attackPower, Vector3 spawnPos, bool isCritical)
+    public void Init(float attackPower, bool isCritical, Vector3 spawnPos)
     {
-        _attackPower = attackPower;
-        _spawnPos = spawnPos;
+        _finalDamage = attackPower;
         _isCritical = isCritical;
+        _spawnPos = spawnPos;
 
         FindTarget(); // 타겟 검색
     }
@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _target.TakeDamage(_attackPower, _isCritical);
+        _target.TakeDamage(_finalDamage, _isCritical);
         Destroy(gameObject);
     }
 }

@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class SkillProjectile_Meteor : MonoBehaviour
 {
-    private float _attackPower;
+    private float _finalDamage;
+    private bool _isCritical;
 
-    public void SetAtk(float attackPercentage)
+    public void Init(float finalDamage, bool isCritical)
     {
-        _attackPower = PlayerStats.GetStatValue(StatType.AttackPower) * attackPercentage;
+        _finalDamage = finalDamage;
+        _isCritical = isCritical;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.gameObject.GetComponent<HPComponent>().TakeDamage(_attackPower, false);
+            collision.gameObject.GetComponent<HPComponent>().TakeDamage(_finalDamage, _isCritical);
             
-            Debug.Log($"Enemy 에게 {_attackPower} 데미지를 줌!");
+            Debug.Log($"Enemy 에게 {_finalDamage} 데미지를 줌!");
 
             Destroy(gameObject);
         }
     }
-
-    
-
-
 }

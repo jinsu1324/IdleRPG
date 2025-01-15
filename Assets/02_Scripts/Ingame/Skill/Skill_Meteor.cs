@@ -10,6 +10,9 @@ public class Skill_Meteor : SkillItem
     public float Range { get; private set; }                // 사거리
     public float SplashRadius { get; private set; }         // 공격 스플래시 범위
 
+    private float _skillAttackPower;                        // 스킬 공격력
+
+
     /// <summary>
     /// 초기화
     /// </summary>
@@ -37,6 +40,8 @@ public class Skill_Meteor : SkillItem
         AttackPercentage = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.AttackPercentage, Level));
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
         SplashRadius = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.SplashRadius, Level));
+
+        _skillAttackPower = PlayerStats.GetStatValue(StatType.AttackPower) * AttackPercentage;
     }
 
     /// <summary>
@@ -74,8 +79,12 @@ public class Skill_Meteor : SkillItem
             GameObject.Instantiate(SkillDataSO.SkillPrefab, targetPos, Quaternion.identity).
             GetComponent<SkillProjectile_Meteor>();
 
-        // 그 프로젝타일에 공격력 집어넣어주고
-        projectile.SetAtk(AttackPercentage);
+        // 치명타 여부 결정하고, 최종데미지 계산하고
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+
+        // 프로젝타일에 주입
+        projectile.Init(finalDamage, isCritical);
 
 
 

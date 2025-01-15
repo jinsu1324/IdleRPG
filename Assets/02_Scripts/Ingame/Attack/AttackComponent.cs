@@ -23,7 +23,7 @@ public abstract class AttackComponent : MonoBehaviour
     /// <summary>
     /// √ ±‚»≠
     /// </summary>
-    public virtual void Init(float attackPower, float attackSpeed)
+    public void Init(float attackPower, float attackSpeed)
     {
         _attackPower = attackPower;
         _attackSpeed = attackSpeed;

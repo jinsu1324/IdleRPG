@@ -6,16 +6,13 @@ public class AttackComponent_Player : AttackComponent
 {
     [SerializeField] private Projectile _projectilePrefab;  // 프로젝타일 프리팹
     [SerializeField] private Transform _spawnPoint;         // 스폰 위치
-    protected float _criticalRate;                          // 치명타 확률
-    protected float _criticalMultiple;                      // 치명타 피해 배율
-    protected bool _isCritical;                             // 치명타 공격인지
 
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
-        PlayerStats.OnPlayerStatChanged += Update_AttackGroup;   // 플레이어스탯 바뀔때 -> 공격력 관련 수치들 업데이트
+        PlayerStats.OnPlayerStatChanged += Update_AttackPower_And_AttackSpeed;   // 플레이어스탯 바뀔때 -> 공격력과 공격속도 업데이트
     }
 
     /// <summary>
@@ -23,18 +20,7 @@ public class AttackComponent_Player : AttackComponent
     /// </summary>
     private void OnDisable()
     {
-        PlayerStats.OnPlayerStatChanged -= Update_AttackGroup;
-    }
-
-    /// <summary>
-    /// 초기화
-    /// </summary>
-    public override void Init(float attackPower, float attackSpeed)
-    {
-        base.Init(attackPower, attackSpeed);
-
-        _criticalRate = PlayerStats.GetStatValue(StatType.CriticalRate);
-        _criticalMultiple = PlayerStats.GetStatValue(StatType.CriticalMultiple);
+        PlayerStats.OnPlayerStatChanged -= Update_AttackPower_And_AttackSpeed;
     }
 
     /// <summary>
@@ -51,46 +37,30 @@ public class AttackComponent_Player : AttackComponent
     /// </summary>
     protected override void Attack()
     {
-        SpawnProjectile(CalculateFinalDamage());  // 프로젝타일 생성
+        // 치명타 여부 결정하고, 최종데미지 계산하고
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_attackPower, isCritical);
+
+        // 프로젝타일 생성 및 주입
+        SpawnProjectile(finalDamage, isCritical);  
     }
 
     /// <summary>
     /// 프로젝타일 생성
     /// </summary>
-    private void SpawnProjectile(float attackPower)
+    private void SpawnProjectile(float finalDamage, bool isCritical)
     {
         Projectile projectile = GameObject.Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity);
-        projectile.Init(attackPower, _spawnPoint.position, _isCritical);
+        projectile.Init(finalDamage, isCritical, _spawnPoint.position); // 최종데미지, 치명타여부 등 주입
     }
 
     /// <summary>
-    /// 공격력 관련 수치들 업데이트
+    /// 공격력과 공격속도 업데이트
     /// </summary>
-    public void Update_AttackGroup(PlayerStatArgs args)
+    public void Update_AttackPower_And_AttackSpeed(PlayerStatArgs args)
     {
         _attackPower = args.AttackPower;
         _attackSpeed = args.AttackSpeed;
         _attackCooldown = 1f / _attackSpeed;
-        _criticalRate = args.CriticalRate;
-        _criticalMultiple = args.CriticalMultiple;
-    }
-
-    /// <summary>
-    /// 치명타를 계산하여 최종 데미지를 반환
-    /// </summary>
-    protected float CalculateFinalDamage()
-    {
-        bool isCritical = Random.value <= _criticalRate;    // 치명타 여부 결정
-
-        if (isCritical)
-        {
-            _isCritical = true;
-            return _attackPower * _criticalMultiple; // 치명타 피해 적용
-        }
-        else
-        {
-            _isCritical = false;
-            return _attackPower;
-        }
     }
 }
