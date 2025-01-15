@@ -66,6 +66,11 @@ public abstract class SkillItem : Item, IEnhanceableItem, ISkill
     public abstract void ExecuteSkill();
 
     /// <summary>
+    /// 현재 쿨타임 진행상황 가져오기
+    /// </summary>
+    public abstract float GetCurrentCoolTimeProgress();
+
+    /// <summary>
     /// 상세값들 동적할당된 Desc가져오기
     /// </summary>
     public abstract string GetDynamicDesc();

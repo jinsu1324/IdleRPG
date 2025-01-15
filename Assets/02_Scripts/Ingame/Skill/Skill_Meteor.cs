@@ -99,6 +99,14 @@ public class Skill_Meteor : SkillItem
     }
 
     /// <summary>
+    /// 현재 쿨타임 진행상황 가져오기
+    /// </summary>
+    public override float GetCurrentCoolTimeProgress()
+    {
+        return Mathf.Clamp01(CurrentTime / Delay);
+    }
+
+    /// <summary>
     /// 상세값들 동적할당된 Desc가져오기
     /// </summary>
     public override string GetDynamicDesc()

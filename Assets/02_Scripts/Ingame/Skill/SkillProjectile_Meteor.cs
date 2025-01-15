@@ -18,9 +18,6 @@ public class SkillProjectile_Meteor : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
             collision.gameObject.GetComponent<HPComponent>().TakeDamage(_finalDamage, _isCritical);
-            
-            Debug.Log($"Enemy 에게 {_finalDamage} 데미지를 줌!");
-
             Destroy(gameObject);
         }
     }
