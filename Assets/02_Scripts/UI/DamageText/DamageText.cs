@@ -10,9 +10,9 @@ public class DamageText : ObjectPoolObj
     /// <summary>
     /// 텍스트 설정
     /// </summary>
-    public void SetText(string text)
+    public void SetText(float damage)
     {
-        _text.text = text;
+        _text.text = NumberConverter.ConvertAlphabet(damage);
 
         Invoke("ReturnPool", 0.5f);
     }

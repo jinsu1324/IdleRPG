@@ -21,6 +21,6 @@ public class DamageTextManager : SingletonBase<DamageTextManager>
             damageText = _damageTextPool.GetObj().GetComponent<DamageText>();
 
         damageText.transform.position = position; // 좌표 설정
-        damageText.SetText(damage.ToString()); // 데미지 텍스트 설정
+        damageText.SetText(damage); // 데미지 텍스트 설정
     }
 }

@@ -19,7 +19,7 @@ public class ToastCombatPower : MonoBehaviour
         float beforeTotalPower = args.BeforeTotalPower;
 
         // 수치 표시
-        _valueText.text = $"{totalPower}";
+        _valueText.text = NumberConverter.ConvertAlphabet(totalPower); // 알파벳으로 표시
 
         // 화살표 방향 표시
         if (totalPower > beforeTotalPower)
@@ -39,7 +39,7 @@ public class ToastCombatPower : MonoBehaviour
     private void UpdateChangedValueText(float before, float current)
     {
         float changedValue = Mathf.Abs(current - before);
-        _changedValueText.text = $"{changedValue}";
+        _changedValueText.text = NumberConverter.ConvertAlphabet(changedValue);
     }
 
     /// <summary>

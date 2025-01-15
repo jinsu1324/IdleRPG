@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,10 +57,18 @@ public class UpgradeSlot : MonoBehaviour
         {
             _upgradeNameText.text = upgrade.Name;
             _levelText.text = $"Lv.{upgrade.Level}";
-            _valueText.text = $"{upgrade.Value}";
             _costText.text = $"{upgrade.Cost}";
             _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(upgrade.ID.ToString());
-            //_upgradeButton.interactable = _playerManager.CanAffordStat(stat.Cost);
+
+            // 크리티컬 관련은 퍼센티지로 표현
+            if (_id == StatType.CriticalRate.ToString() || _id == StatType.CriticalMultiple.ToString())
+                _valueText.text = NumberConverter.ConvertPercentage(upgrade.Value);
+            // 공격속도는 소수점 정해서 표현
+            else if (_id == StatType.AttackSpeed.ToString())
+                _valueText.text = NumberConverter.ConvertFixedDecimals(upgrade.Value);
+            // 나머지는 알파벳으로 표현
+            else
+                _valueText.text = NumberConverter.ConvertAlphabet(upgrade.Value);
         }
     }
 }

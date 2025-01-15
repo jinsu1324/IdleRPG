@@ -56,6 +56,6 @@ public class UpgradePanel : MonoBehaviour
     /// </summary>
     private void UpdateTotalPowerTextUI(PlayerStatArgs args)
     {
-        _totalCombatPowerText.text = $"{args.TotalPower}";
+        _totalCombatPowerText.text = NumberConverter.ConvertAlphabet(args.TotalPower);
     }
 }

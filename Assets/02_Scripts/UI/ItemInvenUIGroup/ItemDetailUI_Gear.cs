@@ -11,20 +11,20 @@ using UnityEngine.UI;
 public class ItemDetailUI_Gear : ItemDetailUI
 {
     [Title("장비아이템 정보들", bold: false)]
-    [SerializeField] protected TextMeshProUGUI _descText;               // 상세설명 텍스트
-    [SerializeField] private TextMeshProUGUI _levelText;                // 레벨 텍스트
-    [SerializeField] private TextMeshProUGUI _enhanceableCountText;     // 강화 가능한 아이템 갯수 텍스트
-    [SerializeField] private Slider _countSlider;                       // 갯수 표시 슬라이더
-    [SerializeField] private GameObject _equipIcon;                     // 장착 아이콘
-    [SerializeField] private GameObject _enhanceableArrowIcon;          // 강화가능 아이콘
+    [SerializeField] protected TextMeshProUGUI _descText;                   // 상세설명 텍스트
+    [SerializeField] private TextMeshProUGUI _levelText;                    // 레벨 텍스트
+    [SerializeField] private TextMeshProUGUI _enhanceableCountText;         // 강화 가능한 아이템 갯수 텍스트
+    [SerializeField] private Slider _countSlider;                           // 갯수 표시 슬라이더
+    [SerializeField] private GameObject _equipIcon;                         // 장착 아이콘
+    [SerializeField] private GameObject _enhanceableArrowIcon;              // 강화가능 아이콘
 
     [Title("버튼들", bold: false)]
-    [SerializeField] private Button _equipButton;                       // 장착 버튼
-    [SerializeField] private Button _unEquipButton;                     // 장착 해제 버튼
-    [SerializeField] private Button _enhanceButton;                     // 강화 버튼
+    [SerializeField] private Button _equipButton;                           // 장착 버튼
+    [SerializeField] private Button _unEquipButton;                         // 장착 해제 버튼
+    [SerializeField] private Button _enhanceButton;                         // 강화 버튼
 
-    [Title("장비에 붙어있는 어빌리티들", bold: false)]
-    [SerializeField] private List<ItemAbilityInfo> _abilityInfoList;    // 장비에 붙어있는 어빌리티들
+    [Title("장비에 붙어있는 속성들", bold: false)]
+    [SerializeField] private List<ItemAttributeUI> _itemAttributeUIList;    // 장비에 붙어있는 속성 리스트
     
     /// <summary>
     /// OnEnable
@@ -77,7 +77,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
         }
 
         // 어빌리티 정보 업데이트
-        Update_AbilityInfo(item);
+        Update_ItemAttributeUI(item);
 
         // 장착관련정보 + 버튼들 업데이트
         bool isEquipped = EquipGearManager.IsEquipped(item);
@@ -88,9 +88,9 @@ public class ItemDetailUI_Gear : ItemDetailUI
     }
 
     /// <summary>
-    /// 어빌리티 정보 업데이트
+    /// 장비 속성들 UI 업데이트
     /// </summary>
-    private void Update_AbilityInfo(Item item)
+    private void Update_ItemAttributeUI(Item item)
     {
         if (item is GearItem gearItem)
         {
@@ -102,14 +102,14 @@ public class ItemDetailUI_Gear : ItemDetailUI
                 StatType statType = kvp.Key;
                 float value = kvp.Value;
 
-                _abilityInfoList[index].Show(statType, value);
+                _itemAttributeUIList[index].Show(statType, value);
                 index++;
             }
 
             // 나머지 리스트 요소 비활성화
-            for (int i = index; i < _abilityInfoList.Count; i++)
+            for (int i = index; i < _itemAttributeUIList.Count; i++)
             {
-                _abilityInfoList[index].Hide();
+                _itemAttributeUIList[index].Hide();
             }
         }
     }

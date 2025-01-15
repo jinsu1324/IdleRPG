@@ -79,10 +79,11 @@ public class GearPopup : BottomTabPopupBase
     /// </summary>
     private void Update_StatTexts(PlayerStatArgs args)
     {
-        _attackPowerText.text = $"{args.AttackPower}";
-        _attackSpeedText.text = $"{args.AttackSpeed}";
+        _attackPowerText.text = NumberConverter.ConvertAlphabet(args.AttackPower);
+        _attackSpeedText.text = NumberConverter.ConvertFixedDecimals(args.AttackSpeed);
         _maxHpText.text = $"{args.MaxHp}";
-        _criticalRateText.text = $"{args.CriticalRate}";
-        _criticalMultipleText.text = $"{args.CriticalMultiple}";
+        _maxHpText.text = NumberConverter.ConvertAlphabet(args.MaxHp);
+        _criticalRateText.text = NumberConverter.ConvertPercentage(args.CriticalRate);
+        _criticalMultipleText.text = NumberConverter.ConvertPercentage(args.CriticalMultiple);
     }
 }
