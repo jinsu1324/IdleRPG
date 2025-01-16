@@ -29,7 +29,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 2
     AttributeList:
     - Type: Delay
@@ -39,7 +39,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 3
     AttributeList:
     - Type: Delay
@@ -49,7 +49,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 4
     AttributeList:
     - Type: Delay
@@ -59,7 +59,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 5
     AttributeList:
     - Type: Delay
@@ -69,7 +69,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 6
     AttributeList:
     - Type: Delay
@@ -79,7 +79,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 7
     AttributeList:
     - Type: Delay
@@ -89,7 +89,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 8
     AttributeList:
     - Type: Delay
@@ -99,7 +99,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 9
     AttributeList:
     - Type: Delay
@@ -109,7 +109,7 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   - Level: 10
     AttributeList:
     - Type: Delay
@@ -119,5 +119,5 @@ MonoBehaviour:
     - Type: Range
       Value: 3
     - Type: ProjectileCount
-      Value: 5
+      Value: 3
   SkillPrefab: {fileID: 0}
