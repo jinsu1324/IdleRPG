@@ -1,10 +1,8 @@
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
-using UnityEngine;
 
 /// <summary>
 /// 플레이어 코어
