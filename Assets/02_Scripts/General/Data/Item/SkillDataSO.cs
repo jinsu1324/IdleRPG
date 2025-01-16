@@ -11,10 +11,11 @@ public enum SkillAttributeType
     AttackPercentage,
     Delay,
     Range,
-    SplashRadius,
     AddAttackSpeed,
+    AddAttackPower,
     Duration,
-    ProjectileCount
+    ProjectileCount,
+    ProjectileSpeed
 }
 
 /// <summary>

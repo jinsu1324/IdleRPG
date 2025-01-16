@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 메테오 스킬
+/// </summary>
 public class Skill_Meteor : SkillItem
 {
     public float Delay { get; private set; }                // 딜레이 (스킬쿨타임)
     public float AttackPercentage { get; private set; }     // 공격 퍼센티지
     public float Range { get; private set; }                // 사거리
-    public float SplashRadius { get; private set; }         // 공격 스플래시 범위
 
     private float _skillAttackPower;                        // 스킬 공격력
-
 
     /// <summary>
     /// 초기화
@@ -39,7 +40,6 @@ public class Skill_Meteor : SkillItem
         Delay = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Delay, Level));
         AttackPercentage = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.AttackPercentage, Level));
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
-        SplashRadius = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.SplashRadius, Level));
 
         _skillAttackPower = PlayerStats.GetStatValue(StatType.AttackPower) * AttackPercentage;
     }
@@ -100,6 +100,6 @@ public class Skill_Meteor : SkillItem
     /// </summary>
     public override string GetDynamicDesc()
     {
-        return string.Format(Desc, AttackPercentage);
+        return string.Format(Desc, NumberConverter.ConvertPercentage(AttackPercentage));
     }
 }

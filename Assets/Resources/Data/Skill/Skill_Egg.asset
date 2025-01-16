@@ -17,7 +17,7 @@ MonoBehaviour:
   Name: "\uB2EC\uAC40\uD22C\uCC99"
   Grade: Rare
   Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 {0}\uAC1C \uB358\uC838 \uAC01\uAC01
-    \uACF5\uACA9\uB825\uC758 {1}% \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    \uACF5\uACA9\uB825\uC758 {1} \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 55556b917e83fc341823b563c982ac54, type: 3}
   LevelAttributesList:
   - Level: 1
@@ -120,4 +120,4 @@ MonoBehaviour:
       Value: 3
     - Type: ProjectileCount
       Value: 5
-  SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}
+  SkillPrefab: {fileID: 0}

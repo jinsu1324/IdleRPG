@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 분노 스킬
+/// </summary>
 public class Skill_Anger : SkillItem
 {
     public float Delay { get; private set; }            // 딜레이 (스킬쿨타임)

@@ -99,4 +99,4 @@ MonoBehaviour:
       Value: 1.9
     - Type: Duration
       Value: 5
-  SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}
+  SkillPrefab: {fileID: 0}

@@ -81,6 +81,6 @@ public class Skill_Egg : SkillItem
     /// </summary>
     public override string GetDynamicDesc()
     {
-        return string.Format(Desc, ProjectileCount, AttackPercentage);
+        return string.Format(Desc, ProjectileCount, NumberConverter.ConvertPercentage(AttackPercentage));
     }
 }

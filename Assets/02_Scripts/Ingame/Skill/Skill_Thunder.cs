@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 썬더볼트 스킬
+/// </summary>
 public class Skill_Thunder : SkillItem
 {
     public float Delay { get; private set; }                // 딜레이 (스킬쿨타임)
     public float AttackPercentage { get; private set; }     // 공격 퍼센티지
     public float Range { get; private set; }                // 사거리
-    public float ProjectileCount { get; private set; }      // 투사체 갯수
-    public float SplashRadius { get; private set; }         // 공격 스플래시 범위
 
     private float _skillAttackPower;                        // 스킬 공격력
 
@@ -38,8 +39,6 @@ public class Skill_Thunder : SkillItem
         Delay = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Delay, Level));
         AttackPercentage = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.AttackPercentage, Level));
         Range = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.Range, Level));
-        ProjectileCount = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.ProjectileCount, Level));
-        SplashRadius = float.Parse(SkillDataSO.GetAttributeValue(SkillAttributeType.SplashRadius, Level));
 
         _skillAttackPower = PlayerStats.GetStatValue(StatType.AttackPower) * AttackPercentage;
     }
@@ -68,6 +67,23 @@ public class Skill_Thunder : SkillItem
     public override void ExecuteSkill()
     {
         Debug.Log("Skill_Thunder!!");
+
+        //// 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
+        //Vector3 targetPos =
+        //    (FieldTargetManager.GetClosestLivingTarget(PlayerSpawner.PlayerInstance.transform.position) as Component).
+        //    transform.position;
+
+        //// 프로젝타일 생성하고
+        //SkillProjectile_Thunder projectile =
+        //    GameObject.Instantiate(SkillDataSO.SkillPrefab, targetPos, Quaternion.identity).
+        //    GetComponent<SkillProjectile_Thunder>();
+
+        //// 치명타 여부 결정하고, 최종데미지 계산하고
+        //bool isCritical = CriticalManager.IsCritical();
+        //float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+
+        //// 프로젝타일에 주입
+        //projectile.Init(finalDamage, isCritical);
     }
 
     /// <summary>
@@ -83,6 +99,6 @@ public class Skill_Thunder : SkillItem
     /// </summary>
     public override string GetDynamicDesc()
     {
-        return string.Format(Desc, ProjectileCount, AttackPercentage);
+        return string.Format(Desc, NumberConverter.ConvertPercentage(AttackPercentage));
     }
 }
