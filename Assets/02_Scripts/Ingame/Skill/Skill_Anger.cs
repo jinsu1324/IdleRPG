@@ -60,7 +60,16 @@ public class Skill_Anger : SkillItem
     public override void ExecuteSkill()
     {
         Debug.Log("Skill_Anger!!");
+
+        // 버프 적용
+        Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>() { { StatType.AttackSpeed, AddAttackSpeed} };
+        PlayerBuffSystem.Instance.StartBuffToPlayer(Duration, buffDict, this);
+
+        // 이펙트 시작
+        GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerSpawner.PlayerInstance.transform);
+        fx.GetComponent<FX_Skill_Anger>().Init(Duration);
     }
+
 
     /// <summary>
     /// 현재 쿨타임 진행상황 가져오기

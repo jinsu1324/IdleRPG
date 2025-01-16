@@ -85,17 +85,6 @@ public class Skill_Meteor : SkillItem
 
         // 프로젝타일에 주입
         projectile.Init(finalDamage, isCritical);
-
-
-
-        // 그 프로젝타일은 내려오는 애니메이션만 있고, 그다음에 알아서 폭팔이 켜지고 (폭발go 에 collider있음)
-
-        // collider 감지해서 데미지 주기
-
-        // 알아서 사라지기
-
-
-
     }
 
     /// <summary>

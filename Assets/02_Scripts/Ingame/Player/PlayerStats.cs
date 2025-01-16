@@ -78,7 +78,7 @@ public class PlayerStats
             else
                 AddStatModifier(statType, value, source);
         }
-        
+
         // 스탯변경 이벤트 실행
         OnPlayerStatChanged?.Invoke(GetCurrentPlayerStatArgs());
     }

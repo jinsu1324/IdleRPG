@@ -11,7 +11,8 @@ public enum FXName
     FX_Player_Upgrade,
     FX_Enemy_Damaged,
     FX_Enemy_Die,
-    UIFX_UpgradeItem
+    UIFX_UpgradeItem,
+    FX_Skill_Anger
 }
 
 /// <summary>
@@ -45,16 +46,18 @@ public class FXManager : SingletonBase<FXManager>
     /// <summary>
     /// 이펙트 지정위치에 스폰
     /// </summary>
-    public void SpawnFX(FXName fxName, Transform spawnPos)
+    public GameObject SpawnFX(FXName fxName, Transform spawnPos)
     {
         if (_fxPoolDict.TryGetValue(fxName, out ObjectPool pool))
         {
             GameObject fx = pool.GetObj();  // 가져오기
             fx.transform.position = spawnPos.position;   // 위치 설정
+            return fx;
         }
         else
         {
             Debug.Log($"{fxName} 이펙트 풀을 찾을 수 없습니다.");
+            return null;
         }
     }
 }
