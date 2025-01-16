@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillCastUI : MonoBehaviour
+public class CastSkillUI : MonoBehaviour
 {
-    private ISkill _currentSkill;
-    [SerializeField] private Image _skillIcon;
-    [SerializeField] private Image _coolTimeDimd;
+    private ISkill _currentSkill;                       // 현재 스킬
+    [SerializeField] private Image _skillIcon;          // 스킬 아이콘
+    [SerializeField] private Image _coolTimeDimd;       // 쿨타임 딤드
 
+    /// <summary>
+    /// Update
+    /// </summary>
     private void Update()
     {
         if (_currentSkill == null)
             return;
 
-        // 쿨타임 진행 상태를 이미지의 fillAmount로 설정
+        // 쿨타임에따라 딤드 점점 사라지게
         _coolTimeDimd.fillAmount = 1 - _currentSkill.GetCurrentCoolTimeProgress();
     }
 
+    /// <summary>
+    /// 초기화 및 스킬 바인딩
+    /// </summary>
     public void Init_BindSkill(ISkill skill)
     {
         _currentSkill = skill;
@@ -29,6 +35,9 @@ public class SkillCastUI : MonoBehaviour
         _coolTimeDimd.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// 숨기기
+    /// </summary>
     public void Hide()
     {
         _currentSkill = null;
