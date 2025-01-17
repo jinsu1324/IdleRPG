@@ -29,7 +29,9 @@ public class SkillProjectile_Meteor : MonoBehaviour
                 IsCritical = _isCritical
             };
             collision.gameObject.GetComponent<HPComponent>().TakeDamage(args);
-            Destroy(gameObject);
+
+            Destroy(gameObject); 
+            // Todo 맞아야 게임오브젝트가 사라지게 되어있는데, Enemy가 사라질수있음 그때 처리 필요
         }
     }
 }

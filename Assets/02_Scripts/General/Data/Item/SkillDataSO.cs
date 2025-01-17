@@ -9,7 +9,6 @@ using UnityEngine;
 public enum SkillAttributeType
 {
     AttackPercentage,
-    Delay,
     Range,
     AddAttackSpeed,
     AddAttackPower,
@@ -24,7 +23,8 @@ public enum SkillAttributeType
 [System.Serializable]
 public class SkillDataSO : ItemDataSO
 {
-    public GameObject SkillPrefab;   // 스킬 프리팹
+    public float CoolTime;              // 스킬 쿨타임
+    public GameObject SkillPrefab;      // 스킬 프리팹
 
     /// <summary>
     /// 레벨에 맞는 속성들을 딕셔너리로 가져오기

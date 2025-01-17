@@ -22,82 +22,63 @@ MonoBehaviour:
   LevelAttributesList:
   - Level: 1
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3
     - Type: Range
       Value: 3
   - Level: 2
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.1
     - Type: Range
       Value: 3
   - Level: 3
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.2
     - Type: Range
       Value: 3
   - Level: 4
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.3
     - Type: Range
       Value: 3
   - Level: 5
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.4
     - Type: Range
       Value: 3
   - Level: 6
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.5
     - Type: Range
       Value: 3
   - Level: 7
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.6
     - Type: Range
       Value: 3
   - Level: 8
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.7
     - Type: Range
       Value: 3
   - Level: 9
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.8
     - Type: Range
       Value: 3
   - Level: 10
     AttributeList:
-    - Type: Delay
-      Value: 2
     - Type: AttackPercentage
       Value: 3.9
     - Type: Range
       Value: 3
+  CoolTime: 2
   SkillPrefab: {fileID: 1001278347511085140, guid: 5b887ac17380a524d9ed23924fcffd89, type: 3}

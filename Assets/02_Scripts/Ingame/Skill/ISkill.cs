@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface ISkill
 {
-    float CurrentTime { get; }      // 딜레이 체크할 시간
+    float CoolTime { get; }     // 스킬 쿨타임
+    float CurrentTime { get; }  // 쿨타임 체크할 시간
 
     /// <summary>
     /// 쿨타임 체크

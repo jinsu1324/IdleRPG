@@ -69,6 +69,7 @@ public class Parsing_SkillData : Parsing_Base
                 skillDataSO.Name = row[2];
                 skillDataSO.Grade = row[3];
                 skillDataSO.Desc = row[4];
+                skillDataSO.CoolTime = float.Parse(row[5]);
                 skillDataSO.LevelAttributesList = new List<LevelAttributes>();
 
                 gearDataSODict[id] = skillDataSO;
@@ -77,12 +78,12 @@ public class Parsing_SkillData : Parsing_Base
             // 아이템 레벨별 정보
             LevelAttributes itemLevelInfo = new LevelAttributes()
             {
-                Level = row[5],
+                Level = row[6],
                 AttributeList = new List<Attribute>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
-            for (int k = 6; k < row.Length; k += 2)
+            for (int k = 7; k < row.Length; k += 2)
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
@@ -137,6 +138,7 @@ public class Parsing_SkillData : Parsing_Base
             skillDataSO.Name = data.Name;
             skillDataSO.Grade = data.Grade;
             skillDataSO.Desc = data.Desc;
+            skillDataSO.CoolTime = data.CoolTime;
             skillDataSO.LevelAttributesList = data.LevelAttributesList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장

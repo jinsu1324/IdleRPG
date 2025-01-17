@@ -21,82 +21,63 @@ MonoBehaviour:
   LevelAttributesList:
   - Level: 1
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 500
     - Type: Duration
       Value: 5
   - Level: 2
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 510
     - Type: Duration
       Value: 5
   - Level: 3
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 520
     - Type: Duration
       Value: 5
   - Level: 4
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 530
     - Type: Duration
       Value: 5
   - Level: 5
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 540
     - Type: Duration
       Value: 5
   - Level: 6
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 550
     - Type: Duration
       Value: 5
   - Level: 7
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 560
     - Type: Duration
       Value: 5
   - Level: 8
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 570
     - Type: Duration
       Value: 5
   - Level: 9
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 580
     - Type: Duration
       Value: 5
   - Level: 10
     AttributeList:
-    - Type: Delay
-      Value: 10
     - Type: AddAttackPower
       Value: 590
     - Type: Duration
       Value: 5
+  CoolTime: 10
   SkillPrefab: {fileID: 0}
