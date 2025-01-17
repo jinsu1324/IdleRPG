@@ -6,6 +6,15 @@ using TMPro;
 using UnityEngine;
 
 /// <summary>
+/// 플레이어 스탯 업데이트에 필요한 것들 구조체
+/// </summary>
+public struct PlayerStatUpdateArgs
+{
+    public Dictionary<StatType, float> AttributeDict;   // 속성들 딕셔너리
+    public object Source;                               // 출처
+}
+
+/// <summary>
 /// 플레이어 스탯 Args
 /// </summary>
 public struct PlayerStatArgs
@@ -58,13 +67,16 @@ public class PlayerStats
     /// <summary>
     /// 스탯 모디파이어 업데이트
     /// </summary>
-    public static void UpdateStatModifier(Dictionary<StatType, float> itemStatDict, object source)
+    public static void UpdateStatModifier(PlayerStatUpdateArgs args)
     {
+        Dictionary<StatType, float> attributeDict = args.AttributeDict; // 속성들 딕셔너리
+        object source = args.Source;    // 출처
+
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
 
         // 아이템 스탯들 전부 플레이어 스탯에 추가
-        foreach (var kvp in itemStatDict)
+        foreach (var kvp in attributeDict)
         {
             StatType statType = kvp.Key;
             float value = kvp.Value;
@@ -94,13 +106,16 @@ public class PlayerStats
     /// <summary>
     /// 스탯 모디파이어 제거
     /// </summary>
-    public static void RemoveStatModifier(Dictionary<StatType, float> itemStatDict, object source)
+    public static void RemoveStatModifier(PlayerStatUpdateArgs args)
     {
+        Dictionary<StatType, float> attributeDict = args.AttributeDict; // 속성들 딕셔너리
+        object source = args.Source;    // 출처
+
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
 
         // 해당 아이템(source)의 스탯들을, 플레이어 스탯에서 제거
-        foreach (var kvp in itemStatDict)
+        foreach (var kvp in attributeDict)
         {
             StatType statType = kvp.Key;
 

@@ -14,7 +14,7 @@ public class AnimComponent : MonoBehaviour
     {
         AttackComponent attackComponent = GetComponent<AttackComponent>();
         if (attackComponent != null)
-            attackComponent.OnAttacked += PlayAttackAnim; // 공격할 때, 공격 애니메이션 재생
+            attackComponent.OnAttack += PlayAttackAnim; // 공격할 때, 공격 애니메이션 재생
     }
 
     /// <summary>
@@ -24,13 +24,13 @@ public class AnimComponent : MonoBehaviour
     {
         AttackComponent attackComponent = GetComponent<AttackComponent>();
         if (attackComponent != null)
-            attackComponent.OnAttacked -= PlayAttackAnim;
+            attackComponent.OnAttack -= PlayAttackAnim;
     }
 
     /// <summary>
     /// 공격 애니메이션 재생
     /// </summary>
-    public void PlayAttackAnim(OnAttackedArgs args)
+    public void PlayAttackAnim(AttackArgs args)
     {
         _animator.SetFloat("AttackSpeed", args.AttackSpeed); // 애니메이션 스피드 조정
         _animator.SetTrigger("Attack"); // 공격 애니메이션 재생

@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 8349220822790349758}
   - component: {fileID: 6723706231830955227}
   - component: {fileID: 3383299509001523722}
-  - component: {fileID: 2610632928792442622}
+  - component: {fileID: 8727782936110565961}
   - component: {fileID: 133296287989244951}
   - component: {fileID: 8049943085229416431}
   - component: {fileID: 8472665583169259455}
@@ -455,7 +455,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
---- !u!114 &2610632928792442622
+  _hpComponent: {fileID: 8727782936110565961}
+  _attackComponent: {fileID: 8049943085229416431}
+--- !u!114 &8727782936110565961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -464,7 +466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7612278914373717722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47998c5e06d67a243a58f47a94ee05eb, type: 3}
+  m_Script: {fileID: 11500000, guid: d899fecb9774c154d86d8cf0f3f52442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &133296287989244951

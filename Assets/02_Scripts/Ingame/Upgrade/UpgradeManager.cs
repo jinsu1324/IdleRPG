@@ -133,7 +133,7 @@ public class UpgradeManager
             OnUpgradeLevelUp?.Invoke();
 
             // 필드에 있는 플레이어 위치에 이펙트 재생
-            FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerSpawner.GetPlayerInstancePos());
+            FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerManager.GetPlayerInstancePos());
         }
         else
         {

@@ -23,7 +23,12 @@ public class SkillProjectile_Thunder : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            collision.gameObject.GetComponent<HPComponent>().TakeDamage(_finalDamage, _isCritical);
+            TakeDamageArgs args = new TakeDamageArgs()
+            {
+                Damage = _finalDamage,
+                IsCritical = _isCritical
+            };
+            collision.gameObject.GetComponent<HPComponent>().TakeDamage(args);
             Destroy(gameObject);
         }
     }

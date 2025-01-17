@@ -63,7 +63,12 @@ public class Upgrade : BaseData
         Dictionary<StatType, float> dict = new Dictionary<StatType, float>();
         dict[statType] = Value;
 
-        PlayerStats.UpdateStatModifier(dict, this); // 플레이어 스탯에 적용
+        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+        {
+            AttributeDict = dict,
+            Source = this
+        };
+        PlayerStats.UpdateStatModifier(args); // 플레이어 스탯에 적용
     }
 
     /// <summary>

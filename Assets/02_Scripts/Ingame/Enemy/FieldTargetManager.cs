@@ -50,7 +50,7 @@ public class FieldTargetManager
         {
             if (target is HPComponent hpComponent)
             {
-                Enemy enemy = hpComponent.GetComponent<Enemy>();
+                EnemyCore enemy = hpComponent.GetComponent<EnemyCore>();
                 enemy.ReturnPool(); // 필드 적들을 풀로 돌려보냄
             }
         }

@@ -71,7 +71,7 @@ public class Skill_Meteor : SkillItem
 
         // 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
         Vector3 targetPos = 
-            (FieldTargetManager.GetClosestLivingTarget(PlayerSpawner.PlayerInstance.transform.position) as Component).
+            (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).
             transform.position;
 
         // 프로젝타일 생성하고

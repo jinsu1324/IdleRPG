@@ -14,11 +14,11 @@ public class Projectile : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(float attackPower, bool isCritical, Vector3 spawnPos)
+    public void Init(AttackArgs args)
     {
-        _finalDamage = attackPower;
-        _isCritical = isCritical;
-        _spawnPos = spawnPos;
+        _finalDamage = args.AttackPower;
+        _isCritical = args.IsCritical;
+        _spawnPos = args.projectileSpawnPos;
 
         FindTarget(); // 타겟 검색
     }
@@ -59,7 +59,13 @@ public class Projectile : MonoBehaviour
     /// </summary>
     private void AttackTargetEnemy()
     {
-        _target.TakeDamage(_finalDamage, _isCritical);
+        TakeDamageArgs takeDamageArgs = new TakeDamageArgs()
+        {
+            Damage = _finalDamage,
+            IsCritical = _isCritical,
+        };
+        _target.TakeDamage(takeDamageArgs);
+
         Destroy(gameObject);
     }
 }

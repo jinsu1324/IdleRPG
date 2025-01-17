@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 5271637078737633285}
   - component: {fileID: 4536158659823626995}
   - component: {fileID: 4450593558359130494}
-  - component: {fileID: 7927337952629196051}
+  - component: {fileID: 5432502807284386637}
   - component: {fileID: 8718671103535195398}
   - component: {fileID: 7312170959259406287}
   - component: {fileID: 7084045856898601512}
@@ -148,7 +148,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7927337952629196051
+--- !u!114 &5432502807284386637
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2306491536672818110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56561a963c1ab6e4e8cd11e4e4fa4d37, type: 3}
+  m_Script: {fileID: 11500000, guid: 274c0bd7dfb89d148831a81ae66e0a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
@@ -169,6 +169,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  _hpComponent: {fileID: 8718671103535195398}
+  _attackComponent: {fileID: 7084045856898601512}
+  moveComponent: {fileID: 4681285460347550509}
 --- !u!114 &8718671103535195398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2306491536672818110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6912eb967126e7446bc1c6e80cbc1aad, type: 3}
+  m_Script: {fileID: 11500000, guid: d899fecb9774c154d86d8cf0f3f52442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7312170959259406287
@@ -203,7 +206,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2306491536672818110}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4451c4465b909e6439cf3717cba33a9f, type: 3}
+  m_Script: {fileID: 11500000, guid: b063f2c8041f18043834bbc56ad0791c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _attackMotionFrame: 15

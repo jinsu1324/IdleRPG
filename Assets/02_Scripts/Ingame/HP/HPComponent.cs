@@ -3,23 +3,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+
+/// <summary>
+/// HP컴포넌트 초기화할때 필요한 것들 구조체
+/// </summary>
+public struct HPInitArgs
+{
+    public float MaxHp;     // 최대체력
+}
 
 /// <summary>
 /// 데미지 받았을때 필요한 것들 구조체
 /// </summary>
-public struct OnTakeDamagedArgs
+public struct TakeDamageArgs
 {
-    public float CurrentHp;
-    public float MaxHp;
+    public float Damage;        // 받은 데미지
+    public bool IsCritical;     // 크리티컬인지?
+    public float CurrentHp;     // 현재 HP
+    public float MaxHp;         // 맥스 HP
 }
 
 /// <summary>
-/// HP컴포넌트 베이스
+/// HP 컴포넌트
 /// </summary>
-public abstract class HPComponent : MonoBehaviour, IDamagable
+public class HPComponent : MonoBehaviour, IDamagable
 {
-    public Action<OnTakeDamagedArgs> OnTakeDamaged; // 데미지 받았을때 이벤트
+    public Action<TakeDamageArgs> OnTakeDamage;     // 데미지 받았을때 이벤트
+    public Action OnDie;                            // 죽었을 때 이벤트
     public float CurrentHp { get; set; }            // 현재 체력 
     public float MaxHp { get; set; }                // 최대 체력
     public bool IsDead { get; set; }                // 죽었는지
@@ -27,54 +39,57 @@ public abstract class HPComponent : MonoBehaviour, IDamagable
     /// <summary>
     /// 초기화
     /// </summary>
-    public virtual void Init(float hp)
+    public virtual void Init(HPInitArgs args)
     {
         IsDead = false;
 
-        MaxHp = hp;
+        MaxHp = args.MaxHp;
         CurrentHp = MaxHp;
     }
 
     /// <summary>
     /// 데미지 받음
     /// </summary>
-    public void TakeDamage(float atk, bool isCritical)
+    public void TakeDamage(TakeDamageArgs args)
     {
-        // 죽었으면 그냥 무시
-        if (IsDead)
+        if (IsDead) // 죽었으면 그냥 무시
             return;
 
-        // 체력 닳기
-        CurrentHp -= atk;
+        CurrentHp -= args.Damage;
+
+        args.CurrentHp = CurrentHp; // 현재 체력에 관한 정보들도 구조체에 담기
+        args.MaxHp = MaxHp;
         
-        // 이벤트 알림
-        OnTakeDamagedArgs args = new OnTakeDamagedArgs() { CurrentHp = this.CurrentHp, MaxHp = this.MaxHp };
-        OnTakeDamaged?.Invoke(args);
+        OnTakeDamage?.Invoke(args); // 데미지 받았을때 이벤트 알림
 
-        // 데미지 받았을때 태스크들 처리
-        TaskDamaged(atk, isCritical);
+        if (CurrentHp <= 0)
+            Die();
     }
-
-    /// <summary>
-    /// 데미지 받았을때 태스크들 처리
-    /// </summary>
-    protected abstract void TaskDamaged(float atk, bool isCritical);
 
     /// <summary>
     /// 죽음
     /// </summary>
     public void Die()
     {
-        if (IsDead) 
+        if (IsDead) // 이미 죽었으면 무시
             return;
 
         IsDead = true;
-
-        TaskDie();
+        OnDie?.Invoke(); // 죽었을때 이벤트 알림
     }
 
     /// <summary>
-    /// 죽었을때 태스크들 처리
+    /// 최대체력 변경
     /// </summary>
-    protected abstract void TaskDie();
+    public void ChangeMaxHp(PlayerStatArgs args) => MaxHp = args.MaxHp;
+
+    /// <summary>
+    /// HP 리셋
+    /// </summary>
+    public void ResetHp() => CurrentHp = MaxHp;
+
+    /// <summary>
+    /// 죽었음을 false로 리셋
+    /// </summary>
+    public void ResetIsDead() => IsDead = false;
 }

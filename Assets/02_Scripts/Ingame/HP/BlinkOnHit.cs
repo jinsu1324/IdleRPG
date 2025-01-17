@@ -13,7 +13,7 @@ public class BlinkOnHit : MonoBehaviour
     {
         HPComponent hpComponent = GetComponent<HPComponent>();
         if (hpComponent != null)
-            hpComponent.OnTakeDamaged += SpriteBlink;   // 데미지 받았을 때, 스프라이트 깜빡이기
+            hpComponent.OnTakeDamage += SpriteBlink;   // 데미지 받았을 때, 스프라이트 깜빡이기
     }
 
     /// <summary>
@@ -23,13 +23,13 @@ public class BlinkOnHit : MonoBehaviour
     {
         HPComponent hpComponent = GetComponent<HPComponent>();
         if (hpComponent != null)
-            hpComponent.OnTakeDamaged -= SpriteBlink;
+            hpComponent.OnTakeDamage -= SpriteBlink;
     }
 
     /// <summary>
     /// 스프라이트 깜빡이기
     /// </summary>
-    private void SpriteBlink(OnTakeDamagedArgs args)
+    private void SpriteBlink(TakeDamageArgs args)
     {
         foreach (SpriteRenderer sprite in _spriteList)
             sprite.DOColor(Color.red, 0.1f).OnComplete(() => sprite.DOColor(Color.white, 0.1f));

@@ -43,7 +43,7 @@ public class EnemySpawner : SerializedMonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            Enemy enemy = pool.GetObj().GetComponent<Enemy>();
+            EnemyCore enemy = pool.GetObj().GetComponent<EnemyCore>();
             enemy.transform.position = _spawnPosList[i].position;
             enemy.Init(enemyData, statPercentage);
         }

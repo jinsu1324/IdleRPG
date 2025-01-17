@@ -64,12 +64,22 @@ public class Skill_Anger : SkillItem
     {
         Debug.Log("Skill_Anger!!");
 
+        // 버프 딕셔너리 제작
+        Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>() 
+        { 
+            { StatType.AttackSpeed, AddAttackSpeed}
+        };
+
         // 버프 적용
-        Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>() { { StatType.AttackSpeed, AddAttackSpeed} };
-        PlayerBuffSystem.Instance.StartBuffToPlayer(Duration, buffDict, this);
+        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+        {
+            AttributeDict = buffDict,
+            Source = this,
+        };
+        PlayerBuffSystem.Instance.StartBuffToPlayer(Duration, args);
 
         // 이펙트 시작
-        GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerSpawner.PlayerInstance.transform);
+        GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerManager.PlayerInstance.transform);
         fx.GetComponent<FX_Skill_Anger>().Init(Duration);
     }
 

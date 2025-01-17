@@ -12,7 +12,7 @@ public abstract class HPBar : MonoBehaviour
     /// </summary>
     protected virtual void OnEnable()
     {
-        GetComponent<HPComponent>().OnTakeDamaged += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트
+        GetComponent<HPComponent>().OnTakeDamage += UpdateHPSlider;   // 데미지 받았을 때, HP슬라이더 업데이트
         ResetHpBar();
     }
 
@@ -21,13 +21,13 @@ public abstract class HPBar : MonoBehaviour
     /// </summary>
     protected virtual void OnDisable()
     {
-        GetComponent<HPComponent>().OnTakeDamaged -= UpdateHPSlider;
+        GetComponent<HPComponent>().OnTakeDamage -= UpdateHPSlider;
     }
 
     /// <summary>
     /// HP슬라이더 업데이트
     /// </summary>
-    public void UpdateHPSlider(OnTakeDamagedArgs args)
+    public void UpdateHPSlider(TakeDamageArgs args)
     {
         _hpSlider.value = (float)args.CurrentHp / (float)args.MaxHp;
     }
