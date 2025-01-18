@@ -6,18 +6,31 @@ using UnityEngine;
 /// <summary>
 /// 젬 관리자
 /// </summary>
-public class GemManager : MonoBehaviour
+[System.Serializable]
+public class GemManager : ISavable
 {
-    private static int _currentGem;                 // 현재 젬
+    [SaveField] private static int _currentGem;                 // 현재 젬
+    public static int CurrentGem
+    { 
+        get => _currentGem;
+        set
+        {
+            _currentGem = value;
+            NotifyChanged(); // 값이 변경될때 이벤트 호출
+        }
+    }
+
     public static event Action<int> OnGemChanged;   // 젬 변경 되었을 때 이벤트
+    public string Key => nameof(GemManager);   // 고유 키 설정
 
     /// <summary>
     /// 젬 추가
     /// </summary>
     public static void AddGem(int amount)
     {
-        _currentGem += amount;
-        NotifyChanged();
+        CurrentGem += amount;
+        Debug.Log($"현재 gem {CurrentGem}");
+        //NotifyChanged();
     }
 
     /// <summary>
@@ -25,10 +38,10 @@ public class GemManager : MonoBehaviour
     /// </summary>
     public static void ReduceGem(int amount)
     {
-        if (_currentGem >= amount)
+        if (CurrentGem >= amount)
         {
-            _currentGem -= amount;
-            NotifyChanged();
+            CurrentGem -= amount;
+            //NotifyChanged();
         }
         else
         {
@@ -41,7 +54,7 @@ public class GemManager : MonoBehaviour
     /// </summary>
     public static int GetGem()
     {
-        return _currentGem;
+        return CurrentGem;
     }
 
     /// <summary>
@@ -49,7 +62,7 @@ public class GemManager : MonoBehaviour
     /// </summary>
     public static bool HasEnoughGem(int cost)
     {
-        return _currentGem >= cost;
+        return CurrentGem >= cost;
     }
 
     /// <summary>
@@ -57,6 +70,15 @@ public class GemManager : MonoBehaviour
     /// </summary>
     private static void NotifyChanged()
     {
+        Debug.Log("젬 변경 이벤트 호출!!~~~~~~~~~~!!!!!");
+
+        OnGemChanged?.Invoke(_currentGem);
+    }
+
+    public void NotifyLoaded()
+    {
+        Debug.Log("젬 변경 이벤트 호출!!~~~~~~~~~~!!!!!");
+
         OnGemChanged?.Invoke(_currentGem);
     }
 }
