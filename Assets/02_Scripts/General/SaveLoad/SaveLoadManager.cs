@@ -1,18 +1,76 @@
 using Firebase.Database;
 using Newtonsoft.Json; // Newtonsoft.Json 사용
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 
+
+
+
+//////// 내가 생각하는 저장해야하는 구조
+/// ItemInven 
+/// {
+///     Weapon
+///     {
+///         Item
+///         {
+///             ID : Weapon_Sword
+///             ItemType : ItemType.Weapon
+///             Count : 7
+///             Level : 2
+///         }
+///         
+///         Item
+///         {
+///             ID : Weapon_Axe
+///             ItemType : ItemType.Weapon
+///             Count : 7
+///             Level : 2
+///         }
+///     }
+///     
+///     Armor
+///     {
+///         Item
+///         {
+///             ID : Armor_SteelArmor
+///             ItemType : ItemType.Armor
+///             Count : 7
+///             Level : 2
+///         }
+///         
+///         Item
+///         {
+///             ID : Armor_ForestArmor
+///             ItemType : ItemType.Armor
+///             Count : 7
+///             Level : 2
+///         }
+///     }
+/// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 /// <summary>
 /// 세이브할 필드에만 붙일 어트리뷰트
 /// </summary>
 [System.AttributeUsage(System.AttributeTargets.Field)]
-public class SaveField : System.Attribute 
-{ 
+public class SaveField : System.Attribute
+{
 
 }
 
@@ -25,6 +83,40 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     private DatabaseReference _databaseReference;   // 데이터베이스 레퍼런스
     private List<ISavable> _managerList;            // 저장할 매니저 리스트
 
+
+
+
+    public async void DataSaveJinsu()
+    {
+        // JSON 직렬화 및 Firebase에 저장
+        string json = JsonConvert.SerializeObject(ItemInven._itemInvenDict, Formatting.Indented);
+        await _databaseReference.Child("users").Child(_userID).Child("ItemInven").SetRawJsonValueAsync(json);
+    }
+
+    public async void DataLoadJinsu()
+    {
+        var dataSnapshot = await _databaseReference.Child("users").Child(_userID).Child("ItemInven").GetValueAsync();
+
+        // 데이터스냅샷 못찾았으면 그냥 리턴
+        if (!dataSnapshot.Exists)
+        {
+            Debug.LogWarning($"ItemInven 데이터를 찾을 수 없습니다.");
+            return;
+        }
+
+        // 저장된 데이터 가져오기
+        string json = dataSnapshot.GetRawJsonValue();
+        Debug.Log(json);
+
+        //var loadedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+    }
+
+
+
+
+
+
     /// <summary>
     /// Awake
     /// </summary>
@@ -36,7 +128,8 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         _managerList = new List<ISavable>
         {
             new GoldManager(),
-            new GemManager()
+            new GemManager(),
+            new ItemInven()
             // 여기에 다른 매니저를 추가
         };
     }
@@ -49,18 +142,18 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // SaveField 어트리뷰트들만 가져오기
         var fields = savable.GetType()
                             .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                            .Where(field => System.Attribute.IsDefined(field, typeof(SaveField))); 
+                            .Where(field => System.Attribute.IsDefined(field, typeof(SaveField)));
 
-        // 필드이름 - 필드값 딕셔너리 형태로 변환
+        // JSON 직렬화를 위한 필드와 값 설정
         var data = new Dictionary<string, object>();
         foreach (var field in fields)
-            data[field.Name] = field.GetValue(savable); 
+            data[field.Name] = field.GetValue(savable);
 
-        // Firebase에 저장
-        string json = JsonConvert.SerializeObject(data);
+        // JSON 직렬화 및 Firebase에 저장
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
         await _databaseReference.Child("users").Child(_userID).Child(savable.Key).SetRawJsonValueAsync(json);
 
-        Debug.Log($"저장 완료! {savable.Key} : {json}");
+        //Debug.Log($"저장 완료! {savable.Key} : {json}");
     }
 
     /// <summary>
@@ -70,30 +163,49 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     {
         var dataSnapshot = await _databaseReference.Child("users").Child(_userID).Child(savable.Key).GetValueAsync();
 
-        if (dataSnapshot.Exists)
+        // 데이터스냅샷 못찾았으면 그냥 리턴
+        if (!dataSnapshot.Exists)
         {
-            // 가져온 데이터 역직렬화
-            string json = dataSnapshot.GetRawJsonValue();
-            Dictionary<string, object> loadedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-
-            // SaveField 어트리뷰트들만 가져오기
-            var fields = savable.GetType()
-                                .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                                .Where(field => System.Attribute.IsDefined(field, typeof(SaveField))); 
-
-            // 가져온 데이터를 필드에 덮어씌움
-            foreach (var field in fields)
-            {
-                if (loadedData.TryGetValue(field.Name, out object value))
-                    field.SetValue(savable, Convert.ChangeType(value, field.FieldType));
-            }
-
-            Debug.Log($"불러오기 완료! {savable.Key} : {json}");
+            Debug.LogWarning($"{savable.Key} 데이터를 찾을 수 없습니다.");
+            return;
         }
-        else
-            Debug.Log($"{savable.Key} 데이터를 찾을 수 없습니다.");
+
+        // 저장된 데이터 가져오기
+        string json = dataSnapshot.GetRawJsonValue();
+        var loadedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+        // SaveField 어트리뷰트가 붙은 필드만 가져오기
+        var fields = savable.GetType()
+                            .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                            .Where(field => System.Attribute.IsDefined(field, typeof(SaveField)));
+
+        // 필드값들 이름 매칭해서 데이터 덮어씌우기
+        foreach (var field in fields)
+        {
+            if (loadedData.TryGetValue(field.Name, out var value))
+            {
+                try
+                {
+                    // 데이터 타입에 따라 적절히 변환
+                    var convertedValue = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(value), field.FieldType);
+                    field.SetValue(savable, convertedValue);
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogError($"필드 '{field.Name}' 로드 중 오류 발생: {ex.Message}");
+                }
+            }
+        }
+
+        Debug.Log($"불러오기 완료! {savable.Key} : {json}");
     }
 
+    
+    
+    
+    
+    
+    
     /// <summary>
     /// 데이터 제거
     /// </summary>
@@ -118,6 +230,13 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
 
 
 
+
+
+
+
+
+
+
     #region 저장, 불러오기, 제거 버튼들
     /// <summary>
     /// 데이터 저장 버튼
@@ -130,6 +249,8 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         }
 
         Debug.Log("전체 데이터 저장 완료!(버튼)");
+
+        //DataSaveJinsu();
     }
 
     /// <summary>
@@ -140,10 +261,12 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         foreach (var manager in _managerList)
         {
             await LoadAsync(manager);
-            manager.NotifyLoaded(); // 로드 후 이벤트 호출
+            //manager.NotifyLoaded(); // 로드 후 이벤트 호출
         }
-        
+
         Debug.Log($"전체 데이터 불러오기 완료!(버튼)");
+
+        //DataLoadJinsu();
     }
 
     /// <summary>

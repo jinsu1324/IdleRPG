@@ -1,13 +1,14 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill_Lazer : SkillItem
 {
-    public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    public float ProjectileSpeed { get; private set; }      // 투사체 속도
+    [JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
+    [JsonIgnore] public float ProjectileSpeed { get; private set; }      // 투사체 속도
 
-    private float _skillAttackPower;                        // 스킬 공격력
+    [JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
 
     /// <summary>
     /// 속성값 업데이트

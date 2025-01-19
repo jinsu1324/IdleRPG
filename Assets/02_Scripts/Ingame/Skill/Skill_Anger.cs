@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,8 @@ using UnityEngine;
 /// </summary>
 public class Skill_Anger : SkillItem
 {
-    public float AddAttackSpeed { get; private set; }   // 공격속도 추가량              
-    public float Duration { get; private set; }         // 스킬지속시간
+    [JsonIgnore] public float AddAttackSpeed { get; private set; }   // 공격속도 추가량              
+    [JsonIgnore] public float Duration { get; private set; }         // 스킬지속시간
 
     /// <summary>
     /// 속성값 업데이트

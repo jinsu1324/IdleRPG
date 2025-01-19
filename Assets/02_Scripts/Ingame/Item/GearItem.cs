@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using UnityEngine;
 /// </summary>
 public class GearItem : Item, IEnhanceableItem
 {
-    public GearDataSO GearDataSO { get; private set; }                      // 장비 데이터
-    public Dictionary<StatType, float> AttributeDict { get; private set; }  // 레벨에 맞는 속성들 딕셔너리
-    public string AttackAnimType { get; private set; }                      // 공격 애니메이션 타입
-    public GameObject Prefab { get; private set; }                          // 아이템 프리팹
-    public int Level { get; private set; }                                  // 레벨
-    public int EnhanceableCount { get; private set; }                       // 강화 가능한 갯수
+    public int Level { get; private set; }                                               // 레벨
+    [JsonIgnore] public GearDataSO GearDataSO { get; private set; }                      // 장비 데이터
+    [JsonIgnore] public Dictionary<StatType, float> AttributeDict { get; private set; }  // 레벨에 맞는 속성들 딕셔너리
+    [JsonIgnore] public string AttackAnimType { get; private set; }                      // 공격 애니메이션 타입
+    [JsonIgnore] public GameObject Prefab { get; private set; }                          // 아이템 프리팹
+    [JsonIgnore] public int EnhanceableCount { get; private set; }                       // 강화 가능한 갯수
 
     /// <summary>
     /// 초기화

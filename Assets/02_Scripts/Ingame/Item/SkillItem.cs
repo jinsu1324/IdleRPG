@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,12 +10,12 @@ using UnityEngine;
 /// </summary>
 public abstract class SkillItem : Item, IEnhanceableItem, ISkill
 {
-    public SkillDataSO SkillDataSO { get; private set; }                                // 스킬 데이터
-    public Dictionary<SkillAttributeType, float> AttributeDict { get; private set; }    // 레벨에 맞는 속성들 딕셔너리
-    public int Level { get; private set; }                                              // 레벨
-    public int EnhanceableCount { get; private set; }                                   // 강화 가능한 갯수
-    public float CoolTime { get; private set; }                                         // 스킬 쿨타임
-    public float CurrentTime { get; set; }                                              // 쿨타임 계산할 시간
+    public int Level { get; private set; }                                                           // 레벨
+    [JsonIgnore] public SkillDataSO SkillDataSO { get; private set; }                                // 스킬 데이터
+    [JsonIgnore] public Dictionary<SkillAttributeType, float> AttributeDict { get; private set; }    // 레벨에 맞는 속성들 딕셔너리
+    [JsonIgnore] public int EnhanceableCount { get; private set; }                                   // 강화 가능한 갯수
+    [JsonIgnore] public float CoolTime { get; private set; }                                         // 스킬 쿨타임
+    [JsonIgnore] public float CurrentTime { get; set; }                                              // 쿨타임 계산할 시간
 
     /// <summary>
     /// 초기화

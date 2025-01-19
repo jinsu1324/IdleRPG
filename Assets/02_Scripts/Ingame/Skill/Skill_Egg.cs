@@ -1,14 +1,15 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Skill_Egg : SkillItem
 {
-    public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    public float Range { get; private set; }                // 사거리
-    public float ProjectileCount { get; private set; }      // 투사체 갯수
+    [JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
+    [JsonIgnore] public float Range { get; private set; }                // 사거리
+    [JsonIgnore] public float ProjectileCount { get; private set; }      // 투사체 갯수
 
-    private float _skillAttackPower;                        // 스킬 공격력
+    [JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
 
     /// <summary>
     /// 속성값 업데이트

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +8,10 @@ using UnityEngine;
 /// </summary>
 public class Skill_Thunder : SkillItem
 {
-    public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    public float Range { get; private set; }                // 사거리
+    [JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
+    [JsonIgnore] public float Range { get; private set; }                // 사거리
 
-    private float _skillAttackPower;                        // 스킬 공격력
+    [JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
 
     /// <summary>
     /// 속성값 업데이트

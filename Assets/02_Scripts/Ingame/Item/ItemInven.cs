@@ -1,17 +1,38 @@
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+
+
+
+
+
+
+
+
+
 /// <summary>
 /// 가지고 있는 아이템 인벤토리
 /// </summary>
-public class ItemInven
+[System.Serializable]
+public class ItemInven : ISavable
 {
-    public static event Action<Item> OnAddItem;                         // 아이템 추가되었을 때 이벤트
-    
-    private static Dictionary<ItemType, List<Item>> _itemInvenDict;     // 가지고 있는 아이템 인벤토리 딕셔너리 
+    public static event Action<Item> OnAddItem;                                     // 아이템 추가되었을 때 이벤트
+    [SaveField] public static Dictionary<ItemType, List<Item>> _itemInvenDict;      // 가지고 있는 아이템 인벤토리 딕셔너리 
+
+    public string Key => nameof(ItemInven);
+    public void NotifyLoaded()
+    {
+        throw new NotImplementedException();
+    }
+
+
+
+
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -146,4 +167,6 @@ public class ItemInven
 
         return false;
     }
+
+    
 }
