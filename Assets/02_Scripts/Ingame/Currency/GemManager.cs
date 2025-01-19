@@ -9,7 +9,8 @@ using UnityEngine;
 [System.Serializable]
 public class GemManager : ISavable
 {
-    [SaveField] private static int _currentGem;                 // 현재 젬
+    public static event Action<int> OnGemChange;    // 젬 변경 되었을 때 이벤트
+    [SaveField] private static int _currentGem;     // 현재 젬
     public static int CurrentGem
     { 
         get => _currentGem;
@@ -19,9 +20,7 @@ public class GemManager : ISavable
             NotifyChanged(); // 값이 변경될때 이벤트 호출
         }
     }
-
-    public static event Action<int> OnGemChanged;   // 젬 변경 되었을 때 이벤트
-    public string Key => nameof(GemManager);   // 고유 키 설정
+    public string Key => nameof(GemManager);        // Firebase 데이터 저장용 고유 키 설정
 
     /// <summary>
     /// 젬 추가
@@ -29,8 +28,6 @@ public class GemManager : ISavable
     public static void AddGem(int amount)
     {
         CurrentGem += amount;
-        Debug.Log($"현재 gem {CurrentGem}");
-        //NotifyChanged();
     }
 
     /// <summary>
@@ -41,44 +38,28 @@ public class GemManager : ISavable
         if (CurrentGem >= amount)
         {
             CurrentGem -= amount;
-            //NotifyChanged();
         }
         else
-        {
-            Debug.LogWarning("감소할 젬이 부족합니다!");
-        }
+            Debug.Log($"보유한 젬({CurrentGem})이 감소할 젬({amount})보다 적어서 젬감소가 불가능합니다!");
     }
 
     /// <summary>
     /// 젬 가져오기
     /// </summary>
-    public static int GetGem()
-    {
-        return CurrentGem;
-    }
+    public static int GetGem() => CurrentGem;
 
     /// <summary>
     /// 젬 충분한지 체크
     /// </summary>
-    public static bool HasEnoughGem(int cost)
-    {
-        return CurrentGem >= cost;
-    }
+    public static bool HasEnoughGem(int cost) => CurrentGem >= cost;
 
     /// <summary>
     /// 젬 변경 이벤트 호출
     /// </summary>
-    private static void NotifyChanged()
-    {
-        Debug.Log("젬 변경 이벤트 호출!!~~~~~~~~~~!!!!!");
+    private static void NotifyChanged() => OnGemChange?.Invoke(CurrentGem);
 
-        OnGemChanged?.Invoke(_currentGem);
-    }
-
-    public void NotifyLoaded()
-    {
-        Debug.Log("젬 변경 이벤트 호출!!~~~~~~~~~~!!!!!");
-
-        OnGemChanged?.Invoke(_currentGem);
-    }
+    /// <summary>
+    /// 로드되었을 때 이벤트 호출
+    /// </summary>
+    public void NotifyLoaded() => OnGemChange?.Invoke(CurrentGem);
 }

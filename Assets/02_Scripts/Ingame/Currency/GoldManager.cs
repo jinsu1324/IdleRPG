@@ -9,8 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class GoldManager : ISavable
 {
-    [SaveField] private static int _currentGold;                   // 현재 골드
-    public static int CurrentGold
+    public static event Action<int> OnGoldChange;       // 골드 변경 되었을 때 이벤트
+    [SaveField] private static int _currentGold;        // 현재 골드
+    public static int CurrentGold                           
     {
         get => _currentGold;
         set
@@ -19,11 +20,7 @@ public class GoldManager : ISavable
             NotifyChanged(); // 값이 변경될 때 이벤트 호출
         }
     }
-
-
-    public static event Action<int> OnGoldChanged;     // 골드 변경 되었을 때 이벤트
-    public string Key => nameof(GoldManager);   // 고유 키 설정
-
+    public string Key => nameof(GoldManager);           // Firebase 데이터 저장용 고유 키 설정
 
     /// <summary>
     /// 골드 추가
@@ -31,7 +28,6 @@ public class GoldManager : ISavable
     public static void AddGold(int amount)
     {
         CurrentGold += amount;
-        //NotifyChanged();
         QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, amount);
     }
 
@@ -43,43 +39,31 @@ public class GoldManager : ISavable
         if (CurrentGold >= amount)
         {
             CurrentGold -= amount;
-            //NotifyChanged();
             QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, -amount);
         }
         else
-        {
-            Debug.LogWarning("감소할 골드가 부족합니다!");
-        }
+            Debug.Log($"보유한 골드({CurrentGold})가 감소할 골드({amount})보다 적어서 골드감소가 불가능합니다!");
     }
 
     /// <summary>
     /// 골드 가져오기
     /// </summary>
-    public static int GetGold()
-    {
-        return CurrentGold;
-    }
+    public static int GetGold() => CurrentGold; 
 
     /// <summary>
     /// 골드 충분한지 체크
     /// </summary>
-    public static bool HasEnoughGold(int cost)
-    {
-        return CurrentGold >= cost;
-    }
+    public static bool HasEnoughGold(int cost) => CurrentGold >= cost;
+
+
 
     /// <summary>
     /// 골드 변경 이벤트 호출
     /// </summary>
-    private static void NotifyChanged()
-    {
-        Debug.Log("골드 변경 이벤트 호출!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        OnGoldChanged?.Invoke(_currentGold);
-    }
+    private static void NotifyChanged() => OnGoldChange?.Invoke(CurrentGold);
 
-    public void NotifyLoaded()
-    {
-        Debug.Log("골드 변경 이벤트 호출!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        OnGoldChanged?.Invoke(_currentGold);
-    }
+    /// <summary>
+    /// 로드되었을때 이벤트 호출
+    /// </summary>
+    public void NotifyLoaded() => OnGoldChange?.Invoke(CurrentGold);
 }

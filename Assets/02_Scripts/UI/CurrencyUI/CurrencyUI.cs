@@ -13,8 +13,8 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        GoldManager.OnGoldChanged += UpdateGoldUI;  // 골드가 변경될 때, 골드 UI 업데이트
-        GemManager.OnGemChanged += UpdateGemUI; // 젬이 변경될 때, 젬 UI 업데이트
+        GoldManager.OnGoldChange += UpdateGoldUI;  // 골드가 변경될 때, 골드 UI 업데이트
+        GemManager.OnGemChange += UpdateGemUI; // 젬이 변경될 때, 젬 UI 업데이트
     }
 
     /// <summary>
@@ -22,8 +22,8 @@ public class CurrencyUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        GoldManager.OnGoldChanged -= UpdateGoldUI;
-        GemManager.OnGemChanged -= UpdateGemUI;
+        GoldManager.OnGoldChange -= UpdateGoldUI;
+        GemManager.OnGemChange -= UpdateGemUI;
     }
 
     /// <summary>
