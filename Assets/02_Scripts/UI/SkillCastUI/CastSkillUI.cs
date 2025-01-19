@@ -26,13 +26,13 @@ public class CastSkillUI : MonoBehaviour
     /// </summary>
     public void Init_BindSkill(ISkill skill)
     {
-        _currentSkill = skill;
+        //_currentSkill = skill;
 
-        if (skill is Item item)
-            _skillIcon.sprite = item.Icon;
+        //if (skill is Item item)
+        //    _skillIcon.sprite = item.Icon;
 
-        _skillIcon.gameObject.SetActive(true);
-        _coolTimeDimd.gameObject.SetActive(true);
+        //_skillIcon.gameObject.SetActive(true);
+        //_coolTimeDimd.gameObject.SetActive(true);
     }
 
     /// <summary>

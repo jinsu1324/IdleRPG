@@ -74,35 +74,45 @@ public class Parsing_GearData : Parsing_Base
                 gearDataSO.Name = row[2];
                 gearDataSO.Grade = row[3];
                 gearDataSO.Desc = row[4];
-                gearDataSO.AttackAnimType = row[5];
-                gearDataSO.LevelAttributesList = new List<LevelAttributes>();
+                gearDataSO.EnhanceCountInfoList = new List<EnhanceCountInfo>();
+                gearDataSO.AttackAnimType = row[7];
+                gearDataSO.GearAttributesInfoList = new List<GearAttributesInfo>();
                 
                 gearDataSODict[id] = gearDataSO;
             }
 
-            // 아이템 레벨별 정보
-            LevelAttributes itemLevelInfo = new LevelAttributes()
+            // 강화 정보들
+            EnhanceCountInfo enhanceCountInfo = new EnhanceCountInfo()
             {
-                Level = row[6],
-                AttributeList = new List<Attribute>()
+                Level = int.Parse(row[5]),
+                EnhanceCount = int.Parse(row[6]),
+            };
+            gearDataSO.EnhanceCountInfoList.Add(enhanceCountInfo); // 추가
+
+
+            // 레벨별 장비 정보들
+            GearAttributesInfo gearAttributesInfo = new GearAttributesInfo()
+            {
+                Level = int.Parse(row[5]),
+                GearAttributeList = new List<GearAttribute>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
-            for (int k = 7; k < row.Length; k += 2)
+            for (int k = 8; k < row.Length; k += 2)
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    Attribute itemAbility = new Attribute()
+                    GearAttribute gearAttribute = new GearAttribute()
                     {
                         Type = row[k],
                         Value = row[k + 1]
                     };
-                    itemLevelInfo.AttributeList.Add(itemAbility);
+                    gearAttributesInfo.GearAttributeList.Add(gearAttribute);
                 }
             }
 
             // gearData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            gearDataSO.LevelAttributesList.Add(itemLevelInfo);
+            gearDataSO.GearAttributesInfoList.Add(gearAttributesInfo);
         }
 
         // 스크립터블 오브젝트로 저장
@@ -116,7 +126,7 @@ public class Parsing_GearData : Parsing_Base
     private void SaveScriptableObjects(Dictionary<string, GearDataSO> gearDataSODict)
     {
         // 폴더가 없으면 새로 생성
-        string folderPath = $"Assets/Resources/Data/Item/";
+        string folderPath = $"Assets/Resources/Data/Gear/";
         if (System.IO.Directory.Exists(folderPath) == false)
             System.IO.Directory.CreateDirectory(folderPath);
 
@@ -143,8 +153,9 @@ public class Parsing_GearData : Parsing_Base
             gearDataSO.Name = data.Name;
             gearDataSO.Grade = data.Grade;
             gearDataSO.Desc = data.Desc;
+            gearDataSO.EnhanceCountInfoList = data.EnhanceCountInfoList;
             gearDataSO.AttackAnimType = data.AttackAnimType;
-            gearDataSO.LevelAttributesList = data.LevelAttributesList;
+            gearDataSO.GearAttributesInfoList = data.GearAttributesInfoList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
             if (AssetDatabase.Contains(gearDataSO) == false) 

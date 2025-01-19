@@ -53,29 +53,29 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
-        // 기본정보 업데이트
-        base.UpdateUI(item);
+        //// 기본정보 업데이트
+        //base.UpdateUI(item);
 
-        // 상세설명 업데이트
-        if (item is SkillItem skillItem)
-            _descText.text = skillItem.GetDynamicDesc();
+        //// 상세설명 업데이트
+        //if (item is SkillItem skillItem)
+        //    _descText.text = skillItem.GetDynamicDesc();
 
-        // 강화관련정보 업데이트
-        if (item is IEnhanceableItem enhanceableItem)
-        {
-            _levelText.text = $"Lv.{enhanceableItem.Level}";
-            _countText.text = $"{item.Count}";
-            _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-            _countSlider.value = (float)item.Count / (float)enhanceableItem.EnhanceableCount;
-            _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
-            _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
-        }
+        //// 강화관련정보 업데이트
+        //if (item is IEnhanceableItem enhanceableItem)
+        //{
+        //    _levelText.text = $"Lv.{enhanceableItem.Level}";
+        //    _countText.text = $"{item.Count}";
+        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
+        //    _countSlider.value = (float)item.Count / (float)enhanceableItem.EnhanceableCount;
+        //    _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
+        //    _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
+        //}
 
-        // 장착관련정보 + 버튼들 업데이트
-        bool isEquipped = EquipSkillManager.IsEquipped(item);
-        _equipButton.gameObject.SetActive(!isEquipped);
-        _unEquipButton.gameObject.SetActive(isEquipped);
-        _equipIcon.SetActive(isEquipped);
+        //// 장착관련정보 + 버튼들 업데이트
+        //bool isEquipped = EquipSkillManager.IsEquipped(item);
+        //_equipButton.gameObject.SetActive(!isEquipped);
+        //_unEquipButton.gameObject.SetActive(isEquipped);
+        //_equipIcon.SetActive(isEquipped);
     }
 
     /// <summary>

@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
+  m_Name: Helmet_BikingHelmet
+  m_EditorClassIdentifier: 
+  ID: Helmet_BikingHelmet
+  ItemType: Helmet
+  Name: "\uBC14\uC774\uD0B9 \uD5EC\uBA67"
+  Grade: Normal
+  Desc: "\uBC14\uC774\uD0B9\uC774 \uC0AC\uC6A9\uD558\uB358 \uD5EC\uBA67\uC785\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 68ae517979a404949a6b9f73b12adf1c, type: 3}
+  Prefab: {fileID: 7299186910364413415, guid: dcba4b5a6e12c874a8b28f4d50e4894e, type: 3}
+  EnhanceCountInfoList:
+  - Level: 1
+    EnhanceCount: 10
+  - Level: 2
+    EnhanceCount: 11
+  - Level: 3
+    EnhanceCount: 12
+  - Level: 4
+    EnhanceCount: 13
+  - Level: 5
+    EnhanceCount: 14
+  - Level: 6
+    EnhanceCount: 15
+  - Level: 7
+    EnhanceCount: 16
+  - Level: 8
+    EnhanceCount: 17
+  - Level: 9
+    EnhanceCount: 18
+  - Level: 10
+    EnhanceCount: 19
+  AttackAnimType: 
+  GearAttributesInfoList:
+  - Level: 1
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 150
+    - Type: CriticalMultiple
+      Value: 0.1
+  - Level: 2
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 160
+    - Type: CriticalMultiple
+      Value: 0.2
+  - Level: 3
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 170
+    - Type: CriticalMultiple
+      Value: 0.3
+  - Level: 4
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 180
+    - Type: CriticalMultiple
+      Value: 0.4
+  - Level: 5
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 190
+    - Type: CriticalMultiple
+      Value: 0.5
+  - Level: 6
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 200
+    - Type: CriticalMultiple
+      Value: 0.6
+  - Level: 7
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 210
+    - Type: CriticalMultiple
+      Value: 0.7
+  - Level: 8
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 220
+    - Type: CriticalMultiple
+      Value: 0.8
+  - Level: 9
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 230
+    - Type: CriticalMultiple
+      Value: 0.9
+  - Level: 10
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 240
+    - Type: CriticalMultiple
+      Value: 0.10

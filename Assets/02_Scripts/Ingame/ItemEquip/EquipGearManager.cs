@@ -40,16 +40,16 @@ public class EquipGearManager
         // 장착 이벤트 노티
         OnEquipGear?.Invoke(item);
 
-        // 플레이어 스탯 업데이트
-        if (item is GearItem gearItem)
-        {
-            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-            {
-                AttributeDict = gearItem.GetAttributeDict(),
-                Source = item
-            };
-            PlayerStats.UpdateStatModifier(args);
-        }
+        //// 플레이어 스탯 업데이트
+        //if (item is GearItem gearItem)
+        //{
+        //    PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+        //    {
+        //        AttributeDict = gearItem.GetAttributeDict(),
+        //        Source = item
+        //    };
+        //    PlayerStats.UpdateStatModifier(args);
+        //}
     }
 
     /// <summary>
@@ -60,16 +60,16 @@ public class EquipGearManager
         // 해제
         _equipGearDict[item.ItemType] = null;
 
-        // 플레이어에서 스탯 제거
-        if (item is GearItem gearItem)
-        {
-            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-            {
-                AttributeDict = gearItem.GetAttributeDict(),
-                Source = item
-            };
-            PlayerStats.RemoveStatModifier(args);
-        }
+        //// 플레이어에서 스탯 제거
+        //if (item is GearItem gearItem)
+        //{
+        //    PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+        //    {
+        //        AttributeDict = gearItem.GetAttributeDict(),
+        //        Source = item
+        //    };
+        //    PlayerStats.RemoveStatModifier(args);
+        //}
 
         // 해제 이벤트 노티
         OnUnEquipGear?.Invoke(item);

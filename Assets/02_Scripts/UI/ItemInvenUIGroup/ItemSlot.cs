@@ -81,33 +81,33 @@ public class ItemSlot : MonoBehaviour
     /// </summary>
     public void UpdateSlot(Item item)
     {
-        // 슬롯 비었으면 업데이트 하지 않고 무시
-        if (IsSlotEmpty)    
-            return;
+        //// 슬롯 비었으면 업데이트 하지 않고 무시
+        //if (IsSlotEmpty)    
+        //    return;
 
-        // 아이템 기본정보 업데이트
-        _itemIcon.sprite = CurrentItem.Icon;
-        _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(CurrentItem.Grade);
-        _countText.text = $"{CurrentItem.Count}";
+        //// 아이템 기본정보 업데이트
+        //_itemIcon.sprite = CurrentItem.Icon;
+        //_gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(CurrentItem.Grade);
+        //_countText.text = $"{CurrentItem.Count}";
 
 
-        // 강화가능한 아이템이면 강화관련 정보들도 업데이트
-        if (CurrentItem is IEnhanceableItem enhanceableItem)
-        {
-            _levelText.text = $"Lv.{enhanceableItem.Level}"; ;
-            _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-            _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
-            _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
-        }
+        //// 강화가능한 아이템이면 강화관련 정보들도 업데이트
+        //if (CurrentItem is IEnhanceableItem enhanceableItem)
+        //{
+        //    _levelText.text = $"Lv.{enhanceableItem.Level}"; ;
+        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
+        //    _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
+        //    _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
+        //}
 
-        // 장착중 아이콘 업데이트
-        if (CurrentItem is GearItem gearItem)
-            _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
-        if (CurrentItem is SkillItem skillItem)
-            _equipGO.SetActive(EquipSkillManager.IsEquipped(skillItem));
+        //// 장착중 아이콘 업데이트
+        //if (CurrentItem is GearItem gearItem)
+        //    _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
+        //if (CurrentItem is SkillItem skillItem)
+        //    _equipGO.SetActive(EquipSkillManager.IsEquipped(skillItem));
         
 
-        _infoParentGO.SetActive(true);
+        //_infoParentGO.SetActive(true);
     }
 
     /// <summary>

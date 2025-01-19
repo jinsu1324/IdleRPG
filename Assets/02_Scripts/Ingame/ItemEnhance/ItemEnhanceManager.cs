@@ -26,21 +26,21 @@ public class ItemEnhanceManager
             // 아이템 강화 이벤트 노티
             OnItemEnhance?.Invoke(item);    
 
-            // 장비일때만
-            if (item is GearItem gearItem)
-            {
-                // 해당 장비가 장착되어 있을때만
-                if (EquipGearManager.IsEquipped(gearItem))
-                {
-                    // 플레이어 스탯 업데이트
-                    PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-                    {
-                        AttributeDict = gearItem.GetAttributeDict(),
-                        Source = item,
-                    };
-                    PlayerStats.UpdateStatModifier(args);
-                }
-            }
+            //// 장비일때만
+            //if (item is GearItem gearItem)
+            //{
+            //    // 해당 장비가 장착되어 있을때만
+            //    if (EquipGearManager.IsEquipped(gearItem))
+            //    {
+            //        // 플레이어 스탯 업데이트
+            //        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+            //        {
+            //            AttributeDict = gearItem.GetAttributeDict(),
+            //            Source = item,
+            //        };
+            //        PlayerStats.UpdateStatModifier(args);
+            //    }
+            //}
         }
     }
 }

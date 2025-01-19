@@ -54,11 +54,11 @@ public abstract class ItemDetailUI : MonoBehaviour
     /// </summary>
     protected virtual void UpdateUI(Item item)
     {
-        _itemIcon.sprite = item.Icon;
-        _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);
-        _nameText.text = $"{item.Name}";
-        _nameText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
-        _gradeText.text = $"{item.Grade}";
-        _gradeText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
+        //_itemIcon.sprite = item.Icon;
+        //_gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);
+        //_nameText.text = $"{item.Name}";
+        //_nameText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
+        //_gradeText.text = $"{item.Grade}";
+        //_gradeText.color = ResourceManager.Instance.GetItemGradeColor(item.Grade);
     }
 }

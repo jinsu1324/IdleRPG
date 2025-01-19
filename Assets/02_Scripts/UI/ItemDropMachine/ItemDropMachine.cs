@@ -1,6 +1,5 @@
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -56,17 +55,17 @@ public class ItemDropMachine : MonoBehaviour
     /// </summary>
     private Item RandomPickItem()
     {
-        switch (_itemType)
-        {
-            case ItemType.Weapon:
-                return MakeGear(_itemType);
-            case ItemType.Armor:
-                return MakeGear(_itemType);
-            case ItemType.Helmet:
-                return MakeGear(_itemType);
-            case ItemType.Skill:
-                return MakeSkill(_itemType);
-        }
+        //switch (_itemType)
+        //{
+        //    case ItemType.Weapon:
+        //        return MakeGear(_itemType);
+        //    case ItemType.Armor:
+        //        return MakeGear(_itemType);
+        //    case ItemType.Helmet:
+        //        return MakeGear(_itemType);
+        //    case ItemType.Skill:
+        //        return MakeSkill(_itemType);
+        //}
 
         Debug.Log("아무장비도 픽 안되었습니다.");
         return null;
@@ -77,16 +76,18 @@ public class ItemDropMachine : MonoBehaviour
     /// </summary>
     private Item MakeGear(ItemType itemType)
     {
-        // 같은 아이템타입의 아이템데이터는 모두 가져오기
-        List<GearDataSO> gearDataSOList = DataManager.Instance.GetAllGearDataSO(itemType);
+        //// 같은 아이템타입의 아이템데이터는 모두 가져오기
+        //List<GearDataSO> gearDataSOList = DataManager.Instance.GetAllGearDataSO(itemType);
 
-        // 그 아이템데이터들 중에서 하나 랜덤 픽
-        GearDataSO gearDataSO = gearDataSOList[RandomPickItemIndex(gearDataSOList.Count)];
+        //// 그 아이템데이터들 중에서 하나 랜덤 픽
+        //GearDataSO gearDataSO = gearDataSOList[RandomPickItemIndex(gearDataSOList.Count)];
 
-        GearItem gearItem = new GearItem();
-        gearItem.Init(gearDataSO, 1);
+        //GearItem gearItem = new GearItem();
+        //gearItem.Init(gearDataSO, 1);
 
-        return gearItem;
+        //return gearItem;
+
+        return null;
     }
 
     /// <summary>
@@ -94,18 +95,20 @@ public class ItemDropMachine : MonoBehaviour
     /// </summary>
     private SkillItem MakeSkill(ItemType itemType)
     {
-        // 같은 아이템타입의 아이템데이터는 모두 가져오기
+        //// 같은 아이템타입의 아이템데이터는 모두 가져오기
 
-        List<SkillDataSO> skillDataSOList = DataManager.Instance.GetAllSkillDataSO(itemType);
+        //List<SkillDataSO> skillDataSOList = DataManager.Instance.GetAllSkillDataSO(itemType);
 
-        // 그 아이템데이터들 중에서 하나 랜덤 픽
-        SkillDataSO skillDataSO = skillDataSOList[RandomPickItemIndex(skillDataSOList.Count)];
-        string id = skillDataSO.ID;
-        
-        SkillItem skillItem = SkillFactory.CreateSkill(id);
-        skillItem.Init(skillDataSO, 1);
+        //// 그 아이템데이터들 중에서 하나 랜덤 픽
+        //SkillDataSO skillDataSO = skillDataSOList[RandomPickItemIndex(skillDataSOList.Count)];
+        //string id = skillDataSO.ID;
 
-        return skillItem;
+        //SkillItem skillItem = SkillFactory.CreateSkill(id);
+        //skillItem.Init(skillDataSO, 1);
+
+        //return skillItem;
+
+        return null;
     }
 
     /// <summary>

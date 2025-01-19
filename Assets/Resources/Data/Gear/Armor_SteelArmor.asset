@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
+  m_Name: Armor_SteelArmor
+  m_EditorClassIdentifier: 
+  ID: Armor_SteelArmor
+  ItemType: Armor
+  Name: "\uAC15\uCCA0 \uAC11\uC637"
+  Grade: Normal
+  Desc: "\uAC15\uCCA0\uB85C \uBC29\uC5B4\uB825\uC774 \uC62C\uB77C\uAC14\uC2B5\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 87edb9b43d50abc4b8f38759fe7cc2f7, type: 3}
+  Prefab: {fileID: 2658404560622955697, guid: cd6765439133b1144b5d87997f693b85, type: 3}
+  EnhanceCountInfoList:
+  - Level: 1
+    EnhanceCount: 10
+  - Level: 2
+    EnhanceCount: 11
+  - Level: 3
+    EnhanceCount: 12
+  - Level: 4
+    EnhanceCount: 13
+  - Level: 5
+    EnhanceCount: 14
+  - Level: 6
+    EnhanceCount: 15
+  - Level: 7
+    EnhanceCount: 16
+  - Level: 8
+    EnhanceCount: 17
+  - Level: 9
+    EnhanceCount: 18
+  - Level: 10
+    EnhanceCount: 19
+  AttackAnimType: 
+  GearAttributesInfoList:
+  - Level: 1
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 170
+    - Type: CriticalRate
+      Value: 0.05
+  - Level: 2
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 180
+    - Type: CriticalRate
+      Value: 0.06
+  - Level: 3
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 190
+    - Type: CriticalRate
+      Value: 0.07
+  - Level: 4
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 200
+    - Type: CriticalRate
+      Value: 0.08
+  - Level: 5
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 210
+    - Type: CriticalRate
+      Value: 0.09
+  - Level: 6
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 220
+    - Type: CriticalRate
+      Value: 0.10
+  - Level: 7
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 230
+    - Type: CriticalRate
+      Value: 0.11
+  - Level: 8
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 240
+    - Type: CriticalRate
+      Value: 0.12
+  - Level: 9
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 250
+    - Type: CriticalRate
+      Value: 0.13
+  - Level: 10
+    GearAttributeList:
+    - Type: MaxHp
+      Value: 260
+    - Type: CriticalRate
+      Value: 0.14

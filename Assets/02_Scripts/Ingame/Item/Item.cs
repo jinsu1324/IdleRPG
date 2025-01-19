@@ -1,20 +1,49 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
+/// <summary>
+/// 아이템 (퓨어 데이터)
+/// </summary>
 public class Item
 {
-    public string ID { get; set; }                  // ID
-    public ItemType ItemType { get; set; }          // 아이템 타입
-    public int Count { get; set; }                  // 갯수
-    [JsonIgnore] public string Name { get; set; }   // 이름
-    [JsonIgnore] public string Grade { get; set; }  // 등급
-    [JsonIgnore] public string Desc { get; set; }   // 설명
-    [JsonIgnore] public Sprite Icon { get; set; }   // 아이콘
+    public string ID { get; private set; }           // ID
+    public ItemType ItemType { get; private set; }   // 아이템 타입
+    public int Count { get; private set; }           // 갯수
+    public int Level { get; private set; }           // 레벨
+
+    /// <summary>
+    /// 생성자
+    /// </summary>
+    public Item(string id, string itemType, int count, int level)
+    {
+        ID = id;
+        ItemType = (ItemType)Enum.Parse(typeof(ItemType), itemType);
+        Count = count;
+        Level = level;
+    }
 
     /// <summary>
     /// 아이템 갯수 추가
     /// </summary>
-    public void AddCount() => Count++;
+    public void AddCount(int amount)
+    {
+        if (amount < 0) return;
+        Count += amount;
+    }
+
+    /// <summary>
+    /// 아이템 갯수 감소
+    /// </summary>
+    public void ReduceCount(int amount)
+    {
+        if (amount < 0 || Count - amount < 0) return;
+        Count -= amount;
+    }
+
+    /// <summary>
+    /// 아이템 레벨업
+    /// </summary>
+    public void LevelUp()
+    {
+        Level++;
+    }
 }

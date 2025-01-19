@@ -14,7 +14,7 @@ public class EquipSkillManager
     public static event Action OnSkillSwapFinished;         // 장착스킬교체 끝났을 때 이벤트
 
     private static Item[] _equipSkillArr;                   // 장착한 스킬 배열
-    private static int _maxCount = 3;                       // 스킬 장착 최대 갯수
+    //private static int _maxCount = 3;                       // 스킬 장착 최대 갯수
 
     private static Item _swapTargetItem;                    // 스왑 타겟 아이템
 
@@ -23,7 +23,7 @@ public class EquipSkillManager
     /// </summary>
     static EquipSkillManager()
     {
-        _equipSkillArr = new SkillItem[_maxCount];
+        //_equipSkillArr = new SkillItem[_maxCount];
     }
     
     /// <summary>

@@ -59,31 +59,31 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
-        // 기본정보 업데이트
-        base.UpdateUI(item);
+        //// 기본정보 업데이트
+        //base.UpdateUI(item);
 
-        // 상세설명 업데이트
-        _descText.text = item.Desc;
+        //// 상세설명 업데이트
+        //_descText.text = item.Desc;
 
-        // 강화관련정보 업데이트
-        if (item is IEnhanceableItem enhanceableItem)
-        {
-            _levelText.text = $"Lv.{enhanceableItem.Level}";
-            _countText.text = $"{item.Count}";
-            _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-            _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
-            _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
-            _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
-        }
+        //// 강화관련정보 업데이트
+        //if (item is IEnhanceableItem enhanceableItem)
+        //{
+        //    _levelText.text = $"Lv.{enhanceableItem.Level}";
+        //    _countText.text = $"{item.Count}";
+        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
+        //    _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
+        //    _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
+        //    _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
+        //}
 
-        // 어빌리티 정보 업데이트
-        Update_ItemAttributeUI(item);
+        //// 어빌리티 정보 업데이트
+        //Update_ItemAttributeUI(item);
 
-        // 장착관련정보 + 버튼들 업데이트
-        bool isEquipped = EquipGearManager.IsEquipped(item);
-        _equipButton.gameObject.SetActive(!isEquipped);
-        _unEquipButton.gameObject.SetActive(isEquipped);
-        _equipIcon.SetActive(isEquipped);
+        //// 장착관련정보 + 버튼들 업데이트
+        //bool isEquipped = EquipGearManager.IsEquipped(item);
+        //_equipButton.gameObject.SetActive(!isEquipped);
+        //_unEquipButton.gameObject.SetActive(isEquipped);
+        //_equipIcon.SetActive(isEquipped);
 
     }
 
@@ -92,26 +92,26 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// </summary>
     private void Update_ItemAttributeUI(Item item)
     {
-        if (item is GearItem gearItem)
-        {
-            int index = 0;
+        //if (item is GearItem gearItem)
+        //{
+        //    int index = 0;
 
-            // 스탯 Dictionary 순회
-            foreach (var kvp in gearItem.GetAttributeDict())
-            {
-                StatType statType = kvp.Key;
-                float value = kvp.Value;
+        //    // 스탯 Dictionary 순회
+        //    foreach (var kvp in gearItem.GetAttributeDict())
+        //    {
+        //        StatType statType = kvp.Key;
+        //        float value = kvp.Value;
 
-                _itemAttributeUIList[index].Show(statType, value);
-                index++;
-            }
+        //        _itemAttributeUIList[index].Show(statType, value);
+        //        index++;
+        //    }
 
-            // 나머지 리스트 요소 비활성화
-            for (int i = index; i < _itemAttributeUIList.Count; i++)
-            {
-                _itemAttributeUIList[index].Hide();
-            }
-        }
+        //    // 나머지 리스트 요소 비활성화
+        //    for (int i = index; i < _itemAttributeUIList.Count; i++)
+        //    {
+        //        _itemAttributeUIList[index].Hide();
+        //    }
+        //}
     }
 
     /// <summary>

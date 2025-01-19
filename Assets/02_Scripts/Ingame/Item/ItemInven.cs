@@ -1,38 +1,15 @@
-using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
-
-
-
-
-
-
-
-
-
 /// <summary>
 /// 가지고 있는 아이템 인벤토리
 /// </summary>
-[System.Serializable]
-public class ItemInven : ISavable
+public static class ItemInven
 {
-    public static event Action<Item> OnAddItem;                                     // 아이템 추가되었을 때 이벤트
-    [SaveField] public static Dictionary<ItemType, List<Item>> _itemInvenDict;      // 가지고 있는 아이템 인벤토리 딕셔너리 
-
-    public string Key => nameof(ItemInven);
-    public void NotifyLoaded()
-    {
-        throw new NotImplementedException();
-    }
-
-
-
-
+    public static event Action<Item> OnAddItem;                         // 아이템 추가되었을 때 이벤트
+    public static Dictionary<ItemType, List<Item>> _itemInvenDict;      // 가지고 있는 아이템 인벤토리 딕셔너리 
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -53,26 +30,19 @@ public class ItemInven : ISavable
     /// </summary>
     public static void AddItem(Item item)
     {
-        Item existItem = HasItemInInven(item); 
+        Item hasItem = HasItemInInven(item); 
         
-        if (existItem != null) 
+        if (hasItem != null) 
         {
-            // 가지고 있는 아이템이면 갯수만 추가
-            existItem.AddCount();
-
-            // 아이템추가 이벤트 노티
-            OnAddItem?.Invoke(existItem); 
+            int addCount = 1;
+            hasItem.AddCount(addCount); // 가지고 있는 아이템이면 갯수만 추가
+            OnAddItem?.Invoke(hasItem); 
         }
         else
         {
-            // 아니면 아이템 추가
             _itemInvenDict[item.ItemType].Add(item);
-
-            // 아이템추가 이벤트 노티
             OnAddItem?.Invoke(item); 
         }
-
-        
     }
 
     /// <summary>
@@ -80,15 +50,13 @@ public class ItemInven : ISavable
     /// </summary>
     public static Item HasItemInInven(Item item)
     {
-        Item existItem = _itemInvenDict[item.ItemType].Find(x => x.ID == item.ID);
+        Item foundItem = _itemInvenDict[item.ItemType].Find(x => x.ID == item.ID);
 
-        if (existItem != null)
-        {
-            return existItem;
-        }
+        if (foundItem != null)
+            return foundItem;
         else
         {
-            Debug.Log($"{item.Name} 은 처음 획득하는거에요.");
+            Debug.Log($"{item.ID} 은(는) 처음 획득하는거에요.");
             return null;
         }
     }

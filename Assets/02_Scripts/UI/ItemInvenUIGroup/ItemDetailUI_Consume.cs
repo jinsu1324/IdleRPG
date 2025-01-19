@@ -18,9 +18,9 @@ public class ItemDetailUI_Consume : ItemDetailUI
 
     protected override void UpdateUI(Item item)
     {
-        base.UpdateUI(item);
+        //base.UpdateUI(item);
 
-        // 상세설명 업데이트
-        _descText.text = item.Desc;
+        //// 상세설명 업데이트
+        //_descText.text = item.Desc;
     }
 }
