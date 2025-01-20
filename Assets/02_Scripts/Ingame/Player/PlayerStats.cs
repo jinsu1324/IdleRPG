@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 public struct PlayerStatUpdateArgs
 {
-    public Dictionary<StatType, float> AttributeDict;   // 속성들 딕셔너리
+    public Dictionary<StatType, float> DetailStatDict;  // 속성들 딕셔너리
     public object Source;                               // 출처
 }
 
@@ -69,7 +69,7 @@ public class PlayerStats
     /// </summary>
     public static void UpdateStatModifier(PlayerStatUpdateArgs args)
     {
-        Dictionary<StatType, float> attributeDict = args.AttributeDict; // 속성들 딕셔너리
+        Dictionary<StatType, float> attributeDict = args.DetailStatDict; // 속성들 딕셔너리
         object source = args.Source;    // 출처
 
         // 이전 전투력 계산
@@ -108,7 +108,7 @@ public class PlayerStats
     /// </summary>
     public static void RemoveStatModifier(PlayerStatUpdateArgs args)
     {
-        Dictionary<StatType, float> attributeDict = args.AttributeDict; // 속성들 딕셔너리
+        Dictionary<StatType, float> attributeDict = args.DetailStatDict; // 속성들 딕셔너리
         object source = args.Source;    // 출처
 
         // 이전 전투력 계산

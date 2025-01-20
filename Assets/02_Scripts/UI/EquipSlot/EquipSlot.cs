@@ -30,7 +30,7 @@ public abstract class EquipSlot : MonoBehaviour
         ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
         CurrentItem = item;
-        _levelText.text = $"{item.Level}";
+        _levelText.text = $"Lv.{item.Level}";
         _itemIcon.sprite = itemDataSO.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);
 

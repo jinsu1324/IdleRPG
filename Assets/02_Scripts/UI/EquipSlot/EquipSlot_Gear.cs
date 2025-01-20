@@ -18,9 +18,9 @@ public class EquipSlot_Gear : EquipSlot
     /// </summary>
     private void OnEnable()
     {
-        EquipGearManager.OnEquipGear += TryUpdate_EquipSlotGear; // 장비 장착할때 -> 장비장착슬롯 업데이트 시도
-        EquipGearManager.OnUnEquipGear += TryUpdate_EquipSlotGear; // 장비 해제할때 -> 장비장착슬롯 업데이트 시도
-        ItemEnhanceManager.OnItemEnhance += TryUpdate_EquipSlotGear; // 아이템 강화할때 -> 장비장착슬롯 업데이트 시도
+        EquipGearManager.OnEquipGear += TryUpdate_EquipSlotGear; // 장비 장착할때 -> 장비장착슬롯 업데이트
+        EquipGearManager.OnUnEquipGear += TryUpdate_EquipSlotGear; // 장비 해제할때 -> 장비장착슬롯 업데이트
+        ItemEnhanceManager.OnItemEnhance += TryUpdate_EquipSlotGear; // 아이템 강화할때 -> 장비장착슬롯 업데이트
 
         _gearInvenButton.onClick.AddListener(Notify_OnClickGearInvenButton); // 장비인벤버튼 누르면 -> 이벤트 노티
     }
@@ -46,7 +46,7 @@ public class EquipSlot_Gear : EquipSlot
     }
 
     /// <summary>
-    /// 장비장착슬롯 업데이트 시도
+    /// 장비장착슬롯 업데이트
     /// </summary>
     private void TryUpdate_EquipSlotGear(Item item)
     {
@@ -59,7 +59,7 @@ public class EquipSlot_Gear : EquipSlot
     }
 
     /// <summary>
-    /// 장비장착슬롯 업데이트
+    /// 실제 장비장착슬롯 업데이트 로직
     /// </summary>
     private void Update_EquipSlotGear()
     {

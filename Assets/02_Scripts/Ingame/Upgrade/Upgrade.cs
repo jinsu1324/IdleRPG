@@ -65,7 +65,7 @@ public class Upgrade : BaseData
 
         PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
         {
-            AttributeDict = dict,
+            DetailStatDict = dict,
             Source = this
         };
         PlayerStats.UpdateStatModifier(args); // 플레이어 스탯에 적용

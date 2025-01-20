@@ -7,8 +7,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class ItemManager
 {
-    private static Dictionary<string, ItemDataSO> _itemDataSODict = new Dictionary<string, ItemDataSO>(); // 아이템데이터 스크립터블 딕셔너리
-    private static bool _isLoaded = false;  // 로드 되었는지?
+    // 아이템데이터 스크립터블 딕셔너리
+    private static Dictionary<string, ItemDataSO> _itemDataSODict = new Dictionary<string, ItemDataSO>(); 
+    private static bool _isLoaded = false;
 
     /// <summary>
     /// Addressables를 통해 ItemDataSO를 로드

@@ -73,11 +73,11 @@ public class ItemDetailUI_Gear : ItemDetailUI
         Update_GearStatUI(item); // 장비속성들 UI 업데이트
 
 
-        //// 장착관련정보 + 버튼들 업데이트
-        //bool isEquipped = EquipGearManager.IsEquipped(item);
-        //_equipButton.gameObject.SetActive(!isEquipped);
-        //_unEquipButton.gameObject.SetActive(isEquipped);
-        //_equipIcon.SetActive(isEquipped);
+        // 장착관련정보 + 버튼들 업데이트
+        bool isEquipped = EquipGearManager.IsEquipped(item);
+        _equipButton.gameObject.SetActive(!isEquipped);
+        _unEquipButton.gameObject.SetActive(isEquipped);
+        _equipIcon.SetActive(isEquipped);
 
     }
 

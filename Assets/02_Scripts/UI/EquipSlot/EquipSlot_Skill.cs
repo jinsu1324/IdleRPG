@@ -85,7 +85,7 @@ public class EquipSlot_Skill : EquipSlot
             return;
         }
 
-        _reddotComponent.UpdateReddot(() => ItemInven.CanEnhanceable_ThisItem(CurrentItem));
+        _reddotComponent.UpdateReddot(() => ItemManager.CanEnhance(CurrentItem));
     }
 
     /// <summary>
