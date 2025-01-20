@@ -30,7 +30,7 @@ public static class ItemInven
     /// </summary>
     public static void AddItem(Item item)
     {
-        Item hasItem = HasItemInInven(item); 
+        Item hasItem = HasItem(item); 
         
         if (hasItem != null) 
         {
@@ -48,7 +48,7 @@ public static class ItemInven
     /// <summary>
     /// 가지고 있는 아이템인지 확인 후 반환
     /// </summary>
-    public static Item HasItemInInven(Item item)
+    public static Item HasItem(Item item)
     {
         Item foundItem = _itemInvenDict[item.ItemType].Find(x => x.ID == item.ID);
 
@@ -62,14 +62,23 @@ public static class ItemInven
     }
 
     /// <summary>
+    /// 인벤토리에 강화 가능한 아이템이 있는지?
+    /// </summary>
+    public static bool HasEnhanceableItem(ItemType itemType)
+    {
+        if (_itemInvenDict[itemType].Any(item => ItemManager.CanEnhance(item)))
+            return true;
+        else
+            return false;
+    }
+
+    /// <summary>
     /// 아이템 타입에 맞는 아이템 인벤토리 가져오기
     /// </summary>
     public static List<Item> GetItemInven(ItemType itemType)
     {
         if (_itemInvenDict.TryGetValue(itemType, out List<Item> itemInven))
-        {
             return itemInven;
-        }
         else
         {
             Debug.Log($"{itemType} 타입 아이템 인벤토리가 없습니다.");
@@ -77,19 +86,36 @@ public static class ItemInven
         }
     }
 
-    /// <summary>
-    /// 아이템 타입별 인벤토리에 강화 가능한 아이템이 있는지?
-    /// </summary>
-    public static bool HasEnhanceableItem(ItemType itemType)
-    {
-        if (_itemInvenDict[itemType].
-            Where(item => item is IEnhanceableItem).    // 인벤토리에서 IEnhanceableItem 를 모두 찾음
-            Cast<IEnhanceableItem>().                   // 모든요소를 IEnhanceableItem 로 변환
-            Any(enhanceableItem => enhanceableItem.CanEnhance()))   // 모든 IEnhanceableItem 중에 CanEnhance() 인 요소가 있는지 확인
-            return true;
-        else
-            return false;
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /// <summary>
     /// 인벤토리에 강화 가능한 장비가 있는지?
@@ -125,7 +151,7 @@ public static class ItemInven
     /// </summary>
     public static bool CanEnhanceable_ThisItem(Item item)
     {
-        Item existItem = HasItemInInven(item);
+        Item existItem = HasItem(item);
 
         if (existItem == null)
             return false;

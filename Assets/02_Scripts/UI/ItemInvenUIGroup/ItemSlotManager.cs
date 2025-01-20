@@ -20,23 +20,23 @@ public class ItemSlotManager : MonoBehaviour
     /// </summary>
     public void Init(ItemType itemType)
     {
-        List<Item> itemInven = ItemInven.GetItemInven(itemType); // 아이템타입에 맞는 아이템 인벤토리 가져옴
-
+        List<Item> itemInven = ItemInven.GetItemInven(itemType);
+        
         for (int i = 0; i < _ItemSlotList.Count; i++)
         {
-            if (itemInven == null)  // 아이템 인벤 없으면 슬롯 전부 다 비우기만
+            if (itemInven == null)
             {
                 _ItemSlotList[i].Clear();
                 continue;
             }
 
-            if (i < itemInven.Count) // 인벤속 아이템 갯수만큼만 초기화, 나머지는 끄기
-                _ItemSlotList[i].Init(itemInven[i], SnapHighlightImage);
+            if (i < itemInven.Count)  
+                _ItemSlotList[i].Init(itemInven[i], SnapHighlightImage); // 인벤속 아이템 갯수만큼만 초기화, 나머지는 끄기
             else
                 _ItemSlotList[i].Clear();
         }
 
-        HideHighlightImage(); // 하이라이트 이미지 숨기기
+        HideHighlightImage();
     }
 
     /// <summary>

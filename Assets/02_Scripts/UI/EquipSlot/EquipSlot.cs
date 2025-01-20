@@ -27,16 +27,14 @@ public abstract class EquipSlot : MonoBehaviour
     /// </summary>
     public void UpdateSlot(Item item)
     {
-        //CurrentItem = item;
-        //_itemIcon.sprite = item.Icon;
-        //_gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
-        //if (item is IEnhanceableItem enhancableItem)
-        //    _levelText.text = $"Lv.{enhancableItem.Level}";
-        //else
-        //    _levelText.text = $"";
+        CurrentItem = item;
+        _levelText.text = $"{item.Level}";
+        _itemIcon.sprite = itemDataSO.Icon;
+        _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);
 
-        //InfoGO_ON();
+        InfoGO_ON();
     }
     
     /// <summary>

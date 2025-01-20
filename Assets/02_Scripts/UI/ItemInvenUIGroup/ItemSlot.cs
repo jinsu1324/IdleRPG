@@ -14,6 +14,7 @@ public class ItemSlot : MonoBehaviour
     public static event Action<Item> OnSlotSelected;                    // 슬롯이 선택되었을 때 이벤트
     public Item CurrentItem { get; private set; }                       // 현재 슬롯 아이템
     public bool IsSlotEmpty => CurrentItem == null;                     // 슬롯이 비어있는지 
+    private Action<RectTransform> _moveHilightImageAction;              // 하이라이트 이미지 움직이기 함수 저장할 변수     
 
     [Title("아이템 정보들 전체부모 GO", bold: false)]
     [SerializeField] private GameObject _infoParentGO;                  // 아이템 정보들 전체부모 GO
@@ -36,7 +37,6 @@ public class ItemSlot : MonoBehaviour
     [Title("장착 관련", bold: false)]
     [SerializeField] private GameObject _equipGO;                       // 장착되었을 때 아이콘 게임오브젝트
 
-    private Action<RectTransform> _moveHilightImageAction;              // 하이라이트 이미지 움직이기 함수 저장할 변수     
 
     /// <summary>
     /// OnEnable
@@ -71,7 +71,7 @@ public class ItemSlot : MonoBehaviour
     {
         CurrentItem = item;
         _moveHilightImageAction = moveHighlight;
-        UpdateSlot(CurrentItem);
+        UpdateSlot();
 
         gameObject.SetActive(true);
     }
@@ -79,35 +79,31 @@ public class ItemSlot : MonoBehaviour
     /// <summary>
     /// 아이템슬롯 정보들 업데이트
     /// </summary>
-    public void UpdateSlot(Item item)
+    public void UpdateSlot(Item item = null)
     {
-        //// 슬롯 비었으면 업데이트 하지 않고 무시
-        //if (IsSlotEmpty)    
-        //    return;
+        if (IsSlotEmpty)
+            return;
 
-        //// 아이템 기본정보 업데이트
-        //_itemIcon.sprite = CurrentItem.Icon;
-        //_gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(CurrentItem.Grade);
-        //_countText.text = $"{CurrentItem.Count}";
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(CurrentItem.ID);
+
+        _itemIcon.sprite = itemDataSO.Icon;
+        _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);
+        _countText.text = $"{CurrentItem.Count}";
+        _levelText.text = $"Lv.{CurrentItem.Level}";
+        _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(CurrentItem.Level)}";
+        _countSlider.value = (float)CurrentItem.Count / (float)itemDataSO.GetEnhanceCount(CurrentItem.Level);
+        _enhanceableArrowGO.gameObject.SetActive(ItemManager.CanEnhance(CurrentItem));
 
 
-        //// 강화가능한 아이템이면 강화관련 정보들도 업데이트
-        //if (CurrentItem is IEnhanceableItem enhanceableItem)
-        //{
-        //    _levelText.text = $"Lv.{enhanceableItem.Level}"; ;
-        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-        //    _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
-        //    _enhanceableArrowGO.gameObject.SetActive(enhanceableItem.CanEnhance());
-        //}
 
         //// 장착중 아이콘 업데이트
         //if (CurrentItem is GearItem gearItem)
         //    _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
         //if (CurrentItem is SkillItem skillItem)
         //    _equipGO.SetActive(EquipSkillManager.IsEquipped(skillItem));
-        
 
-        //_infoParentGO.SetActive(true);
+
+        _infoParentGO.SetActive(true);
     }
 
     /// <summary>

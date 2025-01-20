@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67524b3f2cbcd6a45bcfc98c23cb027f, type: 3}
+  m_Name: Skill_Egg
+  m_EditorClassIdentifier: 
+  ID: Skill_Egg
+  ItemType: Skill
+  Name: "\uB2EC\uAC40\uD22C\uCC99"
+  Grade: Rare
+  Desc: "\uC2E0\uC120\uD55C \uB2EC\uAC40\uC744 {0}\uAC1C \uB358\uC838 \uAC01\uAC01
+    \uACF5\uACA9\uB825\uC758 {1} \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 55556b917e83fc341823b563c982ac54, type: 3}
+  Prefab: {fileID: 0}
+  EnhanceCountInfoList:
+  - Level: 1
+    EnhanceCount: 10
+  - Level: 2
+    EnhanceCount: 11
+  - Level: 3
+    EnhanceCount: 12
+  - Level: 4
+    EnhanceCount: 13
+  - Level: 5
+    EnhanceCount: 14
+  - Level: 6
+    EnhanceCount: 15
+  - Level: 7
+    EnhanceCount: 16
+  - Level: 8
+    EnhanceCount: 17
+  - Level: 9
+    EnhanceCount: 18
+  - Level: 10
+    EnhanceCount: 19
+  CoolTime: 2
+  LevelSkillStatsList:
+  - Level: 1
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.1
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 2
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.2
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 3
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.3
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 4
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.4
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 5
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.5
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 6
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.6
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 7
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.7
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 8
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.8
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 9
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.9
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3
+  - Level: 10
+    SkillStatList:
+    - Type: AttackPercentage
+      Value: 1.10
+    - Type: Range
+      Value: 3
+    - Type: ProjectileCount
+      Value: 3

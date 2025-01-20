@@ -44,26 +44,26 @@ public class EquipGearComponent : MonoBehaviour
     /// </summary>
     public void EquipPlayer(Item item)
     {
-        GearDataSO gearDataSO = DataManager.Instance.GetGearDataSO(item.ID);
-        GameObject prefab = gearDataSO.Prefab;
+        //GearDataSO gearDataSO = DataManager.Instance.GetGearDataSO(item.ID);
+        //GameObject prefab = gearDataSO.Prefab;
 
-        switch (item.ItemType)
-        {
-            case ItemType.Helmet:
-                EquipGear(prefab, _helmetSlot, ref _currentHelmet);
-                break;
+        //switch (item.ItemType)
+        //{
+        //    case ItemType.Helmet:
+        //        EquipGear(prefab, _helmetSlot, ref _currentHelmet);
+        //        break;
 
-            case ItemType.Armor:
-                EquipGear(prefab, _armorSlot, ref _currentArmor);
-                break;
+        //    case ItemType.Armor:
+        //        EquipGear(prefab, _armorSlot, ref _currentArmor);
+        //        break;
 
-            case ItemType.Weapon:
-                EquipGear(prefab, _weaponSlot, ref _currentWeapon);
-                Hide_BasicHand();   // 손 켜기
-                AttackAnimType attackAnimType = (AttackAnimType)Enum.Parse(typeof(AttackAnimType), gearDataSO.AttackAnimType);
-                GetComponent<AnimComponent>().Change_AttackAnimType(attackAnimType);    // 애니메이션 타입 변경
-                break;
-        }
+        //    case ItemType.Weapon:
+        //        EquipGear(prefab, _weaponSlot, ref _currentWeapon);
+        //        Hide_BasicHand();   // 손 켜기
+        //        AttackAnimType attackAnimType = (AttackAnimType)Enum.Parse(typeof(AttackAnimType), gearDataSO.AttackAnimType);
+        //        GetComponent<AnimComponent>().Change_AttackAnimType(attackAnimType);    // 애니메이션 타입 변경
+        //        break;
+        //}
     }
 
     /// <summary>
@@ -71,25 +71,25 @@ public class EquipGearComponent : MonoBehaviour
     /// </summary>
     public void UnEquipPlayer(Item item)
     {
-        GearDataSO gearDataSO = DataManager.Instance.GetGearDataSO(item.ID);
-        GameObject prefab = gearDataSO.Prefab;
+        //GearDataSO gearDataSO = DataManager.Instance.GetGearDataSO(item.ID);
+        //GameObject prefab = gearDataSO.Prefab;
 
-        switch (item.ItemType)
-        {
-            case ItemType.Helmet:
-                UnEquipGear(ref _currentHelmet);
-                break;
+        //switch (item.ItemType)
+        //{
+        //    case ItemType.Helmet:
+        //        UnEquipGear(ref _currentHelmet);
+        //        break;
 
-            case ItemType.Armor:
-                UnEquipGear(ref _currentArmor);
-                break;
+        //    case ItemType.Armor:
+        //        UnEquipGear(ref _currentArmor);
+        //        break;
 
-            case ItemType.Weapon:
-                UnEquipGear(ref _currentWeapon);
-                Show_BasicHand();   // 손 끄기
-                GetComponent<AnimComponent>().Change_AttackAnimType(AttackAnimType.Hand);   // 애니메이션 타입 손으로
-                break;
-        }
+        //    case ItemType.Weapon:
+        //        UnEquipGear(ref _currentWeapon);
+        //        Show_BasicHand();   // 손 끄기
+        //        GetComponent<AnimComponent>().Change_AttackAnimType(AttackAnimType.Hand);   // 애니메이션 타입 손으로
+        //        break;
+        //}
     }
 
     /// <summary>

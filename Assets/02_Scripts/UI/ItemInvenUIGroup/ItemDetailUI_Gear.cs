@@ -11,20 +11,20 @@ using UnityEngine.UI;
 public class ItemDetailUI_Gear : ItemDetailUI
 {
     [Title("장비아이템 정보들", bold: false)]
-    [SerializeField] protected TextMeshProUGUI _descText;                   // 상세설명 텍스트
-    [SerializeField] private TextMeshProUGUI _levelText;                    // 레벨 텍스트
-    [SerializeField] private TextMeshProUGUI _enhanceableCountText;         // 강화 가능한 아이템 갯수 텍스트
-    [SerializeField] private Slider _countSlider;                           // 갯수 표시 슬라이더
-    [SerializeField] private GameObject _equipIcon;                         // 장착 아이콘
-    [SerializeField] private GameObject _enhanceableArrowIcon;              // 강화가능 아이콘
+    [SerializeField] protected TextMeshProUGUI _descText;               // 상세설명 텍스트
+    [SerializeField] private TextMeshProUGUI _levelText;                // 레벨 텍스트
+    [SerializeField] private TextMeshProUGUI _enhanceableCountText;     // 강화 가능한 아이템 갯수 텍스트
+    [SerializeField] private Slider _countSlider;                       // 갯수 표시 슬라이더
+    [SerializeField] private GameObject _equipIcon;                     // 장착 아이콘
+    [SerializeField] private GameObject _enhanceableArrowIcon;          // 강화가능 아이콘
 
     [Title("버튼들", bold: false)]
-    [SerializeField] private Button _equipButton;                           // 장착 버튼
-    [SerializeField] private Button _unEquipButton;                         // 장착 해제 버튼
-    [SerializeField] private Button _enhanceButton;                         // 강화 버튼
+    [SerializeField] private Button _equipButton;                       // 장착 버튼
+    [SerializeField] private Button _unEquipButton;                     // 장착 해제 버튼
+    [SerializeField] private Button _enhanceButton;                     // 강화 버튼
 
-    [Title("장비에 붙어있는 속성들", bold: false)]
-    [SerializeField] private List<ItemAttributeUI> _itemAttributeUIList;    // 장비에 붙어있는 속성 리스트
+    [Title("장비속성 UI들", bold: false)]
+    [SerializeField] private List<GearStatUI> _gearStatUIList;          // 장비속성 UI 리스트
     
     /// <summary>
     /// OnEnable
@@ -59,25 +59,19 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
-        //// 기본정보 업데이트
-        //base.UpdateUI(item);
+        base.UpdateUI(item);
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
-        //// 상세설명 업데이트
-        //_descText.text = item.Desc;
+        _descText.text = itemDataSO.Desc;
+        _levelText.text = $"Lv.{item.Level}";
+        _countText.text = $"{item.Count}";
+        _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(item.Level)}";
+        _countSlider.value = (float)item.Level / (float)itemDataSO.GetEnhanceCount(item.Level);
+        _enhanceableArrowIcon.gameObject.SetActive(ItemManager.CanEnhance(item));
+        _enhanceButton.gameObject.SetActive(ItemManager.CanEnhance(item));
 
-        //// 강화관련정보 업데이트
-        //if (item is IEnhanceableItem enhanceableItem)
-        //{
-        //    _levelText.text = $"Lv.{enhanceableItem.Level}";
-        //    _countText.text = $"{item.Count}";
-        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-        //    _countSlider.value = (float)CurrentItem.Count / (float)enhanceableItem.EnhanceableCount;
-        //    _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
-        //    _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
-        //}
+        Update_GearStatUI(item); // 장비속성들 UI 업데이트
 
-        //// 어빌리티 정보 업데이트
-        //Update_ItemAttributeUI(item);
 
         //// 장착관련정보 + 버튼들 업데이트
         //bool isEquipped = EquipGearManager.IsEquipped(item);
@@ -88,30 +82,27 @@ public class ItemDetailUI_Gear : ItemDetailUI
     }
 
     /// <summary>
-    /// 장비 속성들 UI 업데이트
+    /// 장비속성들 UI 업데이트
     /// </summary>
-    private void Update_ItemAttributeUI(Item item)
+    private void Update_GearStatUI(Item item)
     {
-        //if (item is GearItem gearItem)
-        //{
-        //    int index = 0;
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
-        //    // 스탯 Dictionary 순회
-        //    foreach (var kvp in gearItem.GetAttributeDict())
-        //    {
-        //        StatType statType = kvp.Key;
-        //        float value = kvp.Value;
+        if (itemDataSO is GearDataSO gearDataSO)
+        {
+            int index = 0;
+            foreach (var kvp in gearDataSO.GetGearStats(item.Level)) 
+            {
+                StatType statType = kvp.Key;
+                float value = kvp.Value;
+                _gearStatUIList[index].Show(statType, value); // 스탯갯수만큼 UI 표시
+                
+                index++;
+            }
 
-        //        _itemAttributeUIList[index].Show(statType, value);
-        //        index++;
-        //    }
-
-        //    // 나머지 리스트 요소 비활성화
-        //    for (int i = index; i < _itemAttributeUIList.Count; i++)
-        //    {
-        //        _itemAttributeUIList[index].Hide();
-        //    }
-        //}
+            for (int i = index; i < _gearStatUIList.Count; i++)
+                _gearStatUIList[index].Hide(); // 나머지는 비활성화
+        }
     }
 
     /// <summary>

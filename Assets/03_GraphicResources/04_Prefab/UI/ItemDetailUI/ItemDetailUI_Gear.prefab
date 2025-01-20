@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 7683113706949449399}
   - component: {fileID: 3333914387027109751}
   m_Layer: 5
-  m_Name: Attribute (2)
+  m_Name: GearStat (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1280,7 +1280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8642334696399395429}
   m_Layer: 5
-  m_Name: Attributes
+  m_Name: GearStats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1955,7 +1955,7 @@ GameObject:
   - component: {fileID: 7107018744667692319}
   - component: {fileID: 4669945181740837047}
   m_Layer: 5
-  m_Name: Attribute
+  m_Name: GearStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3146,7 +3146,7 @@ MonoBehaviour:
   _equipButton: {fileID: 2282291380349169600}
   _unEquipButton: {fileID: 4743900730979648740}
   _enhanceButton: {fileID: 1492155894013676037}
-  _itemAttributeUIList:
+  _gearStatUIList:
   - {fileID: 2496299334400681815}
   - {fileID: 7626240552210100472}
   - {fileID: 3086221578138679216}
@@ -3163,7 +3163,7 @@ GameObject:
   - component: {fileID: 4577608361004747593}
   - component: {fileID: 5859761604167010883}
   m_Layer: 5
-  m_Name: Attribute (1)
+  m_Name: GearStat (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

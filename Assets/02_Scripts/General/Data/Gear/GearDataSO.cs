@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// 공격 애니메이션 타입
@@ -11,23 +13,23 @@ public enum AttackAnimType
 }
 
 /// <summary>
-/// 장비 속성
+/// 장비속성
 /// </summary>
 [System.Serializable]
-public class GearAttribute
+public class GearStat
 {
     public string Type;
     public string Value;
 }
 
 /// <summary>
-/// 장비 속성들 정보
+/// 레벨별 장비속성들
 /// </summary>
 [System.Serializable]
-public class GearAttributesInfo
+public class LevelGearStats
 {
     public int Level;
-    public List<GearAttribute> GearAttributeList;
+    public List<GearStat> GearStatList;
 }
 
 /// <summary>
@@ -37,47 +39,30 @@ public class GearAttributesInfo
 public class GearDataSO : ItemDataSO
 {
     public string AttackAnimType;
-    public List<GearAttributesInfo> GearAttributesInfoList;
+    public List<LevelGearStats> LevelGearStatsList;
 
+    /// <summary>
+    /// 레벨에 맞는 장비속성들 가져오기
+    /// </summary>
+    public Dictionary<StatType, float> GetGearStats(int level)
+    {
+        Dictionary<StatType, float> gearStatDict = new Dictionary<StatType, float>();
 
+        LevelGearStats levelGearStats = LevelGearStatsList.Find(x => x.Level == level);
+        if (levelGearStats == null)
+            return null;
 
+        // 해당 레벨의 장비속성들을 딕셔너리 형태로 저장 후 반환
+        foreach (GearStat gearStat in levelGearStats.GearStatList)
+        {
+            StatType type = (StatType)Enum.Parse(typeof(StatType), gearStat.Type);
+            float value = float.Parse(gearStat.Value);
 
+            gearStatDict.Add(type, value);
+        }
 
-
-
-
-
-    
-
-    ///// <summary>
-    ///// 레벨에 맞는 속성들을 딕셔너리로 가져오기
-    ///// </summary>
-    //public Dictionary<StatType, float> GetAttributeDict_ByLevel(int level)
-    //{
-    //    // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-    //    Dictionary<StatType, float> attributeDict = new Dictionary<StatType, float>();
-
-    //    // level에 맞는 levelAttributes 찾기
-    //    LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
-
-    //    // 없으면 그냥 리턴
-    //    if (levelAttributes == null)
-    //    {
-    //        Debug.Log($"{level}이 맞는 levelAttributes를 찾지 못했습니다.");
-    //        return attributeDict;
-    //    }
-
-    //    // 해당 레벨에 존재하는 속성(attribute)들을 딕셔너리에 넣고 반환
-    //    foreach (Attribute attribute in levelAttributes.AttributeList)
-    //    {
-    //        StatType statType = (StatType)Enum.Parse(typeof(StatType), attribute.Type);
-    //        float value = float.Parse(attribute.Value);
-
-    //        attributeDict.Add(statType, value);
-    //    }
-
-    //    return attributeDict;
-    //}
+        return gearStatDict;
+    }
 }
 
 

@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e8237f745f7844eb224aa39aa30af3, type: 3}
+  m_Name: Helmet_ForestHelmet
+  m_EditorClassIdentifier: 
+  ID: Helmet_ForestHelmet
+  ItemType: Helmet
+  Name: "\uC232\uC758 \uD22C\uAD6C"
+  Grade: Rare
+  Desc: "\uC232\uC18D\uC758 \uD22C\uAD6C\uC785\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: 5b413123e8117454a9b720702244cd14, type: 3}
+  Prefab: {fileID: 7589804328962073218, guid: e333744e9a1e28b4c8b15d55e48d2d86, type: 3}
+  EnhanceCountInfoList:
+  - Level: 1
+    EnhanceCount: 10
+  - Level: 2
+    EnhanceCount: 11
+  - Level: 3
+    EnhanceCount: 12
+  - Level: 4
+    EnhanceCount: 13
+  - Level: 5
+    EnhanceCount: 14
+  - Level: 6
+    EnhanceCount: 15
+  - Level: 7
+    EnhanceCount: 16
+  - Level: 8
+    EnhanceCount: 17
+  - Level: 9
+    EnhanceCount: 18
+  - Level: 10
+    EnhanceCount: 19
+  AttackAnimType: 
+  LevelGearStatsList:
+  - Level: 1
+    GearStatList:
+    - Type: MaxHp
+      Value: 250
+    - Type: CriticalMultiple
+      Value: 0.5
+  - Level: 2
+    GearStatList:
+    - Type: MaxHp
+      Value: 260
+    - Type: CriticalMultiple
+      Value: 0.6
+  - Level: 3
+    GearStatList:
+    - Type: MaxHp
+      Value: 270
+    - Type: CriticalMultiple
+      Value: 0.7
+  - Level: 4
+    GearStatList:
+    - Type: MaxHp
+      Value: 280
+    - Type: CriticalMultiple
+      Value: 0.8
+  - Level: 5
+    GearStatList:
+    - Type: MaxHp
+      Value: 290
+    - Type: CriticalMultiple
+      Value: 0.9
+  - Level: 6
+    GearStatList:
+    - Type: MaxHp
+      Value: 300
+    - Type: CriticalMultiple
+      Value: 0.10
+  - Level: 7
+    GearStatList:
+    - Type: MaxHp
+      Value: 310
+    - Type: CriticalMultiple
+      Value: 0.11
+  - Level: 8
+    GearStatList:
+    - Type: MaxHp
+      Value: 320
+    - Type: CriticalMultiple
+      Value: 0.12
+  - Level: 9
+    GearStatList:
+    - Type: MaxHp
+      Value: 330
+    - Type: CriticalMultiple
+      Value: 0.13
+  - Level: 10
+    GearStatList:
+    - Type: MaxHp
+      Value: 340
+    - Type: CriticalMultiple
+      Value: 0.14

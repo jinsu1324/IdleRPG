@@ -5,10 +5,10 @@ using System;
 /// </summary>
 public class Item
 {
-    public string ID { get; private set; }           // ID
-    public ItemType ItemType { get; private set; }   // 아이템 타입
-    public int Count { get; private set; }           // 갯수
-    public int Level { get; private set; }           // 레벨
+    public string ID { get; private set; }              // ID
+    public ItemType ItemType { get; private set; }      // 아이템 타입
+    public int Count { get; private set; }              // 갯수
+    public int Level { get; private set; }              // 레벨
 
     /// <summary>
     /// 생성자

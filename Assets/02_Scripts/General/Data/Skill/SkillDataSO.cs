@@ -16,23 +16,23 @@ public enum SkillAttributeType
 }
 
 /// <summary>
-/// 스킬 속성
+/// 스킬속성
 /// </summary>
 [System.Serializable]
-public class SkillAttribute
+public class SkillStat
 {
     public string Type;
     public string Value;
 }
 
 /// <summary>
-/// 스킬 속성들 정보
+/// 레벨별 스킬속성들
 /// </summary>
 [System.Serializable]
-public class SkillAttributesInfo
+public class LevelSkillStats
 {
     public int Level;
-    public List<SkillAttribute> SkillAttributeList;
+    public List<SkillStat> SkillStatList;
 }
 
 /// <summary>
@@ -42,7 +42,7 @@ public class SkillAttributesInfo
 public class SkillDataSO : ItemDataSO
 {
     public float CoolTime;
-    public List<SkillAttributesInfo> SkillAttributesInfoList;
+    public List<LevelSkillStats> LevelSkillStatsList;
 
 
 

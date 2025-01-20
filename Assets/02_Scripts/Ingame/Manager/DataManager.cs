@@ -11,21 +11,6 @@ public class DataManager : SingletonBase<DataManager>
     [SerializeField] public StageDatasSO StageDatasSO { get; private set; }                 // 스테이지 데이터
     [SerializeField] public StartingUpgradeDatasSO StartingUpgradeDatasSO { get; private set; }   // 스타팅 업그레이드 데이터
 
-    [Title("장비 데이터", Bold = false)]
-    [SerializeField] private List<GearDataSO> _gearDataSOList;      // 장비 데이터 스크립터블 오브젝트 리스트
-
-    [Title("스킬 데이터", Bold = false)]
-    [SerializeField] private List<SkillDataSO> _skillDataSOList;    // 스킬 데이터 스크립터블 오브젝트 리스트
-
-
-    public void GOGO(Item item)
-    {
-        ItemType type = item.ItemType;  
-    }
-
-
-
-
 
     /// <summary>
     /// Awake 일단...
@@ -59,29 +44,4 @@ public class DataManager : SingletonBase<DataManager>
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
     public void SetStageDatasSO(StageDatasSO data) => StageDatasSO = data;
     public void SetStartingUpgradeDatasSO(StartingUpgradeDatasSO data) => StartingUpgradeDatasSO = data;
-
-
-    /// <summary>
-    /// 모든 장비데이터 리스트 가져오기
-    /// </summary>
-    public List<GearDataSO> GetAllGearDataSO(ItemType itemType)
-    {
-        return _gearDataSOList.FindAll(x => x.ItemType == itemType.ToString());
-    }
-
-    /// <summary>
-    /// 특정 장비 데이터 가져오기
-    /// </summary>
-    public GearDataSO GetGearDataSO(string id)
-    {
-        return _gearDataSOList.Find(x => x.ID == id);
-    }
-
-    /// <summary>
-    /// 모든 스킬데이터 리스트 가져오기
-    /// </summary>
-    public List<SkillDataSO> GetAllSkillDataSO(ItemType itemType)
-    {
-        return _skillDataSOList.FindAll(x => x.ItemType == itemType.ToString());
-    }
 }

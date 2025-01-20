@@ -71,7 +71,7 @@ public class Parsing_SkillData : Parsing_Base
                 skillDataSO.Desc = row[4];
                 skillDataSO.EnhanceCountInfoList = new List<EnhanceCountInfo>();
                 skillDataSO.CoolTime = float.Parse(row[7]);
-                skillDataSO.SkillAttributesInfoList = new List<SkillAttributesInfo>();
+                skillDataSO.LevelSkillStatsList = new List<LevelSkillStats>();
 
                 skillDataSODict[id] = skillDataSO;
             }
@@ -86,10 +86,10 @@ public class Parsing_SkillData : Parsing_Base
 
 
             // 레벨별 스킬 정보들
-            SkillAttributesInfo skillAttributesInfo = new SkillAttributesInfo()
+            LevelSkillStats levelSkillStats = new LevelSkillStats()
             {
                 Level = int.Parse(row[5]),
-                SkillAttributeList = new List<SkillAttribute>()
+                SkillStatList = new List<SkillStat>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
@@ -97,17 +97,17 @@ public class Parsing_SkillData : Parsing_Base
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    SkillAttribute skillAttribute = new SkillAttribute()
+                    SkillStat skillStat = new SkillStat()
                     {
                         Type = row[k],
                         Value = row[k + 1]
                     };
-                    skillAttributesInfo.SkillAttributeList.Add(skillAttribute);
+                    levelSkillStats.SkillStatList.Add(skillStat);
                 }
             }
 
             // skillDataSO의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            skillDataSO.SkillAttributesInfoList.Add(skillAttributesInfo);
+            skillDataSO.LevelSkillStatsList.Add(levelSkillStats);
         }
 
         // 스크립터블 오브젝트로 저장
@@ -121,7 +121,7 @@ public class Parsing_SkillData : Parsing_Base
     private void SaveScriptableObjects(Dictionary<string, SkillDataSO> skillDataSODict)
     {
         // 폴더가 없으면 새로 생성
-        string folderPath = $"Assets/Resources/Data/Skill/";
+        string folderPath = $"Assets/Resources_moved/Data/Skill/"; // 어드레서블 사용 폴더로!
         if (System.IO.Directory.Exists(folderPath) == false)
             System.IO.Directory.CreateDirectory(folderPath);
 
@@ -150,7 +150,7 @@ public class Parsing_SkillData : Parsing_Base
             skillDataSO.Desc = data.Desc;
             skillDataSO.EnhanceCountInfoList = data.EnhanceCountInfoList;
             skillDataSO.CoolTime = data.CoolTime;
-            skillDataSO.SkillAttributesInfoList = data.SkillAttributesInfoList;
+            skillDataSO.LevelSkillStatsList = data.LevelSkillStatsList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
             if (AssetDatabase.Contains(skillDataSO) == false)

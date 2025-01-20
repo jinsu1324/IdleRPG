@@ -76,7 +76,7 @@ public class Parsing_GearData : Parsing_Base
                 gearDataSO.Desc = row[4];
                 gearDataSO.EnhanceCountInfoList = new List<EnhanceCountInfo>();
                 gearDataSO.AttackAnimType = row[7];
-                gearDataSO.GearAttributesInfoList = new List<GearAttributesInfo>();
+                gearDataSO.LevelGearStatsList = new List<LevelGearStats>();
                 
                 gearDataSODict[id] = gearDataSO;
             }
@@ -91,10 +91,10 @@ public class Parsing_GearData : Parsing_Base
 
 
             // 레벨별 장비 정보들
-            GearAttributesInfo gearAttributesInfo = new GearAttributesInfo()
+            LevelGearStats levelGearStats = new LevelGearStats()
             {
                 Level = int.Parse(row[5]),
-                GearAttributeList = new List<GearAttribute>()
+                GearStatList = new List<GearStat>()
             };
 
             // 한 행에 있는 (한 레벨의) 어빌리티 정보들 모두 아이템 레벨별 정보의 리스트에 추가
@@ -102,17 +102,17 @@ public class Parsing_GearData : Parsing_Base
             {
                 if (string.IsNullOrEmpty(row[k]) == false) // 셀이 비어있지 않다면
                 {
-                    GearAttribute gearAttribute = new GearAttribute()
+                    GearStat gearStat = new GearStat()
                     {
                         Type = row[k],
                         Value = row[k + 1]
                     };
-                    gearAttributesInfo.GearAttributeList.Add(gearAttribute);
+                    levelGearStats.GearStatList.Add(gearStat);
                 }
             }
 
             // gearData의 업그레이드 정보리스트에 한 행의 업그레이드 정보 추가
-            gearDataSO.GearAttributesInfoList.Add(gearAttributesInfo);
+            gearDataSO.LevelGearStatsList.Add(levelGearStats);
         }
 
         // 스크립터블 오브젝트로 저장
@@ -126,7 +126,7 @@ public class Parsing_GearData : Parsing_Base
     private void SaveScriptableObjects(Dictionary<string, GearDataSO> gearDataSODict)
     {
         // 폴더가 없으면 새로 생성
-        string folderPath = $"Assets/Resources/Data/Gear/";
+        string folderPath = $"Assets/Resources_moved/Data/Gear/"; // 어드레서블 사용 폴더로!
         if (System.IO.Directory.Exists(folderPath) == false)
             System.IO.Directory.CreateDirectory(folderPath);
 
@@ -155,7 +155,7 @@ public class Parsing_GearData : Parsing_Base
             gearDataSO.Desc = data.Desc;
             gearDataSO.EnhanceCountInfoList = data.EnhanceCountInfoList;
             gearDataSO.AttackAnimType = data.AttackAnimType;
-            gearDataSO.GearAttributesInfoList = data.GearAttributesInfoList;
+            gearDataSO.LevelGearStatsList = data.LevelGearStatsList;
 
             // 에셋이 없을때만 ScriptableObject를 경로에 저장
             if (AssetDatabase.Contains(gearDataSO) == false) 

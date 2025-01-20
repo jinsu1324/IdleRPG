@@ -14,10 +14,12 @@ public class RewardItemSlot : MonoBehaviour
     /// </summary>
     public void Init(Item item)
     {
-        //_itemIcon.sprite = item.Icon;
-        //_gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(item.Grade);
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
-        //gameObject.SetActive(true);
+        _itemIcon.sprite = itemDataSO.Icon;
+        _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);
+
+        gameObject.SetActive(true);
     }
 
     /// <summary>
