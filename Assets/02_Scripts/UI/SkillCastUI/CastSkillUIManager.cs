@@ -5,58 +5,46 @@ using UnityEngine;
 
 public class CastSkillUIManager : MonoBehaviour
 {
-    //[SerializeField] private CastSkillUI[] _castSkillUIArr; // 캐스팅 스킬 UI 들 배열
+    [SerializeField] private CastSkillUI[] _castSkillUIArr; // 캐스팅 스킬 UI 들 배열
 
-    ///// <summary>
-    ///// OnEnable
-    ///// </summary>
-    //private void OnEnable()
-    //{
-    //    EquipSkillManager.OnEquipSkillChanged += Update_CastSkillUIArr; // 장착스킬 바뀌었을때 -> 캐스팅스킬UI들 업데이트
-    //}
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable()
+    {
+        SkillCaster.OnUpdateCastSkills += Update_CastSkillUIArr; // 캐스팅할 스킬들이 바뀌었을때, UI도 업데이트
+    }
 
-    ///// <summary>
-    ///// OnDisable
-    ///// </summary>
-    //private void OnDisable()
-    //{
-    //    EquipSkillManager.OnEquipSkillChanged -= Update_CastSkillUIArr;
-    //}
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        SkillCaster.OnUpdateCastSkills -= Update_CastSkillUIArr;
+    }
 
-    ///// <summary>
-    ///// Start
-    ///// </summary>
-    //private void Start()
-    //{
-    //    Update_CastSkillUIArr();
-    //}
+    /// <summary>
+    /// 캐스팅스킬 UI 업데이트
+    /// </summary>
+    private void Update_CastSkillUIArr(Skill[] castSkillArr)
+    {
+        if (castSkillArr == null)
+        {
+            foreach (CastSkillUI castSkillUI in _castSkillUIArr)
+                castSkillUI.Hide();
 
-    //public void Update_CastSkillUIArr(Item item = null)
-    //{
-    //    // 장착스킬 가져오기
-    //    ISkill[] equipSkillArr = EquipSkillManager.GetEquipISkill(); 
+            return;
+        }
 
-    //    // 아예 비었으면 UI 다 숨기고 리턴
-    //    if (equipSkillArr == null)
-    //    {
-    //        foreach (CastSkillUI castSkillUI in _castSkillUIArr)
-    //            castSkillUI.Hide();
+        for (int i = 0; i < castSkillArr.Length; i++)
+        {
+            if (castSkillArr[i] == null)
+            {
+                _castSkillUIArr[i].Hide();
+                continue;
+            }
 
-    //        return;
-    //    }
-
-    //    // 장착한스킬들을, UI에 바인딩
-    //    for (int i = 0; i < equipSkillArr.Length; i++)
-    //    {
-    //        // 비었으면 UI 숨기기
-    //        if (equipSkillArr[i] == null)
-    //        {
-    //            _castSkillUIArr[i].Hide();
-    //            continue;
-    //        }
-
-    //        // 안비었으면 UI에 그 스킬 바인딩
-    //        _castSkillUIArr[i].Init_BindSkill(equipSkillArr[i]);
-    //    }
-    //}
+            _castSkillUIArr[i].Init_BindSkill(castSkillArr[i]);
+        }
+    }
 }

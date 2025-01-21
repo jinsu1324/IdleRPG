@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public abstract class Skill
 {
+    public string ID;                   // 스킬 ID
     protected SkillDataSO _skillDataSO; // 스킬 데이터
     protected int _level;               // 현재 스킬의 레벨
     protected float _coolTime;          // 스킬 쿨타임
@@ -19,6 +20,7 @@ public abstract class Skill
     {
         Debug.Log("Skill 생성자!");
 
+        ID = args.ID;
         _skillDataSO = args.SkillDataSO;
         _level = args.Level;
         _coolTime = _skillDataSO.CoolTime;

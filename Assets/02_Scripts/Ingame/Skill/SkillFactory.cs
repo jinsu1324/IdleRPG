@@ -9,6 +9,7 @@ using UnityEngine;
 /// </summary>
 public struct CreateSkillArgs
 {
+    public string ID;
     public SkillDataSO SkillDataSO;
     public int Level;
 }
@@ -36,6 +37,7 @@ public class SkillFactory
 
             CreateSkillArgs args = new CreateSkillArgs()
             {
+                ID = id,
                 SkillDataSO = skillDataSO,
                 Level = level
             };

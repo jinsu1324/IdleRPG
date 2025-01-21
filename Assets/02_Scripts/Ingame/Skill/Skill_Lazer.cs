@@ -25,7 +25,7 @@ public class Skill_Lazer : Skill
     private void Update_SkillStatValues()
     {
         _attackPercentage = GetSkillStatValue(SkillStatType.AttackPercentage);
-        _projectileSpeed = GetSkillStatValue(SkillStatType.ProjectileCount);
+        _projectileSpeed = GetSkillStatValue(SkillStatType.ProjectileSpeed);
 
         _skillAttackPower = Calculate_SkillAttackPower(_attackPercentage);
     }

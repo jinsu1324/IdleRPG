@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using UnityEngine;
 /// </summary>
 public class SkillCaster : MonoBehaviour
 {
-    private Skill[] _castSkillArr;  // 장착스킬을 받아와 캐스팅할 스킬들 배열 
+    public static event Action<Skill[]> OnUpdateCastSkills;     // 캐스팅할 스킬들이 바뀌었을때 이벤트
+    private static Skill[] _castSkillArr;                       // 장착스킬을 받아와 캐스팅할 스킬들 배열 
 
     /// <summary>
     /// OnEnable
@@ -68,6 +70,8 @@ public class SkillCaster : MonoBehaviour
     private void Update_CastSkillArr(Item item = null)
     {
         _castSkillArr = EquipSkillManager.GetEquipSkills_SkillType();
+        
+        OnUpdateCastSkills?.Invoke(_castSkillArr);
     }
 
     /// <summary>
@@ -79,5 +83,13 @@ public class SkillCaster : MonoBehaviour
             return true;
 
         return _castSkillArr.All(skill => skill == null);
+    }
+
+    /// <summary>
+    /// 캐스팅할 스킬들 배열 가져오기
+    /// </summary>
+    public static Skill[] GetCastSkillArr()
+    {
+        return _castSkillArr;
     }
 }
