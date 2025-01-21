@@ -70,10 +70,8 @@ public class ItemDetailUI_Gear : ItemDetailUI
         _enhanceableArrowIcon.gameObject.SetActive(ItemManager.CanEnhance(item));
         _enhanceButton.gameObject.SetActive(ItemManager.CanEnhance(item));
 
-        Update_GearStatUI(item); // 장비속성들 UI 업데이트
+        Update_GearStatUI(item);
 
-
-        // 장착관련정보 + 버튼들 업데이트
         bool isEquipped = EquipGearManager.IsEquipped(item);
         _equipButton.gameObject.SetActive(!isEquipped);
         _unEquipButton.gameObject.SetActive(isEquipped);

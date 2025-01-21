@@ -126,7 +126,7 @@ public class Parsing_GearData : Parsing_Base
     private void SaveScriptableObjects(Dictionary<string, GearDataSO> gearDataSODict)
     {
         // 폴더가 없으면 새로 생성
-        string folderPath = $"Assets/Resources_moved/Data/Gear/"; // 어드레서블 사용 폴더로!
+        string folderPath = $"Assets/Resources/Data/Gear/"; // 어드레서블 사용 폴더로!
         if (System.IO.Directory.Exists(folderPath) == false)
             System.IO.Directory.CreateDirectory(folderPath);
 

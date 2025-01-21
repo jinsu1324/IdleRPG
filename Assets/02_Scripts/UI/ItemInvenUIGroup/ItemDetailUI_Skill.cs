@@ -53,29 +53,21 @@ public class ItemDetailUI_Skill : ItemDetailUI
     /// </summary>
     protected override void UpdateUI(Item item)
     {
-        //// 기본정보 업데이트
-        //base.UpdateUI(item);
+        base.UpdateUI(item);
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
 
-        //// 상세설명 업데이트
-        //if (item is SkillItem skillItem)
-        //    _descText.text = skillItem.GetDynamicDesc();
+        _descText.text = itemDataSO.Desc; // Todo Diynamic 텍스트로 해야함
+        _levelText.text = $"Lv.{item.Level}";
+        _countText.text = $"{item.Count}";
+        _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(item.Level)}";
+        _countSlider.value = (float)item.Level / (float)itemDataSO.GetEnhanceCount(item.Level);
+        _enhanceableArrowIcon.gameObject.SetActive(ItemManager.CanEnhance(item));
+        _enhanceButton.gameObject.SetActive(ItemManager.CanEnhance(item));
 
-        //// 강화관련정보 업데이트
-        //if (item is IEnhanceableItem enhanceableItem)
-        //{
-        //    _levelText.text = $"Lv.{enhanceableItem.Level}";
-        //    _countText.text = $"{item.Count}";
-        //    _enhanceableCountText.text = $"{enhanceableItem.EnhanceableCount}";
-        //    _countSlider.value = (float)item.Count / (float)enhanceableItem.EnhanceableCount;
-        //    _enhanceableArrowIcon.gameObject.SetActive(enhanceableItem.CanEnhance());
-        //    _enhanceButton.gameObject.SetActive(enhanceableItem.CanEnhance());
-        //}
-
-        //// 장착관련정보 + 버튼들 업데이트
-        //bool isEquipped = EquipSkillManager.IsEquipped(item);
-        //_equipButton.gameObject.SetActive(!isEquipped);
-        //_unEquipButton.gameObject.SetActive(isEquipped);
-        //_equipIcon.SetActive(isEquipped);
+        bool isEquipped = EquipSkillManager.IsEquipped(item);
+        _equipButton.gameObject.SetActive(!isEquipped);
+        _unEquipButton.gameObject.SetActive(isEquipped);
+        _equipIcon.SetActive(isEquipped);
     }
 
     /// <summary>

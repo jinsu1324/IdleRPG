@@ -3,6 +3,7 @@ using System;
 /// <summary>
 /// 아이템 (퓨어 데이터)
 /// </summary>
+[System.Serializable]
 public class Item
 {
     public string ID { get; private set; }              // ID

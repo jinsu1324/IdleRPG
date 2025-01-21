@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,15 +94,18 @@ public class ItemSlot : MonoBehaviour
         _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(CurrentItem.Level)}";
         _countSlider.value = (float)CurrentItem.Count / (float)itemDataSO.GetEnhanceCount(CurrentItem.Level);
         _enhanceableArrowGO.gameObject.SetActive(ItemManager.CanEnhance(CurrentItem));
-
-
-
-        //// 장착중 아이콘 업데이트
-        //if (CurrentItem is GearItem gearItem)
-        //    _equipGO.SetActive(EquipGearManager.IsEquipped(gearItem));
-        //if (CurrentItem is SkillItem skillItem)
-        //    _equipGO.SetActive(EquipSkillManager.IsEquipped(skillItem));
-
+        
+        switch (CurrentItem.ItemType) // 장착중 아이콘 업데이트
+        {
+            case ItemType.Weapon:
+            case ItemType.Armor:
+            case ItemType.Helmet:
+                _equipGO.SetActive(EquipGearManager.IsEquipped(CurrentItem));
+                break;
+            case ItemType.Skill:
+                _equipGO.SetActive(EquipSkillManager.IsEquipped(CurrentItem));
+                break;
+        }
 
         _infoParentGO.SetActive(true);
     }

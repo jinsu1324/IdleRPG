@@ -1,43 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
-public static class ItemManager
+public class ItemManager : SingletonBase<ItemManager>
 {
-    // 아이템데이터 스크립터블 딕셔너리
-    private static Dictionary<string, ItemDataSO> _itemDataSODict = new Dictionary<string, ItemDataSO>(); 
-    private static bool _isLoaded = false;
+    [SerializeField] private List<ItemDataSO> _itemDataSOList;  // 아이템 데이터들 리스트
+    private static Dictionary<string, ItemDataSO> _itemDataSODict; // 아이템데이터 스크립터블 딕셔너리
 
     /// <summary>
-    /// Addressables를 통해 ItemDataSO를 로드
+    /// Awake
     /// </summary>
-    public static async Task LoadItemDataAsync()
+    protected override void Awake()
     {
-        // 이미 로드된 경우 중복 방지
-        if (_isLoaded) return; 
+        base.Awake();
+        Set_ItemDataSODict();
+    }
 
-        // "ItemData" 라벨을 사용해 모든 ItemDataSO 로드
-        AsyncOperationHandle<IList<ItemDataSO>> handle = Addressables.LoadAssetsAsync<ItemDataSO>("ItemData", null);
+    /// <summary>
+    /// 아이템 데이터 딕셔너리 셋팅
+    /// </summary>
+    private void Set_ItemDataSODict()
+    {
+        _itemDataSODict = new Dictionary<string, ItemDataSO>();
 
-        // 비동기 로드 대기
-        await handle.Task; 
-
-        // 완료되면 딕셔너리에 맵핑
-        if (handle.Status == AsyncOperationStatus.Succeeded)
+        foreach (ItemDataSO itemDataSO in _itemDataSOList)
         {
-            foreach (ItemDataSO itemDataSO in handle.Result)
-            {
-                if (!_itemDataSODict.ContainsKey(itemDataSO.ID))
-                    _itemDataSODict[itemDataSO.ID] = itemDataSO;
-            }
-            _isLoaded = true;
-            Debug.Log("모든 ItemDataSO 로드가 완료되었습니다!!");
+            if (_itemDataSODict.ContainsKey(itemDataSO.ID) == false)
+                _itemDataSODict[itemDataSO.ID] = itemDataSO;
         }
-        else
-            Debug.Log("ItemDataSO 로드가 실패하였습니다.");
     }
 
     /// <summary>
@@ -74,6 +64,6 @@ public static class ItemManager
     public static bool CanEnhance(Item item)
     {
         ItemDataSO itemDataSO = GetItemDataSO(item.ID);
-        return item.Level >= itemDataSO.GetEnhanceCount(item.Level);
+        return item.Count >= itemDataSO.GetEnhanceCount(item.Level);
     }
 }

@@ -15,32 +15,27 @@ public class ItemEnhanceManager
     /// </summary>
     public static void Enhance(Item item)
     {
-        if (item is IEnhanceableItem enhanceableItem)
+        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        int enhanceCount = itemDataSO.GetEnhanceCount(item.Level);
+
+        item.ReduceCount(enhanceCount);
+        item.LevelUp();
+        
+        OnItemEnhance?.Invoke(item);
+
+        // 장비이고 장착했을때만 플레이어 스탯에 적용
+        if (itemDataSO is GearDataSO gearDataSO)
         {
-            // 아이템 갯수 감소
-            enhanceableItem.RemoveCountByEnhance();    
-           
-            // 아이템 레벨업
-            enhanceableItem.ItemLevelUp();             
+            if (EquipGearManager.IsEquipped(item))
+            {
+                PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+                {
+                    DetailStatDict = gearDataSO.GetGearStats(item.Level),
+                    Source = item
+                };
 
-            // 아이템 강화 이벤트 노티
-            OnItemEnhance?.Invoke(item);    
-
-            //// 장비일때만
-            //if (item is GearItem gearItem)
-            //{
-            //    // 해당 장비가 장착되어 있을때만
-            //    if (EquipGearManager.IsEquipped(gearItem))
-            //    {
-            //        // 플레이어 스탯 업데이트
-            //        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-            //        {
-            //            AttributeDict = gearItem.GetAttributeDict(),
-            //            Source = item,
-            //        };
-            //        PlayerStats.UpdateStatModifier(args);
-            //    }
-            //}
+                PlayerStats.UpdateStatModifier(args);
+            }
         }
     }
 }
