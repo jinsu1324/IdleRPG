@@ -45,7 +45,7 @@ public class EquipGearComponent : MonoBehaviour
     public void EquipPlayer(Item item)
     {
         GameObject prefab;
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
         
         if (itemDataSO is GearDataSO gearDataSO)
         {

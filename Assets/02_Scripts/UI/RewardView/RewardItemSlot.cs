@@ -14,7 +14,7 @@ public class RewardItemSlot : MonoBehaviour
     /// </summary>
     public void Init(Item item)
     {
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
 
         _itemIcon.sprite = itemDataSO.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);

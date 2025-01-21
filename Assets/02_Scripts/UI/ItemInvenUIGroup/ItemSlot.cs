@@ -85,7 +85,7 @@ public class ItemSlot : MonoBehaviour
         if (IsSlotEmpty)
             return;
 
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(CurrentItem.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(CurrentItem.ID);
 
         _itemIcon.sprite = itemDataSO.Icon;
         _gradeFrame.sprite = ResourceManager.Instance.GetItemGradeFrame(itemDataSO.Grade);
@@ -93,7 +93,7 @@ public class ItemSlot : MonoBehaviour
         _levelText.text = $"Lv.{CurrentItem.Level}";
         _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(CurrentItem.Level)}";
         _countSlider.value = (float)CurrentItem.Count / (float)itemDataSO.GetEnhanceCount(CurrentItem.Level);
-        _enhanceableArrowGO.gameObject.SetActive(ItemManager.CanEnhance(CurrentItem));
+        _enhanceableArrowGO.gameObject.SetActive(ItemEnhanceManager.CanEnhance(CurrentItem));
         
         switch (CurrentItem.ItemType) // 장착중 아이콘 업데이트
         {

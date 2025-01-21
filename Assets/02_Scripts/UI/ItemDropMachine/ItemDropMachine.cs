@@ -43,7 +43,7 @@ public class ItemDropMachine : MonoBehaviour
     private Item CreateItem()
     {
         // 해당 아이템타입의 모든 데이터 스크립터블 오브젝트들 중에서 1개만 고르기
-        List<ItemDataSO> itemDataSOList = ItemManager.GetItemDataSOList_ByType(_itemType);
+        List<ItemDataSO> itemDataSOList = ItemDataManager.GetItemDataSOList_ByType(_itemType);
         ItemDataSO itemDataSO = itemDataSOList[RandomIndex(itemDataSOList.Count)];
 
         Item item = new Item(itemDataSO.ID, itemDataSO.ItemType, 1, 1);

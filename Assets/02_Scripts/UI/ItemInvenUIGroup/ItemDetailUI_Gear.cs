@@ -60,15 +60,15 @@ public class ItemDetailUI_Gear : ItemDetailUI
     protected override void UpdateUI(Item item)
     {
         base.UpdateUI(item);
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
 
         _descText.text = itemDataSO.Desc;
         _levelText.text = $"Lv.{item.Level}";
         _countText.text = $"{item.Count}";
         _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(item.Level)}";
         _countSlider.value = (float)item.Level / (float)itemDataSO.GetEnhanceCount(item.Level);
-        _enhanceableArrowIcon.gameObject.SetActive(ItemManager.CanEnhance(item));
-        _enhanceButton.gameObject.SetActive(ItemManager.CanEnhance(item));
+        _enhanceableArrowIcon.gameObject.SetActive(ItemEnhanceManager.CanEnhance(item));
+        _enhanceButton.gameObject.SetActive(ItemEnhanceManager.CanEnhance(item));
 
         Update_GearStatUI(item);
 
@@ -84,7 +84,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
     /// </summary>
     private void Update_GearStatUI(Item item)
     {
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
 
         if (itemDataSO is GearDataSO gearDataSO)
         {

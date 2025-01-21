@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemManager : SingletonBase<ItemManager>
+/// <summary>
+/// 아이템데이터 관리
+/// </summary>
+public class ItemDataManager : SingletonBase<ItemDataManager>
 {
-    [SerializeField] private List<ItemDataSO> _itemDataSOList;  // 아이템 데이터들 리스트
-    private static Dictionary<string, ItemDataSO> _itemDataSODict; // 아이템데이터 스크립터블 딕셔너리
+    [SerializeField] private List<ItemDataSO> _itemDataSOList;      // 아이템 데이터들 리스트
+    private static Dictionary<string, ItemDataSO> _itemDataSODict;  // 아이템데이터 스크립터블 딕셔너리
 
     /// <summary>
     /// Awake
@@ -56,14 +59,5 @@ public class ItemManager : SingletonBase<ItemManager>
 
         Debug.Log($"{id} 에 맞는 ItemDataSO를 찾을 수 없습니다.");
         return null;
-    }
-
-    /// <summary>
-    /// 해당 아이템이 강화가능한지?
-    /// </summary>
-    public static bool CanEnhance(Item item)
-    {
-        ItemDataSO itemDataSO = GetItemDataSO(item.ID);
-        return item.Count >= itemDataSO.GetEnhanceCount(item.Level);
     }
 }

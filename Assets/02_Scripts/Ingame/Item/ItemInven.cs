@@ -66,7 +66,7 @@ public static class ItemInven
     /// </summary>
     public static bool HasEnhanceableItem(ItemType itemType)
     {
-        if (_itemInvenDict[itemType].Any(item => ItemManager.CanEnhance(item)))
+        if (_itemInvenDict[itemType].Any(item => ItemEnhanceManager.CanEnhance(item)))
             return true;
         else
             return false;

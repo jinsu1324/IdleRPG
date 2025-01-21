@@ -15,7 +15,7 @@ public class ItemEnhanceManager
     /// </summary>
     public static void Enhance(Item item)
     {
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
         int enhanceCount = itemDataSO.GetEnhanceCount(item.Level);
 
         item.ReduceCount(enhanceCount);
@@ -37,5 +37,14 @@ public class ItemEnhanceManager
                 PlayerStats.UpdateStatModifier(args);
             }
         }
+    }
+
+    /// <summary>
+    /// 해당 아이템이 강화가능한지?
+    /// </summary>
+    public static bool CanEnhance(Item item)
+    {
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
+        return item.Count >= itemDataSO.GetEnhanceCount(item.Level);
     }
 }

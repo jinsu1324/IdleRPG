@@ -41,7 +41,7 @@ public class EquipGearManager
         OnEquipGear?.Invoke(item);
 
         // 플레이어 스탯 업데이트
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
         if (itemDataSO is GearDataSO gearDataSO)
         {
             PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
@@ -65,7 +65,7 @@ public class EquipGearManager
         OnUnEquipGear?.Invoke(item);
 
         // 플레이어 스탯 제거
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
         if (itemDataSO is GearDataSO gearDataSO)
         {
             PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()

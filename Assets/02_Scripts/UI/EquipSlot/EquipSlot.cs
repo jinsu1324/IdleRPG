@@ -27,7 +27,7 @@ public abstract class EquipSlot : MonoBehaviour
     /// </summary>
     public void UpdateSlot(Item item)
     {
-        ItemDataSO itemDataSO = ItemManager.GetItemDataSO(item.ID);
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
 
         CurrentItem = item;
         _levelText.text = $"Lv.{item.Level}";
