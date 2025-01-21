@@ -3,39 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Egg
+public class Skill_Egg : Skill
 {
-    //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    //[JsonIgnore] public float Range { get; private set; }                // 사거리
-    //[JsonIgnore] public float ProjectileCount { get; private set; }      // 투사체 갯수
+    private float _attackPercentage;     // 공격 퍼센티지
+    private float _range;                // 사거리
+    private float _projectileCount;      // 투사체 갯수
+    private float _skillAttackPower;     // 최종 스킬 공격력 
 
-    //[JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
+    /// <summary>
+    /// 생성자
+    /// </summary>
+    public Skill_Egg(CreateSkillArgs args) : base(args)
+    {
+        Debug.Log("Skill_Egg 생성자!");
 
-    ///// <summary>
-    ///// 속성값 업데이트
-    ///// </summary>
-    //protected override void UpdateAttributes()
-    //{
-    //    AttackPercentage = GetAttributeValue_ByCurrentLevel(SkillAttributeType.AttackPercentage);
-    //    Range = GetAttributeValue_ByCurrentLevel(SkillAttributeType.Range);
-    //    ProjectileCount = GetAttributeValue_ByCurrentLevel(SkillAttributeType.ProjectileCount);
+        Update_SkillStatValues();
+    }
 
-    //    _skillAttackPower = Calculate_SkillAttackPower(AttackPercentage);
-    //}
+    /// <summary>
+    /// 스킬스탯 값들 업데이트
+    /// </summary>
+    private void Update_SkillStatValues()
+    {
+        _attackPercentage = GetSkillStatValue(SkillStatType.AttackPercentage);
+        _range = GetSkillStatValue(SkillStatType.Range);
+        _projectileCount = GetSkillStatValue(SkillStatType.ProjectileCount);
 
-    ///// <summary>
-    ///// 스킬 실행
-    ///// </summary>
-    //public override void ExecuteSkill()
-    //{
-    //    Debug.Log("Skill_Egg!!");
-    //}
+        _skillAttackPower = Calculate_SkillAttackPower(_attackPercentage);
+    }
+
+    /// <summary>
+    /// 스킬 실행
+    /// </summary>
+    public override void ExecuteSkill()
+    {
+        Debug.Log($"Skill_Egg!! 공격력 : {_skillAttackPower}");
+    }
 
     ///// <summary>
     ///// Desc가져오기 
     ///// </summary>
     //public override string GetDynamicDesc()
     //{
-    //    return string.Format(Desc, ProjectileCount, NumberConverter.ConvertPercentage(AttackPercentage));
+    //    return string.Format(Desc, _projectileCount, NumberConverter.ConvertPercentage(_attackPercentage));
     //}
 }

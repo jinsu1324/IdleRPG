@@ -3,48 +3,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Lazer
+public class Skill_Lazer : Skill
 {
-    //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    //[JsonIgnore] public float ProjectileSpeed { get; private set; }      // 투사체 속도
+    private float _attackPercentage;     // 공격 퍼센티지
+    private float _projectileSpeed;      // 투사체 속도
+    private float _skillAttackPower;    // 스킬 공격력
 
-    //[JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
+    /// <summary>
+    /// 생성자
+    /// </summary>
+    public Skill_Lazer(CreateSkillArgs args) : base(args)
+    {
+        Debug.Log("Skill_Lazer 생성자!");
 
-    ///// <summary>
-    ///// 속성값 업데이트
-    ///// </summary>
-    //protected override void UpdateAttributes()
-    //{
-    //    AttackPercentage = GetAttributeValue_ByCurrentLevel(SkillAttributeType.AttackPercentage);
-    //    ProjectileSpeed = GetAttributeValue_ByCurrentLevel(SkillAttributeType.ProjectileSpeed);
-        
-    //    _skillAttackPower = Calculate_SkillAttackPower(AttackPercentage);
-    //}
+        Update_SkillStatValues();
+    }
 
-    ///// <summary>
-    ///// 스킬 실행
-    ///// </summary>
-    //public override void ExecuteSkill()
-    //{
-    //    Debug.Log("Skill_Lazer!!");
+    /// <summary>
+    /// 스킬스탯 값들 업데이트
+    /// </summary>
+    private void Update_SkillStatValues()
+    {
+        _attackPercentage = GetSkillStatValue(SkillStatType.AttackPercentage);
+        _projectileSpeed = GetSkillStatValue(SkillStatType.ProjectileCount);
 
-    //    //// 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
-    //    //Vector3 targetPos =
-    //    //    (FieldTargetManager.GetClosestLivingTarget(PlayerSpawner.PlayerInstance.transform.position) as Component).
-    //    //    transform.position;
+        _skillAttackPower = Calculate_SkillAttackPower(_attackPercentage);
+    }
 
-    //    //// 프로젝타일 생성하고
-    //    //SkillProjectile_Meteor projectile =
-    //    //    GameObject.Instantiate(SkillDataSO.SkillPrefab, targetPos, Quaternion.identity).
-    //    //    GetComponent<SkillProjectile_Meteor>();
-
-    //    //// 치명타 여부 결정하고, 최종데미지 계산하고
-    //    //bool isCritical = CriticalManager.IsCritical();
-    //    //float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
-
-    //    //// 프로젝타일에 주입
-    //    //projectile.Init(finalDamage, isCritical);
-    //}
+    /// <summary>
+    /// 스킬 실행
+    /// </summary>
+    public override void ExecuteSkill()
+    {
+        Debug.Log($"Skill_Lazer!! 공격력 : {_skillAttackPower}");
+    }
 
     ///// <summary>
     ///// Desc가져오기 
