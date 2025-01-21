@@ -68,8 +68,13 @@ public class ItemInven : ISavable
     /// </summary>
     public static bool HasEnhanceableItem(ItemType itemType)
     {
-        if (_itemInvenDict[itemType].Any(item => ItemEnhanceManager.CanEnhance(item)))
-            return true;
+        if (_itemInvenDict.TryGetValue(itemType, out List<Item> itemInven))
+        {
+            if (itemInven.Any(item => ItemEnhanceManager.CanEnhance(item)))
+                return true;
+            else
+                return false;
+        }
         else
             return false;
     }
@@ -87,37 +92,6 @@ public class ItemInven : ISavable
             return null;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /// <summary>
     /// 인벤토리에 강화 가능한 장비가 있는지?

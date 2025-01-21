@@ -51,7 +51,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // SaveField 어트리뷰트들만 가져오기
         var fields = savable.GetType()
                             .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                            .Where(field => System.Attribute.IsDefined(field, typeof(SaveField)));
+                            .Where(field => Attribute.IsDefined(field, typeof(SaveField)));
 
         // JSON 직렬화를 위한 필드와 값 설정
         var data = new Dictionary<string, object>();
@@ -62,7 +62,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
         await _databaseReference.Child("users").Child(_userID).Child(savable.Key).SetRawJsonValueAsync(json);
 
-        //Debug.Log($"저장 완료! {savable.Key} : {json}");
+        Debug.Log($"저장 완료! {savable.Key} : {json}");
     }
 
     /// <summary>
@@ -83,10 +83,11 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         string json = dataSnapshot.GetRawJsonValue();
         var loadedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
 
+
         // SaveField 어트리뷰트가 붙은 필드만 가져오기
         var fields = savable.GetType()
                             .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                            .Where(field => System.Attribute.IsDefined(field, typeof(SaveField)));
+                            .Where(field => Attribute.IsDefined(field, typeof(SaveField)));
 
         // 필드값들 이름 매칭해서 데이터 덮어씌우기
         foreach (var field in fields)
