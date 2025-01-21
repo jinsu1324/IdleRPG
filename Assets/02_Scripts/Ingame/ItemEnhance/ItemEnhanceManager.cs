@@ -8,7 +8,8 @@ using UnityEngine;
 /// </summary>
 public class ItemEnhanceManager
 {
-    public static event Action<Item> OnItemEnhance;   // 아이템 강화할때 이벤트
+    public static event Action<Item> OnItemEnhance;   // 아이템 강화할때 이벤트 (장비 + 스킬 포함)
+    public static event Action<Item> OnSkillEnhance;  // 스킬 강화할때 이벤트 (스킬만 따로 플러스로)  
 
     /// <summary>
     /// 아이템 강화
@@ -36,6 +37,11 @@ public class ItemEnhanceManager
 
                 PlayerStats.UpdateStatModifier(args);
             }
+        }
+
+        if (item.ItemType == ItemType.Skill)
+        {
+            OnSkillEnhance?.Invoke(item);
         }
     }
 

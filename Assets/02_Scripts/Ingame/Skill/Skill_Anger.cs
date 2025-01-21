@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 분노 스킬
 /// </summary>
-public class Skill_Anger : SkillItem
+public class Skill_Anger
 {
     //[JsonIgnore] public float AddAttackSpeed { get; private set; }   // 공격속도 추가량              
     //[JsonIgnore] public float Duration { get; private set; }         // 스킬지속시간

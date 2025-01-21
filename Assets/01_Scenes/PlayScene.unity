@@ -16391,8 +16391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8e4104846bbd64abb5199b7041050e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillIcon: {fileID: 901488154}
-  _coolTimeDimd: {fileID: 2095686936}
 --- !u!1 &1052215648
 GameObject:
   m_ObjectHideFlags: 0
@@ -21603,10 +21601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 126fcd2bfb491b04dab0dcb409540baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _castSkillUIArr:
-  - {fileID: 1043037782}
-  - {fileID: 1208363688}
-  - {fileID: 1871654886}
 --- !u!114 &1083134840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22551,8 +22545,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8e4104846bbd64abb5199b7041050e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillIcon: {fileID: 761479952}
-  _coolTimeDimd: {fileID: 1812896757}
 --- !u!114 &1208363689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25746,26 +25738,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1409308945}
-  - component: {fileID: 1409308944}
+  - component: {fileID: 1409308946}
   m_Layer: 0
-  m_Name: EquipSkillCaster
+  m_Name: SkillCaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1409308944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409308943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4beda28d12eca8343bdca7d963f31162, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_IsActive: 1
 --- !u!4 &1409308945
 Transform:
   m_ObjectHideFlags: 0
@@ -25781,6 +25761,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1409308946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1409308943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4beda28d12eca8343bdca7d963f31162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1428047947
 GameObject:
   m_ObjectHideFlags: 0
@@ -31049,8 +31041,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8e4104846bbd64abb5199b7041050e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillIcon: {fileID: 1637630927}
-  _coolTimeDimd: {fileID: 1428047949}
 --- !u!114 &1871654887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33227,7 +33217,7 @@ GameObject:
   - component: {fileID: 2021974984}
   - component: {fileID: 2021974985}
   m_Layer: 0
-  m_Name: '@ ItemManager'
+  m_Name: '@ ItemDataManager'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33257,7 +33247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2021974983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af0570f2aa915a641b2e3fd3fd368dac, type: 3}
+  m_Script: {fileID: 11500000, guid: 6924b196f3da0b84698e40ed7c8aef09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:

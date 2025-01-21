@@ -118,9 +118,17 @@ public class EquipSkillManager
     }
 
     /// <summary>
-    /// 장착한 스킬아이템 배열 가져오기
+    /// 해당 슬롯에 장착되어있는 스킬아이템 가져오기
     /// </summary>
-    public static Item[] GetEquipSkillArr()
+    public static Item GetEquipSkill(int slotIndex)
+    {
+        return _equipSkillArr[slotIndex];
+    }
+
+    /// <summary>
+    /// 장착한 스킬아이템들 가져오기(아이템 타입)
+    /// </summary>
+    public static Item[] GetEquipSkills_ItemType()
     {
         if (_equipSkillArr.All(s => s == null)) // 모든 슬롯이 비어있다면(null) null 반환
             return null;
@@ -129,24 +137,25 @@ public class EquipSkillManager
     }
 
     /// <summary>
-    /// 해당 슬롯에 장착되어있는 스킬아이템 가져오기
+    /// 장착한 스킬들 가져오기 (사용하기 위해 '스킬'형태로 변환해서)
     /// </summary>
-    public static Item GetEquipSkill(int slotIndex)
+    public static Skill[] GetEquipSkills_SkillType()
     {
-        return _equipSkillArr[slotIndex];
-    }
+        Skill[] castSkillArr = new Skill[_maxCount];
 
+        for (int i = 0; i < _equipSkillArr.Length; i++)
+        {
+            Item equipItem = _equipSkillArr[i];
 
-    /// <summary>
-    /// 장착한 스킬들 ISkill 배열을 반환 (인덱스 동일 유지)
-    /// </summary>
-    public static ISkill[] GetEquipISkill()
-    {
-        if (_equipSkillArr.All(s => s == null)) // 모든 슬롯이 비어있다면(null) null 반환
-            return null;
+            if (equipItem == null)
+            {
+                castSkillArr[i] = null;
+                continue;
+            }
 
-        return _equipSkillArr.
-            Select(item => item as ISkill). // ISkill로 변환 (실패 시 null)
-            ToArray();  // 배열로 반환
+            castSkillArr[i] = SkillFactory.CreateSkill(equipItem.ID, equipItem.Level);
+        }
+
+        return castSkillArr;
     }
 }

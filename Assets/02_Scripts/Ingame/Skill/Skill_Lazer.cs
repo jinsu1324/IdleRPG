@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Lazer : SkillItem
+public class Skill_Lazer
 {
     //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
     //[JsonIgnore] public float ProjectileSpeed { get; private set; }      // 투사체 속도

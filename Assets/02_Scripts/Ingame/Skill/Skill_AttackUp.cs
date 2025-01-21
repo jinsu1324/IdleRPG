@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_AttackUp : SkillItem
+public class Skill_AttackUp
 {
     //[JsonIgnore] public float AddAttackPower { get; private set; }   // 공격력 추가량              
     //[JsonIgnore] public float Duration { get; private set; }         // 스킬지속시간

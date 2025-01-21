@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// 스킬 속성 타입
 /// </summary>
-public enum SkillAttributeType
+public enum SkillStatType
 {
     AttackPercentage,
     Range,
@@ -44,62 +45,26 @@ public class SkillDataSO : ItemDataSO
     public float CoolTime;
     public List<LevelSkillStats> LevelSkillStatsList;
 
+    /// <summary>
+    /// 레벨에 맞는 스킬속성들 가져오기
+    /// </summary>
+    public Dictionary<SkillStatType, float> GetSkillStats(int level)
+    {
+        Dictionary<SkillStatType, float> skillStatDict = new Dictionary<SkillStatType, float>();
 
+        LevelSkillStats levelSkillStats = LevelSkillStatsList.Find(x => x.Level == level);
+        if (levelSkillStats == null)
+            return null;
 
+        // 해당 레벨의 스킬속성들을 딕셔너리 형태로 저장 후 반환
+        foreach (SkillStat skillStat in levelSkillStats.SkillStatList)
+        {
+            SkillStatType type = (SkillStatType)Enum.Parse(typeof(SkillStatType), skillStat.Type);
+            float value = float.Parse(skillStat.Value);
 
+            skillStatDict.Add(type, value);
+        }
 
-
-
-
-
-
-
-
-
-
-
-    ///// <summary>
-    ///// 레벨에 맞는 속성들을 딕셔너리로 가져오기
-    ///// </summary>
-    //public Dictionary<SkillAttributeType, float> GetAttributeDict_ByLevel(int level)
-    //{
-    //    // 중복된 데이터를 get하지 않게 새 딕셔너리 생성
-    //    Dictionary<SkillAttributeType, float> attributeDict = new Dictionary<SkillAttributeType, float>();
-
-    //    // level에 맞는 levelAttributes 찾기
-    //    LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
-
-    //    // 없으면 그냥 리턴
-    //    if (levelAttributes == null)
-    //    {
-    //        Debug.Log($"{level}이 맞는 levelAttributes를 찾지 못했습니다.");
-    //        return attributeDict;
-    //    }
-
-    //    // 해당 레벨에 존재하는 속성(attribute)들을 딕셔너리에 넣고 반환
-    //    foreach (Attribute attribute in levelAttributes.AttributeList)
-    //    {
-    //        SkillAttributeType statType = (SkillAttributeType)Enum.Parse(typeof(SkillAttributeType), attribute.Type);
-    //        float value = float.Parse(attribute.Value);
-
-    //        attributeDict.Add(statType, value);
-    //    }
-
-    //    return attributeDict;
-    //}
-
-    ///// <summary>
-    ///// 특정 속성의 값을 반환
-    ///// </summary>
-    //public string GetAttributeValue(SkillAttributeType skillAttributeType, int level)
-    //{
-    //    // level에 맞는 levelAttributes 찾기
-    //    LevelAttributes levelAttributes = LevelAttributesList.Find(x => x.Level == level.ToString());
-
-    //    // 속성중에서 타입이름이 같은 속성을 찾기
-    //    Attribute attribute = levelAttributes.AttributeList.Find(x => x.Type == skillAttributeType.ToString());
-
-    //    // 그 속성의 값을 반환
-    //    return attribute.Value;
-    //}
+        return skillStatDict;
+    }
 }

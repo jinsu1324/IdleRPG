@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 썬더볼트 스킬
 /// </summary>
-public class Skill_Thunder : SkillItem
+public class Skill_Thunder
 {
     //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
     //[JsonIgnore] public float Range { get; private set; }                // 사거리

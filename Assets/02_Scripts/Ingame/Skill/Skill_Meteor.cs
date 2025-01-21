@@ -7,54 +7,64 @@ using UnityEngine;
 /// <summary>
 /// 메테오 스킬
 /// </summary>
-public class Skill_Meteor : SkillItem
+public class Skill_Meteor : Skill
 {
-    //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
-    //[JsonIgnore] public float Range { get; private set; }                // 사거리
+    private float _attackPercentage;     // 공격 퍼센티지
+    private float _range;                // 사거리
+    private float _skillAttackPower;     // 최종 스킬 공격력
+    
+    /// <summary>
+    /// 생성자
+    /// </summary>
+    public Skill_Meteor(CreateSkillArgs args) : base(args)
+    {
+        Debug.Log("Skill_Meteor 생성자!");
 
-    //[JsonIgnore] private float _skillAttackPower;                        // 스킬 공격력
+        Update_SkillStatValues();
+    }
 
-    ///// <summary>
-    ///// 속성값 업데이트
-    ///// </summary>
-    //protected override void UpdateAttributes()
-    //{
-    //    AttackPercentage = GetAttributeValue_ByCurrentLevel(SkillAttributeType.AttackPercentage);
-    //    Range = GetAttributeValue_ByCurrentLevel(SkillAttributeType.Range);
-        
-    //    _skillAttackPower = Calculate_SkillAttackPower(AttackPercentage);
-    //}
+    /// <summary>
+    /// 스킬스탯 값들 업데이트
+    /// </summary>
+    private void Update_SkillStatValues()
+    {
+        _attackPercentage = GetSkillStatValue(SkillStatType.AttackPercentage);
+        _range = GetSkillStatValue(SkillStatType.Range);
 
-    ///// <summary>
-    ///// 스킬 실행
-    ///// </summary>
-    //public override void ExecuteSkill()
-    //{
-    //    Debug.Log("Skill_Meteor!!");
+        _skillAttackPower = Calculate_SkillAttackPower(_attackPercentage);
+    }
 
-    //    // 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
-    //    Vector3 targetPos = 
-    //        (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).
-    //        transform.position;
+    /// <summary>
+    /// 스킬 실행
+    /// </summary>
+    public override void ExecuteSkill()
+    {
+        Debug.Log($"Skill_Meteor!! 공격력 : {_skillAttackPower}");
 
-    //    // 프로젝타일 생성하고
-    //    SkillProjectile_Meteor projectile = 
-    //        GameObject.Instantiate(SkillDataSO.Prefab, targetPos, Quaternion.identity).
-    //        GetComponent<SkillProjectile_Meteor>();
+        //// 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
+        //Vector3 targetPos =
+        //    (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).
+        //    transform.position;
 
-    //    // 치명타 여부 결정하고, 최종데미지 계산하고
-    //    bool isCritical = CriticalManager.IsCritical();
-    //    float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+        //// 프로젝타일 생성하고
+        //SkillProjectile_Meteor projectile =
+        //    GameObject.Instantiate(SkillDataSO.Prefab, targetPos, Quaternion.identity).
+        //    GetComponent<SkillProjectile_Meteor>();
 
-    //    // 프로젝타일에 주입
-    //    projectile.Init(finalDamage, isCritical);
-    //}
+        //// 치명타 여부 결정하고, 최종데미지 계산하고
+        //bool isCritical = CriticalManager.IsCritical();
+        //float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+
+        //// 프로젝타일에 주입
+        //projectile.Init(finalDamage, isCritical);
+    }
 
     ///// <summary>
     ///// Desc가져오기 
     ///// </summary>
     //public override string GetDynamicDesc()
     //{
-    //    return string.Format(Desc, NumberConverter.ConvertPercentage(AttackPercentage));
+    //    return string.Format(Desc, NumberConverter.ConvertPercentage(_attackPercentage));
     //}
+
 }

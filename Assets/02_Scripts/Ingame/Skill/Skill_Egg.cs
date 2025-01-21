@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill_Egg : SkillItem
+public class Skill_Egg
 {
     //[JsonIgnore] public float AttackPercentage { get; private set; }     // 공격 퍼센티지
     //[JsonIgnore] public float Range { get; private set; }                // 사거리
