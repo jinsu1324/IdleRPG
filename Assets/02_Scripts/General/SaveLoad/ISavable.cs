@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 세이브할 클래스에 붙일 인터페이스
+/// </summary>
 public interface ISavable
 {
     string Key { get; } // 데이터의 고유 키
-    
-    void NotifyLoaded(); // 데이터를 로드한 후 호출
 }

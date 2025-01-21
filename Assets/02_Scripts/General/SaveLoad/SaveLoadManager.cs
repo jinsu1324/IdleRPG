@@ -8,68 +8,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 
-
-
-
-//////// 내가 생각하는 저장해야하는 구조
-/// ItemInven 
-/// {
-///     Weapon
-///     {
-///         Item
-///         {
-///             ID : Weapon_Sword
-///             ItemType : ItemType.Weapon
-///             Count : 7
-///             Level : 2
-///         }
-///         
-///         Item
-///         {
-///             ID : Weapon_Axe
-///             ItemType : ItemType.Weapon
-///             Count : 7
-///             Level : 2
-///         }
-///     }
-///     
-///     Armor
-///     {
-///         Item
-///         {
-///             ID : Armor_SteelArmor
-///             ItemType : ItemType.Armor
-///             Count : 7
-///             Level : 2
-///         }
-///         
-///         Item
-///         {
-///             ID : Armor_ForestArmor
-///             ItemType : ItemType.Armor
-///             Count : 7
-///             Level : 2
-///         }
-///     }
-/// }
-
-
-
-
-
-
-
-
-
-
-
-
-
 /// <summary>
 /// 세이브할 필드에만 붙일 어트리뷰트
 /// </summary>
-[System.AttributeUsage(System.AttributeTargets.Field)]
-public class SaveField : System.Attribute
+[AttributeUsage(AttributeTargets.Field)]
+public class SaveField : Attribute
 {
 
 }
@@ -83,40 +26,6 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     private DatabaseReference _databaseReference;   // 데이터베이스 레퍼런스
     private List<ISavable> _managerList;            // 저장할 매니저 리스트
 
-
-
-
-    public async void DataSaveJinsu()
-    {
-        // JSON 직렬화 및 Firebase에 저장
-        string json = JsonConvert.SerializeObject(ItemInven._itemInvenDict, Formatting.Indented);
-        await _databaseReference.Child("users").Child(_userID).Child("ItemInven").SetRawJsonValueAsync(json);
-    }
-
-    public async void DataLoadJinsu()
-    {
-        var dataSnapshot = await _databaseReference.Child("users").Child(_userID).Child("ItemInven").GetValueAsync();
-
-        // 데이터스냅샷 못찾았으면 그냥 리턴
-        if (!dataSnapshot.Exists)
-        {
-            Debug.LogWarning($"ItemInven 데이터를 찾을 수 없습니다.");
-            return;
-        }
-
-        // 저장된 데이터 가져오기
-        string json = dataSnapshot.GetRawJsonValue();
-        Debug.Log(json);
-
-        //var loadedData = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-
-    }
-
-
-
-
-
-
     /// <summary>
     /// Awake
     /// </summary>
@@ -127,9 +36,9 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            new GoldManager(),
-            new GemManager(),
-            //new ItemInven()
+            //new GoldManager(),
+            //new GemManager(),
+            new ItemInven()
             // 여기에 다른 매니저를 추가
         };
     }
