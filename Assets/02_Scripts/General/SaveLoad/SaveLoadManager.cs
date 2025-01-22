@@ -35,7 +35,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         {
             new GoldManager(),
             new GemManager(),
-            //new StageManager(),
+            new CurrentStageData(),
             new ItemInven()
             // 여기에 다른 매니저를 추가
         };
