@@ -7,16 +7,18 @@ using UnityEngine;
 /// <summary>
 /// 장착한 스킬 관리
 /// </summary>
-public class EquipSkillManager
+public class EquipSkillManager : ISavable
 {
-    public static event Action<Item> OnEquipSkillChanged;       // 장착스킬 바뀌었을때 이벤트
-    public static event Action OnSkillSwapStarted;              // 장착스킬교체 시작할 때 이벤트
-    public static event Action OnSkillSwapFinished;             // 장착스킬교체 끝났을 때 이벤트
+    public string Key => nameof(EquipSkillManager);                          // Firebase 데이터 저장용 고유 키 설정
 
-    private static int _maxCount = 3;                           // 스킬 장착 최대 갯수
-    private static Item[] _equipSkillArr = new Item[_maxCount]; // 장착한 스킬 배열
+    public static event Action<Item> OnEquipSkillChanged;                   // 장착스킬 바뀌었을때 이벤트
+    public static event Action OnSkillSwapStarted;                          // 장착스킬교체 시작할 때 이벤트
+    public static event Action OnSkillSwapFinished;                         // 장착스킬교체 끝났을 때 이벤트
 
-    private static Item _swapTargetItem;                        // 스왑 타겟 아이템
+    private static int _maxCount = 3;                                       // 스킬 장착 최대 갯수
+    [SaveField] private static Item[] _equipSkillArr = new Item[_maxCount]; // 장착한 스킬 배열
+
+    private static Item _swapTargetItem;                                    // 스왑 타겟 아이템
 
     /// <summary>
     /// 스킬 장착

@@ -6,11 +6,14 @@ using System.Linq;
 /// <summary>
 /// 장착한 장비 관리
 /// </summary>
-public class EquipGearManager
+public class EquipGearManager : ISavable
 {
+    public string Key => nameof(EquipGearManager);  // Firebase 데이터 저장용 고유 키 설정
+
     public static event Action<Item> OnEquipGear;   // 장비 장착할 때 이벤트
     public static event Action<Item> OnUnEquipGear; // 장비 해제할 때 이벤트
-    private static Dictionary<ItemType, Item> _equipGearDict = new Dictionary<ItemType, Item>(); // 장착한 장비 딕셔너리
+
+    [SaveField] private static Dictionary<ItemType, Item> _equipGearDict = new Dictionary<ItemType, Item>(); // 장착한 장비 딕셔너리
 
     /// <summary>
     /// 장착

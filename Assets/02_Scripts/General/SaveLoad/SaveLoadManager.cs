@@ -35,8 +35,10 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         {
             new GoldManager(),
             new GemManager(),
-            new CurrentStageData(),
-            new ItemInven()
+            //new CurrentStageData(),
+            //new ItemInven(),
+            //new EquipGearManager(),
+            //new EquipSkillManager(),
             // 여기에 다른 매니저를 추가
         };
     }
