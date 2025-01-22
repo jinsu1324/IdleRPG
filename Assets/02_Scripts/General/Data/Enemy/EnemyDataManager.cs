@@ -46,4 +46,15 @@ public class EnemyDataManager : SingletonBase<EnemyDataManager>
             return null;
         }
     }
+
+    /// <summary>
+    /// 적 골드량에 따라 골드 추가
+    /// </summary>
+    public static void AddGoldByEnemy(EnemyID enemyID)
+    {
+        EnemyData enemyData = GetEnemyData(enemyID.ToString());
+        int dropGold = enemyData.DropGold;
+
+        GoldManager.AddGold(dropGold);
+    }
 }

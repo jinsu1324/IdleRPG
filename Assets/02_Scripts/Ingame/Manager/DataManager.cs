@@ -21,10 +21,6 @@ public class DataManager : SingletonBase<DataManager>
         // 스타팅 업그레이드 데이터 셋팅
         UpgradeManager upgradeManager = new UpgradeManager();
         upgradeManager.Init(StartingUpgradeDatasSO.DataList);
-
-        // 적 드랍 골드량 데이터 셋팅
-        EnemyDropGoldManager enemyDropGoldManager = new EnemyDropGoldManager();
-        enemyDropGoldManager.Init();
     }
 
     /// <summary>
