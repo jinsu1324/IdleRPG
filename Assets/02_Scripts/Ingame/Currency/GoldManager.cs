@@ -6,10 +6,10 @@ using UnityEngine;
 /// <summary>
 /// 골드 관리자
 /// </summary>
-[System.Serializable]
 public class GoldManager : ISavable
 {
     public static event Action<int> OnGoldChange;       // 골드 변경 되었을 때 이벤트
+    public string Key => nameof(GoldManager);           // Firebase 데이터 저장용 고유 키 설정
     [SaveField] private static int _currentGold;        // 현재 골드
     public static int CurrentGold                           
     {
@@ -20,7 +20,6 @@ public class GoldManager : ISavable
             NotifyChanged(); // 값이 변경될 때 이벤트 호출
         }
     }
-    public string Key => nameof(GoldManager);           // Firebase 데이터 저장용 고유 키 설정
 
     /// <summary>
     /// 골드 추가
@@ -55,15 +54,8 @@ public class GoldManager : ISavable
     /// </summary>
     public static bool HasEnoughGold(int cost) => CurrentGold >= cost;
 
-
-
     /// <summary>
     /// 골드 변경 이벤트 호출
     /// </summary>
     private static void NotifyChanged() => OnGoldChange?.Invoke(CurrentGold);
-
-    /// <summary>
-    /// 로드되었을때 이벤트 호출
-    /// </summary>
-    public void NotifyLoaded() => OnGoldChange?.Invoke(CurrentGold);
 }

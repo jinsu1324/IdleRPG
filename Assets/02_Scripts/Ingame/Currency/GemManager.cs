@@ -6,10 +6,10 @@ using UnityEngine;
 /// <summary>
 /// 젬 관리자
 /// </summary>
-[System.Serializable]
 public class GemManager : ISavable
 {
     public static event Action<int> OnGemChange;    // 젬 변경 되었을 때 이벤트
+    public string Key => nameof(GemManager);        // Firebase 데이터 저장용 고유 키 설정
     [SaveField] private static int _currentGem;     // 현재 젬
     public static int CurrentGem
     { 
@@ -20,7 +20,6 @@ public class GemManager : ISavable
             NotifyChanged(); // 값이 변경될때 이벤트 호출
         }
     }
-    public string Key => nameof(GemManager);        // Firebase 데이터 저장용 고유 키 설정
 
     /// <summary>
     /// 젬 추가
@@ -57,9 +56,4 @@ public class GemManager : ISavable
     /// 젬 변경 이벤트 호출
     /// </summary>
     private static void NotifyChanged() => OnGemChange?.Invoke(CurrentGem);
-
-    /// <summary>
-    /// 로드되었을 때 이벤트 호출
-    /// </summary>
-    public void NotifyLoaded() => OnGemChange?.Invoke(CurrentGem);
 }

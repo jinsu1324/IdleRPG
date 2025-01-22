@@ -8,12 +8,9 @@ using UnityEngine;
 /// </summary>
 public class ItemInven : ISavable
 {
-    public string Key => nameof(ItemInven);         // 데이터 저장에 사용될 고유 키
-    
     public static event Action<Item> OnAddItem;     // 아이템 추가되었을 때 이벤트
-
-    [SaveField] // 가지고 있는 아이템 인벤토리 딕셔너리 
-    public static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>();
+    public string Key => nameof(ItemInven);         // 데이터 저장에 사용될 고유 키
+    [SaveField] public static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>(); // 가지고 있는 아이템 인벤토리 딕셔너리 
 
     /// <summary>
     /// 인벤토리에 아이템 추가

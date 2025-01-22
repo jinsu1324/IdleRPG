@@ -18,13 +18,14 @@ public enum StageType
     Infinite // 무한 스테이지
 }
 
-public class StageManager : SingletonBase<StageManager>
+public class StageManager : SingletonBase<StageManager>, ISavable
 {
     public static event Action<OnStageChangedArgs> OnStageChanged;  // 스테이지 변경 시 이벤트
-
+    public string Key => nameof(StageManager);                      // Firebase 데이터 저장용 고유 키 설정
+    [SaveField] private int _currentChapter = 1;                    // 현재 챕터
+    [SaveField] private int _currentStage = 1;                      // 현재 스테이지
+    
     private StageType _currentStageType;                            // 현재 스테이지 타입
-    private int _currentChapter = 1;                                // 현재 챕터 // Todo 임시데이터
-    private int _currentStage = 1;                                  // 현재 스테이지
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
     private int _stageLevelingCount = 1;                            // 스테이지를 레벨로 환산한 카운트

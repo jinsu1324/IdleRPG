@@ -1,5 +1,5 @@
 using Firebase.Database;
-using Newtonsoft.Json; // Newtonsoft.Json 사용
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,10 +12,7 @@ using UnityEngine;
 /// 세이브할 필드에만 붙일 어트리뷰트
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
-public class SaveField : Attribute
-{
-
-}
+public class SaveField : Attribute { }
 
 /// <summary>
 /// 세이브 로드 관리
@@ -36,8 +33,9 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            //new GoldManager(),
-            //new GemManager(),
+            new GoldManager(),
+            new GemManager(),
+            //new StageManager(),
             new ItemInven()
             // 여기에 다른 매니저를 추가
         };
@@ -109,12 +107,6 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
 
         Debug.Log($"불러오기 완료! {savable.Key} : {json}");
     }
-
-    
-    
-    
-    
-    
     
     /// <summary>
     /// 데이터 제거
@@ -159,8 +151,6 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         }
 
         Debug.Log("전체 데이터 저장 완료!(버튼)");
-
-        //DataSaveJinsu();
     }
 
     /// <summary>
@@ -175,8 +165,6 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         }
 
         Debug.Log($"전체 데이터 불러오기 완료!(버튼)");
-
-        //DataLoadJinsu();
     }
 
     /// <summary>
