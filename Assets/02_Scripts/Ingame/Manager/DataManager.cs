@@ -7,7 +7,6 @@ using UnityEngine;
 public class DataManager : SingletonBase<DataManager>
 {
     [Title("제너럴 데이터", Bold = false)]
-    [SerializeField] public EnemyDatasSO EnemyDatasSO { get; private set; }                 // 적 데이터
     [SerializeField] public StartingUpgradeDatasSO StartingUpgradeDatasSO { get; private set; }   // 스타팅 업그레이드 데이터
 
 
@@ -25,7 +24,7 @@ public class DataManager : SingletonBase<DataManager>
 
         // 적 드랍 골드량 데이터 셋팅
         EnemyDropGoldManager enemyDropGoldManager = new EnemyDropGoldManager();
-        enemyDropGoldManager.Init(EnemyDatasSO);
+        enemyDropGoldManager.Init();
     }
 
     /// <summary>
@@ -40,6 +39,5 @@ public class DataManager : SingletonBase<DataManager>
 
 
     // 데이터들 set 함수들
-    public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
     public void SetStartingUpgradeDatasSO(StartingUpgradeDatasSO data) => StartingUpgradeDatasSO = data;
 }

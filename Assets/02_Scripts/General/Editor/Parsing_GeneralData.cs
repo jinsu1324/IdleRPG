@@ -19,7 +19,6 @@ public class Parsing_GeneralData : OdinEditorWindow
     private readonly string _apiKey = "AIzaSyATyhPBwN65Vbkg9ppq6NBOo3nLwHuqkJU";
 
     // 시트 이름들
-    private readonly string _sheetName_Enemy = "Enemy";
     private readonly string _sheetName_StartingUpgrade = "StartingUpgrade";
 
     /// <summary>
@@ -42,7 +41,6 @@ public class Parsing_GeneralData : OdinEditorWindow
     [Button("Fetch GeneralData", ButtonSizes.Large)]
     public void DataFetch()
     {
-        FetchAndConvertData<EnemyData, EnemyDatasSO>(_sheetName_Enemy);
         FetchAndConvertData<Upgrade, StartingUpgradeDatasSO>(_sheetName_StartingUpgrade);
     }
 
@@ -61,7 +59,6 @@ public class Parsing_GeneralData : OdinEditorWindow
         }
 
         // 데이터 매니저에 링크
-        dataManager.SetEnemyDatasSO(Resources.Load<EnemyDatasSO>($"Data/{_sheetName_Enemy}"));
         dataManager.SetStartingUpgradeDatasSO(Resources.Load<StartingUpgradeDatasSO>($"Data/{_sheetName_StartingUpgrade}"));
 
         // 저장

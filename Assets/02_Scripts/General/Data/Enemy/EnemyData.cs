@@ -17,8 +17,9 @@ public enum EnemyID
 /// 적 데이터
 /// </summary>
 [System.Serializable]
-public class EnemyData : BaseData
+public class EnemyData
 {
+    public string ID;
     public string Name;
     public float MaxHp;
     public float MoveSpeed;

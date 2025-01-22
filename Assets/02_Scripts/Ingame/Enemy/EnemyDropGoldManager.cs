@@ -10,14 +10,14 @@ public class EnemyDropGoldManager
     /// <summary>
     /// Àû µå¶ø°ñµå µñ¼Å³Ê¸® ¼ÂÆÃ
     /// </summary>
-    public void Init(EnemyDatasSO enemyDatasSO)
+    public void Init()
     {
         _enemyDropGoldDict = new Dictionary<EnemyID, int>();
         EnemyID[] enemyIDArr = (EnemyID[])Enum.GetValues(typeof(EnemyID));
 
         foreach (EnemyID enemyID in enemyIDArr)
         {
-            EnemyData enemyData = enemyDatasSO.GetDataByID(enemyID.ToString());
+            EnemyData enemyData = EnemyDataManager.GetEnemyData(enemyID.ToString());
             int dropGold = enemyData.DropGold;
 
             if (_enemyDropGoldDict.ContainsKey(enemyID) == false)
