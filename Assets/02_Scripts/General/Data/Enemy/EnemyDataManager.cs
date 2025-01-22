@@ -9,7 +9,7 @@ public class EnemyDataManager : SingletonBase<EnemyDataManager>
 {
     [SerializeField] private EnemyDatasSO _enemyDatasSO;        // 에너미 데이터들 스크립터블 오브젝트
     private static Dictionary<string, EnemyData> _enemyDataDict;   // 에너미 데이터 딕셔너리
-
+    
     /// <summary>
     /// Awake
     /// </summary>
@@ -22,7 +22,7 @@ public class EnemyDataManager : SingletonBase<EnemyDataManager>
     /// <summary>
     /// 에너미 데이터 딕셔너리 셋팅
     /// </summary>
-    private void Set_EnemyDataDict()
+    public void Set_EnemyDataDict()
     {
         _enemyDataDict = new Dictionary<string, EnemyData>();
 

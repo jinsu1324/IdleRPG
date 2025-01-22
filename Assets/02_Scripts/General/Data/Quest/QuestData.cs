@@ -17,6 +17,7 @@ public enum QuestType
 [System.Serializable]
 public class QuestData
 {
+    public int Index;
     public QuestType QuestType;
     public string Desc;
     public int TargetValue;

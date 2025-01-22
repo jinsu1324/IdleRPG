@@ -8,35 +8,18 @@ public class QuestManager : SingletonBase<QuestManager>
 {
     public static event Action<Quest> OnUpdateCurrentQuest;          // 현재 퀘스트 정보들 업데이트됐을때 이벤트
     public static event Action<bool> OnCheckQuestCompleted;          // 퀘스트 완료여부 체크할때 이벤트
-    
-    [SerializeField] private QuestDatasSO _questDatasSO;             // 퀘스트 데이터
 
-    private List<QuestData> _questDataList = new List<QuestData>();  // 모든 퀘스트 데이터 리스트
     private Quest _currentQuest;                                     // 현재 활성화된 퀘스트
-    private int _currentIndex = 0;                                   // 현재 퀘스트 인덱스
+    private int _currentIndex = 1;                                   // 현재 퀘스트 인덱스
     private Dictionary<QuestType, int> _questProgressDict;           // 퀘스트 유형별 누적 진행 상황 딕셔너리
 
-    /// <summary>
-    /// Awake
-    /// </summary>
-    protected override void Awake()
+    private void Start()
     {
-        base.Awake();
-
-        InitQuestDataList(); // 퀘스트 데이터 리스트 초기화
         InitQuestProgressDict(); // 누적진행상황 딕셔너리 초기화
 
-        _currentQuest = new Quest(_questDataList[_currentIndex]); // 일단 가장 첫번째 걸로 현재 퀘스트 활성화
+        _currentQuest = new Quest(QuestDataManager.GetQuestData(_currentIndex)); // 일단 가장 첫번째 걸로 현재 퀘스트 활성화
         OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
         CheckQuestComplete(_currentQuest); // 완료여부 체크
-    }
-
-    /// <summary>
-    /// 퀘스트 데이터 리스트 초기화
-    /// </summary>
-    private void InitQuestDataList()
-    {
-        _questDataList = _questDatasSO.QuestDataList;
     }
 
     /// <summary>
@@ -115,14 +98,8 @@ public class QuestManager : SingletonBase<QuestManager>
     private void StartNextQuest()
     {
         _currentIndex++;
-        if (_currentIndex >= _questDataList.Count)
-        {
-            Debug.Log("모든 퀘스트 완료");
-            _currentQuest = null;
-            return;
-        }
         
-        _currentQuest = new Quest(_questDataList[_currentIndex]); // 다음 퀘스트로 현재퀘스트 설정
+        _currentQuest = new Quest(QuestDataManager.GetQuestData(_currentIndex)); // 다음 퀘스트로 현재퀘스트 설정
         OnUpdateCurrentQuest?.Invoke(_currentQuest); // 현재 퀘스트 정보 업데이트 이벤트 실행
         CheckQuestComplete(_currentQuest); // 완료 여부 체크
     }

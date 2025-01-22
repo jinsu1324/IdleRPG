@@ -13,40 +13,49 @@ MonoBehaviour:
   m_Name: Quest
   m_EditorClassIdentifier: 
   QuestDataList:
-  - QuestType: 0
+  - Index: 1
+    QuestType: 0
     Desc: "\uC801 5\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 5
     RewardGem: 100
-  - QuestType: 0
+  - Index: 2
+    QuestType: 0
     Desc: "\uC801 10\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 10
     RewardGem: 200
-  - QuestType: 7
+  - Index: 3
+    QuestType: 7
     Desc: "\uC2A4\uD14C\uC774\uC9C0 3 \uB3C4\uB2EC"
     TargetValue: 3
     RewardGem: 500
-  - QuestType: 1
+  - Index: 4
+    QuestType: 1
     Desc: "\uACE8\uB4DC 5000 \uC218\uC9D1"
     TargetValue: 5000
     RewardGem: 300
-  - QuestType: 2
+  - Index: 5
+    QuestType: 2
     Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
     TargetValue: 10
     RewardGem: 100
-  - QuestType: 3
+  - Index: 6
+    QuestType: 3
     Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 3 \uB3C4\uB2EC"
     TargetValue: 3
     RewardGem: 300
-  - QuestType: 4
+  - Index: 7
+    QuestType: 4
     Desc: "\uCD5C\uB300\uCCB4\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
     TargetValue: 10
     RewardGem: 200
-  - QuestType: 5
+  - Index: 8
+    QuestType: 5
     Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
     TargetValue: 5
     RewardGem: 500
-  - QuestType: 6
+  - Index: 9
+    QuestType: 6
     Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
     TargetValue: 5

@@ -132,54 +132,51 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         Debug.Log("전체 users 데이터 제거 완료!.");
     }
 
-
-
-
-
-
-
-
-
-
-    #region 저장, 불러오기, 제거 버튼들
     /// <summary>
-    /// 데이터 저장 버튼
+    /// 전체 데이터 저장
     /// </summary>
-    public async void OnClickSaveButton()
+    public async Task SaveAll()
     {
         foreach (var manager in _managerList)
-        {
             await SaveAsync(manager);
-        }
 
         Debug.Log("전체 데이터 저장 완료!(버튼)");
     }
 
     /// <summary>
-    /// 데이터 불러오기 버튼
+    /// 전체 데이터 불러오기
     /// </summary>
-    public async void OnClickLoadButton()
+    public async Task LoadAll()
     {
         foreach (var manager in _managerList)
-        {
             await LoadAsync(manager);
-            //manager.NotifyLoaded(); // 로드 후 이벤트 호출
-        }
 
         Debug.Log($"전체 데이터 불러오기 완료!(버튼)");
     }
 
     /// <summary>
-    /// 데이터 제거 버튼
+    /// 전체 데이터 제거
     /// </summary>
-    public async void OnClickRemoveButton()
+    public async Task RemoveAll()
     {
         foreach (var manager in _managerList)
-        {
             await RemoveAsync(manager);
-        }
 
         Debug.Log("전체 데이터 제거 완료!(버튼)");
     }
-    #endregion
+    
+    /// <summary>
+    /// 전체 데이터 저장 버튼
+    /// </summary>
+    public void SaveAllButton() => _ = SaveAll(); // '_ =' 반환값 무시 (디스카드(discard))
+
+    /// <summary>
+    /// 전체 데이터 불러오기 버튼
+    /// </summary>
+    public void LoadAllButton() => _ = LoadAll();
+
+    /// <summary>
+    /// 전체 데이터 제거 버튼
+    /// </summary>
+    public void RemoveAllButton() => _ = RemoveAll();
 }

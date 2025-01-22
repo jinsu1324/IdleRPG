@@ -8,13 +8,13 @@ using UnityEngine.UI;
 
 public class UpgradeSlot : MonoBehaviour
 {
+    [SerializeField] private UpgradeID _upgradeID;                  // 업그레이드 ID
     [SerializeField] private TextMeshProUGUI _upgradeNameText;      // 업그레이드 이름 텍스트 
     [SerializeField] private TextMeshProUGUI _levelText;            // 레벨 텍스트
     [SerializeField] private TextMeshProUGUI _valueText;            // 실제 값 텍스트
     [SerializeField] private TextMeshProUGUI _costText;             // 업그레이드 비용 텍스트
     [SerializeField] private Image _upgradeIcon;                    // 업그레이드 아이콘
     [SerializeField] private UpgradeButton _UpgradeButton;          // 업그레이드 버튼
-    private string _id;                                             // 업그레이드 ID
 
     /// <summary>
     /// OnEnable
@@ -35,12 +35,9 @@ public class UpgradeSlot : MonoBehaviour
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(string id)
+    public void Init()
     {
-        _id = id;
-
-        _UpgradeButton.Init(_id);   // 업그레이드 버튼 초기화
-
+        _UpgradeButton.Init(_upgradeID);
         UpdateUpgradeSlotUI();
     }
 
@@ -50,7 +47,7 @@ public class UpgradeSlot : MonoBehaviour
     private void UpdateUpgradeSlotUI()
     {
         // 이 슬롯의 업그레이드 ID에 맞게 스탯 가져오기
-        Upgrade upgrade = UpgradeManager.GetUpgrade(_id);
+        Upgrade upgrade = UpgradeManager.GetUpgrade(_upgradeID.ToString());
 
         // UI 요소들 업데이트
         if (upgrade != null)
@@ -61,10 +58,10 @@ public class UpgradeSlot : MonoBehaviour
             _upgradeIcon.sprite = ResourceManager.Instance.GetIcon(upgrade.ID.ToString());
 
             // 크리티컬 관련은 퍼센티지로 표현
-            if (_id == StatType.CriticalRate.ToString() || _id == StatType.CriticalMultiple.ToString())
+            if (_upgradeID.ToString() == StatType.CriticalRate.ToString() || _upgradeID.ToString() == StatType.CriticalMultiple.ToString())
                 _valueText.text = NumberConverter.ConvertPercentage(upgrade.Value);
             // 공격속도는 소수점 정해서 표현
-            else if (_id == StatType.AttackSpeed.ToString())
+            else if (_upgradeID.ToString() == StatType.AttackSpeed.ToString())
                 _valueText.text = NumberConverter.ConvertFixedDecimals(upgrade.Value);
             // 나머지는 알파벳으로 표현
             else

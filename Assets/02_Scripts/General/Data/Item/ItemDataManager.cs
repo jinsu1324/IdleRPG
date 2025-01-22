@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
@@ -22,7 +23,7 @@ public class ItemDataManager : SingletonBase<ItemDataManager>
     /// <summary>
     /// 아이템 데이터 딕셔너리 셋팅
     /// </summary>
-    private void Set_ItemDataSODict()
+    public void Set_ItemDataSODict()
     {
         _itemDataSODict = new Dictionary<string, ItemDataSO>();
 

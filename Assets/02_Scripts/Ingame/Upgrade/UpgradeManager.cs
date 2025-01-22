@@ -18,9 +18,9 @@ public class UpgradeManager
     private static Dictionary<string, Upgrade> _upgradeDict;        // 업그레이드들 딕셔너리
 
     /// <summary>
-    /// 업그레이드 딕셔너리 셋팅
+    /// 업그레이드 딕셔너리 초기 셋팅
     /// </summary>
-    public void Init()
+    public void SetUpgradeDict_ByStartData()
     {
         // 딕셔너리 초기화
         _upgradeDict = new Dictionary<string, Upgrade>();

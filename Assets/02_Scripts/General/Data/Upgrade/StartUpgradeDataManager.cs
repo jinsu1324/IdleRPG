@@ -6,7 +6,7 @@ public class StartUpgradeDataManager : SingletonBase<StartUpgradeDataManager>
 {
     [SerializeField] private StartUpgradeDatasSO _startUpgradeDatasSO;      // 스타트 업그레이드 데이터들 스크립터블 오브젝트
     private static Dictionary<string, Upgrade> _startUpgradeDataDict;       // 스타트 업그레이드 데이터 딕셔너리
-
+   
     /// <summary>
     /// Awake
     /// </summary>
@@ -19,7 +19,7 @@ public class StartUpgradeDataManager : SingletonBase<StartUpgradeDataManager>
     /// <summary>
     /// 스타트 업그레이드 데이터 딕셔너리 셋팅
     /// </summary>
-    private void Set_StartUpgradeDataDict()
+    public void Set_StartUpgradeDataDict()
     {
         _startUpgradeDataDict = new Dictionary<string, Upgrade>();
 

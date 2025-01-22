@@ -22,7 +22,7 @@ public class StageDataManager : SingletonBase<StageDataManager>
     /// <summary>
     /// 스테이지 데이터 딕셔너리 셋팅
     /// </summary>
-    private void Set_StageDataDict()
+    public void Set_StageDataDict()
     {
         _stageDataDict = new Dictionary<int, StageData>();
 

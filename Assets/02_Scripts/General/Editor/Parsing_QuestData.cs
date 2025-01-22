@@ -59,10 +59,11 @@ public class Parsing_QuestData : Parsing_Base
 
             // 데이터 할당
             QuestData questData = new QuestData();
-            questData.QuestType = (QuestType)Enum.Parse(typeof(QuestType), row[0]);
-            questData.Desc = row[1];
-            questData.TargetValue = int.Parse(row[2]);
-            questData.RewardGem = int.Parse(row[3]);
+            questData.Index = int.Parse(row[0]);
+            questData.QuestType = (QuestType)Enum.Parse(typeof(QuestType), row[1]);
+            questData.Desc = row[2];
+            questData.TargetValue = int.Parse(row[3]);
+            questData.RewardGem = int.Parse(row[4]);
 
             // 퀘스트 데이터 리스트에 추가
             questDatasSO.QuestDataList.Add(questData);
