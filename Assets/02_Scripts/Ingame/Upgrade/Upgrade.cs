@@ -14,8 +14,9 @@ public enum UpgradeID
 }
 
 [System.Serializable]
-public class Upgrade : BaseData
+public class Upgrade
 {
+    public string ID;              // ID
     public string Name;            // 이름 
     public int Level;              // 레벨
     public float Value;            // 실제 업그레이드 값

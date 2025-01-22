@@ -20,7 +20,7 @@ public class UpgradeManager
     /// <summary>
     /// 업그레이드 딕셔너리 셋팅
     /// </summary>
-    public void Init(List<Upgrade> startingStatDataList)
+    public void Init()
     {
         // 딕셔너리 초기화
         _upgradeDict = new Dictionary<string, Upgrade>();
@@ -35,7 +35,7 @@ public class UpgradeManager
             string id = upgradeID.ToString();
 
             // 초기업그레이드 리스트중에서 ID 매칭되는것 찾기
-            Upgrade findStatData = startingStatDataList.FirstOrDefault(x => x.ID == id);
+            Upgrade findStatData = StartUpgradeDataManager.GetStartUpgradeData(id);
 
             // null 체크
             if (findStatData == null)
