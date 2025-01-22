@@ -3,39 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 스테이지 변경시 이벤트에 필요한 것들 구조체
+/// </summary>
 public struct OnStageChangedArgs
 {
-    public int CurrentChapter;      // 현재 챕터
     public int CurrentStage;        // 현재 스테이지
     public EnemyID EnemyID;         // 등장하는 적 ID
     public int Count;               // 등장하는 적 수
     public float StatPercantage;    // 등장적 스탯 퍼센티지
 }
 
-public enum StageType
-{
-    Normal,  // 일반 스테이지
-    Infinite // 무한 스테이지
-}
-
-public class StageManager : SingletonBase<StageManager>, ISavable
+/// <summary>
+/// 스테이지 로직 관리
+/// </summary>
+public class StageManager : SingletonBase<StageManager>
 {
     public static event Action<OnStageChangedArgs> OnStageChanged;  // 스테이지 변경 시 이벤트
-    public string Key => nameof(StageManager);                      // Firebase 데이터 저장용 고유 키 설정
-    [SaveField] private int _currentChapter = 1;                    // 현재 챕터
-    [SaveField] private int _currentStage = 1;                      // 현재 스테이지
     
-    private StageType _currentStageType;                            // 현재 스테이지 타입
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
-    private int _stageLevelingCount = 1;                            // 스테이지를 레벨로 환산한 카운트
 
     /// <summary>
     /// Start
     /// </summary>
     private void Start()
     {
-        StageBuildAndStart(); // 스테이지 시작
+        StageBuildAndStart();
     }
 
     /// <summary>
@@ -43,18 +37,17 @@ public class StageManager : SingletonBase<StageManager>, ISavable
     /// </summary>
     private void StageBuildAndStart()
     {
-        // 현재 챕터와 스테이지에 맞는 스테이지 데이터 가져오기
-        StageData stageData = DataManager.Instance.StageDatasSO.GetStageData(_currentChapter, _currentStage);
+        // 현재 스테이지에 맞는 스테이지 데이터 가져오기
+        StageData stageData = StageDataManager.GetStageData(CurrentStageData.Stage);
 
         // 데이터에서 필요한 정보들 할당
         EnemyID appearEnemyID = (EnemyID)Enum.Parse(typeof(EnemyID), stageData.AppearEnemy);
         int targetCount = stageData.Count;
         float statPercentage = stageData.StatPercentage;
-        
+
         OnStageChangedArgs args = new OnStageChangedArgs() 
         { 
-            CurrentChapter = _currentChapter, 
-            CurrentStage = _currentStage, 
+            CurrentStage = CurrentStageData.Stage, 
             EnemyID = appearEnemyID, 
             Count = targetCount, 
             StatPercantage = statPercentage
@@ -71,17 +64,17 @@ public class StageManager : SingletonBase<StageManager>, ISavable
     /// </summary>
     public void AddKillCount()
     {
-        if (_currentStageType == StageType.Normal)  // 일반모드면, 
+        if (CurrentStageData.StageType == StageType.Normal)  // 일반모드면, 
         {
             _killCount++;
             
             if (_killCount >= _targetCount) // 타겟 다잡으면 스테이지 레벨업
             {
-                StageLevelUp();
+                CurrentStageData.StageLevelUp();
                 StageBuildAndStart();
             }
         }
-        else if (_currentStageType == StageType.Infinite) // 무한모드면, 
+        else if (CurrentStageData.StageType == StageType.Infinite) // 무한모드면, 
         {
             _killCount++;
             
@@ -89,35 +82,6 @@ public class StageManager : SingletonBase<StageManager>, ISavable
             {
                 StageBuildAndStart();
             }
-        }
-    }
-
-    /// <summary>
-    /// 스테이지 레벨업
-    /// </summary>
-    private void StageLevelUp()
-    {
-        _currentStage++;
-        _stageLevelingCount++;
-        QuestManager.Instance.UpdateQuestProgress(QuestType.ReachStage, 1);
-
-        if (_currentStage > 5)
-        {
-            _currentStage = 1;
-            _currentChapter++;
-        }
-    }
-
-    /// <summary>
-    /// 스테이지 레벨 다운
-    /// </summary>
-    private void StageLevelDown()
-    {
-        _currentStage--;
-
-        if (_currentStage <= 0)
-        {
-            _currentStage = 1;
         }
     }
 
@@ -131,27 +95,11 @@ public class StageManager : SingletonBase<StageManager>, ISavable
     }
 
     /// <summary>
-    /// 스테이지 타입 일반모드로 변경
-    /// </summary>
-    public void SetStageType_Normal()
-    {
-        _currentStageType = StageType.Normal;
-    }
-
-    /// <summary>
-    /// 스테이지 타입 무한모드로 변경
-    /// </summary>
-    public void SetStageType_Infinite()
-    {
-        _currentStageType = StageType.Infinite;
-    }
-
-    /// <summary>
     /// 현재 무한 스테이지인지 반환
     /// </summary>
     public bool IsInfiniteStage()
     {
-        if (_currentStageType == StageType.Infinite)
+        if (CurrentStageData.StageType == StageType.Infinite)
             return true;
         else
             return false;
@@ -162,7 +110,7 @@ public class StageManager : SingletonBase<StageManager>, ISavable
     /// </summary>
     public void DefeatRestartGame()
     {
-        SetStageType_Infinite();    // 무한모드로 변경
+        CurrentStageData.SetStageType_Infinite();    // 무한모드로 변경
         StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
 
@@ -171,7 +119,7 @@ public class StageManager : SingletonBase<StageManager>, ISavable
     /// </summary>
     public void ChallangeRestartGame()
     {
-        SetStageType_Normal();  // 일반모드로 변경
+        CurrentStageData.SetStageType_Normal();  // 일반모드로 변경
         StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
 
@@ -200,10 +148,10 @@ public class StageManager : SingletonBase<StageManager>, ISavable
         // 필드 정리: 모든 몬스터 제거
         FieldTargetManager.ClearAllFieldTarget();
 
-        if (_currentStageType == StageType.Infinite) // 무한모드면 이전스테이지로
-            StageLevelDown();
-        else if (_currentStageType == StageType.Normal) // 일반모드면 다음스테이지로
-            StageLevelUp();
+        if (CurrentStageData.StageType == StageType.Infinite) // 무한모드면 이전스테이지로
+            CurrentStageData.StageLevelDown();
+        else if (CurrentStageData.StageType == StageType.Normal) // 일반모드면 다음스테이지로
+            CurrentStageData.StageLevelUp();
 
         // 스테이지 재시작
         StageBuildAndStart();

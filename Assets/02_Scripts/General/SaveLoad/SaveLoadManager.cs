@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
-/// 세이브할 필드에만 붙일 어트리뷰트
+/// 세이브할 데이터에 붙일 어트리뷰트 (필드, 프로퍼티, 메소드 가능)
 /// </summary>
-[AttributeUsage(AttributeTargets.Field)]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method)]
 public class SaveField : Attribute { }
 
 /// <summary>

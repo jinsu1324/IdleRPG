@@ -44,6 +44,7 @@ public class QuestManager : SingletonBase<QuestManager>
     /// </summary>
     private void InitQuestProgressDict()
     {
+        // 타입 - 초기값 설정
         _questProgressDict = new Dictionary<QuestType, int>()
         {
             { QuestType.KillEnemy, 0 },

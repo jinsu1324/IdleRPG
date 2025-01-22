@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f11ab47566110b4296e6f1f618c9c8a, type: 3}
+  m_Name: Stage
+  m_EditorClassIdentifier: 
+  StageDataList:
+  - Stage: 1
+    AppearEnemy: Monster_SlimeBlue
+    Count: 1
+    StatPercentage: 0.1
+  - Stage: 2
+    AppearEnemy: Monster_SlimeGreen
+    Count: 2
+    StatPercentage: 0.1
+  - Stage: 3
+    AppearEnemy: Monster_SlimePink
+    Count: 3
+    StatPercentage: 0.1
+  - Stage: 4
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 100
+  - Stage: 5
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.1
+  - Stage: 6
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.2
+  - Stage: 7
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.2
+  - Stage: 8
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.2
+  - Stage: 9
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.2
+  - Stage: 10
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.2
+  - Stage: 11
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    StatPercentage: 0.3
+  - Stage: 12
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    StatPercentage: 0.3
+  - Stage: 13
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    StatPercentage: 0.3
+  - Stage: 14
+    AppearEnemy: Monster_SlimePink
+    Count: 5
+    StatPercentage: 0.3
+  - Stage: 15
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.3
+  - Stage: 16
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    StatPercentage: 0.4
+  - Stage: 17
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    StatPercentage: 0.4
+  - Stage: 18
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    StatPercentage: 0.4
+  - Stage: 19
+    AppearEnemy: Monster_SlimeBlue
+    Count: 5
+    StatPercentage: 0.4
+  - Stage: 20
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.4
+  - Stage: 21
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.5
+  - Stage: 22
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.5
+  - Stage: 23
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.5
+  - Stage: 24
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.5
+  - Stage: 25
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.5

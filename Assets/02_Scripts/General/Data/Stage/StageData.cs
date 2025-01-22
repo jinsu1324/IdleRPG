@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class StageData : BaseData
+public class StageData
 {
-    public int Chapter;
     public int Stage;
     public string AppearEnemy;
     public int Count;

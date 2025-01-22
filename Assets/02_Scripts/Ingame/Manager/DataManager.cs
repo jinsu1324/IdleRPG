@@ -8,7 +8,6 @@ public class DataManager : SingletonBase<DataManager>
 {
     [Title("제너럴 데이터", Bold = false)]
     [SerializeField] public EnemyDatasSO EnemyDatasSO { get; private set; }                 // 적 데이터
-    [SerializeField] public StageDatasSO StageDatasSO { get; private set; }                 // 스테이지 데이터
     [SerializeField] public StartingUpgradeDatasSO StartingUpgradeDatasSO { get; private set; }   // 스타팅 업그레이드 데이터
 
 
@@ -42,6 +41,5 @@ public class DataManager : SingletonBase<DataManager>
 
     // 데이터들 set 함수들
     public void SetEnemyDatasSO(EnemyDatasSO data) => EnemyDatasSO = data;
-    public void SetStageDatasSO(StageDatasSO data) => StageDatasSO = data;
     public void SetStartingUpgradeDatasSO(StartingUpgradeDatasSO data) => StartingUpgradeDatasSO = data;
 }
