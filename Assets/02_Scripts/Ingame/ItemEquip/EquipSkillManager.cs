@@ -9,23 +9,15 @@ using UnityEngine;
 /// </summary>
 public class EquipSkillManager
 {
-    public static event Action<Item> OnEquipSkillChanged;   // 장착스킬 바뀌었을때 이벤트
-    public static event Action OnSkillSwapStarted;          // 장착스킬교체 시작할 때 이벤트
-    public static event Action OnSkillSwapFinished;         // 장착스킬교체 끝났을 때 이벤트
+    public static event Action<Item> OnEquipSkillChanged;       // 장착스킬 바뀌었을때 이벤트
+    public static event Action OnSkillSwapStarted;              // 장착스킬교체 시작할 때 이벤트
+    public static event Action OnSkillSwapFinished;             // 장착스킬교체 끝났을 때 이벤트
 
-    private static Item[] _equipSkillArr;                   // 장착한 스킬 배열
-    private static int _maxCount = 3;                       // 스킬 장착 최대 갯수
+    private static int _maxCount = 3;                           // 스킬 장착 최대 갯수
+    private static Item[] _equipSkillArr = new Item[_maxCount]; // 장착한 스킬 배열
 
-    private static Item _swapTargetItem;                    // 스왑 타겟 아이템
+    private static Item _swapTargetItem;                        // 스왑 타겟 아이템
 
-    /// <summary>
-    /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
-    /// </summary>
-    static EquipSkillManager()
-    {
-        _equipSkillArr = new Item[_maxCount];
-    }
-    
     /// <summary>
     /// 스킬 장착
     /// </summary>

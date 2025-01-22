@@ -8,24 +8,12 @@ using UnityEngine;
 /// </summary>
 public class ItemInven : ISavable
 {
-    public string Key => nameof(ItemInven); // 데이터 저장에 사용될 고유 키
+    public string Key => nameof(ItemInven);         // 데이터 저장에 사용될 고유 키
+    
+    public static event Action<Item> OnAddItem;     // 아이템 추가되었을 때 이벤트
 
-    public static event Action<Item> OnAddItem;                                 // 아이템 추가되었을 때 이벤트
-    [SaveField] public static Dictionary<ItemType, List<Item>> _itemInvenDict;  // 가지고 있는 아이템 인벤토리 딕셔너리 
-
-    /// <summary>
-    /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
-    /// </summary>
-    static ItemInven()
-    {
-        _itemInvenDict = new Dictionary<ItemType, List<Item>>()
-        {
-            { ItemType.Weapon, new List<Item>() },
-            { ItemType.Armor, new List<Item>() },
-            { ItemType.Helmet, new List<Item>() },
-            { ItemType.Skill, new List<Item>() }
-        };
-    }
+    [SaveField] // 가지고 있는 아이템 인벤토리 딕셔너리 
+    public static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>();
 
     /// <summary>
     /// 인벤토리에 아이템 추가
@@ -52,6 +40,8 @@ public class ItemInven : ISavable
     /// </summary>
     public static Item HasItem(Item item)
     {
+        CheckAnd_SetDict(item.ItemType);
+
         Item foundItem = _itemInvenDict[item.ItemType].Find(x => x.ID == item.ID);
 
         if (foundItem != null)
@@ -68,6 +58,8 @@ public class ItemInven : ISavable
     /// </summary>
     public static bool HasEnhanceableItem(ItemType itemType)
     {
+        CheckAnd_SetDict(itemType);
+
         if (_itemInvenDict.TryGetValue(itemType, out List<Item> itemInven))
         {
             if (itemInven.Any(item => ItemEnhanceManager.CanEnhance(item)))
@@ -84,6 +76,8 @@ public class ItemInven : ISavable
     /// </summary>
     public static List<Item> GetItemInven(ItemType itemType)
     {
+        CheckAnd_SetDict(itemType);
+
         if (_itemInvenDict.TryGetValue(itemType, out List<Item> itemInven))
             return itemInven;
         else
@@ -120,5 +114,14 @@ public class ItemInven : ISavable
             return true;
         else
             return false;
+    }
+
+    /// <summary>
+    /// 딕셔너리에 키 체크해보고 없으면 딕셔너리 만들기
+    /// </summary>
+    private static void CheckAnd_SetDict(ItemType itemType)
+    {
+        if (_itemInvenDict.ContainsKey(itemType) == false)
+            _itemInvenDict[itemType] = new List<Item>();
     }
 }

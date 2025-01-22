@@ -8,17 +8,9 @@ using System.Linq;
 /// </summary>
 public class EquipGearManager
 {
-    public static event Action<Item> OnEquipGear;               // 장비 장착할 때 이벤트
-    public static event Action<Item> OnUnEquipGear;             // 장비 해제할 때 이벤트
-    private static Dictionary<ItemType, Item> _equipGearDict;   // 장착한 장비 딕셔너리
-
-    /// <summary>
-    /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
-    /// </summary>
-    static EquipGearManager()
-    {
-        _equipGearDict = new Dictionary<ItemType, Item>();
-    }
+    public static event Action<Item> OnEquipGear;   // 장비 장착할 때 이벤트
+    public static event Action<Item> OnUnEquipGear; // 장비 해제할 때 이벤트
+    private static Dictionary<ItemType, Item> _equipGearDict = new Dictionary<ItemType, Item>(); // 장착한 장비 딕셔너리
 
     /// <summary>
     /// 장착
@@ -79,20 +71,11 @@ public class EquipGearManager
     }
 
     /// <summary>
-    /// 아직 딕셔너리가 없으면 생성
-    /// </summary>
-    private static void TryCreateDict(ItemType itemType)
-    {
-        if (_equipGearDict.ContainsKey(itemType) == false)
-            _equipGearDict[itemType] = null;
-    }
-
-    /// <summary>
     /// 장착한 아이템인지?
     /// </summary>
     public static bool IsEquipped(Item item)
     {
-        TryCreateDict(item.ItemType);
+        CheckAnd_SetDict(item.ItemType);
         return _equipGearDict[item.ItemType] == item;
     }
 
@@ -101,7 +84,16 @@ public class EquipGearManager
     /// </summary>
     public static Item GetEquippedItem(ItemType itemType)
     {
-        TryCreateDict(itemType);
+        CheckAnd_SetDict(itemType);
         return _equipGearDict[itemType];
+    }
+
+    /// <summary>
+    /// 딕셔너리에 키 체크해보고 없으면 딕셔너리 만들기
+    /// </summary>
+    private static void CheckAnd_SetDict(ItemType itemType)
+    {
+        if (_equipGearDict.ContainsKey(itemType) == false)
+            _equipGearDict[itemType] = null;
     }
 }
