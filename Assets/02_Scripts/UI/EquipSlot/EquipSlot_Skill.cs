@@ -10,7 +10,7 @@ public class EquipSlot_Skill : EquipSlot
 {
     public static event Action<Item> OnClickItemDetailButton;   // 스킬장착슬롯 아이템 디테일버튼 눌렀을때 액션
 
-    [SerializeField] protected int _slotIndex;                  // 슬롯 인덱스
+    [SerializeField] protected SkillSlot _skillSlot;            // 스킬 장착 슬롯 인덱스
     [SerializeField] private ReddotComponent _reddotComponent;  // 레드닷 컴포넌트
     [SerializeField] private Button _itemDetailButton;          // 아이템 디테일 버튼
     [SerializeField] private Button _swapButton;                // 스킬교체 위한 버튼
@@ -59,7 +59,7 @@ public class EquipSlot_Skill : EquipSlot
     private void Update_EquipSlotSkill(Item item = null)
     {
         // 해당 인덱스에 장착한 스킬 가져오기
-        Item equipSkill = EquipSkillManager.GetEquipSkill(_slotIndex);
+        Item equipSkill = EquipSkillManager.GetEquipSkill(_skillSlot);
 
         // 장착한 스킬 있으면 슬롯 보여주거(+업데이트), 없으면 비우기
         if (equipSkill != null)

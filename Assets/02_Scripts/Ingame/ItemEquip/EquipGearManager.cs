@@ -96,10 +96,7 @@ public class EquipGearManager : ISavable
     private static void CheckAnd_SetDict(ItemType itemType)
     {
         if (_equipGearDict.ContainsKey(itemType) == false)
-        {
-            Debug.Log("체크해서 새로 만들어버린다");
             _equipGearDict[itemType] = null;
-        }
     }
 
     /// <summary>

@@ -5,25 +5,42 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
+/// 스킬 장착 슬롯
+/// </summary>
+public enum SkillSlot
+{
+    None,   // 슬롯 없음 표시용
+    First,  // 첫번째 슬롯
+    Second, // 두번째 슬롯
+    Third,  // 세번째 슬롯
+}
+
+/// <summary>
 /// 장착한 스킬 관리
 /// </summary>
-public class EquipSkillManager// : ISavable
+public class EquipSkillManager : ISavable
 {
-    public string Key => nameof(EquipSkillManager);                          // Firebase 데이터 저장용 고유 키 설정
+    public static event Action<Item> OnEquipSkillChanged;   // 장착스킬 바뀌었을때 이벤트
+    public static event Action OnSkillSwapStarted;          // 장착스킬교체 시작할 때 이벤트
+    public static event Action OnSkillSwapFinished;         // 장착스킬교체 끝났을 때 이벤트
+    
+    private static int _maxCount = 3;                       // 스킬 장착가능 갯수
+    private static Item _swapTargetItem;                    // 스왑 타겟 아이템
+    public string Key => nameof(EquipSkillManager);         // Firebase 데이터 저장용 고유 키 설정
+    [SaveField] private static Dictionary<SkillSlot, Item> _equipSkillDict = new Dictionary<SkillSlot, Item>(); // 장착 스킬 딕셔너리
 
-    public static event Action<Item> OnEquipSkillChanged;                   // 장착스킬 바뀌었을때 이벤트
-    public static event Action OnSkillSwapStarted;                          // 장착스킬교체 시작할 때 이벤트
-    public static event Action OnSkillSwapFinished;                         // 장착스킬교체 끝났을 때 이벤트
-
-    private static int _maxCount = 3;                                       // 스킬 장착 최대 갯수
-    [SaveField] private static Item[] _equipSkillArr = new Item[_maxCount]; // 장착한 스킬 배열
-
-    private static Item _swapTargetItem;                                    // 스왑 타겟 아이템
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
+    {
+        OnEquipSkillChanged?.Invoke(new Item("Weapon_Sword", "Weapon", 1, 1)); // 매개변수는 임시데이터입니다. args로 전체적으로 변경해야함
+    }
 
     /// <summary>
     /// 스킬 장착
     /// </summary>
-    public static void Equip(Item item, int slotIndex = -1)
+    public static void Equip(Item item)
     {
         // 이미 그 아이템을 장착중이면 그냥 무시
         if (IsEquipped(item))
@@ -38,12 +55,11 @@ public class EquipSkillManager// : ISavable
             return;
         }
 
-        // 슬롯 지정 안했다면, 비어있는 슬롯 인덱스 아무거나 가져오기
-        if (slotIndex == -1)
-            slotIndex = GetEmptySlotIndex();
-
+        // 비어있는 슬롯 인덱스 아무거나 가져오기
+        SkillSlot skillSlot = GetEmptySlot();
+        
         // 장착
-        _equipSkillArr[slotIndex] = item;
+        _equipSkillDict[skillSlot] = item;
 
         // 장착스킬 바뀌었을때 이벤트 노티
         OnEquipSkillChanged?.Invoke(item);
@@ -54,15 +70,15 @@ public class EquipSkillManager// : ISavable
     /// </summary>
     public static void UnEquip(Item item)
     {
-        // 해당 아이템이 장착되어있는 슬롯인덱스 가져오기
-        int index = GetEquippedIndex(item); 
+        // 해당 아이템이 장착되어있는 슬롯 가져오기
+        SkillSlot skillSlot = GetEquippedIndex(item); 
 
         // 인덱스 못찾았으면 그냥 리턴
-        if (index < 0)
+        if (skillSlot == SkillSlot.None)
             return;
-        
+
         // 장착 해제
-        _equipSkillArr[index] = null;
+        _equipSkillDict[skillSlot] = null;
 
         // 장착스킬 바뀌었을때 이벤트 노티
         OnEquipSkillChanged?.Invoke(item);
@@ -84,7 +100,7 @@ public class EquipSkillManager// : ISavable
     /// </summary>
     public static bool IsEquipped(Item item)
     {
-        return _equipSkillArr.Contains(item);
+        return _equipSkillDict.Values.Any(x => x != null && x.ID == item.ID);
     }
 
     /// <summary>
@@ -92,42 +108,58 @@ public class EquipSkillManager// : ISavable
     /// </summary>
     private static bool IsEquipMax()
     {
-        return GetEmptySlotIndex() == -1;   // 비어있는 슬롯이 하나도 없으면 최대착용임
+        CheckAnd_SetDict();
+
+        return _equipSkillDict.Values.All(x => x != null);
     }
 
     /// <summary>
-    /// 해당 아이템이 장착되어있는 슬롯인덱스 가져오기
+    /// 해당 아이템이 장착되어있는 슬롯 가져오기
     /// </summary>
-    private static int GetEquippedIndex(Item item)
+    private static SkillSlot GetEquippedIndex(Item item)
     {
-        return Array.FindIndex(_equipSkillArr, s => s == item);
+        foreach (var kvp in _equipSkillDict)
+        {
+            SkillSlot keyIndex = kvp.Key;
+            Item existItem = kvp.Value;
+
+            if (existItem == null)
+                continue;
+
+            if (existItem.ID == item.ID)
+                return keyIndex;
+        }
+
+        return SkillSlot.None;
     }
 
     /// <summary>
-    /// 비어있는 슬롯 인덱스 가져오기
+    /// 비어있는 슬롯 가져오기
     /// </summary>
-    private static int GetEmptySlotIndex()
+    private static SkillSlot GetEmptySlot()
     {
-        return Array.FindIndex(_equipSkillArr, s => s == null);
+        CheckAnd_SetDict();
+
+        foreach (var kvp in _equipSkillDict)
+        {
+            SkillSlot skillSlot = kvp.Key;
+            Item item = kvp.Value;
+
+            if (item == null)
+                return skillSlot;
+        }
+
+        return SkillSlot.None;
     }
 
     /// <summary>
     /// 해당 슬롯에 장착되어있는 스킬아이템 가져오기
     /// </summary>
-    public static Item GetEquipSkill(int slotIndex)
+    public static Item GetEquipSkill(SkillSlot skillSlot)
     {
-        return _equipSkillArr[slotIndex];
-    }
+        CheckAnd_SetDict();
 
-    /// <summary>
-    /// 장착한 스킬아이템들 가져오기(아이템 타입)
-    /// </summary>
-    public static Item[] GetEquipSkills_ItemType()
-    {
-        if (_equipSkillArr.All(s => s == null)) // 모든 슬롯이 비어있다면(null) null 반환
-            return null;
-
-        return _equipSkillArr;
+        return _equipSkillDict[skillSlot];
     }
 
     /// <summary>
@@ -135,21 +167,44 @@ public class EquipSkillManager// : ISavable
     /// </summary>
     public static Skill[] GetEquipSkills_SkillType()
     {
+        CheckAnd_SetDict();
+
         Skill[] castSkillArr = new Skill[_maxCount];
 
-        for (int i = 0; i < _equipSkillArr.Length; i++)
-        {
-            Item equipItem = _equipSkillArr[i];
+        SkillSlot[] allSlots = (SkillSlot[])Enum.GetValues(typeof(SkillSlot));
+        SkillSlot[] validSlots = allSlots.Where(s => s != SkillSlot.None).ToArray();
 
-            if (equipItem == null)
+        for (int i = 0; i < _equipSkillDict.Values.Count; i++)
+        {
+            Item item = _equipSkillDict[validSlots[i]];
+
+            if (item == null)
             {
                 castSkillArr[i] = null;
                 continue;
             }
 
-            castSkillArr[i] = SkillFactory.CreateSkill(equipItem.ID, equipItem.Level);
+            castSkillArr[i] = SkillFactory.CreateSkill(item.ID, item.Level);
         }
 
         return castSkillArr;
+    }
+
+
+    /// <summary>
+    /// 딕셔너리에 키 체크해보고 없으면 딕셔너리 만들기
+    /// </summary>
+    private static void CheckAnd_SetDict()
+    {
+        SkillSlot[] allSlots = (SkillSlot[])Enum.GetValues(typeof(SkillSlot));
+        SkillSlot[] validSlots = allSlots.Where(s => s != SkillSlot.None).ToArray();
+
+        for (int i = 0; i < validSlots.Length; i++)
+        {
+            if (_equipSkillDict.ContainsKey(validSlots[i]) == false)
+                _equipSkillDict[validSlots[i]] = null;
+            else
+                continue;
+        }
     }
 }

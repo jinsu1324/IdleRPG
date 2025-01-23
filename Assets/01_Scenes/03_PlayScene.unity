@@ -26655,6 +26655,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
+      propertyPath: _skillSlot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
       propertyPath: _slotIndex
       value: 1
       objectReference: {fileID: 0}
@@ -27390,6 +27394,10 @@ PrefabInstance:
     - target: {fileID: 334465636756182464, guid: bbc165d622746f94582844af15ea4734, type: 3}
       propertyPath: _slotIndex
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
+      propertyPath: _skillSlot
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
       propertyPath: _slotIndex
@@ -43593,6 +43601,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 148834846}
     m_Modifications:
+    - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
+      propertyPath: _skillSlot
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408007080696113643, guid: bbc165d622746f94582844af15ea4734, type: 3}
+      propertyPath: _slotIndex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1824038181201768155, guid: bbc165d622746f94582844af15ea4734, type: 3}
       propertyPath: m_Name
       value: EquipSlot_Skill

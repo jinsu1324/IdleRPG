@@ -40,8 +40,8 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
             new GemManager(),
             new ItemInven(),
             new EquipGearManager(),
+            new EquipSkillManager(),
             //new CurrentStageData(),
-            //new EquipSkillManager(),
             // 여기에 다른 매니저를 추가
         };
     }
