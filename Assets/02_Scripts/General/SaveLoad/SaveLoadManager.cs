@@ -35,9 +35,9 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            new UpgradeManager() // 완료
-            //new GoldManager(),
-            //new GemManager(),
+            new UpgradeManager(), // 완료
+            new GoldManager(), // 완료
+            new GemManager(), // 완료
             //new CurrentStageData(),
             //new ItemInven(),
             //new EquipGearManager(),

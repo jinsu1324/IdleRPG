@@ -16,14 +16,18 @@ public class GameManager : SingletonBase<GameManager>
     {
         bool existUserID = await SaveLoadManager.ExistUserID();
 
-        if (existUserID == false) // 처음이면 초기값으로 
+        if (existUserID == false)
         {
-            UpgradeManager.SetUpgrades_ByDefualt(); // 업그레이드 초기값
+            Debug.Log("ID 없어서 초기값으로 설정!");
 
+            UpgradeManager.SetUpgrades_ByDefualt();
+            GoldManager.SetDefaultGold();
+            GemManager.SetDefaultGem();
         }
-        else // ID 있으면 서버저장된걸로 로드
+        else
         {
-            Debug.Log("서버저장된거 가져올게");
+            Debug.Log("ID 있어서 서버저장된걸로 불러오기!");
+
             await SaveLoadManager.Instance.LoadAll();
         }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 젬 관리자
 /// </summary>
-public class GemManager// : ISavable
+public class GemManager : ISavable
 {
     public static event Action<int> OnGemChange;    // 젬 변경 되었을 때 이벤트
     public string Key => nameof(GemManager);        // Firebase 데이터 저장용 고유 키 설정
@@ -19,6 +19,14 @@ public class GemManager// : ISavable
             _currentGem = value;
             NotifyChanged(); // 값이 변경될때 이벤트 호출
         }
+    }
+
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
+    {
+        NotifyChanged();
     }
 
     /// <summary>
@@ -56,4 +64,9 @@ public class GemManager// : ISavable
     /// 젬 변경 이벤트 호출
     /// </summary>
     private static void NotifyChanged() => OnGemChange?.Invoke(CurrentGem);
+
+    /// <summary>
+    /// 초기젬 설정
+    /// </summary>
+    public static void SetDefaultGem() => CurrentGem += 50;
 }
