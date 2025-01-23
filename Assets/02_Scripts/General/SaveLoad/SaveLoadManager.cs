@@ -35,7 +35,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            new UpgradeManager()
+            new UpgradeManager() // 완료
             //new GoldManager(),
             //new GemManager(),
             //new CurrentStageData(),
@@ -165,7 +165,10 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     public async Task LoadAll()
     {
         foreach (ISavable manager in _managerList)
+        {
             await LoadAsync(manager);
+            manager.DataLoadTask();
+        }
 
         Debug.Log($"전체 데이터 불러오기 완료!(버튼)");
     }

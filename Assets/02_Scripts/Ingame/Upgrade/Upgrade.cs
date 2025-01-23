@@ -48,13 +48,14 @@ public class Upgrade
 
         Notify_OnUpgradeChanged();
         UpdatePlayerStats();
+
         UpgradeQuestUpdate();   
     }
 
     /// <summary>
     /// 이벤트 노티
     /// </summary>
-    private void Notify_OnUpgradeChanged()
+    public void Notify_OnUpgradeChanged()
     {
         OnUpgradeChanged?.Invoke(this);
     }
@@ -62,7 +63,7 @@ public class Upgrade
     /// <summary>
     /// PlayerStats에 값 업데이트
     /// </summary>
-    private void UpdatePlayerStats()
+    public void UpdatePlayerStats()
     {
         StatType statType = (StatType)Enum.Parse(typeof(StatType), UpgradeStatType);
 

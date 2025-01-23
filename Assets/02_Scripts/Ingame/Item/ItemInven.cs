@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 가지고 있는 아이템 인벤토리
 /// </summary>
-public class ItemInven : ISavable
+public class ItemInven// : ISavable
 {
     public static event Action<Item> OnAddItem;     // 아이템 추가되었을 때 이벤트
     public string Key => nameof(ItemInven);         // 데이터 저장에 사용될 고유 키

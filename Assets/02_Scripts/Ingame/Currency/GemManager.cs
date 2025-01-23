@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 젬 관리자
 /// </summary>
-public class GemManager : ISavable
+public class GemManager// : ISavable
 {
     public static event Action<int> OnGemChange;    // 젬 변경 되었을 때 이벤트
     public string Key => nameof(GemManager);        // Firebase 데이터 저장용 고유 키 설정

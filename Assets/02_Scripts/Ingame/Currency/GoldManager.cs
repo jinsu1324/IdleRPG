@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 골드 관리자
 /// </summary>
-public class GoldManager : ISavable
+public class GoldManager// : ISavable
 {
     public static event Action<int> OnGoldChange;       // 골드 변경 되었을 때 이벤트
     public string Key => nameof(GoldManager);           // Firebase 데이터 저장용 고유 키 설정

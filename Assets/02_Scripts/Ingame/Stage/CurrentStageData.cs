@@ -14,7 +14,7 @@ public enum StageType
 /// <summary>
 /// 현재 스테이지 데이터
 /// </summary>
-public class CurrentStageData : ISavable
+public class CurrentStageData// : ISavable
 {
     public string Key => nameof(CurrentStageData);                          // Firebase 데이터 저장용 고유 키 설정
     [SaveField] public static StageType StageType { get; private set; }     // 현재 스테이지 타입

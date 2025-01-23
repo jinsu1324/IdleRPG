@@ -7,7 +7,7 @@ using UnityEngine;
 /// <summary>
 /// 장착한 스킬 관리
 /// </summary>
-public class EquipSkillManager : ISavable
+public class EquipSkillManager// : ISavable
 {
     public string Key => nameof(EquipSkillManager);                          // Firebase 데이터 저장용 고유 키 설정
 

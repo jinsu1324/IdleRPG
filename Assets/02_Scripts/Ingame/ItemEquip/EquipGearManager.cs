@@ -6,7 +6,7 @@ using System.Linq;
 /// <summary>
 /// 장착한 장비 관리
 /// </summary>
-public class EquipGearManager : ISavable
+public class EquipGearManager// : ISavable
 {
     public string Key => nameof(EquipGearManager);  // Firebase 데이터 저장용 고유 키 설정
 

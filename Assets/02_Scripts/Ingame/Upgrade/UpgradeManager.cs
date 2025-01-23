@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class UpgradeManager : ISavable
 {
-    public string Key => nameof(UpgradeManager); // Firebase 데이터 저장용 고유 키 설정
+    public string Key => nameof(UpgradeManager);    // Firebase 데이터 저장용 고유 키 설정
 
     [SaveField]
     private static Dictionary<StatType, Upgrade> _currentUpgradeDict = new Dictionary<StatType, Upgrade>() // 현재 내 업그레이드들      
@@ -17,6 +18,18 @@ public class UpgradeManager : ISavable
         { StatType.CriticalRate, new Upgrade()},
         { StatType.CriticalMultiple, new Upgrade()},
     };
+
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
+    {
+        foreach (Upgrade upgrade in _currentUpgradeDict.Values)
+        {
+            upgrade.Notify_OnUpgradeChanged();
+            upgrade.UpdatePlayerStats();
+        }
+    }
 
     /// <summary>
     /// 스탯타입에 맞는 현재 업그레이드 가져오기
@@ -58,6 +71,7 @@ public class UpgradeManager : ISavable
     {
         GoldManager.ReduceGold(upgrade.Cost);   // 골드 감소
         upgrade.LevelUp();                      // 업그레이드 레벨업
+        
         FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerManager.GetPlayerInstancePos()); // 필드에 있는 플레이어 위치에 이펙트 재생
     }
 

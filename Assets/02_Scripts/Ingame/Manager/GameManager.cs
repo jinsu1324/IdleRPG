@@ -12,44 +12,22 @@ public class GameManager : SingletonBase<GameManager>
 
     //public static event Action OnGameInit;
 
-    //private void Start()
-    //{
-    //    UpgradeManager.SetUpgrades_ByDefualt(); // 업그레이드 초기값
-    //}
-
-    private void Start()
-    {
-        InitDatas();
-    }
-
-    private async void InitDatas()
+    private async void Start()
     {
         bool existUserID = await SaveLoadManager.ExistUserID();
 
-        if (existUserID == false)
+        if (existUserID == false) // 처음이면 초기값으로 
         {
             UpgradeManager.SetUpgrades_ByDefualt(); // 업그레이드 초기값
 
         }
-        else
+        else // ID 있으면 서버저장된걸로 로드
         {
             Debug.Log("서버저장된거 가져올게");
-            // 아니면 저장된 서버에서 데이터 지정
-            await LoadDataFromServer();
+            await SaveLoadManager.Instance.LoadAll();
         }
 
-
         Init_Game();
-    }
-
-
-
-    /// <summary>
-    /// 서버데이터들 불러오기
-    /// </summary>
-    private async Task LoadDataFromServer()
-    {
-        await SaveLoadManager.Instance.LoadAll();
     }
 
     private void Init_Game()
