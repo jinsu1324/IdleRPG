@@ -6,12 +6,22 @@ using UnityEngine;
 /// <summary>
 /// 가지고 있는 아이템 인벤토리
 /// </summary>
-public class ItemInven// : ISavable
+public class ItemInven : ISavable
 {
-    public static event Action<Item> OnAddItem;     // 아이템 추가되었을 때 이벤트
+    public static event Action OnInvenItemChanged;  // 인벤토리 아이템 변경되었을 때 이벤트
     public string Key => nameof(ItemInven);         // 데이터 저장에 사용될 고유 키
-    [SaveField] public static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>(); // 가지고 있는 아이템 인벤토리 딕셔너리 
 
+    [SaveField] // 가지고 있는 아이템 인벤토리 딕셔너리 
+    public static Dictionary<ItemType, List<Item>> _itemInvenDict = new Dictionary<ItemType, List<Item>>();
+
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
+    {
+        OnInvenItemChanged?.Invoke();
+    }
+    
     /// <summary>
     /// 인벤토리에 아이템 추가
     /// </summary>
@@ -23,12 +33,12 @@ public class ItemInven// : ISavable
         {
             int addCount = 1;
             hasItem.AddCount(addCount); // 가지고 있는 아이템이면 갯수만 추가
-            OnAddItem?.Invoke(hasItem); 
+            OnInvenItemChanged?.Invoke(); 
         }
         else
         {
             _itemInvenDict[item.ItemType].Add(item);
-            OnAddItem?.Invoke(item); 
+            OnInvenItemChanged?.Invoke(); 
         }
     }
 
@@ -121,4 +131,6 @@ public class ItemInven// : ISavable
         if (_itemInvenDict.ContainsKey(itemType) == false)
             _itemInvenDict[itemType] = new List<Item>();
     }
+
+   
 }

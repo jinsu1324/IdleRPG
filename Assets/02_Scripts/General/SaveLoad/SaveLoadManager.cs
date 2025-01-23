@@ -35,12 +35,12 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            new UpgradeManager(), // 완료
-            new GoldManager(), // 완료
-            new GemManager(), // 완료
+            new UpgradeManager(),
+            new GoldManager(),
+            new GemManager(),
+            new ItemInven(),
+            new EquipGearManager(),
             //new CurrentStageData(),
-            //new ItemInven(),
-            //new EquipGearManager(),
             //new EquipSkillManager(),
             // 여기에 다른 매니저를 추가
         };
@@ -91,7 +91,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
         // 데이터스냅샷 못찾았으면 그냥 리턴
         if (!dataSnapshot.Exists)
         {
-            Debug.LogWarning($"{savable.Key} 데이터를 찾을 수 없습니다.");
+            Debug.Log($"{savable.Key} 데이터를 찾을 수 없어서 그냥 리턴합니다.");
             return;
         }
 

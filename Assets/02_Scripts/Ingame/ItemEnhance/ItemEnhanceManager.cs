@@ -32,7 +32,7 @@ public class ItemEnhanceManager
                 PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
                 {
                     DetailStatDict = gearDataSO.GetGearStats(item.Level),
-                    Source = item
+                    SourceID = item.ID
                 };
 
                 PlayerStats.UpdateStatModifier(args);

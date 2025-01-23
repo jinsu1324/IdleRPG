@@ -73,7 +73,7 @@ public class Upgrade
         PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
         {
             DetailStatDict = dict,
-            Source = this
+            SourceID = UpgradeStatType
         };
         PlayerStats.UpdateStatModifier(args); // 플레이어 스탯에 적용
     }

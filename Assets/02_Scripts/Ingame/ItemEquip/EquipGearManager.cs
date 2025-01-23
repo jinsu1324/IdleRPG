@@ -2,18 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 /// <summary>
 /// 장착한 장비 관리
 /// </summary>
-public class EquipGearManager// : ISavable
+public class EquipGearManager : ISavable
 {
     public string Key => nameof(EquipGearManager);  // Firebase 데이터 저장용 고유 키 설정
 
     public static event Action<Item> OnEquipGear;   // 장비 장착할 때 이벤트
     public static event Action<Item> OnUnEquipGear; // 장비 해제할 때 이벤트
 
-    [SaveField] private static Dictionary<ItemType, Item> _equipGearDict = new Dictionary<ItemType, Item>(); // 장착한 장비 딕셔너리
+    [SaveField] // 장착한 장비 딕셔너리
+    private static Dictionary<ItemType, Item> _equipGearDict = new Dictionary<ItemType, Item>(); 
+
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
+    {
+        foreach (Item item in _equipGearDict.Values)
+        {
+            OnEquipGear?.Invoke(item);
+            Apply_ByPlayerStats(item);
+        }
+    }
 
     /// <summary>
     /// 장착
@@ -35,17 +49,8 @@ public class EquipGearManager// : ISavable
         // 장착 이벤트 노티
         OnEquipGear?.Invoke(item);
 
-        // 플레이어 스탯 업데이트
-        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
-        if (itemDataSO is GearDataSO gearDataSO)
-        {
-            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-            {
-                DetailStatDict = gearDataSO.GetGearStats(item.Level),
-                Source = item
-            };
-            PlayerStats.UpdateStatModifier(args);
-        }
+        // 플레이어 스탯에 적용
+        Apply_ByPlayerStats(item);
     }
 
     /// <summary>
@@ -59,18 +64,8 @@ public class EquipGearManager// : ISavable
         // 해제 이벤트 노티
         OnUnEquipGear?.Invoke(item);
 
-        // 플레이어 스탯 제거
-        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
-        if (itemDataSO is GearDataSO gearDataSO)
-        {
-            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-            {
-                DetailStatDict = gearDataSO.GetGearStats(item.Level),
-                Source = item
-            };
-            PlayerStats.RemoveStatModifier(args);
-        }
-
+        // 플레이어 스탯에서 제거
+        Remove_ByPlayerStats(item);
     }
 
     /// <summary>
@@ -79,7 +74,11 @@ public class EquipGearManager// : ISavable
     public static bool IsEquipped(Item item)
     {
         CheckAnd_SetDict(item.ItemType);
-        return _equipGearDict[item.ItemType] == item;
+        
+        if (_equipGearDict[item.ItemType] == null || item == null)
+            return false;
+
+        return _equipGearDict[item.ItemType].ID == item.ID;
     }
 
     /// <summary>
@@ -97,6 +96,44 @@ public class EquipGearManager// : ISavable
     private static void CheckAnd_SetDict(ItemType itemType)
     {
         if (_equipGearDict.ContainsKey(itemType) == false)
+        {
+            Debug.Log("체크해서 새로 만들어버린다");
             _equipGearDict[itemType] = null;
+        }
+    }
+
+    /// <summary>
+    /// 장착한 아이템을 플레이어 스탯에 적용
+    /// </summary>
+    private static void Apply_ByPlayerStats(Item item)
+    {
+        // 플레이어 스탯 업데이트
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
+        if (itemDataSO is GearDataSO gearDataSO)
+        {
+            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+            {
+                DetailStatDict = gearDataSO.GetGearStats(item.Level),
+                SourceID = item.ID
+            };
+            PlayerStats.UpdateStatModifier(args);
+        }
+    }
+
+    /// <summary>
+    /// 해제한 아이템을 플레이어 스탯에서도 제거
+    /// </summary>
+    private static void Remove_ByPlayerStats(Item item)
+    {
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(item.ID);
+        if (itemDataSO is GearDataSO gearDataSO)
+        {
+            PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
+            {
+                DetailStatDict = gearDataSO.GetGearStats(item.Level),
+                SourceID = item.ID
+            };
+            PlayerStats.RemoveStatModifier(args);
+        }
     }
 }

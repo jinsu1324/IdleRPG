@@ -31,7 +31,7 @@ public class BottomTab : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        ItemInven.OnAddItem += Update_ReddotComponent; // 아이템 추가되었을 때 -> 하단탭 레드닷 컴포넌트 업데이트
+        ItemInven.OnInvenItemChanged += Update_ReddotComponent; // 인벤토리 아이템 변경되었을 때 -> 하단탭 레드닷 컴포넌트 업데이트
         ItemEnhanceManager.OnItemEnhance += Update_ReddotComponent; // 아이템 강화할때 -> 하단탭 레드닷 컴포넌트 업데이트
 
         _openButton.onClick.AddListener(OpenTabPopup);
@@ -45,7 +45,7 @@ public class BottomTab : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        ItemInven.OnAddItem -= Update_ReddotComponent;
+        ItemInven.OnInvenItemChanged -= Update_ReddotComponent;
         ItemEnhanceManager.OnItemEnhance -= Update_ReddotComponent;
 
         _openButton.onClick.RemoveAllListeners();
@@ -79,11 +79,21 @@ public class BottomTab : MonoBehaviour
     /// <summary>
     /// 레드닷 컴포넌트 업데이트
     /// </summary>
-    public void Update_ReddotComponent(Item item = null)
+    public void Update_ReddotComponent(Item item = null) => ShowAndHideReddot();
+
+    /// <summary>
+    /// 레드닷 컴포넌트 업데이트 (오버로딩)
+    /// </summary>
+    public void Update_ReddotComponent() => ShowAndHideReddot();
+
+    /// <summary>
+    /// 레드닷 조건에따라 보여주기 / 숨기기
+    /// </summary>
+    private void ShowAndHideReddot()
     {
         switch (_bottomTabType)
         {
-            case BottomTabType.Gear: 
+            case BottomTabType.Gear:
                 _reddotComponent.UpdateReddot(() => ItemInven.HasEnhanceableGear()); // 강화가능한 장비 있는지 확인
                 break;
             case BottomTabType.Skill:

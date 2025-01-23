@@ -11,7 +11,7 @@ using UnityEngine;
 public struct PlayerStatUpdateArgs
 {
     public Dictionary<StatType, float> DetailStatDict;  // 속성들 딕셔너리
-    public object Source;                               // 출처
+    public string SourceID;                             // 출처 ID
 }
 
 /// <summary>
@@ -70,7 +70,7 @@ public class PlayerStats
     public static void UpdateStatModifier(PlayerStatUpdateArgs args)
     {
         Dictionary<StatType, float> attributeDict = args.DetailStatDict; // 속성들 딕셔너리
-        object source = args.Source;    // 출처
+        string sourceID = args.SourceID;    // 출처
 
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
@@ -82,13 +82,13 @@ public class PlayerStats
             float value = kvp.Value;
 
             // 딕셔너리에 소스가 존재하는지 확인
-            StatModifier foundStatModifier = FindSource_In_StatModifierDict(statType, source);
+            StatModifier foundStatModifier = FindSource_In_StatModifierDict(statType, sourceID);
 
             // 이미 존재하면 그 값 갱신, 없으면 새로 추가
             if (foundStatModifier != null)
                 foundStatModifier.Value = value; 
             else
-                AddStatModifier(statType, value, source);
+                AddStatModifier(statType, value, sourceID);
         }
 
         // 스탯변경 이벤트 실행
@@ -98,9 +98,9 @@ public class PlayerStats
     /// <summary>
     /// 스탯 모디파이어 추가
     /// </summary>
-    public static void AddStatModifier(StatType statType, float value, object source)
+    public static void AddStatModifier(StatType statType, float value, string sourceID)
     {
-        _statModifierDict[statType].Add(new StatModifier(value, source));   
+        _statModifierDict[statType].Add(new StatModifier(value, sourceID));   
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public class PlayerStats
     public static void RemoveStatModifier(PlayerStatUpdateArgs args)
     {
         Dictionary<StatType, float> attributeDict = args.DetailStatDict; // 속성들 딕셔너리
-        object source = args.Source;    // 출처
+        string sourceID = args.SourceID;    // 출처
 
         // 이전 전투력 계산
         BeforeCombatPower = GetAllStatValue();
@@ -119,7 +119,7 @@ public class PlayerStats
         {
             StatType statType = kvp.Key;
 
-            _statModifierDict[statType].RemoveAll(modifier => modifier.Source == source);
+            _statModifierDict[statType].RemoveAll(modifier => modifier.SourceID == sourceID);
         }
         
         // 스탯변경 이벤트 실행
@@ -169,11 +169,11 @@ public class PlayerStats
     }
 
     /// <summary>
-    /// 딕셔너리에 소스가 존재하는지 확인
+    /// 딕셔너리에 소스ID가 존재하는지 확인
     /// </summary>
-    private static StatModifier FindSource_In_StatModifierDict(StatType statType, object source)
+    private static StatModifier FindSource_In_StatModifierDict(StatType statType, string sourceID)
     {
-        StatModifier statModifier = _statModifierDict[statType].Find(modifier => modifier.Source == source);
+        StatModifier statModifier = _statModifierDict[statType].Find(modifier => modifier.SourceID == sourceID);
 
         if (statModifier != null)
             return statModifier;
