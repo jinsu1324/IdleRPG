@@ -4,32 +4,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum UpgradeID
-{
-    AttackPower,
-    AttackSpeed,
-    MaxHp,
-    CriticalRate,
-    CriticalMultiple
-}
-
+/// <summary>
+/// 업그레이드
+/// </summary>
 [System.Serializable]
 public class Upgrade
 {
-    public string ID;              // ID
-    public string Name;            // 이름 
-    public int Level;              // 레벨
-    public float Value;            // 실제 업그레이드 값
-    public float ValueIncrease;    // 레벨 오르면 증가하는 값
-    public int Cost;               // 업그레이드 비용
-    public int CostIncrease;       // 레벨 오르면 증가하는 업그레이드 비용
+    public static event Action<Upgrade> OnUpgradeChanged;                    // 업그레이드 변경되었을 때 이벤트
+
+    public string UpgradeStatType;      // 어떤 스탯을 업그레이드할지 스탯타입
+    public string Name;                 // 이름 
+    public int Level;                   // 레벨
+    public float Value;                 // 실제 업그레이드 값
+    public float ValueIncrease;         // 레벨 오르면 증가하는 값
+    public int Cost;                    // 업그레이드 비용
+    public int CostIncrease;            // 레벨 오르면 증가하는 업그레이드 비용
 
     /// <summary>
     /// 초기화
     /// </summary>
-    public void Init(string id, string name, int level, float value, float valueIncrease, int cost, int costIncrease)
+    public void Init(string statType, string name, int level, float value, float valueIncrease, int cost, int costIncrease)
     {
-        ID = id;
+        UpgradeStatType = statType;
         Name = name;
         Level = level;
         Value = value;
@@ -37,6 +33,7 @@ public class Upgrade
         Cost = cost;
         CostIncrease = costIncrease;
 
+        Notify_OnUpgradeChanged();
         UpdatePlayerStats();
     }
 
@@ -49,9 +46,17 @@ public class Upgrade
         Value += ValueIncrease;
         Cost += CostIncrease;
 
+        Notify_OnUpgradeChanged();
         UpdatePlayerStats();
+        UpgradeQuestUpdate();   
+    }
 
-        UpgradeQuestUpdate();   // 업그레이드 관련 퀘스트 업데이트
+    /// <summary>
+    /// 이벤트 노티
+    /// </summary>
+    private void Notify_OnUpgradeChanged()
+    {
+        OnUpgradeChanged?.Invoke(this);
     }
 
     /// <summary>
@@ -59,7 +64,7 @@ public class Upgrade
     /// </summary>
     private void UpdatePlayerStats()
     {
-        StatType statType = (StatType)Enum.Parse(typeof(StatType), ID);
+        StatType statType = (StatType)Enum.Parse(typeof(StatType), UpgradeStatType);
 
         Dictionary<StatType, float> dict = new Dictionary<StatType, float>();
         dict[statType] = Value;
@@ -77,21 +82,21 @@ public class Upgrade
     /// </summary>
     private void UpgradeQuestUpdate()
     {
-        switch ((UpgradeID)Enum.Parse(typeof(UpgradeID), ID))
+        switch ((StatType)Enum.Parse(typeof(StatType), UpgradeStatType))
         {
-            case UpgradeID.AttackPower:
+            case StatType.AttackPower:
                 QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackPower, 1);
                 break;
-            case UpgradeID.AttackSpeed:
+            case StatType.AttackSpeed:
                 QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackSpeed, 1);
                 break;
-            case UpgradeID.MaxHp:
+            case StatType.MaxHp:
                 QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeMaxHp, 1);
                 break;
-            case UpgradeID.CriticalRate:
+            case StatType.CriticalRate:
                 QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalRate, 1);
                 break;
-            case UpgradeID.CriticalMultiple:
+            case StatType.CriticalMultiple:
                 QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalMultiple, 1);
                 break;
         }

@@ -19,8 +19,8 @@ public class SaveField : Attribute { }
 /// </summary>
 public class SaveLoadManager : SingletonBase<SaveLoadManager>
 {
-    private string _userID = "jinsu";               // Firebase에서 사용할 사용자 ID
-    private DatabaseReference _databaseReference;   // 데이터베이스 레퍼런스
+    private static string _userID = "jinsu";               // Firebase에서 사용할 사용자 ID
+    private static DatabaseReference _databaseReference;   // 데이터베이스 레퍼런스
     private List<ISavable> _managerList;            // 저장할 매니저 리스트
 
     /// <summary>
@@ -28,19 +28,35 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     /// </summary>
     protected override void Awake()
     {
+        base.Awake();
+
         _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
         // 저장할 모든 매니저를 리스트에 등록
         _managerList = new List<ISavable>
         {
-            new GoldManager(),
-            new GemManager(),
+            new UpgradeManager()
+            //new GoldManager(),
+            //new GemManager(),
             //new CurrentStageData(),
             //new ItemInven(),
             //new EquipGearManager(),
             //new EquipSkillManager(),
             // 여기에 다른 매니저를 추가
         };
+    }
+
+    /// <summary>
+    /// 유저ID가 서버에 있는지 확인
+    /// </summary>
+    public static async Task<bool> ExistUserID()
+    {
+        var userSnapshot = await _databaseReference.Child("users").Child(_userID).GetValueAsync();
+
+        if (userSnapshot.Exists)
+            return true;
+        else
+            return false;
     }
 
     /// <summary>
@@ -137,7 +153,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     /// </summary>
     public async Task SaveAll()
     {
-        foreach (var manager in _managerList)
+        foreach (ISavable manager in _managerList)
             await SaveAsync(manager);
 
         Debug.Log("전체 데이터 저장 완료!(버튼)");
@@ -148,7 +164,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     /// </summary>
     public async Task LoadAll()
     {
-        foreach (var manager in _managerList)
+        foreach (ISavable manager in _managerList)
             await LoadAsync(manager);
 
         Debug.Log($"전체 데이터 불러오기 완료!(버튼)");
@@ -159,7 +175,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     /// </summary>
     public async Task RemoveAll()
     {
-        foreach (var manager in _managerList)
+        foreach (ISavable manager in _managerList)
             await RemoveAsync(manager);
 
         Debug.Log("전체 데이터 제거 완료!(버튼)");

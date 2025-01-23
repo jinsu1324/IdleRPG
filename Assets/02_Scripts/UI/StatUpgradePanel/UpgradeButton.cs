@@ -7,22 +7,19 @@ using UnityEngine.EventSystems;
 
 public class UpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    private UpgradeID _upgradeID;           // 업그레이드 ID
+    private StatType _statType;             // 업그레이드 할 스탯타입
     private float _upgradeInterval = 0.1f;  // 업그레이드 간격
     private bool _isPressed = false;        // 버튼이 눌린 상태 확인
     private Coroutine _upgradeCoroutine;    // 현재 실행중인 Coroutine 참조
-
     private Vector3 _originalScale;         // 원래 스케일 저장
 
     /// <summary>
-    /// 초기화
+    /// Start
     /// </summary>
-    public void Init(UpgradeID upgradeID)
+    private void Start()
     {
-        _upgradeID = upgradeID;
-
-        // 초기 스케일 저장
-        _originalScale = transform.localScale;
+        _statType = GetComponentInParent<UpgradeSlot>().GetStatType();
+        _originalScale = transform.localScale; // 초기 스케일 저장
     }
 
     /// <summary>
@@ -68,7 +65,7 @@ public class UpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     private void Upgrade()
     {
         // 레벨업 가능하면 레벨업하고 true 반환
-        if (UpgradeManager.TryUpgradeLevelUp(_upgradeID.ToString()))
+        if (UpgradeManager.Try_UpgradeLevelUp(_statType))
         {
             PlayScaleAnimation();
         }

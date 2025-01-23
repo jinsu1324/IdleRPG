@@ -9,39 +9,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87d4e3e4852d49f43bfb319069eac932, type: 3}
-  m_Name: StartUpgrade
+  m_Script: {fileID: 11500000, guid: fe2db1a0292b48044800ffa074e379a5, type: 3}
+  m_Name: DefaultUpgrade
   m_EditorClassIdentifier: 
-  StartUpgradeDataList:
-  - ID: AttackPower
+  DefaultUpgradeDataList:
+  - UpgradeStatType: AttackPower
     Name: "\uACF5\uACA9\uB825"
     Level: 1
     Value: 10
     ValueIncrease: 1
     Cost: 10
     CostIncrease: 10
-  - ID: AttackSpeed
+  - UpgradeStatType: AttackSpeed
     Name: "\uACF5\uACA9\uC18D\uB3C4"
     Level: 1
     Value: 1
     ValueIncrease: 0.1
     Cost: 10
     CostIncrease: 10
-  - ID: MaxHp
+  - UpgradeStatType: MaxHp
     Name: "\uCCB4\uB825"
     Level: 1
     Value: 1000
     ValueIncrease: 10
     Cost: 15
     CostIncrease: 15
-  - ID: CriticalRate
+  - UpgradeStatType: CriticalRate
     Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
     Level: 1
     Value: 0.5
     ValueIncrease: 0.01
     Cost: 15
     CostIncrease: 15
-  - ID: CriticalMultiple
+  - UpgradeStatType: CriticalMultiple
     Name: "\uCE58\uBA85\uD0C0 \uBC30\uC728"
     Level: 1
     Value: 1.2

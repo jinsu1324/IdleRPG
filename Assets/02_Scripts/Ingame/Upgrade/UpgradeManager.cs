@@ -1,112 +1,50 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// 업그레이드 매니저
 /// </summary>
-public class UpgradeManager
+public class UpgradeManager : ISavable
 {
-    public static event Action OnUpgradeLevelUp;                    // 업그레이드 레벨업 했을 때 이벤트
-    public static float TotalPower { get; private set; }            // 총합 전투력
-    public static float BeforeTotalPower { get; private set; }      // 이전 총합 전투력
+    public string Key => nameof(UpgradeManager); // Firebase 데이터 저장용 고유 키 설정
 
-    private static Dictionary<string, Upgrade> _upgradeDict;        // 업그레이드들 딕셔너리
+    [SaveField]
+    private static Dictionary<StatType, Upgrade> _currentUpgradeDict = new Dictionary<StatType, Upgrade>() // 현재 내 업그레이드들      
+    {
+        { StatType.AttackPower, new Upgrade()},
+        { StatType.AttackSpeed, new Upgrade()},
+        { StatType.MaxHp, new Upgrade()},
+        { StatType.CriticalRate, new Upgrade()},
+        { StatType.CriticalMultiple, new Upgrade()},
+    };
 
     /// <summary>
-    /// 업그레이드 딕셔너리 초기 셋팅
+    /// 스탯타입에 맞는 현재 업그레이드 가져오기
     /// </summary>
-    public void SetUpgradeDict_ByStartData()
+    public static Upgrade GetCurrentUpgrade(StatType statType)
     {
-        // 딕셔너리 초기화
-        _upgradeDict = new Dictionary<string, Upgrade>();
-
-        // 업그레이드 ID들 배열
-        UpgradeID[] upgradeIDArr = (UpgradeID[])Enum.GetValues(typeof(UpgradeID));
-
-        // 업그레이드 ID 만큼 반복
-        foreach (UpgradeID upgradeID in upgradeIDArr)
-        {
-            // 업그레이드 ID 문자열로 변환
-            string id = upgradeID.ToString();
-
-            // 초기업그레이드 리스트중에서 ID 매칭되는것 찾기
-            Upgrade findStatData = StartUpgradeDataManager.GetStartUpgradeData(id);
-
-            // null 체크
-            if (findStatData == null)
-            {
-                Debug.Log($"초기스탯 스크립터블 오브젝트에서 {upgradeID}에 해당하는 데이터를 찾을 수 없습니다.");
-                return;
-            }
-
-            // 찾은 초기업그레이드 데이터로 스탯 생성 
-            Upgrade upgrade = new Upgrade();
-            upgrade.Init(
-                findStatData.ID,
-                findStatData.Name,
-                findStatData.Level,
-                findStatData.Value,
-                findStatData.ValueIncrease,
-                findStatData.Cost,
-                findStatData.CostIncrease
-                );
-
-            // 딕셔너리 ID 중복체크
-            if (_upgradeDict.ContainsKey(id) == true)
-            {
-                Debug.LogWarning($"{id} 는 이미 딕셔너리 속 중복된 스탯 ID 입니다");
-                return;
-            }
-
-            // 딕셔너리에 추가
-            _upgradeDict.Add(id, upgrade);
-        }
-
-        UpdateTotalPower();  // 총합 전투력 업데이트
-    }
-
-    /// <summary>
-    /// 특정 업그레이드 가져오기
-    /// </summary>
-    public static Upgrade GetUpgrade(string id)
-    {
-        if (_upgradeDict.TryGetValue(id, out var stat))
-        {
-            return stat;
-        }
+        if (_currentUpgradeDict.TryGetValue(statType, out Upgrade upgrade))
+            return upgrade;
         else
         {
-            Debug.Log($"{id} 업그레이드가 존재하지 않습니다.");
+            Debug.Log($"{statType} 에 맞는 업그레이드를 찾을 수 없습니다.");
             return null;
         }
     }
 
     /// <summary>
-    /// 모든 업그레이드 가져오기
+    /// 업그레이드 레벨업 시도
     /// </summary>
-    public static List<Upgrade> GetAllUpgrades()
+    public static bool Try_UpgradeLevelUp(StatType statType)
     {
-        List<Upgrade> upgradeList = new List<Upgrade>();
-        upgradeList = _upgradeDict.Values.ToList();
+        Upgrade upgrade = GetCurrentUpgrade(statType);
 
-        return upgradeList;
-    }
+        if (upgrade == null)
+            return false;
 
-    /// <summary>
-    /// 특정 업그레이드 레벨업 시도
-    /// </summary>
-    public static bool TryUpgradeLevelUp(string id)
-    {
-        Upgrade upgrade = GetUpgrade(id); // id 에 맞는 업그레이드 가져오기
-
-        if (upgrade != null && GoldManager.HasEnoughGold(upgrade.Cost)) // 업그레이드가 있고 + 자금이 된다면
+        if (GoldManager.HasEnoughGold(upgrade.Cost))
         {
-            UpgradeLevelUp(id); // 그 업그레이드 레벨업
+            UpgradeLevelUp(upgrade);
             return true;
         }
 
@@ -114,44 +52,41 @@ public class UpgradeManager
     }
 
     /// <summary>
-    /// 특정 업그레이드 레벨업
+    /// 업그레이드 레벨업
     /// </summary>
-    public static void UpgradeLevelUp(string id)
+    public static void UpgradeLevelUp(Upgrade upgrade)
     {
-        if (_upgradeDict.TryGetValue(id.ToString(), out var upgrade))
-        {
-            // 골드 감소
-            GoldManager.ReduceGold(upgrade.Cost);
-
-            // 업그레이드 레벨업
-            upgrade.LevelUp();
-            
-            // 총합 전투력 업데이트
-            UpdateTotalPower();
-
-            // 업그레이드 변경 이벤트 호출
-            OnUpgradeLevelUp?.Invoke();
-
-            // 필드에 있는 플레이어 위치에 이펙트 재생
-            FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerManager.GetPlayerInstancePos());
-        }
-        else
-        {
-            Debug.Log($"{id} 업그레이드가 존재하지 않습니다.");
-        }
+        GoldManager.ReduceGold(upgrade.Cost);   // 골드 감소
+        upgrade.LevelUp();                      // 업그레이드 레벨업
+        FXManager.Instance.SpawnFX(FXName.FX_Player_Upgrade, PlayerManager.GetPlayerInstancePos()); // 필드에 있는 플레이어 위치에 이펙트 재생
     }
 
     /// <summary>
-    /// 총합 전투력 업데이트
+    /// 현재 업그레이드들 초기값으로 셋팅
     /// </summary>
-    public static void UpdateTotalPower()
+    public static void SetUpgrades_ByDefualt()
     {
-        BeforeTotalPower = TotalPower;
+        foreach (var kvp in _currentUpgradeDict)
+        {
+            StatType statType = kvp.Key;
 
-        List<float> statValueList = GetAllUpgrades().Select(stat => stat.Value).ToList();
+            Upgrade startData = DefaultUpgradeDataManager.Get_DefaultUpgradeData(statType.ToString());
 
-        TotalPower = 0;
-        foreach (float value in statValueList)
-            TotalPower += value;
+            if (startData == null)
+                Debug.Log($"{statType}에 맞는 디폴트 데이터를 찾을 수 없습니다.");
+
+            if (_currentUpgradeDict.TryGetValue(statType, out Upgrade upgrade))
+            {
+                upgrade.Init(startData.UpgradeStatType,
+                         startData.Name,
+                         startData.Level,
+                         startData.Value,
+                         startData.ValueIncrease,
+                         startData.Cost,
+                         startData.CostIncrease);
+            }
+            else
+                Debug.Log($"{statType} 딕셔너리를 찾을 수 없습니다.");
+        }
     }
 }

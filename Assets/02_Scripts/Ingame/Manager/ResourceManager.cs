@@ -15,7 +15,7 @@ public class ResourceManager : SingletonBase<ResourceManager>
 {
     // 아이콘 딕셔너리
     [SerializeField]
-    private Dictionary<UpgradeID, Sprite> _statIconDict = new Dictionary<UpgradeID, Sprite>();    
+    private Dictionary<StatType, Sprite> _statIconDict = new Dictionary<StatType, Sprite>();    
 
     // 아이템 등급별 정보들 딕셔너리
     [SerializeField]
@@ -24,17 +24,13 @@ public class ResourceManager : SingletonBase<ResourceManager>
     /// <summary>
     /// 아이콘 가져오기
     /// </summary>
-    public Sprite GetIcon(string id)
+    public Sprite GetIcon(StatType statType)
     {
-        UpgradeID statID = (UpgradeID)Enum.Parse(typeof(UpgradeID), id);
-
-        if (_statIconDict.TryGetValue(statID, out Sprite icon))
-        {
+        if (_statIconDict.TryGetValue(statType, out Sprite icon))
             return icon;
-        }
         else
         {
-            Debug.Log($"{id}에 해당하는 아이콘을 찾을 수 없습니다.");
+            Debug.Log($"{statType}에 해당하는 아이콘을 찾을 수 없습니다.");
             return null;
         }
     }
