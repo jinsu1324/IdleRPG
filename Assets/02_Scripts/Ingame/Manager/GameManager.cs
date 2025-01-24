@@ -18,31 +18,34 @@ public class GameManager : SingletonBase<GameManager>
 
         if (existUserID == false)
         {
-            Debug.Log("ID 없어서 초기값으로 설정!");
+            Debug.Log("A ---- ID 없어서 초기값으로 설정!");
 
             UpgradeManager.SetUpgrades_ByDefualt();
             GoldManager.SetDefaultGold();
             GemManager.SetDefaultGem();
+
+            Debug.Log("A ---- 초기값 설정 완료!");
         }
         else
         {
-            Debug.Log("ID 있어서 서버저장된걸로 불러오기!");
+            Debug.Log("B ---- ID 있어서 서버저장된걸로 불러오기!");
 
             await SaveLoadManager.Instance.LoadAll();
+
+            Debug.Log("B ---- 서버 불러오기 완료!!");
         }
 
-        Init_Game();
+        GameInitialize();
     }
 
-    private void Init_Game()
+    private void GameInitialize()
     {
-        Debug.Log("Init_Game");
+        Debug.Log("게임 초기화 시작...");
 
 
-        
+        StageManager.Instance.StageBuildAndStart();
 
-        // 초기 골드와 젬 설정
-        //GoldManager.AddGold(10000);
-        //GemManager.AddGem(100);
+
+        Debug.Log("게임 초기화 완료!");
     }
 }

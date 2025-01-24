@@ -14,27 +14,20 @@ public enum StageType
 /// <summary>
 /// 현재 스테이지 데이터
 /// </summary>
-public class CurrentStageData// : ISavable
+public class CurrentStageData : ISavable
 {
-    public string Key => nameof(CurrentStageData);                          // Firebase 데이터 저장용 고유 키 설정
-    [SaveField] public static StageType StageType { get; private set; }     // 현재 스테이지 타입
-    [SaveField] private static int _stage;                                  // 현재 스테이지 
-    public static int Stage
+    public string Key => nameof(CurrentStageData);      // Firebase 데이터 저장용 고유 키 설정
+    [SaveField] private static StageType _stageType;    // 현재 스테이지 타입
+    [SaveField] private static int _stage = 1;          // 현재 스테이지 (기본값 1)
+    public static StageType StageType { get { return _stageType; } private set { _stageType = value; } }     
+    public static int Stage { get { return _stage; } set { _stage = value; } }                   
+
+    /// <summary>
+    /// 데이터 불러오기할때 태스크들
+    /// </summary>
+    public void DataLoadTask()
     {
-        get
-        {
-            if (_stage == 0)
-            {
-                _stage = 1;
-                return _stage;
-            }
-            else 
-                return _stage;
-        }
-        private set 
-        { 
-            _stage = value; 
-        }
+        // not yet
     }
 
     /// <summary>

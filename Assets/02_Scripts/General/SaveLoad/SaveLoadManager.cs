@@ -41,7 +41,8 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
             new ItemInven(),
             new EquipGearManager(),
             new EquipSkillManager(),
-            //new CurrentStageData(),
+            new CurrentStageData(),
+            //new QuestManager()
             // 여기에 다른 매니저를 추가
         };
     }

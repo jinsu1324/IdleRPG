@@ -25,17 +25,9 @@ public class StageManager : SingletonBase<StageManager>
     private int _killCount;                                         // 죽인 적 숫자
 
     /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
-    {
-        StageBuildAndStart();
-    }
-
-    /// <summary>
     /// 스테이지 만들고 시작하기
     /// </summary>
-    private void StageBuildAndStart()
+    public void StageBuildAndStart()
     {
         // 현재 스테이지에 맞는 스테이지 데이터 가져오기
         StageData stageData = StageDataManager.GetStageData(CurrentStageData.Stage);
