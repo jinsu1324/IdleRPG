@@ -35,7 +35,7 @@ public class GoldManager : ISavable
     public static void AddGold(int amount)
     {
         CurrentGold += amount;
-        QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, amount);
+        QuestManager.UpdateQuestStack(QuestType.CollectGold, amount);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public class GoldManager : ISavable
         if (CurrentGold >= amount)
         {
             CurrentGold -= amount;
-            QuestManager.Instance.UpdateQuestProgress(QuestType.CollectGold, -amount);
+            QuestManager.UpdateQuestStack(QuestType.CollectGold, -amount);
         }
         else
             Debug.Log($"보유한 골드({CurrentGold})가 감소할 골드({amount})보다 적어서 골드감소가 불가능합니다!");

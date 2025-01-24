@@ -12,7 +12,9 @@ using UnityEngine;
 /// 세이브할 데이터에 붙일 어트리뷰트 (필드, 프로퍼티, 메소드 가능)
 /// </summary>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Method)]
-public class SaveField : Attribute { }
+public class SaveField : Attribute 
+{ 
+}
 
 /// <summary>
 /// 세이브 로드 관리
@@ -32,7 +34,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
 
         _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
 
-        // 저장할 모든 매니저를 리스트에 등록
+        // 저장할 모든 매니저를 리스트에 등록 // 여기에 다른 매니저를 추가
         _managerList = new List<ISavable>
         {
             new UpgradeManager(),
@@ -42,8 +44,7 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
             new EquipGearManager(),
             new EquipSkillManager(),
             new CurrentStageData(),
-            //new QuestManager()
-            // 여기에 다른 매니저를 추가
+            new QuestManager()
         };
     }
 

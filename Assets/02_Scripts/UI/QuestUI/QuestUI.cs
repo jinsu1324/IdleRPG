@@ -18,10 +18,10 @@ public class QuestUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        QuestManager.OnUpdateCurrentQuest += UpdateQuestUI; // 현재 퀘스트 정보들 업데이트됐을때, 퀘스트UI 정보들 업데이트
-        QuestManager.OnCheckQuestCompleted += CompleteButtonONOFF; // 퀘스트 완료여부 체크할때, 완료버튼 On / Off
+        QuestManager.OnUpdateQuest += UpdateQuestUI; // 현재 퀘스트 정보들 업데이트됐을때, 퀘스트UI 정보들 업데이트
+        QuestManager.OnCheckComplete += CompleteButtonONOFF; // 퀘스트 완료여부 체크할때, 완료버튼 On / Off
 
-        _completeButton.onClick.AddListener(QuestManager.Instance.CompleteCurrentQuest); // 완료버튼 누르면 퀘스트 완료되게 
+        _completeButton.onClick.AddListener(QuestManager.CompleteCurrentQuest); // 완료버튼 누르면 퀘스트 완료되게 
     }
 
     /// <summary>
@@ -29,19 +29,10 @@ public class QuestUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        QuestManager.OnUpdateCurrentQuest -= UpdateQuestUI;
-        QuestManager.OnCheckQuestCompleted -= CompleteButtonONOFF;
+        QuestManager.OnUpdateQuest -= UpdateQuestUI;
+        QuestManager.OnCheckComplete -= CompleteButtonONOFF;
 
         _completeButton.onClick.RemoveAllListeners();
-    }
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
-    {
-        Quest currentQuest = QuestManager.Instance.GetCurrentQuest();
-        UpdateQuestUI(currentQuest);
     }
 
     /// <summary>
@@ -49,8 +40,15 @@ public class QuestUI : MonoBehaviour
     /// </summary>
     private void UpdateQuestUI(Quest quest)
     {
+        QuestData questData = QuestDataManager.GetQuestData(quest.QuestIndex);
+
+        _descText.text = questData.Desc;
+        _rewardText.text = $"{questData.RewardGem}";
+        _currentValueText.text = $"{quest.CurrentValue}";
+        _targetValueText.text = $"{questData.TargetValue}";
+
         // 스테이지 도달 퀘스트면 상세수치는 가리기
-        if (quest.GetQuestType() == QuestType.ReachStage)
+        if (quest.QuestType == QuestType.ReachStage)
         {
             _currentValueText.gameObject.SetActive(false);
             _slashText.gameObject.SetActive(false);
@@ -62,18 +60,13 @@ public class QuestUI : MonoBehaviour
             _slashText.gameObject.SetActive(true);
             _targetValueText.gameObject.SetActive(true);
         }
-
-        _descText.text = quest.GetDesc();
-        _rewardText.text = $"{quest.GetRewardGem()}";
-        _currentValueText.text = $"{quest.GetCurrentValue()}";
-        _targetValueText.text = $"{quest.GetTargetValue()}";
     }
 
     /// <summary>
     /// 완료버튼 On / Off
     /// </summary>
-    private void CompleteButtonONOFF(bool flag)
+    private void CompleteButtonONOFF(bool isComplete)
     {
-        _completeButton.gameObject.SetActive(flag);
+        _completeButton.gameObject.SetActive(isComplete);
     }
 }

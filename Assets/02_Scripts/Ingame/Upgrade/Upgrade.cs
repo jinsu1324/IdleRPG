@@ -86,19 +86,19 @@ public class Upgrade
         switch ((StatType)Enum.Parse(typeof(StatType), UpgradeStatType))
         {
             case StatType.AttackPower:
-                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackPower, 1);
+                QuestManager.UpdateQuestStack(QuestType.UpgradeAttackPower, 1);
                 break;
             case StatType.AttackSpeed:
-                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeAttackSpeed, 1);
+                QuestManager.UpdateQuestStack(QuestType.UpgradeAttackSpeed, 1);
                 break;
             case StatType.MaxHp:
-                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeMaxHp, 1);
+                QuestManager.UpdateQuestStack(QuestType.UpgradeMaxHp, 1);
                 break;
             case StatType.CriticalRate:
-                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalRate, 1);
+                QuestManager.UpdateQuestStack(QuestType.UpgradeCriticalRate, 1);
                 break;
             case StatType.CriticalMultiple:
-                QuestManager.Instance.UpdateQuestProgress(QuestType.UpgradeCriticalMultiple, 1);
+                QuestManager.UpdateQuestStack(QuestType.UpgradeCriticalMultiple, 1);
                 break;
         }
     }
