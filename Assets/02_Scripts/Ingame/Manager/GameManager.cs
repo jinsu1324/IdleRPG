@@ -6,14 +6,26 @@ using UnityEngine;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    // 1. 데이터 매니저들 Init 
-    // 2. 서버에서 데이터 받아서 뿌려주기
-    // 3. 필요한 모든것들 초기화 시작
+    public static event Action OnLoadDataStart;     // 데이터 로드 시작했을때 이벤트
+    public static event Action OnLoadDataComplete;  // 데이터 로드 끝났을때 이벤트
 
-    //public static event Action OnGameInit;
-
+    /// <summary>
+    /// Async Start (시작시 데이터 로드 시도)
+    /// </summary>
     private async void Start()
     {
+        await TryLoadData();
+    }
+
+    /// <summary>
+    /// 데이터 로드 시도 (ID없으면 초기값, 있으면 서버에서 데이터 불러오기)
+    /// </summary>
+    public async Task TryLoadData()
+    {
+        GameTimeController.Pause();
+
+        OnLoadDataStart?.Invoke();
+
         bool existUserID = await SaveLoadManager.ExistUserID();
 
         if (existUserID == false)
@@ -35,10 +47,19 @@ public class GameManager : SingletonBase<GameManager>
             Debug.Log("B ------------ 서버 불러오기 완료!!");
         }
 
-        GameInitialize();
+        GameInit();
+
+        await Task.Delay(1000); // 1초 대기
+
+        OnLoadDataComplete?.Invoke();
+
+        GameTimeController.Resume();
     }
 
-    private void GameInitialize()
+    /// <summary>
+    /// 게임 초기화
+    /// </summary>
+    private void GameInit()
     {
         Debug.Log("게임 초기화 시작...");
 
@@ -47,4 +68,9 @@ public class GameManager : SingletonBase<GameManager>
 
         Debug.Log("게임 초기화 완료!");
     }
+
+    /// <summary>
+    /// 세팅팝업에서 사용할 데이터로드시도 버튼
+    /// </summary>
+    public void TryLoadDataButton() => _ = TryLoadData(); // '_ =' 반환값 무시 (디스카드(discard))
 }

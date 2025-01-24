@@ -21,9 +21,12 @@ public class SaveField : Attribute
 /// </summary>
 public class SaveLoadManager : SingletonBase<SaveLoadManager>
 {
-    private static string _userID = "jinsu";               // Firebase에서 사용할 사용자 ID
-    private static DatabaseReference _databaseReference;   // 데이터베이스 레퍼런스
-    private List<ISavable> _managerList;            // 저장할 매니저 리스트
+    public static event Action OnSaveStart;                 // 저장 시작할때 이벤트
+    public static event Action OnSaveComplete;              // 저장 끝났을때 이벤트
+
+    private static string _userID = "jinsu";                // Firebase에서 사용할 사용자 ID
+    private static DatabaseReference _databaseReference;    // 데이터베이스 레퍼런스
+    private List<ISavable> _managerList;                    // 저장할 매니저 리스트
 
     /// <summary>
     /// Awake
@@ -155,10 +158,20 @@ public class SaveLoadManager : SingletonBase<SaveLoadManager>
     /// </summary>
     public async Task SaveAll()
     {
+        GameTimeController.Pause();
+
+        OnSaveStart?.Invoke();
+
         foreach (ISavable manager in _managerList)
             await SaveAsync(manager);
 
         Debug.Log("전체 데이터 저장 완료!(버튼)");
+
+        await Task.Delay(1000); // 1초 대기
+
+        OnSaveComplete?.Invoke();
+
+        GameTimeController.Resume();
     }
 
     /// <summary>
