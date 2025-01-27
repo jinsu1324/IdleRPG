@@ -210,7 +210,7 @@ MonoBehaviour:
   _saveButton: {fileID: 570692865}
   _loadButton: {fileID: 694471746}
   _exitButton: {fileID: 669461826}
-  _dimdButton: {fileID: 0}
+  _dimdButton: {fileID: 189406401}
 --- !u!1 &18723872
 GameObject:
   m_ObjectHideFlags: 0
