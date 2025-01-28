@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 /// <summary>
@@ -66,5 +68,31 @@ public class SkillDataSO : ItemDataSO
         }
 
         return skillStatDict;
+    }
+
+    /// <summary>
+    /// 다이나믹 텍스트 가져오기
+    /// </summary>
+    public string GetDynamicDesc(int level)
+    {
+        Dictionary<SkillStatType, float> skillStatDict = GetSkillStats(level);
+
+        string pattern = @"\[(.*?)\]";
+
+        string resultDesc = Regex.Replace(Desc, pattern, match =>
+        {
+            SkillStatType skillStatType = (SkillStatType)Enum.Parse(typeof(SkillStatType), match.Groups[1].Value);
+
+            if (skillStatDict.TryGetValue(skillStatType, out float value))
+            {
+                return skillStatType == SkillStatType.AttackPercentage
+                    ? NumberConverter.ConvertPercentage(value) : value.ToString();
+            }
+
+            return match.Value;
+        });
+
+        return resultDesc;
+
     }
 }

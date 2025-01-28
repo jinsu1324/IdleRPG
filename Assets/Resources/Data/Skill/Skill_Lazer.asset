@@ -17,8 +17,8 @@ MonoBehaviour:
   Name: "\uB808\uC774\uC800 \uD30C\uB3D9"
   Grade: Rare
   Desc: "\uC804\uBC29\uC73C\uB85C \uB808\uC774\uC800\uD30C\uB3D9\uC744 \uB358\uC838
-    \uACBD\uB85C\uC5D0 \uC788\uB294 \uBAA8\uB4E0\uC801\uC5D0\uAC8C {0} \uD53C\uD574\uB97C
-    \uC90D\uB2C8\uB2E4."
+    \uACBD\uB85C\uC5D0 \uC788\uB294 \uBAA8\uB4E0\uC801\uC5D0\uAC8C [AttackPercentage]
+    \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 10cdeb67a06178147b397a7dd60f9c69, type: 3}
   Prefab: {fileID: 0}
   EnhanceCountInfoList:

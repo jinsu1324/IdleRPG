@@ -1,159 +1,66 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Testtttttt : MonoBehaviour
 {
-    private static Dictionary<int, Item> _equipSkillDict = new Dictionary<int, Item>()
-    {
-        //{ 1, null },
-        //{ 2, new Item("Armor_SteelArmor", "Armor", 1, 1) },
-        ////{ 3, new Item("Weapon_Sword", "Weapon", 1, 1) },
-        //{ 3, null },
-    };
 
     private void Start()
     {
-        //Debug.Log(_equipSkillDict.Values.Count);
+        Item newItem = CreateItem();
 
-        //Debug.Log(GetEmptySlotIndex());
+        Debug.Log(newItem.ID);
 
-        //Debug.Log(IsEquipMax());
-
-        Item item = new Item("Weapon_Sword", "Weapon", 1, 1);
-
-        Debug.Log(IsEquipped(item));
-
-        //Item item = GetEquipSkill(2);
-        //if (item != null)
-        //    Debug.Log(item.ID);
-        //else
-        //    Debug.Log("null!");
-
-    }
-
-
-    /// <summary>
-    /// 장착한 아이템인지?
-    /// </summary>
-    public static bool IsEquipped(Item item)
-    {
-        return _equipSkillDict.Values.Any(x => x.ID == item.ID);
-    }
-
-    /// <summary>
-    /// 최대로 착용했는지?
-    /// </summary>
-    private static bool IsEquipMax()
-    {
-        CheckAnd_SetDict();
-
-        return _equipSkillDict.Values.All(x => x != null);
-    }
-
-    /// <summary>
-    /// 해당 아이템이 장착되어있는 슬롯인덱스 가져오기
-    /// </summary>
-    private static int GetEquippedIndex(Item item)
-    {
-        foreach (var kvp in _equipSkillDict)
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(newItem.ID);
+        if (itemDataSO is SkillDataSO skillDataSO)
         {
-            int keyIndex = kvp.Key;
-            Item existItem = kvp.Value;
+            string text = skillDataSO.Desc;
+            string pattern = @"\{(.*?)\}";
 
-            if (existItem == null)
-                continue;
+            MatchCollection matches = Regex.Matches(text, pattern);
 
-            if (existItem.ID == item.ID)
-                return keyIndex;
-        }
-
-        return -1;
-    }
-
-
-    /// <summary>
-    /// 비어있는 슬롯 인덱스 가져오기
-    /// </summary>
-    private static int GetEmptySlotIndex()
-    {
-        CheckAnd_SetDict();
-
-        foreach (var kvp in _equipSkillDict)
-        {
-            int keyIndex = kvp.Key;
-            Item item = kvp.Value;
-
-            if (item == null)
-                return keyIndex;
-        }
-
-        return -1;
-    }
-
-    /// <summary>
-    /// 해당 슬롯에 장착되어있는 스킬아이템 가져오기
-    /// </summary>
-    public static Item GetEquipSkill(int slotIndex)
-    {
-        return _equipSkillDict[slotIndex];
-    }
-
-
-
-
-
-
-
-
-    /// <summary>
-    /// 딕셔너리에 키 체크해보고 없으면 딕셔너리 만들기
-    /// </summary>
-    private static void CheckAnd_SetDict()
-    {
-        for (int i = 1; i <= 3; i++)
-        {
-            if (_equipSkillDict.ContainsKey(i) == false)
-                _equipSkillDict[i] = null;
-            else
-                continue;
-        }
-    }
-
-
-
-    /// <summary>
-    /// 장착한 스킬들 가져오기 (사용하기 위해 '스킬'형태로 변환해서)
-    /// </summary>
-    public static Skill[] GetEquipSkills_SkillType()
-    {
-        CheckAnd_SetDict();
-
-        Skill[] castSkillArr = new Skill[3];
-
-        int index = 0;
-        foreach (var kvp in _equipSkillDict)
-        {
-            int keyIndex = kvp.Key;
-            Item item = kvp.Value;
-
-            if (item == null)
+            foreach (Match match in matches)
             {
-                castSkillArr[index] = null;
-                index++;
-                continue;
+                Debug.Log(match.Groups[1].Value); // 그룹 내부 문자열 출력: Duration, AddAttackSpeed
+
+                Dictionary<SkillStatType, float> skillStats = skillDataSO.GetSkillStats(newItem.Level);
+
+
             }
 
-            castSkillArr[index] = SkillFactory.CreateSkill(item.ID, item.Level);
+
+
+
         }
 
-        return castSkillArr;
     }
 
 
+    /// <summary>
+    /// 아이템 생성
+    /// </summary>
+    private Item CreateItem()
+    {
+        // 해당 아이템타입의 모든 데이터 스크립터블 오브젝트들 중에서 1개만 고르기
+        List<ItemDataSO> itemDataSOList = ItemDataManager.GetItemDataSOList_ByType(ItemType.Skill);
+        ItemDataSO itemDataSO = itemDataSOList[RandomIndex(itemDataSOList.Count)];
 
+        Item item = new Item(itemDataSO.ID, itemDataSO.ItemType, 1, 1);
+        return item;
+    }
 
+    /// <summary>
+    /// 0-maxCount 사이 랜덤한 숫자 반환
+    /// </summary>
+    private int RandomIndex(int maxCount)
+    {
+        int index = Random.Range(0, maxCount);
+        return index;
+    }
 
 
 }
