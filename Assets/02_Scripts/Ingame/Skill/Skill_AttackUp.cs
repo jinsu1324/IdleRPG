@@ -13,8 +13,6 @@ public class Skill_AttackUp : Skill
     /// </summary>
     public Skill_AttackUp(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_AttackUp »ý¼ºÀÚ!");
-
         Update_SkillStatValues();
     }
 

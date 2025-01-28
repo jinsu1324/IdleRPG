@@ -14,8 +14,6 @@ public class Skill_Meteor : Skill
     /// </summary>
     public Skill_Meteor(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_Meteor »ý¼ºÀÚ!");
-
         Update_SkillStatValues();
     }
 

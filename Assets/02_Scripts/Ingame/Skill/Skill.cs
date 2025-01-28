@@ -18,8 +18,6 @@ public abstract class Skill
     /// </summary>
     public Skill(CreateSkillArgs args)
     {
-        Debug.Log("Skill »ý¼ºÀÚ!");
-
         ID = args.ID;
         _skillDataSO = args.SkillDataSO;
         _level = args.Level;

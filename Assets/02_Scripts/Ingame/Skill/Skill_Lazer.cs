@@ -14,8 +14,6 @@ public class Skill_Lazer : Skill
     /// </summary>
     public Skill_Lazer(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_Lazer »ý¼ºÀÚ!");
-
         Update_SkillStatValues();
     }
 

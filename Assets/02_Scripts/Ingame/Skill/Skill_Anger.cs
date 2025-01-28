@@ -16,8 +16,6 @@ public class Skill_Anger : Skill
     /// </summary>
     public Skill_Anger(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_Anger 생성자!");
-
         Update_SkillStatValues();
     }
 
@@ -35,24 +33,14 @@ public class Skill_Anger : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Anger!! 공속증가값 : {_addAttackSpeed}");
+        // Debug.Log($"Skill_Anger!! 공속증가값 : {_addAttackSpeed}");
 
-        //// 버프 딕셔너리 제작
-        //Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>()
-        //{
-        //    { StatType.AttackSpeed, _addAttackSpeed}
-        //};
+        Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>(){ { StatType.AttackSpeed, _addAttackSpeed} };
 
-        //// 버프 적용
-        //PlayerStatUpdateArgs args = new PlayerStatUpdateArgs()
-        //{
-        //    DetailStatDict = buffDict,
-        //    Source = this,
-        //};
-        //PlayerBuffSystem.Instance.StartBuffToPlayer(_duration, args);
+        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs(){ DetailStatDict = buffDict, SourceID = this.GetType().Name };
+        PlayerBuffSystem.Instance.StartBuffToPlayer(_duration, args);
 
-        //// 이펙트 시작
-        //GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerManager.PlayerInstance.transform);
-        //fx.GetComponent<FX_Skill_Anger>().Init(_duration);
+        GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerManager.PlayerInstance.transform);
+        fx.GetComponent<FX_Skill_Anger>().Init(_duration);
     }
 }

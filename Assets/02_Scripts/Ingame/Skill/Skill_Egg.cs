@@ -15,8 +15,6 @@ public class Skill_Egg : Skill
     /// </summary>
     public Skill_Egg(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_Egg »ý¼ºÀÚ!");
-
         Update_SkillStatValues();
     }
 

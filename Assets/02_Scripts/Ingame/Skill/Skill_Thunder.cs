@@ -17,8 +17,6 @@ public class Skill_Thunder : Skill
     /// </summary>
     public Skill_Thunder(CreateSkillArgs args) : base(args)
     {
-        Debug.Log("Skill_Thunder »ý¼ºÀÚ!");
-
         Update_SkillStatValues();
     }
 
