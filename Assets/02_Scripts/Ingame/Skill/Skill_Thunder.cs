@@ -57,12 +57,4 @@ public class Skill_Thunder : Skill
         //// 프로젝타일에 주입
         //projectile.Init(finalDamage, isCritical);
     }
-
-    ///// <summary>
-    ///// Desc가져오기
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, NumberConverter.ConvertPercentage(AttackPercentage));
-    //}
 }

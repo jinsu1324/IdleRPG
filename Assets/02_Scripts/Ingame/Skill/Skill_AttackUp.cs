@@ -42,12 +42,4 @@ public class Skill_AttackUp : Skill
         //GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerSpawner.PlayerInstance.transform);
         //fx.GetComponent<FX_Skill_Anger>().Init(Duration);
     }
-
-    ///// <summary>
-    ///// Desc가져오기 
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, Duration, AddAttackPower);
-    //}
 }

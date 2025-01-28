@@ -39,12 +39,4 @@ public class Skill_Egg : Skill
     {
         Debug.Log($"Skill_Egg!! 공격력 : {_skillAttackPower}");
     }
-
-    ///// <summary>
-    ///// Desc가져오기 
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, _projectileCount, NumberConverter.ConvertPercentage(_attackPercentage));
-    //}
 }

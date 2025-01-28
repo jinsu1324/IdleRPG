@@ -37,12 +37,4 @@ public class Skill_Lazer : Skill
     {
         Debug.Log($"Skill_Lazer!! 공격력 : {_skillAttackPower}");
     }
-
-    ///// <summary>
-    ///// Desc가져오기 
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, NumberConverter.ConvertPercentage(AttackPercentage));
-    //}
 }

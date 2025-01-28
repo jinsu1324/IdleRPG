@@ -55,12 +55,4 @@ public class Skill_Anger : Skill
         //GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerManager.PlayerInstance.transform);
         //fx.GetComponent<FX_Skill_Anger>().Init(_duration);
     }
-
-    ///// <summary>
-    ///// Desc가져오기 
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, _duration, _addAttackSpeed);
-    //}
 }

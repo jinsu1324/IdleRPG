@@ -6,6 +6,7 @@ public class SkillProjectile_Meteor : MonoBehaviour
 {
     private float _finalDamage; // 최종 데미지
     private bool _isCritical;   // 크리티컬 여부
+    private BoxCollider2D _col; // 콜라이더
 
     /// <summary>
     /// 초기화
@@ -14,6 +15,8 @@ public class SkillProjectile_Meteor : MonoBehaviour
     {
         _finalDamage = finalDamage;
         _isCritical = isCritical;
+        _col = GetComponent<BoxCollider2D>();
+        _col.enabled = false;
     }
 
     /// <summary>
@@ -29,9 +32,23 @@ public class SkillProjectile_Meteor : MonoBehaviour
                 IsCritical = _isCritical
             };
             collision.gameObject.GetComponent<HPComponent>().TakeDamage(args);
-
-            Destroy(gameObject); 
-            // Todo 맞아야 게임오브젝트가 사라지게 되어있는데, Enemy가 사라질수있음 그때 처리 필요
+            _col.enabled = false;
         }
+    }
+
+    /// <summary>
+    /// 콜라이더 켜기 (애니메이션 키프레임에서 설정)
+    /// </summary>
+    public void Collider_ON()
+    {
+        _col.enabled = true;
+    }
+
+    /// <summary>
+    /// 삭제 (애니메이션 키프레임에서 설정)
+    /// </summary>
+    public void DestroyFX()
+    {
+        Destroy(gameObject);
     }
 }

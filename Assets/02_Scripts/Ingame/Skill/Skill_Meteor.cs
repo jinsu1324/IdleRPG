@@ -35,32 +35,16 @@ public class Skill_Meteor : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Meteor!! 공격력 : {_skillAttackPower}");
+        //Debug.Log($"Skill_Meteor!! 공격력 : {_skillAttackPower}");
 
-        //// 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
-        //Vector3 targetPos =
-        //    (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).
-        //    transform.position;
+        Vector3 targetPos = (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).transform.position;
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
 
-        //// 프로젝타일 생성하고
-        //SkillProjectile_Meteor projectile =
-        //    GameObject.Instantiate(SkillDataSO.Prefab, targetPos, Quaternion.identity).
-        //    GetComponent<SkillProjectile_Meteor>();
+        SkillProjectile_Meteor projectile = GameObject.Instantiate(itemDataSO.Prefab, targetPos, Quaternion.identity).GetComponent<SkillProjectile_Meteor>();
 
-        //// 치명타 여부 결정하고, 최종데미지 계산하고
-        //bool isCritical = CriticalManager.IsCritical();
-        //float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
 
-        //// 프로젝타일에 주입
-        //projectile.Init(finalDamage, isCritical);
+        projectile.Init(finalDamage, isCritical);
     }
-
-    ///// <summary>
-    ///// Desc가져오기 
-    ///// </summary>
-    //public override string GetDynamicDesc()
-    //{
-    //    return string.Format(Desc, NumberConverter.ConvertPercentage(_attackPercentage));
-    //}
-
 }
