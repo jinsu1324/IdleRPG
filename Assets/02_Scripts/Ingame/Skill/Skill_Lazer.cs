@@ -33,6 +33,18 @@ public class Skill_Lazer : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Lazer!! °ø°Ý·Â : {_skillAttackPower}");
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
+
+        SkillProjectile_Lazer projectile = 
+            GameObject.Instantiate(
+                itemDataSO.Prefab, 
+                PlayerManager.PlayerInstance.transform.position + new Vector3(0, 0.5f, 0), 
+                Quaternion.identity).
+                GetComponent<SkillProjectile_Lazer>();
+
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+
+        projectile.Init(finalDamage, isCritical);
     }
 }

@@ -17,10 +17,10 @@ MonoBehaviour:
   Name: "\uB808\uC774\uC800 \uD30C\uB3D9"
   Grade: Rare
   Desc: "\uC804\uBC29\uC73C\uB85C \uB808\uC774\uC800\uD30C\uB3D9\uC744 \uB358\uC838
-    \uACBD\uB85C\uC5D0 \uC788\uB294 \uBAA8\uB4E0\uC801\uC5D0\uAC8C [AttackPercentage]
+    \uACBD\uB85C\uC5D0 \uC788\uB294 \uC801 3\uB9C8\uB9AC\uC5D0\uAC8C [AttackPercentage]
     \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 10cdeb67a06178147b397a7dd60f9c69, type: 3}
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 3468142428507519311, guid: 47d78d79b1545fb4bb245ffa207079da, type: 3}
   EnhanceCountInfoList:
   - Level: 1
     EnhanceCount: 10
