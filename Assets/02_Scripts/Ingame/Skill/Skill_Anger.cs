@@ -33,11 +33,9 @@ public class Skill_Anger : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        // Debug.Log($"Skill_Anger!! 공속증가값 : {_addAttackSpeed}");
-
         Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>(){ { StatType.AttackSpeed, _addAttackSpeed} };
 
-        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs(){ DetailStatDict = buffDict, SourceID = this.GetType().Name };
+        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs(){ DetailStatDict = buffDict, SourceID = ID };
         PlayerBuffSystem.Instance.StartBuffToPlayer(_duration, args);
 
         GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerManager.PlayerInstance.transform);

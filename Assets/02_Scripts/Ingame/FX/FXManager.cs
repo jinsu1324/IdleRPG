@@ -12,7 +12,8 @@ public enum FXName
     FX_Enemy_Damaged,
     FX_Enemy_Die,
     UIFX_UpgradeItem,
-    FX_Skill_Anger
+    FX_Skill_Anger,
+    FX_Skill_AttackUp
 }
 
 /// <summary>

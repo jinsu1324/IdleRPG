@@ -30,14 +30,12 @@ public class Skill_AttackUp : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Anger!! 공격력 증가값 : {_addAttackPower}");
+        Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>() { { StatType.AttackPower, _addAttackPower } };
 
-        //// 버프 적용
-        //Dictionary<StatType, float> buffDict = new Dictionary<StatType, float>() { { StatType.AttackSpeed, AddAttackPower } };
-        //PlayerBuffSystem.Instance.StartBuffToPlayer(Duration, buffDict, this);
+        PlayerStatUpdateArgs args = new PlayerStatUpdateArgs() { DetailStatDict = buffDict, SourceID = ID };
+        PlayerBuffSystem.Instance.StartBuffToPlayer(_duration, args);
 
-        //// 이펙트 시작
-        //GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_Anger, PlayerSpawner.PlayerInstance.transform);
-        //fx.GetComponent<FX_Skill_Anger>().Init(Duration);
+        GameObject fx = FXManager.Instance.SpawnFX(FXName.FX_Skill_AttackUp, PlayerManager.PlayerInstance.transform);
+        fx.GetComponent<FX_Skill_AttackUp>().Init(_duration);
     }
 }
