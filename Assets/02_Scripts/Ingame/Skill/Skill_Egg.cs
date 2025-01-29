@@ -35,6 +35,22 @@ public class Skill_Egg : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Egg!! °ø°Ý·Â : {_skillAttackPower}");
+        IDamagable target = FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position);
+
+        if (target == null)
+            return;
+
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
+
+        SkillProjectile_Egg projectile = GameObject.Instantiate(
+                itemDataSO.Prefab,
+                PlayerManager.PlayerInstance.transform.position,
+                Quaternion.identity).
+                GetComponent<SkillProjectile_Egg>();
+
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
+
+        projectile.Init(finalDamage, isCritical, target);
     }
 }
