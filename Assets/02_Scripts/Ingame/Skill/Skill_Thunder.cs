@@ -36,23 +36,14 @@ public class Skill_Thunder : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Debug.Log($"Skill_Thunder!! 공격력 : {_skillAttackPower}");
+        Vector3 targetPos = (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).transform.position;
+        ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
 
-        //// 타겟 1명을 찾아서 설정해서 그 위치에 생성하고
-        //Vector3 targetPos =
-        //    (FieldTargetManager.GetClosestLivingTarget(PlayerSpawner.PlayerInstance.transform.position) as Component).
-        //    transform.position;
+        SkillProjectile_Thunder projectile = GameObject.Instantiate(itemDataSO.Prefab, targetPos, Quaternion.identity).GetComponent<SkillProjectile_Thunder>();
 
-        //// 프로젝타일 생성하고
-        //SkillProjectile_Thunder projectile =
-        //    GameObject.Instantiate(SkillDataSO.SkillPrefab, targetPos, Quaternion.identity).
-        //    GetComponent<SkillProjectile_Thunder>();
+        bool isCritical = CriticalManager.IsCritical();
+        float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
 
-        //// 치명타 여부 결정하고, 최종데미지 계산하고
-        //bool isCritical = CriticalManager.IsCritical();
-        //float finalDamage = CriticalManager.CalculateFinalDamage(_skillAttackPower, isCritical);
-
-        //// 프로젝타일에 주입
-        //projectile.Init(finalDamage, isCritical);
+        projectile.Init(finalDamage, isCritical);
     }
 }

@@ -33,8 +33,6 @@ public class Skill_Meteor : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        //Debug.Log($"Skill_Meteor!! °ø°Ý·Â : {_skillAttackPower}");
-
         Vector3 targetPos = (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).transform.position;
         ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
 
