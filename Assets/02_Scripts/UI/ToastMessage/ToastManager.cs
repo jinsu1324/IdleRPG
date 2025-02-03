@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToastManager : MonoBehaviour
+public class ToastManager : SingletonBase<ToastManager>
 {
     [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
     private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
 
     [SerializeField] private ToastDefeat _toastDefeat;              // 패배 토스트메시지
     private Coroutine _toastDefeatCoroutine;                        // 패배 토스트메시지 코루틴
+
+    [SerializeField] private ToastCommon _toastCommon;              // 커먼 토스트메시지
+    private Coroutine _toastCommonCoroutine;                        // 커먼 토스트메시지 코루틴
 
     /// <summary>
     /// OnEnable
@@ -27,6 +30,9 @@ public class ToastManager : MonoBehaviour
         PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
         StageManager.OnStageDefeat -= StartShow_ToastDefeat;
     }
+
+
+
 
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
@@ -54,6 +60,8 @@ public class ToastManager : MonoBehaviour
         _toastCombatPower.Hide();
     }
 
+
+
     /// <summary>
     /// 패배 토스트메시지 보여주기
     /// </summary>
@@ -78,5 +86,36 @@ public class ToastManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3f);
      
         _toastDefeat.Hide();
+    }
+
+
+
+
+
+
+    /// <summary>
+    /// 커먼 토스트메시지 보여주기
+    /// </summary>
+    public void StartShow_ToastCommon(string text)
+    {
+        // 이미 코루틴 있으면 실행 중단
+        if (_toastCommonCoroutine != null)
+            StopCoroutine(_toastCommonCoroutine);
+
+        // 새로운 코루틴 시작
+        _toastCommonCoroutine = StartCoroutine(Show_ToastCommon(text));
+    }
+
+    /// <summary>
+    /// 커먼 토스트메시지 코루틴
+    /// </summary>
+    private IEnumerator Show_ToastCommon(string text)
+    {
+        _toastCommon.Hide();
+
+        _toastCommon.Show(text);
+        yield return new WaitForSecondsRealtime(1f);
+
+        _toastCommon.Hide();
     }
 }

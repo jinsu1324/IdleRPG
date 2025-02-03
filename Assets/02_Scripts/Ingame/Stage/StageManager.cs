@@ -22,6 +22,7 @@ public class StageManager : SingletonBase<StageManager>
     public static event Action<StageBuildArgs> OnStageBuildStart;       // 스테이지 빌딩 시작 이벤트
     public static event Action<StageBuildArgs> OnStageBuildFinish;      // 스테이지 빌딩 완료 이벤트
     public static event Action OnStageDefeat;                           // 스테이지 패배 이벤트
+    public static event Action OnStageChallange;                        // 스테이지 도전 이벤트
     
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
@@ -63,6 +64,8 @@ public class StageManager : SingletonBase<StageManager>
         yield return new WaitForSeconds(1.5f);
 
         OnStageBuildFinish?.Invoke(args);
+
+        ToastManager.Instance.StartShow_ToastCommon($"Stage {args.CurrentStage}"); // 스테이지 토스트메시지
     }
 
     /// <summary>
@@ -126,6 +129,7 @@ public class StageManager : SingletonBase<StageManager>
     /// </summary>
     public void ChallangeRestartGame()
     {
+        OnStageChallange?.Invoke();
         CurrentStageData.SetStageType_Normal();  // 일반모드로 변경
         StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
@@ -138,7 +142,7 @@ public class StageManager : SingletonBase<StageManager>
         // 일시정지
         GameTimeController.Pause(); 
 
-        yield return new WaitForSecondsRealtime(2.5f); // Time.timeScale = 0에서도 동작
+        yield return new WaitForSecondsRealtime(2.0f); // Time.timeScale = 0에서도 동작
 
         // 게임 다시 시작
         GameTimeController.Resume();
