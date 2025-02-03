@@ -12,6 +12,7 @@ public class PlayerCore : SerializedMonoBehaviour
 {
     [SerializeField] private HPComponent _hpComponent;                          // HP 컴포넌트
     [SerializeField] private AttackComponent_ProjectileType _attackComponent;   // 공격 컴포넌트 (프로젝타일타입)
+    [SerializeField] private AnimComponent _animComponent;                      // 애니메이션 컴포넌트
 
     /// <summary>
     /// OnEnable
@@ -25,6 +26,12 @@ public class PlayerCore : SerializedMonoBehaviour
 
         PlayerResetService.OnReset += _hpComponent.ResetHp;  // 플레이어 리셋할때 -> 플레이어의 HP 리셋
         PlayerResetService.OnReset += _hpComponent.ResetIsDead;  // 플레이어 리셋할때 -> 플레이어의 죽었는지 bool값도 리셋
+
+        StageManager.OnStageBuilding += _attackComponent.IsAttackStop_True;    // 스테이지 변경중일때 -> 공격중단 true
+        StageManager.OnStageBuilding += _animComponent.MoveAnimStart;   // 스테이지 변경중일 때 -> 움직임 애니메이션 시작
+
+        StageManager.OnStageBuildFinish += _attackComponent.IsAttackStop_False; // 스테이지 변경 끝났을때 -> 공격중단 false
+        StageManager.OnStageBuildFinish += _animComponent.MoveAnimStop; // 스테이지 변경 끝났을때 -> 움직임 애니메이션 종료
     }
 
     /// <summary>
@@ -39,6 +46,12 @@ public class PlayerCore : SerializedMonoBehaviour
 
         PlayerResetService.OnReset -= _hpComponent.ResetHp;
         PlayerResetService.OnReset -= _hpComponent.ResetIsDead;
+
+        StageManager.OnStageBuilding -= _attackComponent.IsAttackStop_True;
+        StageManager.OnStageBuilding -= _animComponent.MoveAnimStart;
+
+        StageManager.OnStageBuildFinish -= _attackComponent.IsAttackStop_False;
+        StageManager.OnStageBuildFinish -= _animComponent.MoveAnimStop;
     }
 
     /// <summary>

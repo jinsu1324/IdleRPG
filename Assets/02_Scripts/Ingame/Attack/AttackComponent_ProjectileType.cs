@@ -6,12 +6,16 @@ public class AttackComponent_ProjectileType : AttackComponent
 {
     [SerializeField] private Projectile _projectilePrefab;  // 프로젝타일 프리팹
     [SerializeField] private Transform _spawnPoint;         // 스폰 위치
+    private bool _isAttackPause;                            // 이동중일때 공격 일시정지 여부
 
     /// <summary>
     /// Update
     /// </summary>
     private void Update()
     {
+        if (_isAttackPause)
+            return;
+
         if (IsAttackCoolTime()) // 쿨타임마다 공격 프로세스 시작
             StartAttackProcess();
     }
@@ -43,4 +47,14 @@ public class AttackComponent_ProjectileType : AttackComponent
         Projectile projectile = GameObject.Instantiate(_projectilePrefab, _spawnPoint.position, Quaternion.identity);
         projectile.Init(args);
     }
+
+    /// <summary>
+    /// 공격중단 true로
+    /// </summary>
+    public void IsAttackStop_True() => _isAttackPause = true;
+
+    /// <summary>
+    /// 공격중단 false 로
+    /// </summary>
+    public void IsAttackStop_False(OnStageChangedArgs args) => _isAttackPause = false;
 }

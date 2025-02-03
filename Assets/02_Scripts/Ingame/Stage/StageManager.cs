@@ -19,7 +19,8 @@ public struct OnStageChangedArgs
 /// </summary>
 public class StageManager : SingletonBase<StageManager>
 {
-    public static event Action<OnStageChangedArgs> OnStageChanged;  // 스테이지 변경 시 이벤트
+    public static event Action OnStageBuilding;                         // 스테이지 재구성중 이벤트
+    public static event Action<OnStageChangedArgs> OnStageBuildFinish;  // 스테이지 재구성 끝 이벤트
     
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
@@ -29,6 +30,14 @@ public class StageManager : SingletonBase<StageManager>
     /// </summary>
     public void StageBuildAndStart()
     {
+        StartCoroutine(StageBuildAndStart_Coroutine());
+    }
+
+    /// <summary>
+    /// 스테이지 빌드 및 시작 코루틴
+    /// </summary>
+    private IEnumerator StageBuildAndStart_Coroutine()
+    {
         // 현재 스테이지에 맞는 스테이지 데이터 가져오기
         StageData stageData = StageDataManager.GetStageData(CurrentStageData.Stage);
 
@@ -37,20 +46,24 @@ public class StageManager : SingletonBase<StageManager>
         int targetCount = stageData.Count;
         float statPercentage = stageData.StatPercentage;
 
-        OnStageChangedArgs args = new OnStageChangedArgs() 
-        { 
-            CurrentStage = CurrentStageData.Stage, 
-            EnemyID = appearEnemyID, 
-            Count = targetCount, 
+        OnStageChangedArgs args = new OnStageChangedArgs()
+        {
+            CurrentStage = CurrentStageData.Stage,
+            EnemyID = appearEnemyID,
+            Count = targetCount,
             StatPercantage = statPercentage
         };
 
         ResetTargetCount(args); // 목표 + 죽인 적 숫자 리셋
-        OnStageChanged?.Invoke(args);
-
         PlayerResetService.PlayerReset(); // 플레이어 리셋
+        
+        OnStageBuilding?.Invoke();
+
+        yield return new WaitForSeconds(2.0f);
+
+        OnStageBuildFinish?.Invoke(args);
     }
-    
+
     /// <summary>
     /// 킬 카운트 증가
     /// </summary>

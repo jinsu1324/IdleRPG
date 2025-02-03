@@ -457,6 +457,7 @@ MonoBehaviour:
     SerializationNodes: []
   _hpComponent: {fileID: 8727782936110565961}
   _attackComponent: {fileID: 8049943085229416431}
+  _animComponent: {fileID: 8472665583169259455}
 --- !u!114 &8727782936110565961
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -43,4 +43,20 @@ public class AnimComponent : MonoBehaviour
     {
         _animator.SetInteger("AttackAnimType", (int)attackAnimType);
     }
+
+    /// <summary>
+    /// 무브 애니메이션 시작
+    /// </summary>
+    public void MoveAnimStart()
+    {
+        _animator.SetBool("isMove", true);
+    }
+
+    /// <summary>
+    /// 무브 애니메이션 끝
+    /// </summary>
+    public void MoveAnimStop(OnStageChangedArgs args)
+    {
+        _animator.SetBool("isMove", false);
+    }
 }
