@@ -21,7 +21,7 @@ public class QuestUI : MonoBehaviour
         QuestManager.OnUpdateQuest += UpdateQuestUI; // 현재 퀘스트 정보들 업데이트됐을때, 퀘스트UI 정보들 업데이트
         QuestManager.OnCheckComplete += CompleteButtonONOFF; // 퀘스트 완료여부 체크할때, 완료버튼 On / Off
 
-        _completeButton.onClick.AddListener(QuestManager.CompleteCurrentQuest); // 완료버튼 누르면 퀘스트 완료되게 
+        _completeButton.onClick.AddListener(QuestCompleteUITask); // 완료버튼 누르면 퀘스트 완료 태스크 실행
     }
 
     /// <summary>
@@ -68,5 +68,14 @@ public class QuestUI : MonoBehaviour
     private void CompleteButtonONOFF(bool isComplete)
     {
         _completeButton.gameObject.SetActive(isComplete);
+    }
+
+    /// <summary>
+    /// 퀘스트 완료 UI 태스크
+    /// </summary>
+    private void QuestCompleteUITask()
+    {
+        QuestManager.CompleteCurrentQuest();    // 퀘스트 완료
+        CurrencyIconMover.Instance.MoveCurrency_Multi(CurrencyType.Gem, transform.position); // 보석 이동 애니메이션
     }
 }

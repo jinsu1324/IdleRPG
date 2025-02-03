@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// 에너미 코어
@@ -86,7 +87,8 @@ public class EnemyCore : ObjectPoolObj
         EnemyDataManager.AddGoldByEnemy(_enemyID); // 골드 추가
         FieldTargetManager.RemoveFieldEnemyList(GetComponent<HPComponent>()); // 필드타겟 리스트에서 삭제
         QuestManager.AddValue_KillEnemyQuest(QuestType.KillEnemy, 1); // 적 죽이기 퀘스트에 업데이트
-        CurrencyIconMover.Instance.MoveCurrency(CurrencyType.Gold, transform.position); // 골드 이동 애니메이션
+
+        CurrencyIconMover.Instance.MoveCurrency_Multi(CurrencyType.Gold, transform.position); // 골드 이동 애니메이션
 
         FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform);    // 이펙트 띄우기
 

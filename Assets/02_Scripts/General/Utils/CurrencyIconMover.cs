@@ -30,7 +30,29 @@ public class CurrencyIconMover : SingletonBase<CurrencyIconMover>
     [SerializeField] private Transform _gemDestination;       // 보석 이동 목적지
 
     /// <summary>
-    /// 재화 이동
+    /// 재화이동 다수
+    /// </summary>
+    public void MoveCurrency_Multi(CurrencyType currencyType, Vector3 startPos)
+    {
+         StartCoroutine(MoveMultiCoroutine(currencyType, startPos));
+    }
+
+    /// <summary>
+    /// 재화이동 다수 코루틴
+    /// </summary>
+    private IEnumerator MoveMultiCoroutine(CurrencyType currencyType, Vector3 startPos)
+    {
+        int randomCount = Random.Range(5, 10);
+
+        for (int i = 0; i < randomCount; i++)
+        {
+            MoveCurrency(currencyType, startPos);
+            yield return new WaitForSecondsRealtime(0.02f);
+        }
+    }
+
+    /// <summary>
+    /// 재화 이동 싱글
     /// </summary>
     public void MoveCurrency(CurrencyType currencyType, Vector3 startPos)
     {
@@ -65,12 +87,24 @@ public class CurrencyIconMover : SingletonBase<CurrencyIconMover>
     private IEnumerator MoveToTarget(GameObject currencyPrefab, Vector3 startPos, Vector3 endPos)
     {
         // 이동시간
-        float duration = 1f; 
+        float duration = 1f;
+        float height = Random.Range(-1.0f, 1.0f); // 랜덤한 최대 높이
 
         // 일정 시간 동안 위치를 선형보간하며 이동
         for (float t = 0; t < duration; t+= Time.deltaTime)
         {
-            currencyPrefab.transform.position = Vector3.Lerp(startPos, endPos, t / duration);
+            float progress = t / duration;
+            Vector3 currentPos = Vector3.Lerp(startPos, endPos, progress);
+
+            // 포물선 효과 추가 (sin 곡선을 이용한 부드러운 곡선 이동)
+            float arc = Mathf.Sin(progress * Mathf.PI) * height;
+
+            if (endPos == _goldDestination.position) 
+                currentPos.y += arc; // 골드면 y축에 포물선 추가
+            else
+                currentPos.x += arc; // 젬이면 x 축에 포물선 추가
+
+            currencyPrefab.transform.position = currentPos;
             yield return null;
         }
 

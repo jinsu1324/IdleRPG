@@ -10,7 +10,7 @@ using UnityEngine;
 public class FieldTargetManager
 {
     private static List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
-    private static float _range = 7.5f;    // 기본 사거리
+    private static float _range = 8.0f;    // 기본 사거리
 
     /// <summary>
     /// 필드 타겟 리스트에 추가
