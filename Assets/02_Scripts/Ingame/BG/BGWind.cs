@@ -11,7 +11,8 @@ public class BGWind : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        StageManager.OnStageBuilding += WindAnimStart;  // 스테이지 빌딩시 -> 바람 애니메이션 시작
+        StageManager.OnStageBuildStart += WindAnimStart;  // 스테이지 빌딩 시작시 -> 바람 애니메이션 시작
+        StageManager.OnStageBuildFinish += WindAnimEnd;   // 스테이지 빌딩 종료시 -> 바람 애니메이션 종료
     }
 
     /// <summary>
@@ -19,14 +20,23 @@ public class BGWind : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        StageManager.OnStageBuilding -= WindAnimStart;
+        StageManager.OnStageBuildStart -= WindAnimStart;
+        StageManager.OnStageBuildFinish -= WindAnimEnd;
     }
 
     /// <summary>
     /// 바람애니메이션 시작
     /// </summary>
-    public void WindAnimStart()
+    public void WindAnimStart(StageBuildArgs args)
     {
-        _animator.SetTrigger("Wind");
+        _animator.SetBool("isWind", true);
+    }
+
+    /// <summary>
+    /// 바람애니메이션 종료
+    /// </summary>
+    public void WindAnimEnd(StageBuildArgs args)
+    {
+        _animator.SetBool("isWind", false);
     }
 }

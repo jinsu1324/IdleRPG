@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private float _speed = 10f;         // 투사체 속도
+    private float _speed = 20f;         // 투사체 속도
     private float _finalDamage;         // 최종 공격력
     private IDamagable _target;         // 타겟
-    private Vector3 _spawnPos;          // 투사체 생성 위치
     private bool _isCritical;
 
     /// <summary>
@@ -18,9 +17,7 @@ public class Projectile : MonoBehaviour
     {
         _finalDamage = args.AttackPower;
         _isCritical = args.IsCritical;
-        _spawnPos = args.projectileSpawnPos;
-
-        FindTarget(); // 타겟 검색
+        _target = args.Target;
     }
 
     /// <summary>
@@ -46,13 +43,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 타겟 찾기
-    /// </summary>
-    private void FindTarget()
-    {
-        _target = FieldTargetManager.GetClosestLivingTarget(_spawnPos);
-    }
 
     /// <summary>
     /// 타겟 공격

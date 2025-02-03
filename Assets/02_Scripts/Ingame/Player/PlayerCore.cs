@@ -27,10 +27,10 @@ public class PlayerCore : SerializedMonoBehaviour
         PlayerResetService.OnReset += _hpComponent.ResetHp;  // 플레이어 리셋할때 -> 플레이어의 HP 리셋
         PlayerResetService.OnReset += _hpComponent.ResetIsDead;  // 플레이어 리셋할때 -> 플레이어의 죽었는지 bool값도 리셋
 
-        StageManager.OnStageBuilding += _attackComponent.IsAttackStop_True;    // 스테이지 변경중일때 -> 공격중단 true
-        StageManager.OnStageBuilding += _animComponent.MoveAnimStart;   // 스테이지 변경중일 때 -> 움직임 애니메이션 시작
+        StageManager.OnStageBuildStart += _attackComponent.AttackPause;    // 스테이지 변경중일때 -> 공격 일시정지
+        StageManager.OnStageBuildStart += _animComponent.MoveAnimStart;   // 스테이지 변경중일 때 -> 움직임 애니메이션 시작
 
-        StageManager.OnStageBuildFinish += _attackComponent.IsAttackStop_False; // 스테이지 변경 끝났을때 -> 공격중단 false
+        StageManager.OnStageBuildFinish += _attackComponent.AttackResume; // 스테이지 변경 끝났을때 -> 공격 재개
         StageManager.OnStageBuildFinish += _animComponent.MoveAnimStop; // 스테이지 변경 끝났을때 -> 움직임 애니메이션 종료
     }
 
@@ -47,10 +47,10 @@ public class PlayerCore : SerializedMonoBehaviour
         PlayerResetService.OnReset -= _hpComponent.ResetHp;
         PlayerResetService.OnReset -= _hpComponent.ResetIsDead;
 
-        StageManager.OnStageBuilding -= _attackComponent.IsAttackStop_True;
-        StageManager.OnStageBuilding -= _animComponent.MoveAnimStart;
+        StageManager.OnStageBuildStart -= _attackComponent.AttackPause;
+        StageManager.OnStageBuildStart -= _animComponent.MoveAnimStart;
 
-        StageManager.OnStageBuildFinish -= _attackComponent.IsAttackStop_False;
+        StageManager.OnStageBuildFinish -= _attackComponent.AttackResume;
         StageManager.OnStageBuildFinish -= _animComponent.MoveAnimStop;
     }
 

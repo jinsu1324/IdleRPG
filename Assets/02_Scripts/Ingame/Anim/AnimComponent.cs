@@ -47,7 +47,7 @@ public class AnimComponent : MonoBehaviour
     /// <summary>
     /// 무브 애니메이션 시작
     /// </summary>
-    public void MoveAnimStart()
+    public void MoveAnimStart(StageBuildArgs args)
     {
         _animator.SetBool("isMove", true);
     }
@@ -55,7 +55,7 @@ public class AnimComponent : MonoBehaviour
     /// <summary>
     /// 무브 애니메이션 끝
     /// </summary>
-    public void MoveAnimStop(OnStageChangedArgs args)
+    public void MoveAnimStop(StageBuildArgs args)
     {
         _animator.SetBool("isMove", false);
     }

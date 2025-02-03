@@ -16,7 +16,7 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void OnEnable()
     {
-        StageManager.OnStageBuildFinish += UpdateStageInfoUI;   // 스테이지 변경될 때 -> 스테이지 정보 UI 업데이트
+        StageManager.OnStageBuildStart += UpdateStageInfoUI;   // 스테이지 변경 시작될때 -> 스테이지 정보 UI 업데이트
 
         _challangeButton.onClick.AddListener(StageManager.Instance.ChallangeRestartGame);
     }
@@ -26,7 +26,7 @@ public class StageInfoUI : MonoBehaviour
     /// </summary>
     private void OnDisable()
     {
-        StageManager.OnStageBuildFinish -= UpdateStageInfoUI;
+        StageManager.OnStageBuildStart -= UpdateStageInfoUI;
 
         _challangeButton.onClick.RemoveAllListeners();
     }
@@ -34,7 +34,7 @@ public class StageInfoUI : MonoBehaviour
     /// <summary>
     /// UI 업데이트
     /// </summary>
-    private void UpdateStageInfoUI(OnStageChangedArgs args)
+    private void UpdateStageInfoUI(StageBuildArgs args)
     {
         int currentStage = args.CurrentStage;
         _currentText.text = $"Stage {currentStage}";

@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// 스테이지 변경시 이벤트에 필요한 것들 구조체
 /// </summary>
-public struct OnStageChangedArgs
+public struct StageBuildArgs
 {
     public int CurrentStage;        // 현재 스테이지
     public EnemyID EnemyID;         // 등장하는 적 ID
@@ -19,8 +19,9 @@ public struct OnStageChangedArgs
 /// </summary>
 public class StageManager : SingletonBase<StageManager>
 {
-    public static event Action OnStageBuilding;                         // 스테이지 재구성중 이벤트
-    public static event Action<OnStageChangedArgs> OnStageBuildFinish;  // 스테이지 재구성 끝 이벤트
+    public static event Action<StageBuildArgs> OnStageBuildStart;       // 스테이지 빌딩 시작 이벤트
+    public static event Action<StageBuildArgs> OnStageBuildFinish;      // 스테이지 빌딩 완료 이벤트
+    public static event Action OnStageDefeat;                           // 스테이지 패배 이벤트
     
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
@@ -46,7 +47,7 @@ public class StageManager : SingletonBase<StageManager>
         int targetCount = stageData.Count;
         float statPercentage = stageData.StatPercentage;
 
-        OnStageChangedArgs args = new OnStageChangedArgs()
+        StageBuildArgs args = new StageBuildArgs()
         {
             CurrentStage = CurrentStageData.Stage,
             EnemyID = appearEnemyID,
@@ -57,9 +58,9 @@ public class StageManager : SingletonBase<StageManager>
         ResetTargetCount(args); // 목표 + 죽인 적 숫자 리셋
         PlayerResetService.PlayerReset(); // 플레이어 리셋
         
-        OnStageBuilding?.Invoke();
+        OnStageBuildStart?.Invoke(args);
 
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
 
         OnStageBuildFinish?.Invoke(args);
     }
@@ -93,7 +94,7 @@ public class StageManager : SingletonBase<StageManager>
     /// <summary>
     /// 목표 + 죽인 적 숫자 리셋
     /// </summary>
-    private void ResetTargetCount(OnStageChangedArgs args)
+    private void ResetTargetCount(StageBuildArgs args)
     {
         _targetCount = args.Count;
         _killCount = 0;
@@ -115,6 +116,7 @@ public class StageManager : SingletonBase<StageManager>
     /// </summary>
     public void DefeatRestartGame()
     {
+        OnStageDefeat?.Invoke();
         CurrentStageData.SetStageType_Infinite();    // 무한모드로 변경
         StartCoroutine(RestartGameCoroutine()); // 대기 후 게임 재시작
     }
@@ -136,9 +138,7 @@ public class StageManager : SingletonBase<StageManager>
         // 일시정지
         GameTimeController.Pause(); 
 
-        // UI 팝업 표시 (예: "게임 종료" UI 활성화)
-        
-        yield return new WaitForSecondsRealtime(2f); // Time.timeScale = 0에서도 동작
+        yield return new WaitForSecondsRealtime(2.5f); // Time.timeScale = 0에서도 동작
 
         // 게임 다시 시작
         GameTimeController.Resume();

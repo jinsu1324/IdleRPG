@@ -30,7 +30,7 @@ public struct AttackArgs
     public float AttackPower;           // 공격력
     public float AttackSpeed;           // 공격속도
     public bool IsCritical;             // 크리티컬인지?
-    public Vector3 projectileSpawnPos;  // 프로젝타일 스폰 위치
+    public IDamagable Target;           // 타겟
 }
 
 /// <summary>

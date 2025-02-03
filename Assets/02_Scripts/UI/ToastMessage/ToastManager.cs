@@ -7,12 +7,16 @@ public class ToastManager : MonoBehaviour
     [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
     private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
 
+    [SerializeField] private ToastDefeat _toastDefeat;              // 패배 토스트메시지
+    private Coroutine _toastDefeatCoroutine;                        // 패배 토스트메시지 코루틴
+
     /// <summary>
     /// OnEnable
     /// </summary>
     private void OnEnable()
     {
         PlayerStats.OnPlayerStatChanged += StartShow_ToastCombatPower;  // 플레이어 스탯 변경되었을 때, 전투력 토스트메시지 보여주기
+        StageManager.OnStageDefeat += StartShow_ToastDefeat;    // 스테이지 패배시 패배토스트 보여주기
     }
 
     /// <summary>
@@ -21,6 +25,7 @@ public class ToastManager : MonoBehaviour
     private void OnDisable()
     {
         PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
+        StageManager.OnStageDefeat -= StartShow_ToastDefeat;
     }
 
     /// <summary>
@@ -44,8 +49,34 @@ public class ToastManager : MonoBehaviour
         _toastCombatPower.Hide();
 
         _toastCombatPower.Init(args);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
 
         _toastCombatPower.Hide();
+    }
+
+    /// <summary>
+    /// 패배 토스트메시지 보여주기
+    /// </summary>
+    public void StartShow_ToastDefeat()
+    {
+        // 이미 코루틴 있으면 실행 중단
+        if (_toastDefeatCoroutine != null)
+            StopCoroutine(_toastDefeatCoroutine);
+
+        // 새로운 코루틴 시작
+        _toastDefeatCoroutine = StartCoroutine(Show_ToastDefeat());
+    }
+
+    /// <summary>
+    /// 패배 토스트메시지 코루틴
+    /// </summary>
+    private IEnumerator Show_ToastDefeat()
+    {
+        _toastDefeat.Hide();
+
+        _toastDefeat.Show();
+        yield return new WaitForSecondsRealtime(3f);
+     
+        _toastDefeat.Hide();
     }
 }

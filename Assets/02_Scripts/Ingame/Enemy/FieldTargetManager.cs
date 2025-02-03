@@ -10,6 +10,7 @@ using UnityEngine;
 public class FieldTargetManager
 {
     private static List<IDamagable> _fieldTargetList = new List<IDamagable>();    // 필드에 스폰되어 있는 타겟 리스트
+    private static float _range = 7.5f;    // 기본 사거리
 
     /// <summary>
     /// 필드 타겟 리스트에 추가
@@ -34,7 +35,10 @@ public class FieldTargetManager
     {
         // 살아있는 적들만 필터링 후 거리 기준으로 정렬
         IDamagable closestTarget = _fieldTargetList.
-            Where(target => target != null && !target.IsDead). // 살아있는 타겟만 필터링
+            Where(target => 
+            target != null 
+            && !target.IsDead 
+            && Mathf.Abs((target as Component).transform.position.x - pos.x) <= _range). // 사거리 내 살아있는 타겟만 필터링
             OrderBy(target => Vector3.Distance(pos, (target as Component).transform.position)).     // 거리 기준 정렬
             FirstOrDefault(); // 가장 가까운 타겟 반환
 
