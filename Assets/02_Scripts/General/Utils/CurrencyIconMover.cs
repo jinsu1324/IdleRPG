@@ -91,20 +91,24 @@ public class CurrencyIconMover : SingletonBase<CurrencyIconMover>
         float height = Random.Range(-1.0f, 1.0f); // 랜덤한 최대 높이
 
         // 일정 시간 동안 위치를 선형보간하며 이동
-        for (float t = 0; t < duration; t+= Time.deltaTime)
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
         {
-            float progress = t / duration;
+            float progress = elapsedTime / duration;
             Vector3 currentPos = Vector3.Lerp(startPos, endPos, progress);
 
             // 포물선 효과 추가 (sin 곡선을 이용한 부드러운 곡선 이동)
             float arc = Mathf.Sin(progress * Mathf.PI) * height;
 
-            if (endPos == _goldDestination.position) 
+            if (endPos == _goldDestination.position)
                 currentPos.y += arc; // 골드면 y축에 포물선 추가
             else
                 currentPos.x += arc; // 젬이면 x 축에 포물선 추가
 
             currencyPrefab.transform.position = currentPos;
+
+            // Time.unscaledDeltaTime 사용하여 Time.timeScale 영향을 받지 않도록 함
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
 
