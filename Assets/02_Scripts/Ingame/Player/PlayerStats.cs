@@ -47,7 +47,7 @@ public class PlayerStats
 {
     public static event Action<PlayerStatArgs> OnPlayerStatChanged; // 플레이어 스탯 변경되었을 때 이벤트
     private static Dictionary<StatType, List<StatModifier>> _statModifierDict; // 스탯별로 StatModifier 리스트를 관리
-    public static float BeforeCombatPower { get; private set; } // 이전전투력
+    public static float BeforeTotalPower { get; private set; } // 이전전투력
 
     /// <summary>
     /// 정적 생성자 (클래스가 처음 참조될 때 한 번만 호출)
@@ -73,7 +73,7 @@ public class PlayerStats
         string sourceID = args.SourceID;    // 출처
 
         // 이전 전투력 계산
-        BeforeCombatPower = GetAllStatValue();
+        BeforeTotalPower = GetAllStatValue();
 
         // 아이템 스탯들 전부 플레이어 스탯에 추가
         foreach (var kvp in attributeDict)
@@ -112,7 +112,7 @@ public class PlayerStats
         string sourceID = args.SourceID;    // 출처
 
         // 이전 전투력 계산
-        BeforeCombatPower = GetAllStatValue();
+        BeforeTotalPower = GetAllStatValue();
 
         // 해당 아이템(source)의 스탯들을, 플레이어 스탯에서 제거
         foreach (var kvp in attributeDict)
@@ -144,7 +144,30 @@ public class PlayerStats
         StatType[] AllStatTypes = (StatType[])Enum.GetValues(typeof(StatType));
 
         foreach (StatType statType in AllStatTypes)
-            resultStatValue += GetStatValue(statType);
+        {
+            // 스탯별로 전투력 다르게 계산
+            float calculatePower = 0.0f;
+            switch (statType)
+            {
+                case StatType.AttackPower:
+                    calculatePower = GetStatValue(statType) * 100f;
+                    break;
+                case StatType.AttackSpeed:
+                    calculatePower = GetStatValue(statType) * 1000f;
+                    break;
+                case StatType.MaxHp:
+                    calculatePower = GetStatValue(statType) * 10f;
+                    break;
+                case StatType.CriticalRate:
+                    calculatePower = GetStatValue(statType) * 10000f;
+                    break;
+                case StatType.CriticalMultiple:
+                    calculatePower = GetStatValue(statType) * 10000f;
+                    break;
+            }
+
+            resultStatValue += calculatePower;
+        }
 
         return resultStatValue;
     }
@@ -156,7 +179,7 @@ public class PlayerStats
     {
         PlayerStatArgs args = new PlayerStatArgs
         {
-            BeforeTotalPower = BeforeCombatPower,
+            BeforeTotalPower = BeforeTotalPower,
             TotalPower = GetAllStatValue(),
             AttackPower = GetStatValue(StatType.AttackPower),
             AttackSpeed = GetStatValue(StatType.AttackSpeed),

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ToastManager : SingletonBase<ToastManager>
 {
-    [SerializeField] private ToastCombatPower _toastCombatPower;    // 전투력 수치 토스트 메시지
-    private Coroutine _toastCombatPowerCoroutine;                   // 전투려 수치 토스트 메시지 코루틴 담을 변수
+    [SerializeField] private ToastTotalPower _toastTotalPower;      // 전투력 수치 토스트 메시지
+    private Coroutine _toastTotalPowerCoroutine;                    // 전투력 수치 토스트 메시지 코루틴 담을 변수
 
     [SerializeField] private ToastDefeat _toastDefeat;              // 패배 토스트메시지
     private Coroutine _toastDefeatCoroutine;                        // 패배 토스트메시지 코루틴
@@ -18,7 +18,7 @@ public class ToastManager : SingletonBase<ToastManager>
     /// </summary>
     private void OnEnable()
     {
-        PlayerStats.OnPlayerStatChanged += StartShow_ToastCombatPower;  // 플레이어 스탯 변경되었을 때, 전투력 토스트메시지 보여주기
+        PlayerStats.OnPlayerStatChanged += StartShow_ToastTotalPower;  // 플레이어 스탯 변경되었을 때, 전투력 토스트메시지 보여주기
         StageManager.OnStageDefeat += StartShow_ToastDefeat;    // 스테이지 패배시 패배토스트 보여주기
     }
 
@@ -27,7 +27,7 @@ public class ToastManager : SingletonBase<ToastManager>
     /// </summary>
     private void OnDisable()
     {
-        PlayerStats.OnPlayerStatChanged -= StartShow_ToastCombatPower;
+        PlayerStats.OnPlayerStatChanged -= StartShow_ToastTotalPower;
         StageManager.OnStageDefeat -= StartShow_ToastDefeat;
     }
 
@@ -37,27 +37,27 @@ public class ToastManager : SingletonBase<ToastManager>
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주기
     /// </summary>
-    public void StartShow_ToastCombatPower(PlayerStatArgs args)
+    public void StartShow_ToastTotalPower(PlayerStatArgs args)
     {
         // 이미 코루틴 있으면 실행 중단
-        if (_toastCombatPowerCoroutine != null) 
-            StopCoroutine(_toastCombatPowerCoroutine);
+        if (_toastTotalPowerCoroutine != null) 
+            StopCoroutine(_toastTotalPowerCoroutine);
 
         // 새로운 코루틴 시작
-        _toastCombatPowerCoroutine = StartCoroutine(Show_ToastCombatPower(args));
+        _toastTotalPowerCoroutine = StartCoroutine(Show_ToastTotalPower(args));
     }
 
     /// <summary>
     /// 전투력 수치 토스트메시지 보여주는 코루틴
     /// </summary>
-    private IEnumerator Show_ToastCombatPower(PlayerStatArgs args)
+    private IEnumerator Show_ToastTotalPower(PlayerStatArgs args)
     {
-        _toastCombatPower.Hide();
+        _toastTotalPower.Hide();
 
-        _toastCombatPower.Init(args);
+        _toastTotalPower.Init(args);
         yield return new WaitForSecondsRealtime(1f);
 
-        _toastCombatPower.Hide();
+        _toastTotalPower.Hide();
     }
 
 

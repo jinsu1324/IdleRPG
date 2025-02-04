@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ToastCombatPower : MonoBehaviour
+public class ToastTotalPower : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _valueText;            // 현재 전투력 수치 표시할 텍스트
     [SerializeField] private TextMeshProUGUI _changedValueText;     // 변경된 전투력 수치 텍스트
@@ -20,6 +20,7 @@ public class ToastCombatPower : MonoBehaviour
 
         // 수치 표시
         _valueText.text = NumberConverter.ConvertAlphabet(totalPower); // 알파벳으로 표시
+        //_valueText.text = $"{totalPower}"; 
 
         // 화살표 방향 표시
         if (totalPower > beforeTotalPower)
@@ -39,7 +40,8 @@ public class ToastCombatPower : MonoBehaviour
     private void UpdateChangedValueText(float before, float current)
     {
         float changedValue = Mathf.Abs(current - before);
-        _changedValueText.text = NumberConverter.ConvertAlphabet(changedValue);
+        _changedValueText.text = NumberConverter.ConvertAlphabet(changedValue); // 알파벳으로 표시
+        //_changedValueText.text = $"{changedValue}";
     }
 
     /// <summary>

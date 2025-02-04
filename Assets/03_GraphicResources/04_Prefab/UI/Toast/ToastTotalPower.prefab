@@ -4993,7 +4993,7 @@ GameObject:
   - component: {fileID: 4796615495348993017}
   - component: {fileID: 825294466234045985}
   m_Layer: 5
-  m_Name: ToastCombatPower
+  m_Name: ToastTotalPower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5199,7 +5199,7 @@ GameObject:
   - component: {fileID: 733917410265924586}
   - component: {fileID: 6233890970440732158}
   m_Layer: 5
-  m_Name: TotalCombatPower
+  m_Name: TotalPower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
