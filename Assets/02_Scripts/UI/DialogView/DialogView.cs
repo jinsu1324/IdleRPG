@@ -22,7 +22,7 @@ public class DialogView : MonoBehaviour
     /// </summary>
     private IEnumerator HideDelay()
     {
-        yield return new WaitForSecondsRealtime(5.0f);
+        yield return new WaitForSecondsRealtime(5.5f);
         gameObject.SetActive(false);
     }
 }
