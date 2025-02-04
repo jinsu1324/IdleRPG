@@ -9,6 +9,8 @@ public class GameManager : SingletonBase<GameManager>
     public static event Action OnLoadDataStart;     // 데이터 로드 시작했을때 이벤트
     public static event Action OnLoadDataComplete;  // 데이터 로드 끝났을때 이벤트
 
+    public static event Action OnNewGame;           // 새로 시작하는 게임일때 이벤트
+
     /// <summary>
     /// Async Start (시작시 데이터 로드 시도)
     /// </summary>
@@ -35,6 +37,8 @@ public class GameManager : SingletonBase<GameManager>
             GoldManager.SetDefaultGold();
             GemManager.SetDefaultGem();
             UpgradeManager.SetUpgrades_ByDefualt();
+
+            OnNewGame?.Invoke();
 
             Debug.Log("A ------------ 초기값 설정 완료!");
         }
