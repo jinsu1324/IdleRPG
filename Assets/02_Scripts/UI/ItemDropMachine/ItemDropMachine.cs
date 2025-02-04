@@ -29,6 +29,14 @@ public class ItemDropMachine : MonoBehaviour
     [SerializeField]
     private ItemDropButton _dropButton;
 
+
+
+
+    // 불가시 토스트메시지
+
+
+
+
     /// <summary>
     /// OnEnable
     /// </summary>
@@ -54,7 +62,7 @@ public class ItemDropMachine : MonoBehaviour
         // 젬 부족하면 그냥 리턴
         if (GemManager.HasEnoughGem(_dropCost) == false)
         {
-            Debug.Log("젬이 충분하지 않습니다!");
+            ToastManager.Instance.StartShow_ToastCommon("보석이 부족합니다."); // 토스트 메시지
             return;
         }
 
