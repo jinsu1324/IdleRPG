@@ -32,9 +32,9 @@ public class GameManager : SingletonBase<GameManager>
         {
             Debug.Log("A ------------ ID 없어서 초기값으로 설정!");
 
-            UpgradeManager.SetUpgrades_ByDefualt();
             GoldManager.SetDefaultGold();
             GemManager.SetDefaultGem();
+            UpgradeManager.SetUpgrades_ByDefualt();
 
             Debug.Log("A ------------ 초기값 설정 완료!");
         }

@@ -71,7 +71,7 @@ public class UpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
         else
         {
-            Debug.Log("이 업그레이드를 업그레이드 할 골드가 충분하지 않습니다!");
+            ToastManager.Instance.StartShow_ToastCommon("골드가 부족합니다."); // 토스트 메시지
         }
     }
 

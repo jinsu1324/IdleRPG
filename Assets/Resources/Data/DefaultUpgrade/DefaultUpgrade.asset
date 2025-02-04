@@ -18,7 +18,7 @@ MonoBehaviour:
     Level: 1
     Value: 10
     ValueIncrease: 1
-    Cost: 10
+    Cost: 10000
     CostIncrease: 10
   - UpgradeStatType: AttackSpeed
     Name: "\uACF5\uACA9\uC18D\uB3C4"

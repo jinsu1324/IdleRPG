@@ -92,12 +92,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90767b1096beafa44bca2c01672b4d6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statType: 0
   _upgradeNameText: {fileID: 7151874265671573330}
   _levelText: {fileID: 1268334829535652351}
   _valueText: {fileID: 7933636439504975401}
   _costText: {fileID: 7820151344939020398}
   _upgradeIcon: {fileID: 7016770254857778964}
   _UpgradeButton: {fileID: 3194846557186673003}
+  _dimd: {fileID: 1414130761939480935}
 --- !u!1 &1222435892809987124
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,8 +265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.049129646, b: 0.16981131, a: 0.8039216}
-  m_RaycastTarget: 1
+  m_Color: {r: 0, g: 0.049129646, b: 0.16981131, a: 0.39215687}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
