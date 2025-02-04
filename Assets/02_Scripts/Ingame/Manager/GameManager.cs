@@ -58,6 +58,10 @@ public class GameManager : SingletonBase<GameManager>
         OnLoadDataComplete?.Invoke();
 
         GameTimeController.Resume();
+
+        // юс╫ц
+        SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene);
+        SoundManager.Instance.SetBGMVolume(0.5f);
     }
 
     /// <summary>

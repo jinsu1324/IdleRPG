@@ -46,7 +46,10 @@ public class AttackComponent_ProjectileType : AttackComponent
             IsCritical = isCritical,
             Target = _target,
         };
-        SpawnProjectile(attackArgs);  
+        SpawnProjectile(attackArgs);
+
+        // юс╫ц
+        SoundManager.Instance.PlaySFX(SFXType.SFX_HeroDamaged);
     }
 
     /// <summary>
