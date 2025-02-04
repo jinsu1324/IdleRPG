@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 public class ItemDropMachine : MonoBehaviour
 {
     public static event Action<List<Item>> OnDroppedItem;   // 아이템 드롭 완료되었을때 이벤트
+    public static event Action<bool> OnDimdUpdate;  // 딤드 업데이트할때 사용할 이벤트
 
     [Title("드롭 갯수", bold: false)]
     [SerializeField] 
@@ -20,13 +21,46 @@ public class ItemDropMachine : MonoBehaviour
     [SerializeField] 
     private ItemType _itemType;
 
+    [Title("드롭 비용", bold: false)]
+    [SerializeField]
+    private int _dropCost;
+
+    [Title("드롭 버튼", bold: false)]
+    [SerializeField]
+    private ItemDropButton _dropButton;
+
+    /// <summary>
+    /// OnEnable
+    /// </summary>
+    private void OnEnable()
+    {
+        _dropButton.ButtonAddListener(OnClickDropItem); // 버튼에 아이템 드롭함수 연결
+        _dropButton.UpdateDimd(GemManager.HasEnoughGem(_dropCost)); // 버튼 딤드 업데이트
+    }
+
+    /// <summary>
+    /// OnDisable
+    /// </summary>
+    private void OnDisable()
+    {
+        _dropButton.ButtonRemoveListener(); // 버튼 리스너 제거
+    }
+
     /// <summary>
     /// 아이템 드롭 (버튼연결)
     /// </summary>
     public void OnClickDropItem()
     {
-        List<Item> dropItemList = new List<Item>(); 
+        // 젬 부족하면 그냥 리턴
+        if (GemManager.HasEnoughGem(_dropCost) == false)
+        {
+            Debug.Log("젬이 충분하지 않습니다!");
+            return;
+        }
 
+        GemManager.ReduceGem(_dropCost); // 젬 감소
+
+        List<Item> dropItemList = new List<Item>(); 
         for (int i = 0; i < _maxDropCount; i++)
         {
             Item item = CreateItem(); 
@@ -35,6 +69,8 @@ public class ItemDropMachine : MonoBehaviour
         }
 
         OnDroppedItem?.Invoke(dropItemList);
+
+        OnDimdUpdate?.Invoke(GemManager.HasEnoughGem(_dropCost)); // 버튼 딤드 업데이트
     }
 
     /// <summary>
