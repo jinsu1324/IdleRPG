@@ -6,7 +6,7 @@ public class SkillProjectile_Egg : MonoBehaviour
 {
     private float _finalDamage;         // 최종 데미지
     private bool _isCritical;           // 크리티컬 여부
-    private float _speed = 12f;         // 투사체 속도
+    private float _speed = 20f;         // 투사체 속도
     private IDamagable _target;         // 타겟
 
     /// <summary>

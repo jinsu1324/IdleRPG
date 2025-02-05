@@ -15,48 +15,127 @@ MonoBehaviour:
   QuestDataList:
   - Index: 1
     QuestType: 0
-    Desc: "\uC801 5\uB9C8\uB9AC \uCC98\uCE58"
-    TargetValue: 5
-    RewardGem: 100
-  - Index: 2
-    QuestType: 0
     Desc: "\uC801 10\uB9C8\uB9AC \uCC98\uCE58"
     TargetValue: 10
     RewardGem: 200
-  - Index: 3
+  - Index: 2
     QuestType: 7
-    Desc: "\uC2A4\uD14C\uC774\uC9C0 3 \uB3C4\uB2EC"
-    TargetValue: 3
-    RewardGem: 500
-  - Index: 4
+    Desc: "\uC2A4\uD14C\uC774\uC9C0 10 \uB3C4\uB2EC"
+    TargetValue: 10
+    RewardGem: 200
+  - Index: 3
     QuestType: 1
-    Desc: "\uACE8\uB4DC 5000 \uC218\uC9D1"
-    TargetValue: 5000
-    RewardGem: 300
-  - Index: 5
+    Desc: "\uACE8\uB4DC 1000 \uC218\uC9D1"
+    TargetValue: 1000
+    RewardGem: 200
+  - Index: 4
     QuestType: 2
     Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
     TargetValue: 10
-    RewardGem: 100
-  - Index: 6
+    RewardGem: 200
+  - Index: 5
     QuestType: 3
     Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 3 \uB3C4\uB2EC"
     TargetValue: 3
-    RewardGem: 300
-  - Index: 7
+    RewardGem: 200
+  - Index: 6
     QuestType: 4
     Desc: "\uCD5C\uB300\uCCB4\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
     TargetValue: 10
     RewardGem: 200
+  - Index: 7
+    QuestType: 5
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 3
+      \uB3C4\uB2EC"
+    TargetValue: 3
+    RewardGem: 200
   - Index: 8
+    QuestType: 6
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 3
+      \uB3C4\uB2EC"
+    TargetValue: 3
+    RewardGem: 200
+  - Index: 9
+    QuestType: 0
+    Desc: "\uC801 20\uB9C8\uB9AC \uCC98\uCE58"
+    TargetValue: 20
+    RewardGem: 400
+  - Index: 10
+    QuestType: 7
+    Desc: "\uC2A4\uD14C\uC774\uC9C0 20 \uB3C4\uB2EC"
+    TargetValue: 20
+    RewardGem: 400
+  - Index: 11
+    QuestType: 1
+    Desc: "\uACE8\uB4DC 5000 \uC218\uC9D1"
+    TargetValue: 5000
+    RewardGem: 400
+  - Index: 12
+    QuestType: 2
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 50 \uB3C4\uB2EC"
+    TargetValue: 50
+    RewardGem: 400
+  - Index: 13
+    QuestType: 3
+    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 5 \uB3C4\uB2EC"
+    TargetValue: 5
+    RewardGem: 400
+  - Index: 14
+    QuestType: 4
+    Desc: "\uCD5C\uB300\uCCB4\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 50 \uB3C4\uB2EC"
+    TargetValue: 50
+    RewardGem: 400
+  - Index: 15
     QuestType: 5
     Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
     TargetValue: 5
-    RewardGem: 500
-  - Index: 9
+    RewardGem: 400
+  - Index: 16
     QuestType: 6
     Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
     TargetValue: 5
-    RewardGem: 500
+    RewardGem: 400
+  - Index: 17
+    QuestType: 0
+    Desc: "\uC801 30\uB9C8\uB9AC \uCC98\uCE58"
+    TargetValue: 30
+    RewardGem: 600
+  - Index: 18
+    QuestType: 7
+    Desc: "\uC2A4\uD14C\uC774\uC9C0 30 \uB3C4\uB2EC"
+    TargetValue: 30
+    RewardGem: 600
+  - Index: 19
+    QuestType: 1
+    Desc: "\uACE8\uB4DC 10000 \uC218\uC9D1"
+    TargetValue: 10000
+    RewardGem: 600
+  - Index: 20
+    QuestType: 2
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
+    TargetValue: 100
+    RewardGem: 600
+  - Index: 21
+    QuestType: 3
+    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
+    TargetValue: 10
+    RewardGem: 600
+  - Index: 22
+    QuestType: 4
+    Desc: "\uCD5C\uB300\uCCB4\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
+    TargetValue: 100
+    RewardGem: 600
+  - Index: 23
+    QuestType: 5
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 10
+      \uB3C4\uB2EC"
+    TargetValue: 10
+    RewardGem: 600
+  - Index: 24
+    QuestType: 6
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 10
+      \uB3C4\uB2EC"
+    TargetValue: 10
+    RewardGem: 600

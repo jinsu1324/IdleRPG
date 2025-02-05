@@ -8,6 +8,7 @@ public class AttackComponent_ProjectileType : AttackComponent
     [SerializeField] private Transform _spawnPoint;         // 스폰 위치
     private bool _isAttackPause;                            // 이동중일때 공격 일시정지 여부
     private IDamagable _target;                             // 타겟
+    private float _attackRange = 8.0f;                      // 기본 사거리
 
     /// <summary>
     /// Update
@@ -22,7 +23,7 @@ public class AttackComponent_ProjectileType : AttackComponent
         if (IsAttackCoolTime()) 
         {
             // 타겟없으면 그냥 리턴
-            _target = FieldTargetManager.GetClosestLivingTarget(transform.position);
+            _target = FieldTargetManager.GetClosestLivingTarget(transform.position, _attackRange);
             if (_target == null)
                 return;
 

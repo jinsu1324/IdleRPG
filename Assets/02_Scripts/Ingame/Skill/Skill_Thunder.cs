@@ -36,7 +36,11 @@ public class Skill_Thunder : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        Vector3 targetPos = (FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position) as Component).transform.position;
+        IDamagable target = FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position, _range);
+        if (target == null)
+            return;
+
+        Vector3 targetPos = (target as Component).transform.position;
         ItemDataSO itemDataSO = ItemDataManager.GetItemDataSO(ID);
 
         SkillProjectile_Thunder projectile = GameObject.Instantiate(itemDataSO.Prefab, targetPos, Quaternion.identity).GetComponent<SkillProjectile_Thunder>();

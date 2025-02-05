@@ -35,7 +35,7 @@ public class Skill_Egg : Skill
     /// </summary>
     public override void ExecuteSkill()
     {
-        IDamagable target = FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position);
+        IDamagable target = FieldTargetManager.GetClosestLivingTarget(PlayerManager.PlayerInstance.transform.position, _range);
 
         if (target == null)
             return;

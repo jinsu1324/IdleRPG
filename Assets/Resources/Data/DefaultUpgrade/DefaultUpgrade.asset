@@ -18,33 +18,33 @@ MonoBehaviour:
     Level: 1
     Value: 10
     ValueIncrease: 1
-    Cost: 10000
+    Cost: 100
     CostIncrease: 10
   - UpgradeStatType: AttackSpeed
     Name: "\uACF5\uACA9\uC18D\uB3C4"
     Level: 1
     Value: 1
     ValueIncrease: 0.1
-    Cost: 10
-    CostIncrease: 10
+    Cost: 1000
+    CostIncrease: 100
   - UpgradeStatType: MaxHp
     Name: "\uCCB4\uB825"
     Level: 1
     Value: 1000
     ValueIncrease: 10
-    Cost: 15
-    CostIncrease: 15
+    Cost: 100
+    CostIncrease: 10
   - UpgradeStatType: CriticalRate
     Name: "\uCE58\uBA85\uD0C0 \uD655\uB960"
     Level: 1
     Value: 0.5
     ValueIncrease: 0.01
-    Cost: 15
-    CostIncrease: 15
+    Cost: 1000
+    CostIncrease: 100
   - UpgradeStatType: CriticalMultiple
     Name: "\uCE58\uBA85\uD0C0 \uBC30\uC728"
     Level: 1
     Value: 1.2
     ValueIncrease: 0.01
-    Cost: 20
-    CostIncrease: 20
+    Cost: 1000
+    CostIncrease: 100

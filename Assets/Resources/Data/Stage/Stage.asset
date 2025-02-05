@@ -15,38 +15,38 @@ MonoBehaviour:
   StageDataList:
   - Stage: 1
     AppearEnemy: Monster_SlimeBlue
-    Count: 1
+    Count: 2
     StatPercentage: 0.1
   - Stage: 2
     AppearEnemy: Monster_SlimeGreen
-    Count: 2
+    Count: 3
     StatPercentage: 0.1
   - Stage: 3
     AppearEnemy: Monster_SlimePink
-    Count: 3
+    Count: 4
     StatPercentage: 0.1
   - Stage: 4
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 100
+    StatPercentage: 0.1
   - Stage: 5
     AppearEnemy: Boss_KingSlime
     Count: 1
     StatPercentage: 0.1
   - Stage: 6
-    AppearEnemy: Monster_SlimeGreen
-    Count: 5
+    AppearEnemy: Monster_SlimeBlue
+    Count: 3
     StatPercentage: 0.2
   - Stage: 7
     AppearEnemy: Monster_SlimeGreen
     Count: 5
     StatPercentage: 0.2
   - Stage: 8
-    AppearEnemy: Monster_SlimeGreen
+    AppearEnemy: Monster_SlimePink
     Count: 5
     StatPercentage: 0.2
   - Stage: 9
-    AppearEnemy: Monster_SlimeGreen
+    AppearEnemy: Monster_SlimeBlue
     Count: 5
     StatPercentage: 0.2
   - Stage: 10
@@ -54,20 +54,20 @@ MonoBehaviour:
     Count: 1
     StatPercentage: 0.2
   - Stage: 11
-    AppearEnemy: Monster_SlimePink
-    Count: 5
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
     StatPercentage: 0.3
   - Stage: 12
-    AppearEnemy: Monster_SlimePink
-    Count: 5
+    AppearEnemy: Monster_SlimeGreen
+    Count: 4
     StatPercentage: 0.3
   - Stage: 13
     AppearEnemy: Monster_SlimePink
     Count: 5
     StatPercentage: 0.3
   - Stage: 14
-    AppearEnemy: Monster_SlimePink
-    Count: 5
+    AppearEnemy: Monster_SlimeBlue
+    Count: 6
     StatPercentage: 0.3
   - Stage: 15
     AppearEnemy: Boss_KingSlime
@@ -78,38 +78,178 @@ MonoBehaviour:
     Count: 5
     StatPercentage: 0.4
   - Stage: 17
-    AppearEnemy: Monster_SlimeBlue
-    Count: 5
+    AppearEnemy: Monster_SlimeGreen
+    Count: 6
     StatPercentage: 0.4
   - Stage: 18
-    AppearEnemy: Monster_SlimeBlue
+    AppearEnemy: Monster_SlimePink
     Count: 5
     StatPercentage: 0.4
   - Stage: 19
     AppearEnemy: Monster_SlimeBlue
-    Count: 5
+    Count: 6
     StatPercentage: 0.4
   - Stage: 20
     AppearEnemy: Boss_KingSlime
     Count: 1
     StatPercentage: 0.4
   - Stage: 21
-    AppearEnemy: Monster_SlimeGreen
-    Count: 5
+    AppearEnemy: Monster_SlimeBlue
+    Count: 7
     StatPercentage: 0.5
   - Stage: 22
     AppearEnemy: Monster_SlimeGreen
     Count: 5
     StatPercentage: 0.5
   - Stage: 23
-    AppearEnemy: Monster_SlimeGreen
-    Count: 5
+    AppearEnemy: Monster_SlimePink
+    Count: 6
     StatPercentage: 0.5
   - Stage: 24
-    AppearEnemy: Monster_SlimeGreen
-    Count: 5
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
     StatPercentage: 0.5
   - Stage: 25
     AppearEnemy: Boss_KingSlime
     Count: 1
     StatPercentage: 0.5
+  - Stage: 26
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 0.6
+  - Stage: 27
+    AppearEnemy: Monster_SlimeGreen
+    Count: 6
+    StatPercentage: 0.6
+  - Stage: 28
+    AppearEnemy: Monster_SlimePink
+    Count: 7
+    StatPercentage: 0.6
+  - Stage: 29
+    AppearEnemy: Monster_SlimeBlue
+    Count: 8
+    StatPercentage: 0.6
+  - Stage: 30
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.6
+  - Stage: 31
+    AppearEnemy: Monster_SlimeBlue
+    Count: 9
+    StatPercentage: 0.7
+  - Stage: 32
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.7
+  - Stage: 33
+    AppearEnemy: Monster_SlimePink
+    Count: 3
+    StatPercentage: 0.7
+  - Stage: 34
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 0.7
+  - Stage: 35
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.7
+  - Stage: 36
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 0.8
+  - Stage: 37
+    AppearEnemy: Monster_SlimeGreen
+    Count: 5
+    StatPercentage: 0.8
+  - Stage: 38
+    AppearEnemy: Monster_SlimePink
+    Count: 4
+    StatPercentage: 0.8
+  - Stage: 39
+    AppearEnemy: Monster_SlimeBlue
+    Count: 8
+    StatPercentage: 0.8
+  - Stage: 40
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.8
+  - Stage: 41
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 0.9
+  - Stage: 42
+    AppearEnemy: Monster_SlimeGreen
+    Count: 8
+    StatPercentage: 0.9
+  - Stage: 43
+    AppearEnemy: Monster_SlimePink
+    Count: 9
+    StatPercentage: 0.9
+  - Stage: 44
+    AppearEnemy: Monster_SlimeBlue
+    Count: 10
+    StatPercentage: 0.9
+  - Stage: 45
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 0.9
+  - Stage: 46
+    AppearEnemy: Monster_SlimeBlue
+    Count: 4
+    StatPercentage: 1
+  - Stage: 47
+    AppearEnemy: Monster_SlimeGreen
+    Count: 4
+    StatPercentage: 1
+  - Stage: 48
+    AppearEnemy: Monster_SlimePink
+    Count: 6
+    StatPercentage: 1
+  - Stage: 49
+    AppearEnemy: Monster_SlimeBlue
+    Count: 9
+    StatPercentage: 1
+  - Stage: 50
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 1
+  - Stage: 51
+    AppearEnemy: Monster_SlimeBlue
+    Count: 8
+    StatPercentage: 1.1
+  - Stage: 52
+    AppearEnemy: Monster_SlimeGreen
+    Count: 6
+    StatPercentage: 1.1
+  - Stage: 53
+    AppearEnemy: Monster_SlimePink
+    Count: 4
+    StatPercentage: 1.1
+  - Stage: 54
+    AppearEnemy: Monster_SlimeBlue
+    Count: 7
+    StatPercentage: 1.1
+  - Stage: 55
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 1.1
+  - Stage: 56
+    AppearEnemy: Monster_SlimeBlue
+    Count: 8
+    StatPercentage: 1.2
+  - Stage: 57
+    AppearEnemy: Monster_SlimeGreen
+    Count: 6
+    StatPercentage: 1.2
+  - Stage: 58
+    AppearEnemy: Monster_SlimePink
+    Count: 7
+    StatPercentage: 1.2
+  - Stage: 59
+    AppearEnemy: Monster_SlimeBlue
+    Count: 6
+    StatPercentage: 1.2
+  - Stage: 60
+    AppearEnemy: Boss_KingSlime
+    Count: 1
+    StatPercentage: 1.2
