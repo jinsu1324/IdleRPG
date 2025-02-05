@@ -40,65 +40,65 @@ MonoBehaviour:
     EnhanceCount: 18
   - Level: 10
     EnhanceCount: 19
-  CoolTime: 10
+  CoolTime: 6
   LevelSkillStatsList:
   - Level: 1
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 2
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.1
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 3
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.2
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 4
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.3
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 5
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.4
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 6
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.5
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 7
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.6
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 8
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.7
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 9
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.8
     - Type: Duration
-      Value: 5
+      Value: 2
   - Level: 10
     SkillStatList:
     - Type: AddAttackSpeed
       Value: 1.9
     - Type: Duration
-      Value: 5
+      Value: 2
