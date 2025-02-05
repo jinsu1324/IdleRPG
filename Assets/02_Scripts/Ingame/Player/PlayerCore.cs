@@ -10,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class PlayerCore : SerializedMonoBehaviour
 {
+    [SerializeField] private Transform _fxTransform;    // 이펙트 나올 위치
     [SerializeField] private HPComponent _hpComponent;                          // HP 컴포넌트
     [SerializeField] private AttackComponent_ProjectileType _attackComponent;   // 공격 컴포넌트 (프로젝타일타입)
     [SerializeField] private AnimComponent _animComponent;                      // 애니메이션 컴포넌트
@@ -19,6 +20,7 @@ public class PlayerCore : SerializedMonoBehaviour
     /// </summary>
     private void OnEnable()
     {
+        _hpComponent.OnTakeDamage += PlayerTakeDamageTask; // 데미지 받았을때 -> 플레이어에서만 처리할것들 처리
         _hpComponent.OnDie += PlayerDieTask;  // 플레이어 죽었을때, 플레이어 죽음에 필요한 태스크들 처리
 
         PlayerStats.OnPlayerStatChanged += _hpComponent.ChangeMaxHp; // 플레이어 스탯 변경되었을 때 -> 플레이어의 최대체력 변경
@@ -32,6 +34,7 @@ public class PlayerCore : SerializedMonoBehaviour
 
         StageManager.OnStageBuildFinish += _attackComponent.AttackResume; // 스테이지 변경 끝났을때 -> 공격 재개
         StageManager.OnStageBuildFinish += _animComponent.MoveAnimStop; // 스테이지 변경 끝났을때 -> 움직임 애니메이션 종료
+
     }
 
     /// <summary>
@@ -39,6 +42,7 @@ public class PlayerCore : SerializedMonoBehaviour
     /// </summary>
     private void OnDisable()
     {
+        _hpComponent.OnTakeDamage -= PlayerTakeDamageTask;
         _hpComponent.OnDie -= PlayerDieTask;
 
         PlayerStats.OnPlayerStatChanged -= _hpComponent.ChangeMaxHp; 
@@ -52,6 +56,7 @@ public class PlayerCore : SerializedMonoBehaviour
 
         StageManager.OnStageBuildFinish -= _attackComponent.AttackResume;
         StageManager.OnStageBuildFinish -= _animComponent.MoveAnimStop;
+
     }
 
     /// <summary>
@@ -88,6 +93,16 @@ public class PlayerCore : SerializedMonoBehaviour
         };
         _attackComponent.Update_AttackPower(attackUpdateArgs);
         _attackComponent.Update_AttackSpeed(attackUpdateArgs);
+    }
+
+    /// <summary>
+    /// 플레이어가 데미지 받았을 때 처리할것들
+    /// </summary>
+    private void PlayerTakeDamageTask(TakeDamageArgs args)
+    {
+        FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, _fxTransform); // 이펙트 띄우기
+
+        SoundManager.Instance.PlaySFX(SFXType.SFX_TakeDamage);
     }
 
     /// <summary>

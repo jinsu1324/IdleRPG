@@ -15,7 +15,7 @@ MonoBehaviour:
   StageDataList:
   - Stage: 1
     AppearEnemy: Monster_SlimeBlue
-    Count: 2
+    Count: 3
     StatPercentage: 0.1
   - Stage: 2
     AppearEnemy: Monster_SlimeGreen
@@ -52,7 +52,7 @@ MonoBehaviour:
   - Stage: 10
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.2
+    StatPercentage: 2
   - Stage: 11
     AppearEnemy: Monster_SlimeBlue
     Count: 4
@@ -72,7 +72,7 @@ MonoBehaviour:
   - Stage: 15
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.3
+    StatPercentage: 3
   - Stage: 16
     AppearEnemy: Monster_SlimeBlue
     Count: 5
@@ -92,7 +92,7 @@ MonoBehaviour:
   - Stage: 20
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.4
+    StatPercentage: 5
   - Stage: 21
     AppearEnemy: Monster_SlimeBlue
     Count: 7
@@ -112,7 +112,7 @@ MonoBehaviour:
   - Stage: 25
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.5
+    StatPercentage: 5
   - Stage: 26
     AppearEnemy: Monster_SlimeBlue
     Count: 4
@@ -132,7 +132,7 @@ MonoBehaviour:
   - Stage: 30
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.6
+    StatPercentage: 5
   - Stage: 31
     AppearEnemy: Monster_SlimeBlue
     Count: 9
@@ -152,7 +152,7 @@ MonoBehaviour:
   - Stage: 35
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.7
+    StatPercentage: 5
   - Stage: 36
     AppearEnemy: Monster_SlimeBlue
     Count: 4
@@ -172,7 +172,7 @@ MonoBehaviour:
   - Stage: 40
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.8
+    StatPercentage: 5
   - Stage: 41
     AppearEnemy: Monster_SlimeBlue
     Count: 4
@@ -192,7 +192,7 @@ MonoBehaviour:
   - Stage: 45
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 0.9
+    StatPercentage: 5
   - Stage: 46
     AppearEnemy: Monster_SlimeBlue
     Count: 4
@@ -212,7 +212,7 @@ MonoBehaviour:
   - Stage: 50
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 1
+    StatPercentage: 5
   - Stage: 51
     AppearEnemy: Monster_SlimeBlue
     Count: 8
@@ -232,7 +232,7 @@ MonoBehaviour:
   - Stage: 55
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 1.1
+    StatPercentage: 5
   - Stage: 56
     AppearEnemy: Monster_SlimeBlue
     Count: 8
@@ -252,4 +252,4 @@ MonoBehaviour:
   - Stage: 60
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 1.2
+    StatPercentage: 5

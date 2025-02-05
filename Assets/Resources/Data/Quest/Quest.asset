@@ -25,13 +25,13 @@ MonoBehaviour:
     RewardGem: 200
   - Index: 3
     QuestType: 1
-    Desc: "\uACE8\uB4DC 1000 \uC218\uC9D1"
-    TargetValue: 1000
+    Desc: "\uACE8\uB4DC 3000 \uC218\uC9D1"
+    TargetValue: 3000
     RewardGem: 200
   - Index: 4
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
-    TargetValue: 10
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 50 \uB3C4\uB2EC"
+    TargetValue: 50
     RewardGem: 200
   - Index: 5
     QuestType: 3
@@ -45,15 +45,15 @@ MonoBehaviour:
     RewardGem: 200
   - Index: 7
     QuestType: 5
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 3
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
-    TargetValue: 3
+    TargetValue: 5
     RewardGem: 200
   - Index: 8
     QuestType: 6
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 3
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 5
       \uB3C4\uB2EC"
-    TargetValue: 3
+    TargetValue: 5
     RewardGem: 200
   - Index: 9
     QuestType: 0
@@ -72,13 +72,13 @@ MonoBehaviour:
     RewardGem: 400
   - Index: 12
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 50 \uB3C4\uB2EC"
-    TargetValue: 50
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
+    TargetValue: 100
     RewardGem: 400
   - Index: 13
     QuestType: 3
-    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 5 \uB3C4\uB2EC"
-    TargetValue: 5
+    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
+    TargetValue: 10
     RewardGem: 400
   - Index: 14
     QuestType: 4
@@ -87,15 +87,15 @@ MonoBehaviour:
     RewardGem: 400
   - Index: 15
     QuestType: 5
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 5
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 10
       \uB3C4\uB2EC"
-    TargetValue: 5
+    TargetValue: 10
     RewardGem: 400
   - Index: 16
     QuestType: 6
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 5
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 10
       \uB3C4\uB2EC"
-    TargetValue: 5
+    TargetValue: 10
     RewardGem: 400
   - Index: 17
     QuestType: 0
@@ -109,18 +109,18 @@ MonoBehaviour:
     RewardGem: 600
   - Index: 19
     QuestType: 1
-    Desc: "\uACE8\uB4DC 10000 \uC218\uC9D1"
-    TargetValue: 10000
+    Desc: "\uACE8\uB4DC 7000 \uC218\uC9D1"
+    TargetValue: 7000
     RewardGem: 600
   - Index: 20
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
-    TargetValue: 100
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 150 \uB3C4\uB2EC"
+    TargetValue: 150
     RewardGem: 600
   - Index: 21
     QuestType: 3
-    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 10 \uB3C4\uB2EC"
-    TargetValue: 10
+    Desc: "\uACF5\uACA9\uC18D\uB3C4 \uC5C5\uADF8\uB808\uC774\uB4DC 15 \uB3C4\uB2EC"
+    TargetValue: 15
     RewardGem: 600
   - Index: 22
     QuestType: 4
@@ -129,13 +129,13 @@ MonoBehaviour:
     RewardGem: 600
   - Index: 23
     QuestType: 5
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 10
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uD655\uB960 \uC5C5\uADF8\uB808\uC774\uB4DC 15
       \uB3C4\uB2EC"
-    TargetValue: 10
+    TargetValue: 15
     RewardGem: 600
   - Index: 24
     QuestType: 6
-    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 10
+    Desc: "\uD06C\uB9AC\uD2F0\uCEEC \uBC30\uC728 \uC5C5\uADF8\uB808\uC774\uB4DC 15
       \uB3C4\uB2EC"
-    TargetValue: 10
+    TargetValue: 15
     RewardGem: 600
