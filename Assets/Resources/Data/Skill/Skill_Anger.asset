@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Skill_Anger
   ItemType: Skill
-  Name: "\uBD84\uB178"
+  Name: "\uC544\uB4DC\uB808\uB0A0\uB9B0 \uC8FC\uC0AC"
   Grade: Normal
   Desc: "[Duration]\uCD08\uAC04 \uACF5\uACA9\uC18D\uB3C4\uAC00 [AddAttackSpeed]\uC99D\uAC00\uD569\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: f04258f9c0a756748b5a85752bef9ab1, type: 3}

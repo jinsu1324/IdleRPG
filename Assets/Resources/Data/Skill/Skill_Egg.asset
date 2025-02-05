@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Skill_Egg
   ItemType: Skill
-  Name: "\uB2EC\uAC40\uD22C\uCC99"
+  Name: "\uC784\uD329\uD2B8 \uC6E8\uC774\uBE0C"
   Grade: Rare
-  Desc: "\uAC15\uB825\uD55C \uB2EC\uAC40\uC744 \uB358\uC838 \uACF5\uACA9\uB825\uC758
+  Desc: "\uAC15\uB825\uD55C \uC6E8\uC774\uBE0C\uB97C \uB0A0\uB824 \uACF5\uACA9\uB825\uC758
     [AttackPercentage] \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 55556b917e83fc341823b563c982ac54, type: 3}
   Prefab: {fileID: 7970477444971788699, guid: 4ca965811b50815419f0abfed2b9788b, type: 3}

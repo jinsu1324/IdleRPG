@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: Skill_AttackUp
   ItemType: Skill
-  Name: "\uD798\uC758 \uAE38"
+  Name: "\uBD88\uAF43 \uC2EC\uC7A5"
   Grade: Normal
   Desc: "[Duration]\uCD08\uAC04 \uACF5\uACA9\uB825\uC774 [AddAttackPower]\uC99D\uAC00\uD569\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 941f90f831929b14ba861d26753f5c13, type: 3}
