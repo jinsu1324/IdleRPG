@@ -7,7 +7,8 @@ using UnityEngine.Audio;
 
 public enum BGMType
 {
-    BGM_PlayScene
+    BGM_PlayScene_ver1,
+    BGM_PlayScene_ver2,
 }
 
 public enum SFXType

@@ -59,9 +59,8 @@ public class GameManager : SingletonBase<GameManager>
 
         GameTimeController.Resume();
 
-        // юс╫ц
-        SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene);
-        SoundManager.Instance.SetBGMVolume(0.2f);
+        SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene_ver2);
+        //SoundManager.Instance.SetBGMVolume(0.2f);
     }
 
     /// <summary>
