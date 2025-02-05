@@ -105,7 +105,6 @@ public class ItemDetailUI_Skill : ItemDetailUI
 
         ItemEnhanceManager.Enhance(CurrentItem);
 
-        FXManager.Instance.SpawnFX(FXName.UIFX_ItemEnhance, _gradeFrame.transform);
         SoundManager.Instance.PlaySFX(SFXType.SFX_ItemEnhance);
     }
 }
