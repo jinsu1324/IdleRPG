@@ -92,7 +92,7 @@ MonoBehaviour:
   - Stage: 20
     AppearEnemy: Boss_KingSlime
     Count: 1
-    StatPercentage: 5
+    StatPercentage: 10
   - Stage: 21
     AppearEnemy: Monster_SlimeBlue
     Count: 7
@@ -116,19 +116,19 @@ MonoBehaviour:
   - Stage: 26
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 0.6
+    StatPercentage: 0.5
   - Stage: 27
     AppearEnemy: Monster_SlimeGreen
     Count: 6
-    StatPercentage: 0.6
+    StatPercentage: 0.5
   - Stage: 28
     AppearEnemy: Monster_SlimePink
     Count: 7
-    StatPercentage: 0.6
+    StatPercentage: 0.5
   - Stage: 29
     AppearEnemy: Monster_SlimeBlue
     Count: 8
-    StatPercentage: 0.6
+    StatPercentage: 0.5
   - Stage: 30
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -136,19 +136,19 @@ MonoBehaviour:
   - Stage: 31
     AppearEnemy: Monster_SlimeBlue
     Count: 9
-    StatPercentage: 0.7
+    StatPercentage: 0.5
   - Stage: 32
     AppearEnemy: Monster_SlimeGreen
     Count: 5
-    StatPercentage: 0.7
+    StatPercentage: 0.5
   - Stage: 33
     AppearEnemy: Monster_SlimePink
     Count: 3
-    StatPercentage: 0.7
+    StatPercentage: 0.5
   - Stage: 34
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 0.7
+    StatPercentage: 0.5
   - Stage: 35
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -156,19 +156,19 @@ MonoBehaviour:
   - Stage: 36
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 0.8
+    StatPercentage: 0.5
   - Stage: 37
     AppearEnemy: Monster_SlimeGreen
     Count: 5
-    StatPercentage: 0.8
+    StatPercentage: 0.5
   - Stage: 38
     AppearEnemy: Monster_SlimePink
     Count: 4
-    StatPercentage: 0.8
+    StatPercentage: 0.5
   - Stage: 39
     AppearEnemy: Monster_SlimeBlue
     Count: 8
-    StatPercentage: 0.8
+    StatPercentage: 0.5
   - Stage: 40
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -176,19 +176,19 @@ MonoBehaviour:
   - Stage: 41
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 0.9
+    StatPercentage: 0.5
   - Stage: 42
     AppearEnemy: Monster_SlimeGreen
     Count: 8
-    StatPercentage: 0.9
+    StatPercentage: 0.5
   - Stage: 43
     AppearEnemy: Monster_SlimePink
     Count: 9
-    StatPercentage: 0.9
+    StatPercentage: 0.5
   - Stage: 44
     AppearEnemy: Monster_SlimeBlue
     Count: 10
-    StatPercentage: 0.9
+    StatPercentage: 0.5
   - Stage: 45
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -196,19 +196,19 @@ MonoBehaviour:
   - Stage: 46
     AppearEnemy: Monster_SlimeBlue
     Count: 4
-    StatPercentage: 1
+    StatPercentage: 0.5
   - Stage: 47
     AppearEnemy: Monster_SlimeGreen
     Count: 4
-    StatPercentage: 1
+    StatPercentage: 0.5
   - Stage: 48
     AppearEnemy: Monster_SlimePink
     Count: 6
-    StatPercentage: 1
+    StatPercentage: 0.5
   - Stage: 49
     AppearEnemy: Monster_SlimeBlue
     Count: 9
-    StatPercentage: 1
+    StatPercentage: 0.5
   - Stage: 50
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -216,19 +216,19 @@ MonoBehaviour:
   - Stage: 51
     AppearEnemy: Monster_SlimeBlue
     Count: 8
-    StatPercentage: 1.1
+    StatPercentage: 0.5
   - Stage: 52
     AppearEnemy: Monster_SlimeGreen
     Count: 6
-    StatPercentage: 1.1
+    StatPercentage: 0.5
   - Stage: 53
     AppearEnemy: Monster_SlimePink
     Count: 4
-    StatPercentage: 1.1
+    StatPercentage: 0.5
   - Stage: 54
     AppearEnemy: Monster_SlimeBlue
     Count: 7
-    StatPercentage: 1.1
+    StatPercentage: 0.5
   - Stage: 55
     AppearEnemy: Boss_KingSlime
     Count: 1
@@ -236,19 +236,19 @@ MonoBehaviour:
   - Stage: 56
     AppearEnemy: Monster_SlimeBlue
     Count: 8
-    StatPercentage: 1.2
+    StatPercentage: 0.5
   - Stage: 57
     AppearEnemy: Monster_SlimeGreen
     Count: 6
-    StatPercentage: 1.2
+    StatPercentage: 0.5
   - Stage: 58
     AppearEnemy: Monster_SlimePink
     Count: 7
-    StatPercentage: 1.2
+    StatPercentage: 0.5
   - Stage: 59
     AppearEnemy: Monster_SlimeBlue
     Count: 6
-    StatPercentage: 1.2
+    StatPercentage: 0.5
   - Stage: 60
     AppearEnemy: Boss_KingSlime
     Count: 1

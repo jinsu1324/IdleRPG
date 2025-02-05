@@ -30,8 +30,8 @@ MonoBehaviour:
     RewardGem: 200
   - Index: 4
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 50 \uB3C4\uB2EC"
-    TargetValue: 50
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 30 \uB3C4\uB2EC"
+    TargetValue: 30
     RewardGem: 200
   - Index: 5
     QuestType: 3
@@ -72,8 +72,8 @@ MonoBehaviour:
     RewardGem: 400
   - Index: 12
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
-    TargetValue: 100
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 70 \uB3C4\uB2EC"
+    TargetValue: 70
     RewardGem: 400
   - Index: 13
     QuestType: 3
@@ -114,8 +114,8 @@ MonoBehaviour:
     RewardGem: 600
   - Index: 20
     QuestType: 2
-    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 150 \uB3C4\uB2EC"
-    TargetValue: 150
+    Desc: "\uACF5\uACA9\uB825 \uC5C5\uADF8\uB808\uC774\uB4DC 100 \uB3C4\uB2EC"
+    TargetValue: 100
     RewardGem: 600
   - Index: 21
     QuestType: 3
