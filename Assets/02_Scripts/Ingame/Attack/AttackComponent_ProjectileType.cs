@@ -48,8 +48,7 @@ public class AttackComponent_ProjectileType : AttackComponent
         };
         SpawnProjectile(attackArgs);
 
-        // юс╫ц
-        SoundManager.Instance.PlaySFX(SFXType.SFX_HeroDamaged);
+        SoundManager.Instance.PlaySFX(SFXType.SFX_PlayerAttack);
     }
 
     /// <summary>

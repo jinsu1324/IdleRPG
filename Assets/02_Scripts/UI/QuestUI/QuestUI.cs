@@ -77,5 +77,7 @@ public class QuestUI : MonoBehaviour
     {
         QuestManager.CompleteCurrentQuest();    // 퀘스트 완료
         CurrencyIconMover.Instance.MoveCurrency_Multi(CurrencyType.Gem, transform.position); // 보석 이동 애니메이션
+
+        SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency); // 재화획득 사운드 재생
     }
 }

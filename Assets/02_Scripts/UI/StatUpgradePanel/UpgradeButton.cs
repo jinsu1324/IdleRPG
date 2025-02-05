@@ -68,6 +68,7 @@ public class UpgradeButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if (UpgradeManager.Try_UpgradeLevelUp(_statType))
         {
             PlayScaleAnimation();
+            SoundManager.Instance.PlaySFX(SFXType.SFX_StatUpgrade);
         }
         else
         {

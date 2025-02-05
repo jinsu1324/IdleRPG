@@ -60,6 +60,9 @@ public class RewardItemView : MonoBehaviour
             if (i < dropItemList.Count)  
             {
                 _rewardItemSlotList[i].Init(dropItemList[i]); // 드롭 아이템리스트 갯수만큼만 보여주고, 나머지는 가리기
+
+                SoundManager.Instance.PlaySFX(SFXType.SFX_RewardItem);
+
                 yield return new WaitForSecondsRealtime(0.1f);
             }
             else

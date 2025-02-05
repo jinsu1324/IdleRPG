@@ -68,5 +68,5 @@ public class GemManager : ISavable
     /// <summary>
     /// 초기젬 설정
     /// </summary>
-    public static void SetDefaultGem() => CurrentGem += 50;
+    public static void SetDefaultGem() => CurrentGem += 500;
 }

@@ -112,6 +112,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
             return;
 
         EquipGearManager.Equip(CurrentItem);
+        SoundManager.Instance.PlaySFX(SFXType.SFX_Equip);
     }
 
     /// <summary>
@@ -134,5 +135,8 @@ public class ItemDetailUI_Gear : ItemDetailUI
             return;
 
         ItemEnhanceManager.Enhance(CurrentItem);
+
+        FXManager.Instance.SpawnFX(FXName.UIFX_ItemEnhance, _gradeFrame.transform);
+        SoundManager.Instance.PlaySFX(SFXType.SFX_ItemEnhance);
     }
 }

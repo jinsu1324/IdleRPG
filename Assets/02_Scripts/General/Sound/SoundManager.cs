@@ -12,7 +12,13 @@ public enum BGMType
 
 public enum SFXType
 {
-    SFX_HeroDamaged
+    SFX_AddCurrency,
+    SFX_ItemEnhance,
+    SFX_StatUpgrade,
+    SFX_TakeDamage,
+    SFX_PlayerAttack,
+    SFX_RewardItem,
+    SFX_Equip,
 }
 
 public class SoundManager : SingletonBase<SoundManager>

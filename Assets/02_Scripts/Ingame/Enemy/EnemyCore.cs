@@ -76,6 +76,8 @@ public class EnemyCore : ObjectPoolObj
     {
         DamageTextManager.Instance.ShowDamageText(args.Damage, transform.position, args.IsCritical); // 데미지 텍스트 띄우기
         FXManager.Instance.SpawnFX(FXName.FX_Enemy_Damaged, transform); // 이펙트 띄우기
+
+        SoundManager.Instance.PlaySFX(SFXType.SFX_TakeDamage);
     }
 
     /// <summary>
@@ -91,6 +93,8 @@ public class EnemyCore : ObjectPoolObj
         CurrencyIconMover.Instance.MoveCurrency_Multi(CurrencyType.Gold, transform.position); // 골드 이동 애니메이션
 
         FXManager.Instance.SpawnFX(FXName.FX_Enemy_Die, transform);    // 이펙트 띄우기
+
+        SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency); // 재화획득 사운드 재생
 
         ReturnPool(); // 풀로 돌려보내기
     }
