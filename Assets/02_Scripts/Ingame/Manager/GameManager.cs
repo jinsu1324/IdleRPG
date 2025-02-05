@@ -61,7 +61,7 @@ public class GameManager : SingletonBase<GameManager>
 
         // юс╫ц
         SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene);
-        SoundManager.Instance.SetBGMVolume(0.5f);
+        SoundManager.Instance.SetBGMVolume(0.2f);
     }
 
     /// <summary>
