@@ -9,6 +9,7 @@ public class RecordMouse : MonoBehaviour
     private void Awake()
     {
         cursorImage.gameObject.SetActive(false);
+        Cursor.visible = false;
     }
 
 #if UNITY_EDITOR // Unity Editor에서만 실행
