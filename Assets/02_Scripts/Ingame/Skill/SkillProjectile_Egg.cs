@@ -36,7 +36,7 @@ public class SkillProjectile_Egg : MonoBehaviour
         transform.Translate(direction * _speed * Time.deltaTime);
 
         // 타겟에 도달했는지 확인 및 공격
-        if (Vector3.Distance(transform.position, (_target as Component).transform.position) < 0.1f)
+        if (Vector3.Distance(transform.position, (_target as Component).transform.position) < 0.5f)
             AttackTargetEnemy();
     }
 
