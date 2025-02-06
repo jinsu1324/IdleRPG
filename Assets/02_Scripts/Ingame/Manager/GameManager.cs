@@ -16,6 +16,8 @@ public class GameManager : SingletonBase<GameManager>
     /// </summary>
     private async void Start()
     {
+        Application.targetFrameRate = 60;
+
         await TryLoadData();
 
         SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene_ver2);
