@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Weapon
   Name: "\uB3C4\uB07C"
   Grade: Normal
-  Desc: "\uBB34\uC11C\uC6B4 \uB3C4\uB07C\uC785\uB2C8\uB2E4."
+  Desc: "\uB098\uBB34\uAFBC\uC774 \uC783\uC5B4\uBC84\uB9B0 \uB3C4\uB07C\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: a0f831080a416a34fb9c80626f6550e0, type: 3}
   Prefab: {fileID: 7084774728181233583, guid: 5120fe3923aca734d9eba8167c7a2b25, type: 3}
   EnhanceCountInfoList:

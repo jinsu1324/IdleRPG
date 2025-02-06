@@ -49,6 +49,9 @@ public class FieldTargetManager
     /// </summary>
     public static void ClearAllFieldTarget()
     {
+        if (_fieldTargetList.Count == 0)
+            return;
+
         foreach(IDamagable target in _fieldTargetList)
         {
             if (target is HPComponent hpComponent)

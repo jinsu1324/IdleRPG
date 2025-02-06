@@ -17,6 +17,9 @@ public class GameManager : SingletonBase<GameManager>
     private async void Start()
     {
         await TryLoadData();
+
+        SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene_ver2);
+        //SoundManager.Instance.SetBGMVolume(0.2f);
     }
 
     /// <summary>
@@ -58,9 +61,6 @@ public class GameManager : SingletonBase<GameManager>
         OnLoadDataComplete?.Invoke();
 
         GameTimeController.Resume();
-
-        SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene_ver2);
-        //SoundManager.Instance.SetBGMVolume(0.2f);
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         Debug.Log("게임 초기화 시작...");
 
-        StageManager.Instance.StageBuildAndStart();
+        StageManager.Instance.StageBuildAndStart_GameInit();
         QuestManager.SetCurrentQuest();
 
         Debug.Log("게임 초기화 완료!");

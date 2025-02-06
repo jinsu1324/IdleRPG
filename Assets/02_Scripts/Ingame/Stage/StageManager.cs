@@ -27,11 +27,22 @@ public class StageManager : SingletonBase<StageManager>
     private int _targetCount;                                       // 죽여야 하는 목표 적 숫자
     private int _killCount;                                         // 죽인 적 숫자
 
+    
+
     /// <summary>
     /// 스테이지 만들고 시작하기
     /// </summary>
     public void StageBuildAndStart()
     {
+        StartCoroutine(StageBuildAndStart_Coroutine());
+    }
+
+    /// <summary>
+    /// 게임 처음이나 로드해서 재시작할때 스테이지 만들고 시작하기
+    /// </summary>
+    public void StageBuildAndStart_GameInit()
+    {
+        FieldTargetManager.ClearAllFieldTarget();
         StartCoroutine(StageBuildAndStart_Coroutine());
     }
 

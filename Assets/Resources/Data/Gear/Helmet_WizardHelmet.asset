@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Helmet
   Name: "\uB9C8\uBC95\uC0AC\uC758 \uBAA8\uC790"
   Grade: Legendary
-  Desc: "\uB9C8\uBC95\uC0AC\uC758 \uBAA8\uC790\uC785\uB2C8\uB2E4."
+  Desc: "\uB300\uB9C8\uBC95\uC0AC\uC758 \uAE30\uC6B4\uC774 \uAE43\uB4E4\uC5B4 \uC788\uC2B5\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 3742245748bb6244e84bd3ef3cf490dd, type: 3}
   Prefab: {fileID: 3479573790953390025, guid: 7aa049e51f9501048a30b61f2d018354, type: 3}
   EnhanceCountInfoList:

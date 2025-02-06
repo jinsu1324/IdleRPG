@@ -36,7 +36,7 @@ public class CurrentStageData : ISavable
     public static void StageLevelUp()
     {
         Stage++;
-        QuestManager.UpdateQuestStack(QuestType.ReachStage, 1);
+        QuestManager.UpdateQuestStack(QuestType.ReachStage, _stage);
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Weapon
   Name: "\uC232\uC758 \uCE7C\uB0A0"
   Grade: Rare
-  Desc: "\uC232\uC758 \uC2E0\uC131\uD55C \uCE7C\uC785\uB2C8\uB2E4."
+  Desc: "\uC232\uC758 \uC2E0\uC131\uD55C \uAE30\uC6B4\uC774 \uAE43\uB4E4\uC5B4 \uC788\uC2B5\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: eb5d5b5e5acf4be43b48eb4bdf8bd192, type: 3}
   Prefab: {fileID: 4263184697863746418, guid: 488800ab125e4a24e8bb40575be38634, type: 3}
   EnhanceCountInfoList:

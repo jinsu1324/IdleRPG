@@ -45,6 +45,9 @@ public class GemManager : ISavable
         if (CurrentGem >= amount)
         {
             CurrentGem -= amount;
+
+            if (CurrentGem <= 0)
+                CurrentGem = 0;
         }
         else
             Debug.Log($"보유한 젬({CurrentGem})이 감소할 젬({amount})보다 적어서 젬감소가 불가능합니다!");

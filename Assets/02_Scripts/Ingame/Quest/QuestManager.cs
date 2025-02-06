@@ -58,12 +58,12 @@ public class QuestManager : ISavable
     }
 
     /// <summary>
-    /// 퀘스트 수치 누적하기
+    /// 퀘스트 누적수치 갱신하기
     /// </summary>
-    public static void UpdateQuestStack(QuestType questType, int amount)
+    public static void UpdateQuestStack(QuestType questType, int value)
     {
         if (_questStackDict.ContainsKey(questType))
-            _questStackDict[questType] += amount;
+            _questStackDict[questType] = value;
 
         if (CurrentQuest.QuestType == questType)
         {

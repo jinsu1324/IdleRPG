@@ -16,7 +16,7 @@ MonoBehaviour:
   ItemType: Helmet
   Name: "\uC232\uC758 \uD22C\uAD6C"
   Grade: Rare
-  Desc: "\uC232\uC18D\uC758 \uD22C\uAD6C\uC785\uB2C8\uB2E4."
+  Desc: "\uC78A\uD600\uC838\uBC84\uB9B0 \uC232 \uC18D\uC758 \uD22C\uAD6C\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 5b413123e8117454a9b720702244cd14, type: 3}
   Prefab: {fileID: 7589804328962073218, guid: e333744e9a1e28b4c8b15d55e48d2d86, type: 3}
   EnhanceCountInfoList:
