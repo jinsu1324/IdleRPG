@@ -17,6 +17,7 @@ using System;
 public struct OnRewardedArgs
 {
     public int Count;
+    public bool CanBuyItem;
 }
 
 /// <summary>
@@ -109,7 +110,11 @@ public class AdmobManager_Reward : MonoBehaviour
                 GemManager.AddGem(rewardAmount);
                 SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
 
-                OnRewardedArgs args = new OnRewardedArgs() { Count = rewardAmount };
+                OnRewardedArgs args = new OnRewardedArgs() 
+                { 
+                    Count = rewardAmount, 
+                    CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost)
+                };
                 OnRewarded?.Invoke(args);
             });
         }

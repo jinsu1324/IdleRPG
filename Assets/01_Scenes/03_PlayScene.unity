@@ -3761,7 +3761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1195521120034417650, guid: e3229fe8dbcc427429baade178b08a23, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70.63352
+      value: -70.633514
       objectReference: {fileID: 0}
     - target: {fileID: 2719552240132572925, guid: e3229fe8dbcc427429baade178b08a23, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6663,7 +6663,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxDropCount: 10
   _itemType: 3
-  _dropCost: 100
   _dropButton: {fileID: 1876225449}
 --- !u!1 &323647467
 GameObject:
@@ -8417,7 +8416,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxDropCount: 10
   _itemType: 2
-  _dropCost: 100
   _dropButton: {fileID: 1400950847}
 --- !u!1 &412390572
 GameObject:
@@ -24459,7 +24457,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxDropCount: 10
   _itemType: 1
-  _dropCost: 100
   _dropButton: {fileID: 1682678153}
 --- !u!1 &1407818709
 GameObject:
@@ -25376,7 +25373,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxDropCount: 10
   _itemType: 0
-  _dropCost: 100
   _dropButton: {fileID: 1841982857}
 --- !u!1001 &1478631542
 PrefabInstance:
@@ -30420,7 +30416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 16.000008}
+  m_AnchoredPosition: {x: 0, y: 16}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1848915475
@@ -38017,7 +38013,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -32.000015}
+  m_AnchoredPosition: {x: 0, y: -32}
   m_SizeDelta: {x: 64, y: 180}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &4176434367064025631

@@ -21,21 +21,11 @@ public class ItemDropMachine : MonoBehaviour
     [SerializeField] 
     private ItemType _itemType;
 
-    [Title("드롭 비용", bold: false)]
-    [SerializeField]
-    private int _dropCost;
-
     [Title("드롭 버튼", bold: false)]
     [SerializeField]
     private ItemDropButton _dropButton;
 
-
-
-
-    // 불가시 토스트메시지
-
-
-
+    public static int DropCost = 100;   // 아이템 드롭 비용
 
     /// <summary>
     /// OnEnable
@@ -43,7 +33,7 @@ public class ItemDropMachine : MonoBehaviour
     private void OnEnable()
     {
         _dropButton.ButtonAddListener(OnClickDropItem); // 버튼에 아이템 드롭함수 연결
-        _dropButton.UpdateDimd(GemManager.HasEnoughGem(_dropCost)); // 버튼 딤드 업데이트
+        _dropButton.UpdateDimd(GemManager.HasEnoughGem(DropCost)); // 버튼 딤드 업데이트
     }
 
     /// <summary>
@@ -60,13 +50,13 @@ public class ItemDropMachine : MonoBehaviour
     public void OnClickDropItem()
     {
         // 젬 부족하면 그냥 리턴
-        if (GemManager.HasEnoughGem(_dropCost) == false)
+        if (GemManager.HasEnoughGem(DropCost) == false)
         {
             ToastManager.Instance.StartShow_ToastCommon("보석이 부족합니다."); // 토스트 메시지
             return;
         }
 
-        GemManager.ReduceGem(_dropCost); // 젬 감소
+        GemManager.ReduceGem(DropCost); // 젬 감소
 
         List<Item> dropItemList = new List<Item>(); 
         for (int i = 0; i < _maxDropCount; i++)
@@ -78,7 +68,7 @@ public class ItemDropMachine : MonoBehaviour
 
         OnDroppedItem?.Invoke(dropItemList);
 
-        OnDimdUpdate?.Invoke(GemManager.HasEnoughGem(_dropCost)); // 버튼 딤드 업데이트
+        OnDimdUpdate?.Invoke(GemManager.HasEnoughGem(DropCost)); // 버튼 딤드 업데이트
     }
 
     /// <summary>

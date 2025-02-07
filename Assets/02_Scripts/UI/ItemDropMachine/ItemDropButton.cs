@@ -17,6 +17,7 @@ public class ItemDropButton : MonoBehaviour
     private void OnEnable()
     {
         ItemDropMachine.OnDimdUpdate += UpdateDimd; // 딤드 업데이트
+        AdmobManager_Reward.OnRewarded += UpdateDimd;   // 딤드 업데이트 (오버로딩)
     }
 
     /// <summary>
@@ -25,6 +26,7 @@ public class ItemDropButton : MonoBehaviour
     private void OnDisable()
     {
         ItemDropMachine.OnDimdUpdate -= UpdateDimd;
+        AdmobManager_Reward.OnRewarded -= UpdateDimd;
     }
 
     /// <summary>
@@ -35,6 +37,19 @@ public class ItemDropButton : MonoBehaviour
         _dimd.SetActive(!canBuy);
 
         if (canBuy)
+            _costText.color = Color.white;
+        else
+            _costText.color = Color.red;
+    }
+
+    /// <summary>
+    /// 딤드 업데이트 오버로딩
+    /// </summary>
+    public void UpdateDimd(OnRewardedArgs args)
+    {
+        _dimd.SetActive(!args.CanBuyItem);
+
+        if (args.CanBuyItem)
             _costText.color = Color.white;
         else
             _costText.color = Color.red;
