@@ -1696,6 +1696,8 @@ namespace Sirenix.OdinInspector.Modules.Addressables.Editor
     public static class OdinAddressableUtility
     {
         private readonly static Action openAddressableWindowAction;
+        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "CS0414", Justification = "Reserved for future use.")]
         private static bool hasLoggedPackablesMissingError = false;
         
         static OdinAddressableUtility()
