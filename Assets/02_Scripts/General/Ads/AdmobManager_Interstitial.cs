@@ -20,14 +20,14 @@ public class AdmobManager_Interstitial : MonoBehaviour
 {
 
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-3940256099942544/1033173712"; // 테스트 광고임
+    private static string _adUnitId = "ca-app-pub-3940256099942544/1033173712"; // 테스트 광고임
 #elif UNITY_IPHONE
-    private string _adUnitId = "ca-app-pub-3940256099942544/4411468910";
+    private static string _adUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
-    private string _adUnitId = "unused";
+    private static string _adUnitId = "unused";
 #endif
 
-    private InterstitialAd _interstitialAd; // 전면 광고
+    private static InterstitialAd _interstitialAd; // 전면 광고
 
     /// <summary>
     /// Start
@@ -41,7 +41,7 @@ public class AdmobManager_Interstitial : MonoBehaviour
     /// <summary>
     /// 샘플용 버튼
     /// </summary>
-    public void TestButton_Interstitial()
+    public static void TestButton_Interstitial()
     {
         LoadInterstitialAd();
         ShowInterstitialAd();
@@ -51,7 +51,7 @@ public class AdmobManager_Interstitial : MonoBehaviour
     /// <summary>
     /// 전면 광고 로드
     /// </summary>
-    public void LoadInterstitialAd()
+    public static void LoadInterstitialAd()
     {
         // 이미 있으면 정리
         if (_interstitialAd != null)
@@ -83,7 +83,7 @@ public class AdmobManager_Interstitial : MonoBehaviour
     /// <summary>
     /// 전면 광고 표시
     /// </summary>
-    public void ShowInterstitialAd()
+    public static void ShowInterstitialAd()
     {
         if (_interstitialAd != null && _interstitialAd.CanShowAd())
         {
@@ -99,7 +99,7 @@ public class AdmobManager_Interstitial : MonoBehaviour
     /// <summary>
     /// 다음 전면 광고 로드 (최대한 빨리 다른 광고를 표시할 수 있도록)
     /// </summary>
-    private void RegisterReloadHandler(InterstitialAd interstitialAd)
+    private static void RegisterReloadHandler(InterstitialAd interstitialAd)
     {
         // 광고가 전체 화면 콘텐츠를 닫을 때 발생
         interstitialAd.OnAdFullScreenContentClosed += () =>

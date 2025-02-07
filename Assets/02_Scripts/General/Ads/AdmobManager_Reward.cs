@@ -14,6 +14,11 @@ using System;
 /// 다음 보상형 광고를 미리 로드하세요
 /// </summary>
 
+public struct OnRewardedArgs
+{
+    public int Count;
+}
+
 /// <summary>
 /// 리워드 광고
 /// </summary>
@@ -21,14 +26,16 @@ public class AdmobManager_Reward : MonoBehaviour
 {
 
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
+    private static string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
 #elif UNITY_IPHONE
-    private string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
+    private static string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
-    private string _adUnitId = "unused";
+    private static string _adUnitId = "unused";
 #endif
 
-    private RewardedAd _rewardedAd;// 리워드 광고
+    public static event Action<OnRewardedArgs> OnRewarded; // 리워드 획득 이벤트
+
+    private static RewardedAd _rewardedAd;  // 리워드 광고
 
     /// <summary>
     /// Start
@@ -43,9 +50,9 @@ public class AdmobManager_Reward : MonoBehaviour
     }
 
     /// <summary>
-    /// 샘플용 버튼
+    /// 리워드 광고 로드 및 보여주기
     /// </summary>
-    public void TestButton_Reward()
+    public static void LoadAndShow_RewardedAd()
     {
         LoadRewardedAd();
         ShowRewardedAd();
@@ -54,7 +61,7 @@ public class AdmobManager_Reward : MonoBehaviour
     /// <summary>
     /// 보상형 광고 로드
     /// </summary>
-    public void LoadRewardedAd()
+    public static void LoadRewardedAd()
     {
         // 기존 광고 정리
         if (_rewardedAd != null)
@@ -86,7 +93,7 @@ public class AdmobManager_Reward : MonoBehaviour
     /// <summary>
     /// 보상형 광고 표시 및 보상제공
     /// </summary>
-    public void ShowRewardedAd()
+    public static void ShowRewardedAd()
     {
         const string rewardMsg = "보상 제공! 유형: {0}, 갯수: {1}.";
 
@@ -97,9 +104,11 @@ public class AdmobManager_Reward : MonoBehaviour
                 // TODO: 사용자에게 보상 제공
                 Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));
 
-                GemManager.AddGem(500);
-                CurrencyIconMover.Instance.MoveCurrency_Multi(CurrencyType.Gem, transform.position);
+                GemManager.AddGem(100);
                 SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
+
+                OnRewardedArgs args = new OnRewardedArgs() { Count = 100 };
+                OnRewarded?.Invoke(args);
             });
         }
     }

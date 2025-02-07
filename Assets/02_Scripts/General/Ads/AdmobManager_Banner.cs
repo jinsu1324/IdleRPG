@@ -12,14 +12,14 @@ public class AdmobManager_Banner : MonoBehaviour
 {
 
 #if UNITY_ANDROID
-    private string _adUnitId = "ca-app-pub-3940256099942544/6300978111"; // 테스트 광고임
+    private static string _adUnitId = "ca-app-pub-3940256099942544/6300978111"; // 테스트 광고임
 #elif UNITY_IPHONE
-    private string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
+    private static string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
 #else
-    private string _adUnitId = "unused";
+    private static string _adUnitId = "unused";
 #endif
 
-    private BannerView _bannerView; // 배너 뷰
+    private static BannerView _bannerView; // 배너 뷰
 
     /// <summary>
     /// Start
@@ -33,7 +33,7 @@ public class AdmobManager_Banner : MonoBehaviour
     /// <summary>
     /// 샘플용 버튼임
     /// </summary>
-    public void TestButton_Banner()
+    public static void TestButton_Banner()
     {
         CreateBannerView();
         LoadBannerAd();
@@ -42,7 +42,7 @@ public class AdmobManager_Banner : MonoBehaviour
     /// <summary>
     /// 화면에 배너 만들기 
     /// </summary>
-    public void CreateBannerView()
+    public static void CreateBannerView()
     {
         Debug.Log("배너를 만듭니다.");
 
@@ -61,7 +61,7 @@ public class AdmobManager_Banner : MonoBehaviour
     /// <summary>
     /// 배너에 들어갈 광고를 로드
     /// </summary>
-    public void LoadBannerAd()
+    public static void LoadBannerAd()
     {
         // 배너 없으면 만들기
         if (_bannerView == null)
@@ -76,7 +76,7 @@ public class AdmobManager_Banner : MonoBehaviour
     /// <summary>
     /// 배너 제거
     /// </summary>
-    public void DestroyBannerView()
+    public static void DestroyBannerView()
     {
         if (_bannerView != null)
         {
