@@ -104,10 +104,12 @@ public class AdmobManager_Reward : MonoBehaviour
                 // TODO: 사용자에게 보상 제공
                 Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));
 
-                GemManager.AddGem(100);
+                int rewardAmount = 100;
+
+                GemManager.AddGem(rewardAmount);
                 SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
 
-                OnRewardedArgs args = new OnRewardedArgs() { Count = 100 };
+                OnRewardedArgs args = new OnRewardedArgs() { Count = rewardAmount };
                 OnRewarded?.Invoke(args);
             });
         }
