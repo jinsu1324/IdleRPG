@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+#if UNITY_EDITOR
 using UnityEditor.PackageManager;
 using UnityEditor.VersionControl;
+#endif
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 using System;
+
+
+
 
 public class IAPManager : MonoBehaviour, IStoreListener
 {
