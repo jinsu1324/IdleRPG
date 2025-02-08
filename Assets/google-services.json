@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:136685267085:android:46df25816dd6da9d561ac4",
+        "mobilesdk_app_id": "1:136685267085:android:93218711b96c5d0a561ac4",
         "android_client_info": {
-          "package_name": "com.DefaultCompany.IdleRPG"
+          "package_name": "com.LEEJINSUCompany.IdleRPG"
         }
       },
       "oauth_client": [],
