@@ -6,10 +6,14 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
+using System;
 
 public class IAPManager : MonoBehaviour, IStoreListener
 {
-    [SerializeField] private GameObject _dimd;
+    public static event Action<OnRewardedArgs> OnIAPCompleted;
+
+
+    [SerializeField] private Button _gem1000Button;
 
 
     [SerializeField] private TextMeshProUGUI _stateText;
@@ -63,13 +67,32 @@ public class IAPManager : MonoBehaviour, IStoreListener
         if (product.definition.id == _gem500)
         {
             _stateText.text = "보석 500개 구매 성공!";
+            GemManager.AddGem(500);
+
+            OnRewardedArgs args = new OnRewardedArgs()
+            {
+                Count = 500,
+                CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost)
+            };
+            OnIAPCompleted?.Invoke(args);
+
+            SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
         }
         else if (product.definition.id == _gem1000)
         {
             _stateText.text = "보석 1000개 구매 성공!";
-            _dimd.gameObject.SetActive(true);
-        }
+            GemManager.AddGem(1000);
 
+            OnRewardedArgs args = new OnRewardedArgs()
+            {
+                Count = 1000,
+                CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost)
+            };
+            OnIAPCompleted?.Invoke(args);
+
+            SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
+            _gem1000Button.gameObject.SetActive(false);
+        }
 
         return PurchaseProcessingResult.Complete;
     }
@@ -85,9 +108,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         if (product != null)
         {
-            bool isCheck = product.hasReceipt;
+            bool isBuy = product.hasReceipt;
 
-            _dimd.gameObject.SetActive(isCheck);
+            _gem1000Button.gameObject.SetActive(!isBuy);
         }
     }
 }

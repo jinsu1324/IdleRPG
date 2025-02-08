@@ -9,10 +9,13 @@ public class CurrencyRewardViewManager : MonoBehaviour
     private void OnEnable()
     {
         AdmobManager_Reward.OnRewarded += _currencyRewardView.Show;
+        IAPManager.OnIAPCompleted += _currencyRewardView.Show;
     }
 
     private void OnDisable()
     {
         AdmobManager_Reward.OnRewarded -= _currencyRewardView.Show;
+        IAPManager.OnIAPCompleted -= _currencyRewardView.Show;
+
     }
 }
