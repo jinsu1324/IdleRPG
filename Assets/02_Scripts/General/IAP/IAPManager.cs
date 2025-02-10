@@ -23,7 +23,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
     
     // 상품 ID
     private string _gem500 = "gem500";          // 500 보석 (소모성)
-    private string _gem1000 = "gem1000";        // 1000 보석 (비소모성)
+    private string _gem2000 = "gem2000";        // 2000 보석 (소모성)
+    //private string _gem1000 = "gem1000";        // 1000 보석 (비소모성)
 
     /// <summary>
     /// Start
@@ -43,7 +44,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         // 상품 추가
         builder.AddProduct(_gem500, ProductType.Consumable);
-        builder.AddProduct(_gem1000, ProductType.Consumable);
+        builder.AddProduct(_gem2000, ProductType.Consumable);
 
         // 결제 시스템 초기화
         UnityPurchasing.Initialize(this, builder);
@@ -113,17 +114,17 @@ public class IAPManager : MonoBehaviour, IStoreListener
             // 사운드 재생
             SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
         }
-        else if (product.definition.id == _gem1000)
+        else if (product.definition.id == _gem2000)
         {
-            Debug.Log("보석 1000개 구매 성공!");
+            Debug.Log("보석 2000개 구매 성공!");
 
-            // 보석 1000개 추가
-            GemManager.AddGem(1000);
+            // 보석 2000개 추가
+            GemManager.AddGem(2000);
 
             // 구매 완료 이벤트 발생
             OnRewardedArgs args = new OnRewardedArgs()
             {
-                Count = 1000,
+                Count = 2000,
                 CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost)
             };
             OnIAPCompleted?.Invoke(args);
