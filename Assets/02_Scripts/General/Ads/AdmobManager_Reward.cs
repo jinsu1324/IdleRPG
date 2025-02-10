@@ -27,8 +27,8 @@ public class AdmobManager_Reward : MonoBehaviour
 {
 
 #if UNITY_ANDROID
-    //private static string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
-    private static string _adUnitId = "ca-app-pub-1200588527228656/3929253718"; // 진짜 앱 리워드 광고 ID
+    private static string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
+    //private static string _adUnitId = "ca-app-pub-1200588527228656/3929253718"; // 진짜 앱 리워드 광고 ID
 #elif UNITY_IPHONE
     private static string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
