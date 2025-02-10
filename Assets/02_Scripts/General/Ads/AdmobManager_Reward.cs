@@ -45,7 +45,7 @@ public class AdmobManager_Reward : MonoBehaviour
     void Start()
     {
         // Google 모바일 광고 SDK를 초기화합니다.
-        MobileAds.Initialize((InitializationStatus initStatus) => { }); // 초기화 완료 후 콜백 가능함
+        MobileAds.Initialize((InitializationStatus initStatus) => { Debug.Log("광고 초기화 완료!"); }); // 초기화 완료 후 콜백 가능함
 
         // 보상형 광고 정리
         // _rewardedAd.Destroy();
