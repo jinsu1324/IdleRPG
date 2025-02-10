@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GameManager : SingletonBase<GameManager>
 {
@@ -11,11 +13,15 @@ public class GameManager : SingletonBase<GameManager>
 
     public static event Action OnNewGame;           // 새로 시작하는 게임일때 이벤트
 
+    [SerializeField] private TextMeshProUGUI _verText;  // 버전텍스트
+
     /// <summary>
     /// Async Start (시작시 데이터 로드 시도)
     /// </summary>
     private async void Start()
     {
+        _verText.text = $"Version: {Application.version}";
+
         Application.targetFrameRate = 60;
 
         await TryLoadData();

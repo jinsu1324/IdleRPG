@@ -17,7 +17,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 {
     public static event Action<OnRewardedArgs> OnIAPCompleted; // 결제 완료 시 이벤트
 
-    [SerializeField] private Button _gem1000Button; // gem1000 구매버튼
+    //[SerializeField] private Button _gem1000Button; // gem1000 구매버튼
 
     private IStoreController _storeController;  // 인앱결제 컨트롤러
     
@@ -43,7 +43,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         // 상품 추가
         builder.AddProduct(_gem500, ProductType.Consumable);
-        builder.AddProduct(_gem1000, ProductType.NonConsumable);
+        builder.AddProduct(_gem1000, ProductType.Consumable);
 
         // 결제 시스템 초기화
         UnityPurchasing.Initialize(this, builder);
@@ -57,8 +57,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
         // 결제 컨트롤러 저장
         _storeController = controller; 
 
-        // 비소모성 상품 구매 여부 확인
-        CheckNonConsumable(_gem1000);
+        //// 비소모성 상품 구매 여부 확인
+        //CheckNonConsumable(_gem1000);
     }
 
     /// <summary>
@@ -131,8 +131,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
             // 사운드 재생
             SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
 
-            // 1000 보석 버튼 비활성화 (비소모성 상품이므로)
-            _gem1000Button.gameObject.SetActive(false);
+            //// 1000 보석 버튼 비활성화 (비소모성 상품이므로)
+            //_gem1000Button.gameObject.SetActive(false);
         }
 
         // 구매 처리 완료
@@ -147,21 +147,21 @@ public class IAPManager : MonoBehaviour, IStoreListener
         _storeController.InitiatePurchase(productID);
     }
 
-    /// <summary>
-    /// 비소모성 아이템 구매 여부 확인
-    /// </summary>
-    private void CheckNonConsumable(string id)
-    {
-        // id에 맞는 해당 상품 가져오기
-        var product = _storeController.products.WithID(id);
+    ///// <summary>
+    ///// 비소모성 아이템 구매 여부 확인
+    ///// </summary>
+    //private void CheckNonConsumable(string id)
+    //{
+    //    // id에 맞는 해당 상품 가져오기
+    //    var product = _storeController.products.WithID(id);
 
-        if (product != null)
-        {
-            // 구매했는지 여부 확인
-            bool isBuy = product.hasReceipt;
+    //    if (product != null)
+    //    {
+    //        // 구매했는지 여부 확인
+    //        bool isBuy = product.hasReceipt;
 
-            // 이미 구매한 경우 버튼 비활성화
-            _gem1000Button.gameObject.SetActive(!isBuy);
-        }
-    }
+    //        // 이미 구매한 경우 버튼 비활성화
+    //        _gem1000Button.gameObject.SetActive(!isBuy);
+    //    }
+    //}
 }
