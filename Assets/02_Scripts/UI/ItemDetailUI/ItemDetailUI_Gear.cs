@@ -66,7 +66,7 @@ public class ItemDetailUI_Gear : ItemDetailUI
         _levelText.text = $"Lv.{item.Level}";
         _countText.text = $"{item.Count}";
         _enhanceableCountText.text = $"{itemDataSO.GetEnhanceCount(item.Level)}";
-        _countSlider.value = (float)item.Level / (float)itemDataSO.GetEnhanceCount(item.Level);
+        _countSlider.value = (float)item.Count / (float)itemDataSO.GetEnhanceCount(item.Level);
         _enhanceableArrowIcon.gameObject.SetActive(ItemEnhanceManager.CanEnhance(item));
         _enhanceButton.gameObject.SetActive(ItemEnhanceManager.CanEnhance(item));
 
