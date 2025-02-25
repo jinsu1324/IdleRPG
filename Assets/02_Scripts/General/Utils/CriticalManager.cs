@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 치명타 여부 결정 및 계산
+/// 치명타 여부 결정 및 계산 매니저
 /// </summary>
 public class CriticalManager
 {
