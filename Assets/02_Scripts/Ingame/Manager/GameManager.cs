@@ -22,7 +22,8 @@ public class GameManager : SingletonBase<GameManager>
     {
         _verText.text = $"Version: {Application.version}";
 
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60; // 프레임 60으로
+        QualitySettings.vSyncCount = 0; // VSync 비활성화
 
         await TryLoadData();
 
