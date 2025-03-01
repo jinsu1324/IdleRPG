@@ -25,11 +25,39 @@ public class GameManager : SingletonBase<GameManager>
         Application.targetFrameRate = 60; // 프레임 60으로
         QualitySettings.vSyncCount = 0; // VSync 비활성화
 
-        await TryLoadData();
+        await InitDatas();
 
         SoundManager.Instance.PlayBGM(BGMType.BGM_PlayScene_ver2);
         //SoundManager.Instance.SetBGMVolume(0.2f);
     }
+
+    /// <summary>
+    /// 처음 게임 시작할때 초기화
+    /// </summary>
+    public async Task InitDatas()
+    {
+        GameTimeController.Pause();
+
+        OnLoadDataStart?.Invoke();
+
+        // 게임 시작하면 무조건 초기화 로직
+        GoldManager.SetDefaultGold();
+        GemManager.SetDefaultGem();
+        UpgradeManager.SetUpgrades_ByDefualt();
+
+        OnNewGame?.Invoke();
+
+
+
+        GameInit();
+
+        await Task.Delay(1000); // 1초 대기
+
+        OnLoadDataComplete?.Invoke();
+
+        GameTimeController.Resume();
+    }
+
 
     /// <summary>
     /// 데이터 로드 시도 (ID없으면 초기값, 있으면 서버에서 데이터 불러오기)
@@ -44,15 +72,7 @@ public class GameManager : SingletonBase<GameManager>
 
         if (existUserID == false)
         {
-            Debug.Log("A ------------ ID 없어서 초기값으로 설정!");
-
-            GoldManager.SetDefaultGold();
-            GemManager.SetDefaultGem();
-            UpgradeManager.SetUpgrades_ByDefualt();
-
-            OnNewGame?.Invoke();
-
-            Debug.Log("A ------------ 초기값 설정 완료!");
+            Debug.Log("B ------------ ID 를 찾을 수 없습니다!!");
         }
         else
         {
