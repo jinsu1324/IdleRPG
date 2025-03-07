@@ -15,7 +15,7 @@ public class ShopItem_Currency_Ads : MonoBehaviour
     private void OnEnable()
     {
         AdmobManager_Reward.OnRewarded += ShowDimd; // 광고다보고 보상받을때 -> 딤드 켜기
-        _buyButton.onClick.AddListener(AdmobManager_Reward.LoadAndShow_RewardedAd); // 구매 버튼 누르면 보상광고 뜨기
+        _buyButton.onClick.AddListener(AdmobManager_Reward.Instance.LoadAndShow_RewardedAd); // 구매 버튼 누르면 보상광고 뜨기
     }
 
     /// <summary>

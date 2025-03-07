@@ -4,6 +4,8 @@ using UnityEngine;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using System;
+using System.Threading.Tasks;
+using TMPro;
 
 /// <summary>
 /// 보상형 광고 로드
@@ -23,21 +25,23 @@ public struct OnRewardedArgs
 /// <summary>
 /// 리워드 광고
 /// </summary>
-public class AdmobManager_Reward : MonoBehaviour
+public class AdmobManager_Reward : SingletonBase<AdmobManager_Reward>
 {
 
 #if UNITY_ANDROID
-    //private static string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
-    private static string _adUnitId = "ca-app-pub-1200588527228656/3929253718"; // 진짜 앱 리워드 광고 ID
+    private string _adUnitId = "ca-app-pub-3940256099942544/5224354917"; // 테스트 광고임
+    //private string _adUnitId = "ca-app-pub-1200588527228656/3929253718"; // 진짜 앱 리워드 광고 ID
 #elif UNITY_IPHONE
-    private static string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
+    private string _adUnitId = "ca-app-pub-3940256099942544/1712485313";
 #else
-    private static string _adUnitId = "unused";
+    private string _adUnitId = "unused";
 #endif
 
-    public static event Action<OnRewardedArgs> OnRewarded; // 리워드 획득 이벤트
+    public static event Action OnAdLoadStart;       // 광고 로드 시작될때 이벤트
+    public static event Action OnAdLoadComplete;    // 광고 로드 끝날때 이벤트
 
-    private static RewardedAd _rewardedAd;  // 리워드 광고
+    public static event Action<OnRewardedArgs> OnRewarded; // 리워드 획득 이벤트
+    private RewardedAd _rewardedAd;  // 리워드 광고
 
     /// <summary>
     /// Start
@@ -46,25 +50,24 @@ public class AdmobManager_Reward : MonoBehaviour
     {
         // Google 모바일 광고 SDK를 초기화합니다.
         MobileAds.Initialize((InitializationStatus initStatus) => { Debug.Log("광고 초기화 완료!"); }); // 초기화 완료 후 콜백 가능함
-
-        // 보상형 광고 정리
-        // _rewardedAd.Destroy();
     }
 
     /// <summary>
     /// 리워드 광고 로드 및 보여주기
     /// </summary>
-    public static void LoadAndShow_RewardedAd()
+    public async void LoadAndShow_RewardedAd()
     {
-        LoadRewardedAd();
+        await LoadRewardedAd();
         ShowRewardedAd();
     }
 
     /// <summary>
     /// 보상형 광고 로드
     /// </summary>
-    public static void LoadRewardedAd()
+    public Task LoadRewardedAd()
     {
+        TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
+
         // 기존 광고 정리
         if (_rewardedAd != null)
         {
@@ -72,121 +75,143 @@ public class AdmobManager_Reward : MonoBehaviour
             _rewardedAd = null;
         }
 
-        Debug.Log("보상형 광고를 로드 중입니다.");
+        Debug.Log($"광고를 요청중입니다.");
+        OnAdLoadStart?.Invoke();
 
         // 광고 로드 요청
         var adRequest = new AdRequest();
         RewardedAd.Load(_adUnitId, adRequest, (RewardedAd ad, LoadAdError error) =>
         {
-            // 오류가 null이거나 광고가 null 이면, 로드 요청이 실패한 것임
-            if (error != null || ad == null)
+            if (error != null || ad == null) // 오류가 null이거나 광고가 null 이면, 로드 요청이 실패한 것임
             {
-                Debug.LogError($"보상형 광고를 로드하지 못했습니다. 에러 : {error}");
+                string errorMessage = error.GetMessage();
+
+                if (error.GetCode() == 3) // 특정 에러에 대한 추가 로그 출력
+                    Debug.LogError("광고 없음 (No Fill). AdMob 인벤토리가 부족할 수 있음.");
+                else if (errorMessage.Contains("No fill from ad server"))
+                    Debug.LogError("No fill from ad server - 광고 요청은 성공했으나 광고 없음.");
+
+                taskCompletionSource.SetResult(false);
+                OnAdLoadComplete?.Invoke();
                 return;
             }
 
-            Debug.Log($"응답된 보상형 광고 : {ad.GetResponseInfo()}"); ;
-
+            Debug.Log($"응답된 보상형 광고 : {ad.GetResponseInfo()}");
             _rewardedAd = ad;
-        });
-    }
 
+            taskCompletionSource.SetResult(true); // 로드 성공 시 true 반환
+            OnAdLoadComplete?.Invoke();
+        });
+
+        return taskCompletionSource.Task; // Task 반환 (await로 기다릴 수 있음)
+    }
 
     /// <summary>
     /// 보상형 광고 표시 및 보상제공
     /// </summary>
-    public static void ShowRewardedAd()
+    public void ShowRewardedAd()
     {
-        const string rewardMsg = "보상 제공! 유형: {0}, 갯수: {1}.";
-
-        if (_rewardedAd != null && _rewardedAd.CanShowAd())
+        if (_rewardedAd == null)
         {
-            _rewardedAd.Show((Reward reward) =>
-            {
-                // TODO: 사용자에게 보상 제공
-                Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));
-
-                int rewardAmount = 100;
-
-                GemManager.AddGem(rewardAmount);
-                SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
-
-                OnRewardedArgs args = new OnRewardedArgs() 
-                { 
-                    Count = rewardAmount, 
-                    CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost)
-                };
-                OnRewarded?.Invoke(args);
-            });
+            Debug.LogError("광고 객체가 null 상태입니다. 광고를 다시 로드하세요.");
+            return;
         }
+
+        if (!_rewardedAd.CanShowAd())
+        {
+            Debug.LogError("광고가 로드되었지만 CanShowAd()가 false입니다.");
+            return;
+        }
+
+        _rewardedAd.Show((Reward reward) =>
+        {
+            string rewardMsg = "보상 제공! 유형: {0}, 갯수: {1}.";
+            Debug.Log(string.Format(rewardMsg, reward.Type, reward.Amount));
+
+            StartCoroutine(UpdateUIAfterReward());
+        });
     }
 
-
-
-
-    // [참고용] 공식문서에 나온 보상형 광고 이벤트 리스너
-    private void RegisterEventHandlers(RewardedAd ad)
+    /// <summary>
+    /// 유니티 UI 업데이트는 메인스레드에서만 가능하기때문에 코루틴 (비동기라서 광고 콜백은 백그라운드 스레드에서 실행될 확률이 높기때문)
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator UpdateUIAfterReward()
     {
-        // 광고로 수익이 발생한 것으로 추정되는 경우 발생
-        ad.OnAdPaid += (AdValue adValue) =>
-        {
-            Debug.Log(String.Format("보상형 광고 유료 {0} {1}.",
-                adValue.Value,
-                adValue.CurrencyCode));
-        };
+        yield return null; // 다음 프레임에서 실행되도록 대기
 
-        // 광고에 대한 노출이 기록되면 발생합니다.
-        ad.OnAdImpressionRecorded += () =>
-        {
-            Debug.Log("보상형 광고는 노출을 기록했습니다.");
-        };
+        // TODO: 사용자에게 보상 제공
+        int rewardAmount = 100;
+        GemManager.AddGem(rewardAmount);
+        SoundManager.Instance.PlaySFX(SFXType.SFX_AddCurrency);
 
-        // 광고 클릭이 기록되면 발생합니다.
-        ad.OnAdClicked += () =>
-        {
-            Debug.Log("보상형 광고가 클릭되었습니다");
-        };
-
-        // 광고가 전체 화면 콘텐츠를 열 때 발생합니다.
-        ad.OnAdFullScreenContentOpened += () =>
-        {
-            Debug.Log("보상형 광고 전체 화면 콘텐츠가 열렸습니다..");
-        };
-
-        // 광고가 전체 화면 콘텐츠를 닫을 때 발생합니다.
-        ad.OnAdFullScreenContentClosed += () =>
-        {
-            Debug.Log("보상형 광고 전체 화면 콘텐츠가 닫혔습니다.");
-        };
-
-        // 광고가 전체 화면 콘텐츠를 열지 못한 경우 발생합니다.
-        ad.OnAdFullScreenContentFailed += (AdError error) =>
-        {
-            Debug.LogError("보상형 광고가 전체 화면 콘텐츠를 열지 못했습니다. " +
-                           "에러는 : " + error);
-        };
+        OnRewarded?.Invoke(new OnRewardedArgs { Count = rewardAmount, CanBuyItem = GemManager.HasEnoughGem(ItemDropMachine.DropCost) });
     }
 
-    // 다음 보상형 광고를 미리 로드
-    private void RegisterReloadHandler(RewardedAd ad)
-    {
-        // 광고가 전체 화면 콘텐츠를 닫을 때 발생합니다.
-        ad.OnAdFullScreenContentClosed += () =>
-        {
-            Debug.Log("보상형 광고 전체 화면 콘텐츠가 닫혔습니다.");
 
-            // 최대한 빨리 다른 광고를 표시할 수 있도록 광고를 다시 로드하세요.
-            LoadRewardedAd();
-        };
+    //// [참고용] 공식문서에 나온 보상형 광고 이벤트 리스너
+    //private void RegisterEventHandlers(RewardedAd ad)
+    //{
+    //    // 광고로 수익이 발생한 것으로 추정되는 경우 발생
+    //    ad.OnAdPaid += (AdValue adValue) =>
+    //    {
+    //        Debug.Log(String.Format("보상형 광고 유료 {0} {1}.",
+    //            adValue.Value,
+    //            adValue.CurrencyCode));
+    //    };
 
-        // 광고가 전체 화면 콘텐츠를 열지 못했을 때 발생합니다.
-        ad.OnAdFullScreenContentFailed += (AdError error) =>
-        {
-            Debug.LogError("보상형 광고가 전체 화면 콘텐츠를 열지 못했습니다 " +
-                           "에러는 : " + error);
+    //    // 광고에 대한 노출이 기록되면 발생합니다.
+    //    ad.OnAdImpressionRecorded += () =>
+    //    {
+    //        Debug.Log("보상형 광고는 노출을 기록했습니다.");
+    //    };
 
-            // 최대한 빨리 다른 광고를 표시할 수 있도록 광고를 다시 로드하세요.
-            LoadRewardedAd();
-        };
-    }
+    //    // 광고 클릭이 기록되면 발생합니다.
+    //    ad.OnAdClicked += () =>
+    //    {
+    //        Debug.Log("보상형 광고가 클릭되었습니다");
+    //    };
+
+    //    // 광고가 전체 화면 콘텐츠를 열 때 발생합니다.
+    //    ad.OnAdFullScreenContentOpened += () =>
+    //    {
+    //        Debug.Log("보상형 광고 전체 화면 콘텐츠가 열렸습니다..");
+    //    };
+
+    //    // 광고가 전체 화면 콘텐츠를 닫을 때 발생합니다.
+    //    ad.OnAdFullScreenContentClosed += () =>
+    //    {
+    //        Debug.Log("보상형 광고 전체 화면 콘텐츠가 닫혔습니다.");
+    //    };
+
+    //    // 광고가 전체 화면 콘텐츠를 열지 못한 경우 발생합니다.
+    //    ad.OnAdFullScreenContentFailed += (AdError error) =>
+    //    {
+    //        Debug.LogError("보상형 광고가 전체 화면 콘텐츠를 열지 못했습니다. " +
+    //                       "에러는 : " + error);
+    //    };
+    //}
+
+    //// 다음 보상형 광고를 미리 로드
+    //private void RegisterReloadHandler(RewardedAd ad)
+    //{
+    //    // 광고가 전체 화면 콘텐츠를 닫을 때 발생합니다.
+    //    ad.OnAdFullScreenContentClosed += () =>
+    //    {
+    //        Debug.Log("보상형 광고 전체 화면 콘텐츠가 닫혔습니다.");
+
+    //        // 최대한 빨리 다른 광고를 표시할 수 있도록 광고를 다시 로드하세요.
+    //        LoadRewardedAd();
+    //    };
+
+    //    // 광고가 전체 화면 콘텐츠를 열지 못했을 때 발생합니다.
+    //    ad.OnAdFullScreenContentFailed += (AdError error) =>
+    //    {
+    //        Debug.LogError("보상형 광고가 전체 화면 콘텐츠를 열지 못했습니다 " +
+    //                       "에러는 : " + error);
+
+    //        // 최대한 빨리 다른 광고를 표시할 수 있도록 광고를 다시 로드하세요.
+    //        LoadRewardedAd();
+    //    };
+    //}
 }
